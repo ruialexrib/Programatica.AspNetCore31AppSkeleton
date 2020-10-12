@@ -16,7 +16,6 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
             _dummyService = dummyService;
         }
 
-
         // GET: GridController
         public ActionResult Index()
         {

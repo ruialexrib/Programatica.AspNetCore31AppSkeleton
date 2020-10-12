@@ -1,0 +1,18 @@
+﻿@model IEnumerable<Programatica.AspNetCore31AppSkeleton.Data.Models.Dummy>
+
+@{
+    ViewData["Title"] = "Grid Page";
+}
+
+<ejs-grid id="Grid"  allowGrouping="true" allowPaging="true" allowSorting="true" allowFiltering="true" toolbar="@(new List<string>() {"Search" })">
+    <e-data-manager url="@Url.Action("UrlDatasource", "Grid")" adaptor="UrlAdaptor"></e-data-manager>
+    <e-grid-filterSettings type="Excel"></e-grid-filterSettings>
+    <e-grid-columns>
+        <e-grid-column field="Id" headerText="Dummy Id" isPrimaryKey="true" width="50"></e-grid-column>
+        <e-grid-column field="Description" headerText="Dummy Description" width="150"></e-grid-column>
+        <e-grid-column field="SystemId" headerText="Dummy SystemId" width="150"></e-grid-column>
+    </e-grid-columns>
+</ejs-grid>
+
+
+

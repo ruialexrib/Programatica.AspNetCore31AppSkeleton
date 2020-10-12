@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewData["Title"] = "Modal Page";
+}
+
+
+<a href="#" class="btn btn-primary" id="cmd-open" onclick="on_cmd_open_click(event)">Open Modal</a>
+
+@section Scripts {
+    <script type="text/javascript">
+    $(document).ready(function () {
+
+
+        (function ($) {
+            debug('document ready !!!');
+        }(jQuery));
+
+
+        on_cmd_open_click = function (e) {
+            e.preventDefault();
+            debug('on_cmd_open_click');
+            var url = "@Url.Action("Modal", "Modal")";
+            modal.show(url)
+                .then((h) => {
+                    debug("modal show event ok");
+                    modal.setsize(modalsizes.NORMAL);
+                })
+                .catch((e) => alert(e));
+        }
+
+        on_cmd_close_click = function (e) {
+            e.preventDefault();
+            debug('on_cmd_close_click');
+            modal.close();
+        }
+
+    });
+    </script>
+}

@@ -28,6 +28,7 @@
                 </div>
             </div>
             <div class="content">
+                <partial name="AdminLTE/_Modal" />
                 <div class="container-fluid">
                     @RenderBody()
                 </div>
@@ -45,5 +46,7 @@
 
     <!-- Syncfusion Essential JS 2 ScriptManager -->
     <ejs-scripts></ejs-scripts>
+
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

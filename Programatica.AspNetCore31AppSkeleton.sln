@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Programatica.AspNetCore31Ap
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Programatica.AspNetCore31AppSkeleton.Data.Migrations.Bootstrap", "Programatica.AspNetCore31AppSkeleton.Data.Migrations.Bootstrap\Programatica.AspNetCore31AppSkeleton.Data.Migrations.Bootstrap.csproj", "{0EB618D2-49EF-4238-822C-26C4D7DE8C5C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{C5025133-8C24-4F39-B926-61460C6C92F2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,6 +38,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{54DB20EB-352A-4143-BF0F-287E0D5826CD} = {C5025133-8C24-4F39-B926-61460C6C92F2}
+		{120B3616-DB90-4B68-8681-E3ED4F504A10} = {C5025133-8C24-4F39-B926-61460C6C92F2}
+		{0EB618D2-49EF-4238-822C-26C4D7DE8C5C} = {C5025133-8C24-4F39-B926-61460C6C92F2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C1226327-2159-4BD5-BFE3-E44B021CC480}

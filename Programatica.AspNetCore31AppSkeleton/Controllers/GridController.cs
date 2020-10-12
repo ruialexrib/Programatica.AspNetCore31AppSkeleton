@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Programatica.AspNetCore31AppSkeleton.Data.Models;
-using Programatica.AspNetCore31AppSkeleton.Models;
 using Programatica.Framework.Services;
 using Syncfusion.EJ2.Base;
 using System.Collections;

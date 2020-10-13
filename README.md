@@ -5,6 +5,17 @@ A solid skeleton for building out real features with asp.net core, adminlte, rep
 
 <img src="https://github.com/ruialexrib/Programatica.AspNetCore31AppSkeleton/blob/main/logo.png?raw=true" width="500">
 
+### Migrations
+
+#### Create migration
+```
+Add-Migration InitialCreate -StartupProject Programatica.AspNetCore31AppSkeleton.Data.Migrations.Bootstrap -Project Programatica.AspNetCore31AppSkeleton.Data.Migrations -Verbose
+```
+#### Update database
+```
+Update-Database -StartupProject Programatica.AspNetCore31AppSkeleton.Data.Migrations.Bootstrap -Project Programatica.AspNetCore31AppSkeleton.Data.Migrations -Verbose
+```
+
 ### Demo
 
 [Im running inside a docker, inside a raspberrypi4](http://ruialexrib.ddns.net:8088)

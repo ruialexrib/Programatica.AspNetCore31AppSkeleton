@@ -4,6 +4,8 @@
 # docker tag aspnetcore31appskeleton kryptoncontainer/aspnetcore31appskeleton:latest
 # docker push kryptoncontainer/aspnetcore31appskeleton
 
+
+# support for arm32 - raspberrypi
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1.2-buster-slim-arm32v7 AS base
 WORKDIR /app
 EXPOSE 80

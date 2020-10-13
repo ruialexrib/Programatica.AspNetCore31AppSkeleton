@@ -5,13 +5,18 @@ VisualStudioVersion = 16.0.30523.141
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Programatica.AspNetCore31AppSkeleton", "Programatica.AspNetCore31AppSkeleton\Programatica.AspNetCore31AppSkeleton.csproj", "{00C889C6-173D-4056-966E-259399268ACC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Programatica.AspNetCore31AppSkeleton.Data.Migrations", "Programatica.AspNetCore31AppSkeleton.Data.Migrations\Programatica.AspNetCore31AppSkeleton.Data.Migrations.csproj", "{54DB20EB-352A-4143-BF0F-287E0D5826CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Programatica.AspNetCore31AppSkeleton.Data.Migrations", "Programatica.AspNetCore31AppSkeleton.Data.Migrations\Programatica.AspNetCore31AppSkeleton.Data.Migrations.csproj", "{54DB20EB-352A-4143-BF0F-287E0D5826CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Programatica.AspNetCore31AppSkeleton.Data", "Programatica.AspNetCore31AppSkeleton.Data\Programatica.AspNetCore31AppSkeleton.Data.csproj", "{120B3616-DB90-4B68-8681-E3ED4F504A10}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Programatica.AspNetCore31AppSkeleton.Data", "Programatica.AspNetCore31AppSkeleton.Data\Programatica.AspNetCore31AppSkeleton.Data.csproj", "{120B3616-DB90-4B68-8681-E3ED4F504A10}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Programatica.AspNetCore31AppSkeleton.Data.Migrations.Bootstrap", "Programatica.AspNetCore31AppSkeleton.Data.Migrations.Bootstrap\Programatica.AspNetCore31AppSkeleton.Data.Migrations.Bootstrap.csproj", "{0EB618D2-49EF-4238-822C-26C4D7DE8C5C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Programatica.AspNetCore31AppSkeleton.Data.Migrations.Bootstrap", "Programatica.AspNetCore31AppSkeleton.Data.Migrations.Bootstrap\Programatica.AspNetCore31AppSkeleton.Data.Migrations.Bootstrap.csproj", "{0EB618D2-49EF-4238-822C-26C4D7DE8C5C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{C5025133-8C24-4F39-B926-61460C6C92F2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8F65CEF1-9D2B-4061-B2BC-C351DE1C17BD}"
+	ProjectSection(SolutionItems) = preProject
+		Dockerfile = Dockerfile
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

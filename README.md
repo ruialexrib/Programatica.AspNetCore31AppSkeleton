@@ -4,3 +4,7 @@
 A solid skeleton for building out real features with asp.net core, adminlte, repository pattern, entity-framework migrations and syncfusion components.
 
 <img src="https://github.com/ruialexrib/Programatica.AspNetCore31AppSkeleton/blob/main/logo.png?raw=true" width="500">
+
+### Demo
+
+[Im running inside a docker, inside a raspberrypi4](http://ruialexrib.ddns.net:8088)

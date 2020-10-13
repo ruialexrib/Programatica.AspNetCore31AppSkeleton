@@ -17,4 +17,8 @@
     <ProjectReference Include="..\Programatica.AspNetCore31AppSkeleton.Data\Programatica.AspNetCore31AppSkeleton.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\plugins\bootbox\" />
+  </ItemGroup>
+
 </Project>

@@ -56,6 +56,7 @@
                 break;
             case "refreshRecords":
                 refreshRecords();
+                global.toastinfo("Data refreshed!");
                 break;
             default:
         }
@@ -78,6 +79,7 @@
             .then((status) => {
                 modal.close();
                 refreshRecords();
+                global.toastsuccess("Record created with success!");
             })
             .catch((status) => {
                 var s = JSON.parse(status);
@@ -99,6 +101,7 @@
             .then((status) => {
                 modal.close();
                 refreshRecords();
+                global.toastsuccess("Record updated with success!");
             })
             .catch((status) => {
                 var s = JSON.parse(status);
@@ -135,10 +138,11 @@
         global.submit(url, data)
             .then((status) => {
                 refreshRecords();
+                global.toastsuccess("Record deleted with success!");
             })
             .catch((status) => {
                 var s = JSON.parse(status);
-                debug(s);
+                global.toasterror(s);
             });
     }
 

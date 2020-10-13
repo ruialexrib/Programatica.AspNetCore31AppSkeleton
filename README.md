@@ -40,6 +40,6 @@ docker push yourcontainer/aspnetcore31appskeleton
 docker run -d -p 8080:80 --restart unless-stopped --name aspnetcore31appskeleton yourcontainer/aspnetcore31appskeleton
 ```
 
-### Demo
+### Live Demo
 
 [Im running inside a docker, hosted in a raspberrypi4, connected to an azure database... how cool is that ?!](http://ruialexrib.ddns.net:8088) :thumbsup:

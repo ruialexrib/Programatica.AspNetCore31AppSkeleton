@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Programatica.AspNetCore31AppSkeleton.Data.Models;
+using Programatica.AspNetCore31AppSkeleton.ViewModels;
 using Programatica.Framework.Services;
 using Syncfusion.EJ2.Base;
 using System.Collections;
@@ -54,6 +55,69 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
                 DataSource = operation.PerformTake(DataSource, dm.Take);
             }
             return dm.RequiresCounts ? Json(new { result = DataSource, count }) : Json(DataSource);
+        }
+
+
+
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return PartialView("_Create");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public JsonResult Create([FromBody] DummyViewModel vm)
+        {
+            if (ModelState.IsValid)
+            {
+                _dummyService.Create(new Dummy { Description = vm.Description });
+                return Json(new { result = "ok" });
+            }
+            else
+            {
+                return Json(new { result = "error" });
+            }
+        }
+
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            Dummy dummy = _dummyService.Get(id);
+            if (dummy == null)
+            {
+                return NotFound();
+            }
+            return PartialView("_Edit", new DummyViewModel
+            {
+                Id = dummy.Id,
+                SystemId = dummy.SystemId,
+                Description = dummy.Description
+            });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public JsonResult Edit([FromBody] DummyViewModel vm)
+        {
+            if (ModelState.IsValid)
+            {
+                _dummyService.Modify(new Dummy { Id = vm.Id, SystemId = vm.SystemId, Description = vm.Description });
+                return Json(new { result = "ok" });
+            }
+            else
+            {
+                return Json(new { result = "error" });
+            }
+        }
+
+        [HttpPost]
+        public JsonResult Delete([FromBody] DummyViewModel vm)
+        {
+            _dummyService.Delete(vm.Id);
+            return Json(new { result = "ok" });
         }
     }
 }

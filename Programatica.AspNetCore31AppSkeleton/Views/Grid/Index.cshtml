@@ -2,17 +2,151 @@
 
 @{
     ViewData["Title"] = "Grid Page";
+
+    List<object> commands = new List<object>();
+    commands.Add(new { type = "updateRecord", buttonOption = new { iconCss = "e-icons e-edit", cssClass = "e-flat e-details" } }); // custom
+    commands.Add(new { type = "deleteRecord", buttonOption = new { iconCss = "e-icons e-delete", cssClass = "e-flat e-details" } }); // custom
+
+    List<object> toolbarItems = new List<object>();
+    toolbarItems.Add(new { text = "New Record", tooltipText = "Novo Registo", id = "createRecord" });
+    toolbarItems.Add(new { text = "Refresh", tooltipText = "Atualizar Registos", id = "refreshRecords" });
 }
 
-<ejs-grid id="Grid"  allowGrouping="true" allowPaging="true" allowSorting="true" allowFiltering="true" toolbar="@(new List<string>() {"Search" })">
+<ejs-grid id="Grid"
+          allowGrouping="true"
+          allowPaging="true"
+          allowSorting="true"
+          allowFiltering="true"
+          allowSelection="true"
+          toolbarClick="on_grid_toolbar"
+          toolbar=toolbarItems
+          commandClick="on_grid_command">
     <e-data-manager url="@Url.Action("UrlDatasource", "Grid")" adaptor="UrlAdaptor"></e-data-manager>
     <e-grid-filterSettings type="Excel"></e-grid-filterSettings>
     <e-grid-columns>
         <e-grid-column field="Id" headerText="Dummy Id" isPrimaryKey="true" width="50"></e-grid-column>
         <e-grid-column field="Description" headerText="Dummy Description" width="150"></e-grid-column>
         <e-grid-column field="SystemId" headerText="Dummy SystemId" width="150"></e-grid-column>
+        <e-grid-column width="100" commands="commands"></e-grid-column>
     </e-grid-columns>
 </ejs-grid>
+
+
+<script type="text/javascript">
+
+    function on_grid_command(args) {
+        var type = args.commandColumn.type;
+        var selectedId = args.rowData["Id"];
+
+        switch (type) {
+            case "updateRecord":
+                updateRecord(selectedId);
+                break;
+            case "deleteRecord":
+                deleteRecord(selectedId);
+                break;
+            default:
+        }
+    }
+
+    function on_grid_toolbar(args) {
+        switch (args.item.id) {
+            case "createRecord":
+                createRecord();
+                break;
+            case "refreshRecords":
+                refreshRecords();
+                break;
+            default:
+        }
+    }
+
+    function on_cmd_close_click(e) {
+        e.preventDefault();
+        modal.close();
+    }
+
+    function on_cmd_save_click(e) {
+        e.preventDefault();
+        var url = "@Url.Action("Create", "Grid")";
+        var data = {
+            Description: $("#Description").val()
+        };
+        var token = global.gettoken();
+
+        global.submit(url, data, token)
+            .then((status) => {
+                modal.close();
+                refreshRecords();
+            })
+            .catch((status) => {
+                var s = JSON.parse(status);
+                debug(s);
+            });
+    }
+
+    function on_cmd_edit_click(e) {
+        e.preventDefault();
+        var url = "@Url.Action("Edit", "Grid")";
+        var data = {
+            Id: $("#Id").val(),
+            SystemId: $("#SystemId").val(),
+            Description: $("#Description").val()
+        };
+        var token = global.gettoken();
+
+        global.submit(url, data, token)
+            .then((status) => {
+                modal.close();
+                refreshRecords();
+            })
+            .catch((status) => {
+                var s = JSON.parse(status);
+                debug(s);
+            });
+    }
+
+    function createRecord() {
+        var url = "@Url.Action("Create", "Grid")";
+        modal.show(url)
+            .then((h) => {
+                debug("modal show event ok");
+                    modal.setsize(modalsizes.NORMAL);
+            })
+            .catch((e) => alert(e));
+    }
+
+    function updateRecord(id) {
+        var url = "@Url.Action("Edit", "Grid")?id=" + id ;
+        modal.show(url)
+            .then((h) => {
+                debug("modal show event ok");
+                    modal.setsize(modalsizes.NORMAL);
+            })
+            .catch((e) => alert(e));
+    }
+
+    function deleteRecord(id) {
+        var url = "@Url.Action("Delete", "Grid")";
+        var data = {
+            Id: id
+        };
+
+        global.submit(url, data)
+            .then((status) => {
+                refreshRecords();
+            })
+            .catch((status) => {
+                var s = JSON.parse(status);
+                debug(s);
+            });
+    }
+
+    function refreshRecords() {
+        var grid = $("#Grid")[0].ej2_instances[0];
+        grid.refresh();
+    }
+</script>
 
 
 

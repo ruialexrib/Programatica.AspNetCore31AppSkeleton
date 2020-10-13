@@ -42,7 +42,7 @@ namespace Programatica.AspNetCore31AppSkeleton
             services.AddDbContext<IDbContext, AppDbContext>(opt =>
                             {
                                 opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
-                            });
+                            }, ServiceLifetime.Transient);
 
             // inmemory context
             // comment this to use sql server

@@ -1,0 +1,30 @@
+﻿
+@model Programatica.AspNetCore31AppSkeleton.ViewModels.DummyViewModel
+
+<div class="modal-header">
+    <h5 class="modal-title">Edit Dummy Record</h5>
+</div>
+
+<div class="modal-body">
+
+    <div class="row">
+        <div class="col-md-12">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+                <input type="hidden" asp-for="SystemId" />
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label"></label>
+                    <input asp-for="Description" class="form-control" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+<div class="modal-footer">
+    <a href="#" class="btn btn-sm btn-primary" onclick="on_cmd_close_click(event)">Close</a>
+    <a href="#" class="btn btn-sm btn-success"  onclick="on_cmd_edit_click(event)">Save</a>
+</div>

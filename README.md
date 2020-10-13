@@ -20,4 +20,4 @@ Update-Database -StartupProject Programatica.AspNetCore31AppSkeleton.Data.Migrat
 
 ### Demo
 
-[Im running inside a docker, hosted in a raspberrypi4, connected to an azure database... how cool is that ?!](http://ruialexrib.ddns.net:8088)
+:computer: [Im running inside a docker, hosted in a raspberrypi4, connected to an azure database... how cool is that ?!](http://ruialexrib.ddns.net:8088) :thumbsup:

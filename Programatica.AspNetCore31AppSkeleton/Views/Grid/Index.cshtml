@@ -43,7 +43,12 @@
                 updateRecord(selectedId);
                 break;
             case "deleteRecord":
-                deleteRecord(selectedId);
+                global.confirm("Eliminar registo?")
+                    .then((result) => {
+                        if (result === true) {
+                            deleteRecord(selectedId);
+                        }
+                    });
                 break;
             default:
         }

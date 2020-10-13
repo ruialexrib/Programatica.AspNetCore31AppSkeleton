@@ -7,11 +7,11 @@ A solid skeleton for building out real features with asp.net core, adminlte, rep
 
 ### Migrations
 
-#### Create migration
+##### Create migration
 ```
 Add-Migration InitialCreate -StartupProject Programatica.AspNetCore31AppSkeleton.Data.Migrations.Bootstrap -Project Programatica.AspNetCore31AppSkeleton.Data.Migrations -Verbose
 ```
-#### Update database
+##### Update database
 ```
 Update-Database -StartupProject Programatica.AspNetCore31AppSkeleton.Data.Migrations.Bootstrap -Project Programatica.AspNetCore31AppSkeleton.Data.Migrations -Verbose
 ```

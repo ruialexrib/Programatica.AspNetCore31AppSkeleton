@@ -20,23 +20,23 @@ Update-Database -StartupProject Programatica.AspNetCore31AppSkeleton.Data.Migrat
 
 ### Docker
 
-##### Build image
 ```
+# Clone repository
+git clone https://github.com/ruialexrib/Programatica.AspNetCore31AppSkeleton.git
+
+# Goto solution directory
+cd Programatica.AspNetCore31AppSkeleton
+
+# Build image
 docker build -t aspnetcore31appskeleton .
-```
 
-##### Tag image
-```
+# Tag image
 docker tag aspnetcore31appskeleton yourcontainer/aspnetcore31appskeleton:latest
-```
 
-##### Push image
-```
+# Push image
 docker push yourcontainer/aspnetcore31appskeleton
-```
 
-##### Run image
-```
+# Run image
 docker run -d -p 8080:80 --restart unless-stopped --name aspnetcore31appskeleton yourcontainer/aspnetcore31appskeleton
 ```
 

@@ -31,131 +31,137 @@
     </e-grid-columns>
 </ejs-grid>
 
+@section Scripts {
 
-<script type="text/javascript">
+    <script type="text/javascript">
 
-    function on_grid_command(args) {
-        var type = args.commandColumn.type;
-        var selectedId = args.rowData["Id"];
+        function on_grid_command(args) {
+            var type = args.commandColumn.type;
+            var selectedId = args.rowData["Id"];
 
-        switch (type) {
-            case "updateRecord":
-                updateRecord(selectedId);
-                break;
-            case "deleteRecord":
-                global.confirm("Eliminar registo?")
-                    .then((result) => {
-                        if (result === true) {
-                            deleteRecord(selectedId);
-                        }
-                    });
-                break;
-            default:
+            switch (type) {
+                case "updateRecord":
+                    updateRecord(selectedId);
+                    break;
+                case "deleteRecord":
+                    global.confirm("Eliminar registo?")
+                        .then((result) => {
+                            if (result === true) {
+                                deleteRecord(selectedId);
+                            }
+                        });
+                    break;
+                default:
+            }
         }
-    }
 
-    function on_grid_toolbar(args) {
-        switch (args.item.id) {
-            case "createRecord":
-                createRecord();
-                break;
-            case "refreshRecords":
-                refreshRecords();
-                global.toastinfo("Data refreshed!");
-                break;
-            default:
+        function on_grid_toolbar(args) {
+            switch (args.item.id) {
+                case "createRecord":
+                    createRecord();
+                    break;
+                case "refreshRecords":
+                    refreshRecords();
+                    global.toastinfo("Data refreshed!");
+                    break;
+                default:
+            }
         }
-    }
 
-    function on_cmd_close_click(e) {
-        e.preventDefault();
-        modal.close();
-    }
+        function on_cmd_close_click(e) {
+            e.preventDefault();
+            modal.close();
+        }
 
-    function on_cmd_save_click(e) {
-        e.preventDefault();
-        var url = "@Url.Action("Create", "Grid")";
-        var data = {
-            Description: $("#Description").val()
-        };
-        var token = global.gettoken();
+        function on_cmd_save_click(e) {
+            e.preventDefault();
+            var url = "@Url.Action("Create", "Grid")";
+            var data = {
+                Description: $("#Description").val()
+            };
+            var token = global.gettoken();
 
-        global.submit(url, data, token)
-            .then((status) => {
-                modal.close();
-                refreshRecords();
-                global.toastsuccess("Record created with success!");
-            })
-            .catch((status) => {
-                var s = JSON.parse(status);
-                debug(s);
-            });
-    }
+            global.submit(url, data, token)
+                .then((status) => {
+                    modal.close();
+                    refreshRecords();
+                    global.toastsuccess("Record created with success!");
+                })
+                .catch((status) => {
+                    var s = JSON.parse(status);
+                    debug(s);
+                });
+        }
 
-    function on_cmd_edit_click(e) {
-        e.preventDefault();
-        var url = "@Url.Action("Edit", "Grid")";
-        var data = {
-            Id: $("#Id").val(),
-            SystemId: $("#SystemId").val(),
-            Description: $("#Description").val()
-        };
-        var token = global.gettoken();
 
-        global.submit(url, data, token)
-            .then((status) => {
-                modal.close();
-                refreshRecords();
-                global.toastsuccess("Record updated with success!");
-            })
-            .catch((status) => {
-                var s = JSON.parse(status);
-                debug(s);
-            });
-    }
 
-    function createRecord() {
-        var url = "@Url.Action("Create", "Grid")";
-        modal.show(url)
-            .then((h) => {
-                debug("modal show event ok");
-                    modal.setsize(modalsizes.NORMAL);
-            })
-            .catch((e) => alert(e));
-    }
+        function on_cmd_edit_click(e) {
+            e.preventDefault();
+            var url = "@Url.Action("Edit", "Grid")";
+            var data = {
+                Id: $("#Id").val(),
+                SystemId: $("#SystemId").val(),
+                Description: $("#Description").val()
+            };
+            var token = global.gettoken();
 
-    function updateRecord(id) {
-        var url = "@Url.Action("Edit", "Grid")?id=" + id ;
-        modal.show(url)
-            .then((h) => {
-                debug("modal show event ok");
-                    modal.setsize(modalsizes.NORMAL);
-            })
-            .catch((e) => alert(e));
-    }
+            global.submit(url, data, token)
+                .then((status) => {
+                    modal.close();
+                    refreshRecords();
+                    global.toastsuccess("Record updated with success!");
+                })
+                .catch((status) => {
+                    var s = JSON.parse(status);
+                    debug(s);
+                });
+        }
 
-    function deleteRecord(id) {
-        var url = "@Url.Action("Delete", "Grid")";
-        var data = {
-            Id: id
-        };
+        function createRecord() {
+            var url = "@Url.Action("Create", "Grid")";
+            modal.show(url)
+                .then((h) => {
+                    debug("modal show event ok");
+                        modal.setsize(modalsizes.NORMAL);
+                })
+                .catch((e) => alert(e));
+        }
 
-        global.submit(url, data)
-            .then((status) => {
-                refreshRecords();
-                global.toastsuccess("Record deleted with success!");
-            })
-            .catch((status) => {
-                var s = JSON.parse(status);
-                global.toasterror(s);
-            });
-    }
+        function updateRecord(id) {
+            var url = "@Url.Action("Edit", "Grid")?id=" + id ;
+            modal.show(url)
+                .then((h) => {
+                    debug("modal show event ok");
+                        modal.setsize(modalsizes.NORMAL);
+                })
+                .catch((e) => alert(e));
+        }
 
-    function refreshRecords() {
-        var grid = $("#Grid")[0].ej2_instances[0];
-        grid.refresh();
-    }
-</script>
+        function deleteRecord(id) {
+            var url = "@Url.Action("Delete", "Grid")";
+            var data = {
+                Id: id
+            };
+
+            global.submit(url, data)
+                .then((status) => {
+                    refreshRecords();
+                    global.toastsuccess("Record deleted with success!");
+                })
+                .catch((status) => {
+                    var s = JSON.parse(status);
+                    global.toasterror(s);
+                });
+        }
+
+        function refreshRecords() {
+            var grid = $("#Grid")[0].ej2_instances[0];
+            grid.refresh();
+        }
+    </script>
+}
+
+
 
 
 

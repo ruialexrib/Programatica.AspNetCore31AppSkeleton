@@ -89,11 +89,11 @@ global.confirm = function (message) {
             buttons: {
                 confirm: {
                     label: cfg.bootbox.btnYes,
-                    className: 'btn-sm btn-success'
+                    className: 'btn-primary'
                 },
                 cancel: {
                     label: cfg.bootbox.btnNo,
-                    className: 'btn-sm btn-default'
+                    className: 'btn-secondary'
                 }
             },
             callback: (result) => {

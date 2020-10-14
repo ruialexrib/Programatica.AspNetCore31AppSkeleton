@@ -10,7 +10,7 @@ cfg.bootbox.btnYes = "Yes";
 cfg.bootbox.btnNo = "No";
 
 cfg.text = cfg.text || {};
-cfg.text.askConfirmTitle = '<i class="fas fa-exclamation-circle text-green"></i> Please confirm';
+cfg.text.askConfirmTitle = '<i class="fas fa-exclamation-circle text-primary"></i> Please confirm';
 cfg.text.askConfirmDelete = "Do you want to delete this record?";
 
 ////////////////////////////////////
@@ -20,4 +20,13 @@ cfg.text.askConfirmDelete = "Do you want to delete this record?";
 toastr.options.closeButton = true;
 toastr.options.progressBar = false;
 toastr.options.newestOnTop = true;
+
+paceOptions = {
+    // Disable the 'elements' source
+    elements: false,
+
+    // Only show the progress on regular and ajax-y page navigation,
+    // not every request
+    restartOnRequestAfter: false
+}
 

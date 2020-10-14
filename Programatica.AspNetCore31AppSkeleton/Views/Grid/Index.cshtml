@@ -4,32 +4,33 @@
     ViewData["Title"] = "Grid Page";
 
     List<object> commands = new List<object>();
-    commands.Add(new { id = "updateRecord", type = "Update Record", buttonOption = new { iconCss = "e-icons e-edit", cssClass = "e-flat e-details" } }); // custom
-    commands.Add(new { id = "deleteRecord", type = "Delete Record", buttonOption = new { iconCss = "e-icons e-delete", cssClass = "e-flat e-details" } }); // custom
+    commands.Add(new { id = "deleteRecord", type = "Delete Record", buttonOption = new { content = "", iconCss = "e-icons e-delete text-danger", cssClass = "e-flat text-danger" } }); // custom
 
-    List<object> toolbarItems = new List<object>();
-    toolbarItems.Add(new { text = "New Record", tooltipText = "Novo Registo", id = "createRecord" });
-    toolbarItems.Add(new { text = "Refresh", tooltipText = "Atualizar Registos", id = "refreshRecords" });
 }
 
-<ejs-grid id="Grid"
-          allowGrouping="true"
-          allowPaging="true"
-          allowSorting="true"
-          allowFiltering="true"
-          allowSelection="true"
-          toolbarClick="on_grid_toolbar"
-          toolbar=toolbarItems
-          commandClick="on_grid_command">
-    <e-data-manager url="@Url.Action("UrlDatasource", "Grid")" adaptor="UrlAdaptor"></e-data-manager>
-    <e-grid-filterSettings type="Excel"></e-grid-filterSettings>
-    <e-grid-columns>
-        <e-grid-column field="Id" headerText="Dummy Id" isPrimaryKey="true" width="50"></e-grid-column>
-        <e-grid-column field="Description" headerText="Dummy Description" width="150"></e-grid-column>
-        <e-grid-column field="SystemId" headerText="Dummy SystemId" width="150"></e-grid-column>
-        <e-grid-column width="100" commands="commands"></e-grid-column>
-    </e-grid-columns>
-</ejs-grid>
+<div class="row padtop10 padbot10">
+    <a href="#" class="btn btn-primary" onclick="on_cmd_create_click(event)"><i class="fas fa-plus"></i> New Record</a>&nbsp;
+    <a href="#" class="btn btn-secondary" onclick="on_cmd_refresh_click(event)"><i class="fas fa-sync-alt"></i> Refresh</a>
+</div>
+
+<div class="row">
+    <ejs-grid id="Grid"
+              allowPaging="true"
+              allowSorting="true"
+              allowFiltering="true"
+              allowSelection="true"
+              recordDoubleClick="on_grid_dblclick"
+              commandClick="on_grid_command">
+        <e-data-manager url="@Url.Action("UrlDatasource", "Grid")" adaptor="UrlAdaptor"></e-data-manager>
+        <e-grid-filterSettings type="Excel"></e-grid-filterSettings>
+        <e-grid-columns>
+            <e-grid-column width="10" field="Id" headerText="ID" isPrimaryKey="true"></e-grid-column>
+            <e-grid-column width="150" field="Description" headerText="DESCRIPTION"></e-grid-column>
+            <e-grid-column width="150" field="SystemId" headerText="SYSTEMID"></e-grid-column>
+            <e-grid-column width="40" commands="commands"></e-grid-column>
+        </e-grid-columns>
+    </ejs-grid>
+</div>
 
 @section Scripts {
 
@@ -56,17 +57,20 @@
             }
         }
 
-        function on_grid_toolbar(args) {
-            switch (args.item.id) {
-                case "createRecord":
-                    createRecord();
-                    break;
-                case "refreshRecords":
-                    refreshRecords();
-                    global.toastinfo("Data refreshed!");
-                    break;
-                default:
-            }
+        function on_grid_dblclick(args) {
+            var itemid = args.rowData.Id;
+            updateRecord(itemid);
+        }
+
+        function on_cmd_create_click(e) {
+            e.preventDefault();
+            createRecord();
+        }
+
+        function on_cmd_refresh_click(e) {
+            e.preventDefault();
+            refreshRecords();
+            global.toastinfo("Data refreshed!");
         }
 
         function on_cmd_close_click(e) {

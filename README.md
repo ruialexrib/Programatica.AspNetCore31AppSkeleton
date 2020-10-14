@@ -21,10 +21,10 @@ Update-Database -StartupProject Programatica.AspNetCore31AppSkeleton.Data.Migrat
 ### Docker
 
 ```
-# Clone repo
+# Clone repository
 git clone https://github.com/ruialexrib/Programatica.AspNetCore31AppSkeleton.git
 
-# Goto Solution Directory
+# Goto solution directory
 cd Programatica.AspNetCore31AppSkeleton
 
 # Build image

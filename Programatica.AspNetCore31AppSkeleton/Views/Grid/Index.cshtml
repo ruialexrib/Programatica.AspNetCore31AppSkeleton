@@ -4,8 +4,8 @@
     ViewData["Title"] = "Grid Page";
 
     List<object> commands = new List<object>();
-    commands.Add(new { type = "updateRecord", buttonOption = new { iconCss = "e-icons e-edit", cssClass = "e-flat e-details" } }); // custom
-    commands.Add(new { type = "deleteRecord", buttonOption = new { iconCss = "e-icons e-delete", cssClass = "e-flat e-details" } }); // custom
+    commands.Add(new { id = "updateRecord", type = "Update Record", buttonOption = new { iconCss = "e-icons e-edit", cssClass = "e-flat e-details" } }); // custom
+    commands.Add(new { id = "deleteRecord", type = "Delete Record", buttonOption = new { iconCss = "e-icons e-delete", cssClass = "e-flat e-details" } }); // custom
 
     List<object> toolbarItems = new List<object>();
     toolbarItems.Add(new { text = "New Record", tooltipText = "Novo Registo", id = "createRecord" });
@@ -36,15 +36,16 @@
     <script type="text/javascript">
 
         function on_grid_command(args) {
-            var type = args.commandColumn.type;
+            console.dir(args);
+            var itemid = args.commandColumn.id;
             var selectedId = args.rowData["Id"];
 
-            switch (type) {
+            switch (itemid) {
                 case "updateRecord":
                     updateRecord(selectedId);
                     break;
                 case "deleteRecord":
-                    global.confirm("Eliminar registo?")
+                    global.confirm(cfg.text.askConfirmDelete)
                         .then((result) => {
                             if (result === true) {
                                 deleteRecord(selectedId);

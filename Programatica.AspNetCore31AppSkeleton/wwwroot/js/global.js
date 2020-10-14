@@ -83,17 +83,17 @@ global.alert = function (message) {
 global.confirm = function (message) {
     return new Promise((resolve, reject) => {
         bootbox.confirm({
-            title: 'O que pretende fazer?',
+            title: cfg.text.askConfirmTitle,
             message: message,
             size: 'small',
             buttons: {
                 confirm: {
-                    label: 'Sim',
-                    className: 'btn-success'
+                    label: cfg.bootbox.btnYes,
+                    className: 'btn-sm btn-success'
                 },
                 cancel: {
-                    label: 'Não',
-                    className: 'btn-default'
+                    label: cfg.bootbox.btnNo,
+                    className: 'btn-sm btn-default'
                 }
             },
             callback: (result) => {

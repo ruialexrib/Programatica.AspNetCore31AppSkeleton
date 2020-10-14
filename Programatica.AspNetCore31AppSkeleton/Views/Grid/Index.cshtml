@@ -21,10 +21,12 @@
               allowSelection="true"
               recordDoubleClick="on_grid_dblclick"
               commandClick="on_grid_command">
+        <e-grid-pagesettings pageSizes="true" pageSize="10">
+        </e-grid-pagesettings>
         <e-data-manager url="@Url.Action("UrlDatasource", "Grid")" adaptor="UrlAdaptor"></e-data-manager>
         <e-grid-filterSettings type="Excel"></e-grid-filterSettings>
         <e-grid-columns>
-            <e-grid-column width="10" field="Id" headerText="ID" isPrimaryKey="true"></e-grid-column>
+            <e-grid-column width="20" field="Id" headerText="ID" isPrimaryKey="true"></e-grid-column>
             <e-grid-column width="150" field="Description" headerText="DESCRIPTION"></e-grid-column>
             <e-grid-column width="150" field="SystemId" headerText="SYSTEMID"></e-grid-column>
             <e-grid-column width="40" commands="commands"></e-grid-column>

@@ -1,4 +1,10 @@
-﻿.e-grid {
+﻿.navbar-menu {
+    border-top: 1px solid #dee2e6;
+    border-left: 1px solid #dee2e6;
+    border-right: 1px solid #dee2e6;
+}
+
+.e-grid {
     font-size: 12px !important;
 }
 
@@ -18,3 +24,5 @@
 .padbot10 {
     padding-bottom: 10px;
 }
+
+

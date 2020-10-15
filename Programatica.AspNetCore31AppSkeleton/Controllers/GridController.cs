@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Programatica.AspNetCore31AppSkeleton.Data.Models;
 using Programatica.AspNetCore31AppSkeleton.ViewModels;
 using Programatica.Framework.Services;
@@ -11,10 +12,12 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
     public class GridController : Controller
     {
         private readonly IService<Dummy> _dummyService;
+        private readonly IMapper _mapper;
 
-        public GridController(IService<Dummy> dummyService)
+        public GridController(IService<Dummy> dummyService, IMapper mapper)
         {
             _dummyService = dummyService;
+            _mapper = mapper;
         }
 
         // GET: GridController
@@ -72,7 +75,7 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
         {
             if (ModelState.IsValid)
             {
-                _dummyService.Create(new Dummy { Description = vm.Description });
+                _dummyService.Create(_mapper.Map<Dummy>(vm));
                 return Json(new { result = "ok" });
             }
             else
@@ -90,12 +93,7 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
             {
                 return NotFound();
             }
-            return PartialView("_Edit", new DummyViewModel
-            {
-                Id = dummy.Id,
-                SystemId = dummy.SystemId,
-                Description = dummy.Description
-            });
+            return PartialView("_Edit", _mapper.Map<DummyViewModel>(dummy));
         }
 
         [HttpPost]
@@ -104,7 +102,7 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
         {
             if (ModelState.IsValid)
             {
-                _dummyService.Modify(new Dummy { Id = vm.Id, SystemId = vm.SystemId, Description = vm.Description });
+                _dummyService.Modify(_mapper.Map<Dummy>(vm));
                 return Json(new { result = "ok" });
             }
             else

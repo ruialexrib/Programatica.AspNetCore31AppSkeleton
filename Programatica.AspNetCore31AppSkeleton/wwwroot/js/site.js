@@ -18,3 +18,7 @@ $(document).on("click", ".btn", function (e) {
         }, 5000);
     }
 });
+
+$(document).ajaxStart(function () {
+    Pace.restart();
+});

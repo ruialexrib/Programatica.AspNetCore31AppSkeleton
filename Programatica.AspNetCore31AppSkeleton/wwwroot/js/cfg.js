@@ -18,8 +18,11 @@ cfg.text.askConfirmDelete = "Do you want to delete this record?";
 ////////////////////////////////////
 
 toastr.options.closeButton = true;
-toastr.options.progressBar = false;
+toastr.options.progressBar = true;
 toastr.options.newestOnTop = true;
+toastr.options.positionClass = "toast-bottom-right";
+toastr.options.showMethod = "fadeIn";
+toastr.options.hideMethod = "fadeOut";
 
 paceOptions = {
     // Disable the 'elements' source

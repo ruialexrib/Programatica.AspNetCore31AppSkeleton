@@ -6,6 +6,7 @@ using Programatica.Framework.Services;
 using Syncfusion.EJ2.Base;
 using System.Collections;
 using System.Linq;
+using System.Threading;
 
 namespace Programatica.AspNetCore31AppSkeleton.Controllers
 {
@@ -28,6 +29,8 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
 
         public ActionResult UrlDatasource([FromBody] DataManagerRequest dm)
         {
+            Thread.Sleep(5000);
+
             IEnumerable DataSource = _dummyService.Get();
 
             DataOperations operation = new DataOperations();

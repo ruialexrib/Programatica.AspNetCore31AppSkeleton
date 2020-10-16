@@ -1,6 +1,4 @@
-﻿
-
-$(document).on("click", ".btn", function (e) {
+﻿$(document).on("click", ".btn", function (e) {
     var target = $(this);
     var text = $(target).text();
     var atr = $(target).attr("data-loading-text");
@@ -22,3 +20,4 @@ $(document).on("click", ".btn", function (e) {
 $(document).ajaxStart(function () {
     Pace.restart();
 });
+

@@ -23,7 +23,7 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
-                     with font-awesome or any other icon font library -->
+    with font-awesome or any other icon font library -->
                 <li class="nav-item has-treeview menu-open">
                     <a href="#" class="nav-link active">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -56,6 +56,27 @@
                         </p>
                     </a>
                 </li>
+
+                <li class="nav-item has-treeview menu-open">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-cogs"></i>
+                        <p>
+                            Events
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <form>
+                                <div class="form-group">
+                                    <textarea class="form-control" id="txt-events" rows="15"></textarea>
+                                    <a href="#" class="btn btn-link" onclick="on_cmd_eventClear_click(event)">Clear</a>
+                                </div>
+                            </form>
+                        </li>
+                    </ul>
+                </li>
+
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

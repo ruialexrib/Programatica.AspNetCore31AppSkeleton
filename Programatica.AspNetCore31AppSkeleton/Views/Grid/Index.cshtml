@@ -32,6 +32,7 @@
           allowSorting="true"
           allowFiltering="true"
           allowSelection="true"
+          dataBound="on_grid_databound"
           recordDoubleClick="on_grid_dblclick"
           rowSelected="on_grid_click">
     <e-grid-pagesettings pageSizes="true" pageSize="10">
@@ -53,24 +54,36 @@
         var recordId;
         var recordName;
 
+        $(document).ready(function () {
+            global.addEvent("$(document).ready")
+        });
+
+        function on_grid_databound(args) {
+            global.addEvent("on_grid_databound");
+        }
+
         function on_grid_dblclick(args) {
             recordId = args.rowData.Id;
             updateRecord(recordId);
+            global.addEvent("on_grid_dblclick");
         }
 
         function on_grid_click(args) {
             recordId = args.data.Id;
             recordName = args.data.Description;
+            global.addEvent("on_grid_click");
         }
 
         function on_cmd_search_click(e) {
             e.preventDefault();
             searchRecord();
+            global.addEvent("on_cmd_search_click");
         }
 
         function on_cmd_create_click(e) {
             e.preventDefault();
             createRecord();
+            global.addEvent("on_cmd_create_click");
         }
 
         function on_cmd_update_click(e) {
@@ -80,6 +93,7 @@
             } else {
                 global.alert("You must select a record !");
             }
+            global.addEvent("on_cmd_update_click");
         }
 
         function on_cmd_delete_click(e) {
@@ -94,17 +108,20 @@
             } else {
                 global.alert("You must select a record !");
             }
+            global.addEvent("on_cmd_delete_click");
         }
 
         function on_cmd_refresh_click(e) {
             e.preventDefault();
             refreshRecords();
             global.toastinfo("Data refreshed!");
+            global.addEvent("on_cmd_refresh_click");
         }
 
         function on_cmd_close_click(e) {
             e.preventDefault();
             modal.close();
+            global.addEvent("on_cmd_close_click");
         }
 
         function on_cmd_save_click(e) {
@@ -125,6 +142,7 @@
                     var s = JSON.parse(status);
                     debug(s);
                 });
+            global.addEvent("on_cmd_save_click");
         }
 
         function on_cmd_edit_click(e) {
@@ -147,6 +165,7 @@
                     var s = JSON.parse(status);
                     debug(s);
                 });
+            global.addEvent("on_cmd_edit_click");
         }
 
         function createRecord() {

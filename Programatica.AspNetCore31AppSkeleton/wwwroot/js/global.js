@@ -2,6 +2,8 @@
 
 var global = global || {};
 
+global.ev = [];
+
 global.get = function (url) {
     return new Promise((resolve, reject) => {
         $.ajax({
@@ -124,4 +126,16 @@ global.toasterror = function (message) {
 
 global.toastinfo = function (message) {
     toastr.info(message);
+}
+
+global.addEvent = function (e) {
+    global.ev.push(e);
+    global.listEvent();
+}
+
+global.listEvent = function () {
+    document.getElementById("txt-events").value ="";
+    global.ev.forEach((item) => {
+        document.getElementById("txt-events").value += global.date() + " : " + item + "\n";
+    });
 }

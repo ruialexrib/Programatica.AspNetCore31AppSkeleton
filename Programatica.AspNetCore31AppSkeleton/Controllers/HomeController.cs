@@ -23,7 +23,12 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult License()
+        {
+            return View();
+        }
+
+        public IActionResult Credits()
         {
             return View();
         }

@@ -15,6 +15,11 @@ body {
     border-right: 1px solid #dee2e6;
 }
 
+/* bootstrap overrides */
+.content-header {
+    padding: 10px 0.75rem;
+}
+
 /* material overrides */
 
 .e-control,

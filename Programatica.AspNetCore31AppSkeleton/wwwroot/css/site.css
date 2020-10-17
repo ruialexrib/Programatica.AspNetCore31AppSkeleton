@@ -9,6 +9,11 @@ body {
     font-size: 1rem;
 }
 
+#main {
+    overflow: auto;
+    padding-bottom: 60px; /* this needs to be bigger than footer height*/
+}
+
 .navbar-menu {
     border-top: 1px solid #dee2e6;
     border-left: 1px solid #dee2e6;
@@ -18,6 +23,10 @@ body {
 /* bootstrap overrides */
 .content-header {
     padding: 10px 0.75rem;
+}
+
+.content-wrapper {
+    background-color: #fff;
 }
 
 /* material overrides */
@@ -36,4 +45,10 @@ body {
     .e-grid .e-rowcell {
         cursor: pointer;
         font-size: 1rem;
+    }
+
+    .e-grid .e-groupdroparea {
+        font-size: 1rem;
+        background-color: #fff;
+        font-family: Roboto, 'Open Sans', "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     }

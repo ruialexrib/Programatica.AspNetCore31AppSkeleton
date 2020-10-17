@@ -18,6 +18,18 @@
         <li class="nav-item">
             <a href="#" class="nav-link text-dark" onclick="on_cmd_refresh_click(event)"><i class="fas fa-sync-alt"></i> Refresh</a>
         </li>
+        <!-- Dropdown -->
+        <li class="nav-item dropdown">
+            <a class="nav-link  text-dark dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                <i class="fas fa-ellipsis-v"></i> More Options
+            </a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item text-dark" href="#" onclick="on_cmd_togglegroup_click(event)"><i class="far fa-object-ungroup"></i> Toggle Group</a>
+                <a class="dropdown-item text-dark" href="#" onclick="on_cmd_clearfilter_click(event)"><i class="fas fa-filter"></i> Clear Filters</a>
+                <a class="dropdown-item text-dark" href="#" onclick="on_cmd_clearsearch_click(event)"><i class="fas fa-search"></i> Clear Search</a>
+
+            </div>
+        </li>
     </ul>
     <section class="d-none d-md-block">
         <form class="form-inline">
@@ -60,12 +72,27 @@
         function on_grid_databound(args) {
         }
 
+        function on_cmd_clearfilter_click(e) {
+            var grid = $("#Grid")[0].ej2_instances[0];
+            grid.clearFiltering();
+        }
+
+        function on_cmd_clearsearch_click(e) {
+            var grid = $("#Grid")[0].ej2_instances[0];
+            grid.searchSettings.key = '';
+        }
+
+        function on_cmd_togglegroup_click(e) {
+            var grid = $("#Grid")[0].ej2_instances[0];
+            grid.allowGrouping = !grid.allowGrouping;
+        }
+
         function on_grid_dblclick(args) {
             recordId = args.rowData.Id;
             updateRecord(recordId);
         }
 
-        function on_grid_click(args) {
+        function on_grid_click(args){
             recordId = args.data.Id;
             recordName = args.data.Description;
         }

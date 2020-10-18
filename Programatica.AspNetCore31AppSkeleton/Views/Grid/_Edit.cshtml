@@ -11,8 +11,8 @@
             <form asp-action="Edit">
 
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                @*<input type="hidden" asp-for="Id" />
-                    <input type="hidden" asp-for="SystemId" />*@
+                <input type="hidden" asp-for="CreatedUser" />
+                <input type="hidden" asp-for="CreatedDate" />
 
                 <div class="form-group row">
                     <label asp-for="Id" class="col-sm-2 col-form-label"></label>

@@ -18,6 +18,7 @@ body {
     border-top: 1px solid #dee2e6;
     border-left: 1px solid #dee2e6;
     border-right: 1px solid #dee2e6;
+    background-color: rgb(250,250,250) !important;
 }
 
 /* bootstrap overrides */
@@ -52,3 +53,21 @@ body {
         background-color: #fff;
         font-family: Roboto, 'Open Sans', "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     }
+
+    .e-grid .e-rowcell,
+    .e-grid .e-groupcaption,
+    .e-grid .e-indentcell,
+    .e-grid .e-recordplusexpand,
+    .e-grid .e-recordpluscollapse,
+    .e-grid .e-detailrowcollapse,
+    .e-grid .e-detailrowexpand,
+    .e-grid .e-detailindentcell,
+    .e-grid .e-detailcell {
+        border-color: rgb(240,240,240);
+    }
+
+    .e-grid .e-headercell,
+    .e-grid .e-detailheadercell {
+        border-color: rgb(240,240,240);
+    }
+

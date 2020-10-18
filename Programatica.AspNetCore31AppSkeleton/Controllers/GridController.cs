@@ -96,7 +96,8 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
             {
                 return NotFound();
             }
-            return PartialView("_Edit", _mapper.Map<DummyViewModel>(dummy));
+            var vm = _mapper.Map<DummyViewModel>(dummy);
+            return PartialView("_Edit", vm);
         }
 
         [HttpPost]

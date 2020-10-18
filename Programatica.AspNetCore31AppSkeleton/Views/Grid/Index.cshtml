@@ -27,7 +27,6 @@
                 <a class="dropdown-item text-dark" href="#" onclick="on_cmd_togglegroup_click(event)"><i class="far fa-object-ungroup"></i> Toggle Group</a>
                 <a class="dropdown-item text-dark" href="#" onclick="on_cmd_clearfilter_click(event)"><i class="fas fa-filter"></i> Clear Filters</a>
                 <a class="dropdown-item text-dark" href="#" onclick="on_cmd_clearsearch_click(event)"><i class="fas fa-search"></i> Clear Search</a>
-
             </div>
         </li>
     </ul>
@@ -55,6 +54,8 @@
         <e-grid-column width="30" field="Id" headerText="ID" isPrimaryKey="true"></e-grid-column>
         <e-grid-column width="150" field="Description" headerText="DESCRIPTION"></e-grid-column>
         <e-grid-column width="150" field="SystemId" headerText="SYSTEMID"></e-grid-column>
+        <e-grid-column width="150" field="CreatedUser" headerText="USER"></e-grid-column>
+        <e-grid-column width="150" field="CreatedDate" headerText="DATE"></e-grid-column>
     </e-grid-columns>
 </ejs-grid>
 
@@ -167,7 +168,9 @@
             var data = {
                 Id: $("#Id").val(),
                 SystemId: $("#SystemId").val(),
-                Description: $("#Description").val()
+                Description: $("#Description").val(),
+                CreatedUser: $("#CreatedUser").val(),
+                CreatedDate: $("#CreatedDate").val()
             };
             var token = global.gettoken();
 

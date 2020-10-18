@@ -7,6 +7,8 @@ namespace Programatica.AspNetCore31AppSkeleton.ViewModels
         public int Id { get; set; }
         public Guid SystemId { get; set; }
         public string Description { get; set; }
+        public DateTime? CreatedDate { get; set; }
+        public string CreatedUser { get; set; }
 
         public DummyViewModel()
         {

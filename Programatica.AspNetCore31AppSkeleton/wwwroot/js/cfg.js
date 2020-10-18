@@ -6,8 +6,8 @@ cfg.modal.dialog = "#modal-dialog";
 cfg.modal.content = "#modal-content";
 
 cfg.bootbox = cfg.bootbox || {};
-cfg.bootbox.btnYes = "Yes";
-cfg.bootbox.btnNo = "No";
+cfg.bootbox.btnYes = "YES";
+cfg.bootbox.btnNo = "NO";
 
 cfg.text = cfg.text || {};
 cfg.text.askConfirmTitle = '<i class="fas fa-exclamation-circle text-primary"></i> Please confirm';

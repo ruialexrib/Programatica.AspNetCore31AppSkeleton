@@ -71,3 +71,6 @@ body {
         border-color: rgb(240,240,240);
     }
 
+.brand-link {
+    font-size: 1.25rem;
+}

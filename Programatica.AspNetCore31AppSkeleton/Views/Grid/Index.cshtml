@@ -1,39 +1,39 @@
 ﻿@model IEnumerable<Programatica.AspNetCore31AppSkeleton.Data.Models.Dummy>
 
 @{
-    ViewData["Title"] = "Grid Page";
+    ViewData["Title"] = "GRID PAGE";
 }
 
 <nav class="navbar navbar-expand navbar-light bg-light navbar-menu">
     <ul class="navbar-nav mr-auto">
         <li class="nav-item ">
-            <a href="#" class="nav-link text-dark" onclick="on_cmd_create_click(event)"><i class="fas fa-plus"></i> New</a>
+            <a href="#" class="nav-link text-dark" onclick="on_cmd_create_click(event)"><i class="fas fa-plus"></i> NEW</a>
         </li>
         <li class="nav-item ">
-            <a href="#" class="nav-link text-dark" onclick="on_cmd_update_click(event)"><i class="fas fa-edit"></i> Update</a>
+            <a href="#" class="nav-link text-dark" onclick="on_cmd_update_click(event)"><i class="fas fa-edit"></i> UPDATE</a>
         </li>
         <li class="nav-item ">
-            <a href="#" class="nav-link text-dark" onclick="on_cmd_delete_click(event)"><i class="fas fa-trash"></i> Delete</a>
+            <a href="#" class="nav-link text-dark" onclick="on_cmd_delete_click(event)"><i class="fas fa-trash"></i> DELETE</a>
         </li>
         <li class="nav-item">
-            <a href="#" class="nav-link text-dark" onclick="on_cmd_refresh_click(event)"><i class="fas fa-sync-alt"></i> Refresh</a>
+            <a href="#" class="nav-link text-dark" onclick="on_cmd_refresh_click(event)"><i class="fas fa-sync-alt"></i> REFRESH</a>
         </li>
         <!-- Dropdown -->
         <li class="nav-item dropdown d-none d-md-block">
             <a class="nav-link  text-dark dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                <i class="fas fa-ellipsis-v"></i> More Options
+                <i class="fas fa-ellipsis-v"></i> MORE OPTIONS
             </a>
             <div class="dropdown-menu">
-                <a class="dropdown-item text-dark" href="#" onclick="on_cmd_togglegroup_click(event)"><i class="far fa-object-ungroup"></i> Toggle Group</a>
-                <a class="dropdown-item text-dark" href="#" onclick="on_cmd_clearfilter_click(event)"><i class="fas fa-filter"></i> Clear Filters</a>
-                <a class="dropdown-item text-dark" href="#" onclick="on_cmd_clearsearch_click(event)"><i class="fas fa-search"></i> Clear Search</a>
+                <a class="dropdown-item text-dark" href="#" onclick="on_cmd_togglegroup_click(event)"><i class="far fa-object-ungroup"></i> TOGGLE GROUP</a>
+                <a class="dropdown-item text-dark" href="#" onclick="on_cmd_clearfilter_click(event)"><i class="fas fa-filter"></i> CLEAR FILTERS</a>
+                <a class="dropdown-item text-dark" href="#" onclick="on_cmd_clearsearch_click(event)"><i class="fas fa-search"></i> CLEAR SEARCH</a>
             </div>
         </li>
     </ul>
     <section class="d-none d-md-block">
         <form class="form-inline">
             <input id="txt-search" class="form-control form-control-sm" type="search" placeholder="Search" aria-label="Search">&nbsp;
-            <a href="#" class="btn-link text-dark" onclick="on_cmd_search_click(event)"><i class="fas fa-search"></i> Search</a>
+            <a href="#" class="btn-link text-dark" onclick="on_cmd_search_click(event)"><i class="fas fa-search"></i> SEARCH</a>
         </form>
     </section>
 </nav>

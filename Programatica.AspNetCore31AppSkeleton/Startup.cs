@@ -40,8 +40,8 @@ namespace Programatica.AspNetCore31AppSkeleton
                     .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme,
                     options =>
                     {
-                        options.LoginPath = "/Home/License";
-                        options.LogoutPath = "/Home/Credits";
+                        options.LoginPath = "/Account/Login";
+                        options.LogoutPath = "/Account/Logoff";
                     });
 
             services.AddControllersWithViews()

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Programatica.AspNetCore31AppSkeleton.Data.Models;
 using Programatica.AspNetCore31AppSkeleton.ViewModels;
@@ -10,6 +11,7 @@ using System.Threading;
 
 namespace Programatica.AspNetCore31AppSkeleton.Controllers
 {
+    [Authorize]
     public class GridController : Controller
     {
         private readonly IService<Dummy> _dummyService;

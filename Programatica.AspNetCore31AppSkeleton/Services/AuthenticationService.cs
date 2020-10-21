@@ -11,7 +11,7 @@ namespace Programatica.AspNetCore31AppSkeleton.Services
     {
         public async Task SignIn(HttpContext httpContext, string username, bool isPersistent = false)
         {
-            ClaimsIdentity identity = new ClaimsIdentity(GetUserClaims(username), CookieAuthenticationDefaults.AuthenticationScheme);
+            ClaimsIdentity identity = new ClaimsIdentity(GetUserPrincipalClaims(username), CookieAuthenticationDefaults.AuthenticationScheme);
             ClaimsPrincipal principal = new ClaimsPrincipal(identity);
 
             await httpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
@@ -22,7 +22,7 @@ namespace Programatica.AspNetCore31AppSkeleton.Services
             await httpContext.SignOutAsync();
         }
 
-        private IEnumerable<Claim> GetUserClaims(string user)
+        private IEnumerable<Claim> GetUserPrincipalClaims(string user)
         {
             List<Claim> claims = new List<Claim>();
 
@@ -36,8 +36,11 @@ namespace Programatica.AspNetCore31AppSkeleton.Services
         private IEnumerable<Claim> GetUserRoleClaims(string user)
         {
             List<Claim> claims = new List<Claim>();
-
-            claims.Add(new Claim(ClaimTypes.Role, "admin"));
+            claims.Add(new Claim(ClaimTypes.Role, "User"));
+            if (user.Equals("admin"))
+            {
+                claims.Add(new Claim(ClaimTypes.Role, "Admin"));
+            }
             return claims;
         }
     }

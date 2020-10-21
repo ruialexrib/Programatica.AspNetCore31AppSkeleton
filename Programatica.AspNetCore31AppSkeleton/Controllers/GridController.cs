@@ -11,7 +11,7 @@ using System.Threading;
 
 namespace Programatica.AspNetCore31AppSkeleton.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class GridController : Controller
     {
         private readonly IService<Dummy> _dummyService;

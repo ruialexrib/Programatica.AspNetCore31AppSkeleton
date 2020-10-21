@@ -11,7 +11,7 @@ using Programatica.AspNetCore31AppSkeleton.Services;
 
 namespace Programatica.AspNetCore31AppSkeleton.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "User")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

@@ -1,4 +1,5 @@
-﻿@{ var userName = User.Identity.Name; }
+﻿@inject Programatica.Framework.Core.Adapter.IAuthUserAdapter _authUserAdapter
+
 
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
@@ -17,7 +18,7 @@
                 <img src="~/img/ruialexrib.jpg" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">@userName</a>
+                <a href="#" class="d-block">@_authUserAdapter.Name [@_authUserAdapter.AuthenticationType]</a>
             </div>
         </div>
 

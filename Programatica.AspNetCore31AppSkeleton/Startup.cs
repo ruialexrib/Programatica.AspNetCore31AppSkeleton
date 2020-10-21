@@ -5,11 +5,13 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json.Serialization;
+using Programatica.AspNetCore31AppSkeleton.Adapters;
 using Programatica.AspNetCore31AppSkeleton.Data.Migrations.Context;
 using Programatica.AspNetCore31AppSkeleton.Data.Models;
 using Programatica.Framework.Core.Adapter;
@@ -67,7 +69,7 @@ namespace Programatica.AspNetCore31AppSkeleton
 
             // adapters
             services.AddTransient<IDateTimeAdapter, DateTimeAdapter>();
-            services.AddTransient<IAuthUserAdapter, AuthUserAdapter>();
+            services.AddTransient<IAuthUserAdapter, ClaimBasedAuthAdapter>();
             services.AddTransient<IJsonSerializerAdapter, JsonSerializerAdapter>();
 
             // event handler
@@ -81,6 +83,9 @@ namespace Programatica.AspNetCore31AppSkeleton
             // service
             services.AddTransient(typeof(IService<>), typeof(Service<>));
             services.AddTransient<Services.IAuthenticationService, Services.AuthenticationService>();
+
+            // others
+            services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

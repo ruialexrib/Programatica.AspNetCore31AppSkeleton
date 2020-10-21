@@ -23,13 +23,12 @@ modal.show = function (url, returnurl, prevreturnurl) {
         modal.prevreturnurl = prevreturnurl;
         modal.guid = global.guid();
 
-        container.modal({
-            backdrop: 'static',
-            keyboard: false
-        });
-
         global.get(url)
             .then((html) => {
+                container.modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
                 content.html(html);
                 resolve(html);
             })

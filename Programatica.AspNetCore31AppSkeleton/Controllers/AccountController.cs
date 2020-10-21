@@ -25,8 +25,14 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
         [HttpPost]
         public IActionResult Login(LoginViewModel vm)
         {
-            _authenticationService.SignIn(HttpContext, vm.Username);
-            return RedirectToAction("Index", "Home", null);
+            if (ModelState.IsValid)
+            {
+                _authenticationService.SignIn(HttpContext, vm.Username, vm.Password, vm.IsPersistent);
+                return RedirectToAction("Index", "Home", null);
+            }else
+            {
+                return View(vm);
+            }
         }
 
         public IActionResult Logoff()

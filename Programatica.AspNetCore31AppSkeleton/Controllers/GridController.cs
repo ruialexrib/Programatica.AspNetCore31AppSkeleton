@@ -1,10 +1,13 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Programatica.AspNetCore31AppSkeleton.Data.Models;
 using Programatica.AspNetCore31AppSkeleton.ViewModels;
+using Programatica.Framework.Data.Repository;
 using Programatica.Framework.Services;
 using Syncfusion.EJ2.Base;
+using System;
 using System.Collections;
 using System.Linq;
 using System.Threading;
@@ -31,8 +34,6 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
 
         public ActionResult UrlDatasource([FromBody] DataManagerRequest dm)
         {
-            Thread.Sleep(5000);
-
             IEnumerable DataSource = _dummyService.Get();
 
             DataOperations operation = new DataOperations();
@@ -80,12 +81,29 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
         {
             if (ModelState.IsValid)
             {
-                _dummyService.Create(_mapper.Map<Dummy>(vm));
-                return Json(new { result = "ok" });
+                try
+                {
+
+                    _dummyService.Create(_mapper.Map<Dummy>(vm));
+                    return new JsonResult(new { result = "ok" })
+                    {
+                        StatusCode = StatusCodes.Status200OK
+                    };
+                }
+                catch (Exception e)
+                {
+                    return new JsonResult(new { result = "error", message = e.Message })
+                    {
+                        StatusCode = StatusCodes.Status200OK
+                    };
+                }
             }
             else
             {
-                return Json(new { result = "error" });
+                return new JsonResult(new { result = "error", message = "Invalid Model" })
+                {
+                    StatusCode = StatusCodes.Status400BadRequest
+                };
             }
         }
 
@@ -108,20 +126,50 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
         {
             if (ModelState.IsValid)
             {
-                _dummyService.Modify(_mapper.Map<Dummy>(vm));
-                return Json(new { result = "ok" });
+                try
+                {
+                    _dummyService.Modify(_mapper.Map<Dummy>(vm));
+                    return new JsonResult(new { result = "ok" })
+                    {
+                        StatusCode = StatusCodes.Status200OK
+                    };
+                }
+                catch (Exception e)
+                {
+                    return new JsonResult(new { result = "error", message = e.Message })
+                    {
+                        StatusCode = StatusCodes.Status200OK
+                    };
+                }
             }
             else
             {
-                return Json(new { result = "error" });
+                return new JsonResult(new { result = "error", message = "Invalid Model" })
+                {
+                    StatusCode = StatusCodes.Status400BadRequest
+                };
             }
         }
 
         [HttpPost]
         public JsonResult Delete([FromBody] DummyViewModel vm)
         {
-            _dummyService.Delete(vm.Id);
-            return Json(new { result = "ok" });
+            try
+            {
+                _dummyService.Delete(vm.Id);
+                return new JsonResult(new { result = "ok" })
+                {
+                    StatusCode = StatusCodes.Status200OK
+                };
+            }
+            catch (Exception e)
+            {
+                return new JsonResult(new { result = "error", message = e.Message })
+                {
+                    StatusCode = StatusCodes.Status400BadRequest
+                };
+            }
+            
         }
     }
 }

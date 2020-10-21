@@ -10,6 +10,7 @@ namespace Programatica.AspNetCore31AppSkeleton.ViewModels
     {
         [Required]
         public string Username { get; set; }
+        [Required]
         public string Password { get; set; }
         public bool IsPersistent { get; set; }
     }

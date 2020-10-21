@@ -5,7 +5,7 @@ namespace Programatica.AspNetCore31AppSkeleton.Services
 {
     public interface IAuthenticationService
     {
-        Task SignIn(HttpContext httpContext, string username, bool isPersistent = false);
+        Task SignIn(HttpContext httpContext, string username, string password, bool isPersistent = false);
         Task SignOut(HttpContext httpContext);
     }
 }

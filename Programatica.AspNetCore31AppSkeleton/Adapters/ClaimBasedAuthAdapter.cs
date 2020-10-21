@@ -1,10 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Programatica.Framework.Core.Adapter;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
 
 namespace Programatica.AspNetCore31AppSkeleton.Adapters
 {
@@ -16,10 +13,22 @@ namespace Programatica.AspNetCore31AppSkeleton.Adapters
         {
             get
             {
-                return _httpContextAccessor.HttpContext.User.Identity.Name;
+                return _httpContextAccessor.HttpContext.User
+                                .Claims
+                                .FirstOrDefault(x => x.Type.Equals("AuthenticatedUserName"))
+                                .Value;
             }
         }
-        public string Password { get; }
+        public string Password
+        {
+            get
+            {
+                return _httpContextAccessor.HttpContext.User
+                                .Claims
+                                .FirstOrDefault(x => x.Type.Equals("AuthenticatedUserPassword"))
+                                .Value;
+            }
+        }
         public string AuthenticationType
         {
             get
@@ -27,7 +36,18 @@ namespace Programatica.AspNetCore31AppSkeleton.Adapters
                 return _httpContextAccessor.HttpContext.User.Identity.AuthenticationType;
             }
         }
-        public DateTime LastLoginDateTime { get; }
+        public DateTime LastLoginDateTime
+        {
+            get
+            {
+                return DateTime.Parse(
+                    _httpContextAccessor.HttpContext.User
+                                            .Claims
+                                            .FirstOrDefault(x => x.Type.Equals("AuthenticatedUserLastLoginDateTime"))
+                                            .Value
+                    );
+            }
+        }
 
         public ClaimBasedAuthAdapter(IHttpContextAccessor httpContextAccessor)
         {

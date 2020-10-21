@@ -10,6 +10,6 @@ namespace Programatica.AspNetCore31AppSkeleton.Profiles
         {
             CreateMap<Dummy, DummyViewModel>().ReverseMap();
         }
-        
+
     }
 }

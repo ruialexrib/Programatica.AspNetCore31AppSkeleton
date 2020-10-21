@@ -14,6 +14,7 @@ using Newtonsoft.Json.Serialization;
 using Programatica.AspNetCore31AppSkeleton.Adapters;
 using Programatica.AspNetCore31AppSkeleton.Data.Migrations.Context;
 using Programatica.AspNetCore31AppSkeleton.Data.Models;
+using Programatica.AspNetCore31AppSkeleton.Handlers;
 using Programatica.Framework.Core.Adapter;
 using Programatica.Framework.Data.Context;
 using Programatica.Framework.Data.Models;
@@ -74,7 +75,10 @@ namespace Programatica.AspNetCore31AppSkeleton
 
             // event handler
             services.AddTransient<IEventHandler<Dummy>, AuditEventHandler<Dummy>>();
+            services.AddTransient<IEventHandler<Dummy>, ServiceEventHandler<Dummy>>();
+            services.AddTransient<IEventHandler<User>, AuditEventHandler<User>>();
             services.AddTransient<IList<IEventHandler<Dummy>>>(p => p.GetServices<IEventHandler<Dummy>>().ToList());
+            services.AddTransient<IList<IEventHandler<User>>>(p => p.GetServices<IEventHandler<User>>().ToList());
             services.AddTransient<IList<IEventHandler<TrackChange>>>(p => p.GetServices<IEventHandler<TrackChange>>().ToList());
 
             // injector

@@ -36,8 +36,7 @@
 
                 <form asp-action="Login">
                     <div class="input-group mb-3">
-                        <input asp-for="Username" class="form-control" placeholder="Username (something)" />
-                        <span asp-validation-for="Username" class="text-danger"></span>
+                        <input asp-for="Username" class="form-control" placeholder="Username (type admin)" />
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
@@ -45,19 +44,18 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input asp-for="Password" class="form-control" placeholder="Password (something)" />
-                        <span asp-validation-for="Password" class="text-danger"></span>
+                        <input asp-for="Password" class="form-control" placeholder="Password (type something)" />
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
                             </div>
                         </div>
-                    </div>
+                    </div> 
                     <div class="row">
                         <div class="col-8">
                             <div class="icheck-primary">
-                                <input type="checkbox" id="remember">
-                                <label for="remember">
+                                <input type="checkbox" asp-for="IsPersistent" />
+                                <label for="IsPersistent">
                                     Remember Me
                                 </label>
                             </div>

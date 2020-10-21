@@ -1,7 +1,7 @@
-﻿@model IEnumerable<Programatica.AspNetCore31AppSkeleton.Data.Models.Dummy>
+﻿@model IEnumerable<Programatica.AspNetCore31AppSkeleton.Data.Models.User>
 
 @{
-    ViewData["Title"] = "GRID PAGE";
+    ViewData["Title"] = "USERS PAGE";
 }
 
 <nav class="navbar navbar-expand navbar-light bg-light navbar-menu">
@@ -48,16 +48,15 @@
           rowSelected="on_grid_click">
     <e-grid-pagesettings pageSizes="true" pageSize="10">
     </e-grid-pagesettings>
-    <e-data-manager url="@Url.Action("UrlDatasource", "Grid")" adaptor="UrlAdaptor"></e-data-manager>
+    <e-data-manager url="@Url.Action("UrlDatasource", "Users")" adaptor="UrlAdaptor"></e-data-manager>
     <e-grid-filterSettings type="Excel"></e-grid-filterSettings>
     <e-grid-columns>
         <e-grid-column width="70" field="Id" headerText="ID" isPrimaryKey="true"></e-grid-column>
-        <e-grid-column width="200" field="Description" headerText="DESCRIPTION"></e-grid-column>
-        <e-grid-column width="200" field="SystemId" headerText="SYSTEMID"></e-grid-column>
+        <e-grid-column width="200" field="Username" headerText="USERNAME"></e-grid-column>
         <e-grid-column width="120" field="CreatedUser" headerText="CREATED USER"></e-grid-column>
-        <e-grid-column width="150" field="CreatedDate" headerText="CREATED DATE" customFormat="@(new { type ="date", format="yyyy-MM-dd HH:mm:ss" })" type="date"></e-grid-column>
+        <e-grid-column width="120" field="CreatedDate" headerText="CREATED DATE" customFormat="@(new { type ="date", format="yyyy-MM-dd" })" type="date"></e-grid-column>
         <e-grid-column width="120" field="LastModifiedUser" headerText="MODIF. USER"></e-grid-column>
-        <e-grid-column width="150" field="LastModifiedDate" headerText="MODIF. DATE" customFormat="@(new { type ="date", format="yyyy-MM-dd HH:mm:ss" })" type="date"></e-grid-column>
+        <e-grid-column width="120" field="LastModifiedDate" headerText="MODIF. DATE" customFormat="@(new { type ="date", format="yyyy-MM-dd" })" type="date"></e-grid-column>
 
     </e-grid-columns>
 </ejs-grid>
@@ -162,7 +161,6 @@
                 .catch((status) => {
                     var s = JSON.parse(status);
                     debug(s);
-                    global.toasterror(s.message);
                 });
         }
 
@@ -171,7 +169,10 @@
             var url = "@Url.Action("Edit", "Grid")";
             var data = {
                 Id: $("#Id").val(),
-                Description: $("#Description").val()
+                SystemId: $("#SystemId").val(),
+                Description: $("#Description").val(),
+                CreatedUser: $("#CreatedUser").val(),
+                CreatedDate: $("#CreatedDate").val()
             };
             var token = global.gettoken();
 
@@ -184,22 +185,23 @@
                 .catch((status) => {
                     var s = JSON.parse(status);
                     debug(s);
-                    global.toasterror(s.message);
                 });
         }
 
         function showCreateRecordView() {
-            var url = "@Url.Action("Create", "Grid")";
+            var url = "@Url.Action("Create", "Users")";
             modal.show(url)
                 .then((h) => {
                     debug("modal show event ok");
                         modal.setsize(modalsizes.NORMAL);
                 })
-                .catch((e) => alert(e));
+                .catch((e) => {
+                    global.toasterror(e);
+                });
         }
 
         function showUpdateRecordView(id) {
-            var url = "@Url.Action("Edit", "Grid")?id=" + id ;
+            var url = "@Url.Action("Edit", "Users")?id=" + id ;
             modal.show(url)
                 .then((h) => {
                     debug("modal show event ok");
@@ -209,7 +211,7 @@
         }
 
         function deleteRecord(id) {
-            var url = "@Url.Action("Delete", "Grid")";
+            var url = "@Url.Action("Delete", "Users")";
             var data = {
                 Id: id
             };

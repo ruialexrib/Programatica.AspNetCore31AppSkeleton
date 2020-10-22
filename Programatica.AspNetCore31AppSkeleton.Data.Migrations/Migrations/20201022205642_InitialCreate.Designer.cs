@@ -10,7 +10,7 @@ using Programatica.AspNetCore31AppSkeleton.Data.Migrations.Context;
 namespace Programatica.AspNetCore31AppSkeleton.Data.Migrations.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20201021173737_InitialCreate")]
+    [Migration("20201022205642_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -69,22 +69,22 @@ namespace Programatica.AspNetCore31AppSkeleton.Data.Migrations.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2020, 10, 21, 17, 37, 36, 156, DateTimeKind.Utc).AddTicks(7854),
+                            CreatedDate = new DateTime(2020, 10, 22, 20, 56, 40, 945, DateTimeKind.Utc).AddTicks(9011),
                             CreatedUser = "system",
                             Description = "Dummy One",
                             IsDestroyed = false,
                             IsSystem = false,
-                            SystemId = new Guid("a4de1cf8-cfda-43e2-b6b3-307fe608eef6")
+                            SystemId = new Guid("909725a8-1f9e-414a-b4b9-d0a14361052b")
                         },
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2020, 10, 21, 17, 37, 36, 156, DateTimeKind.Utc).AddTicks(7968),
+                            CreatedDate = new DateTime(2020, 10, 22, 20, 56, 40, 945, DateTimeKind.Utc).AddTicks(9132),
                             CreatedUser = "system",
                             Description = "Dummy Two",
                             IsDestroyed = false,
                             IsSystem = false,
-                            SystemId = new Guid("43171431-798b-470c-a462-6c0b7365f3fb")
+                            SystemId = new Guid("5c09a973-49cd-48e3-aa46-b3076cfcf6b7")
                         });
                 });
 
@@ -136,12 +136,14 @@ namespace Programatica.AspNetCore31AppSkeleton.Data.Migrations.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2020, 10, 21, 17, 37, 36, 156, DateTimeKind.Utc).AddTicks(4650),
+                            CreatedDate = new DateTime(2020, 10, 22, 20, 56, 40, 945, DateTimeKind.Utc).AddTicks(5637),
                             CreatedUser = "system",
                             IsDestroyed = false,
                             IsSystem = true,
+                            LastModifiedDate = new DateTime(2020, 10, 22, 20, 56, 40, 945, DateTimeKind.Utc).AddTicks(5692),
+                            LastModifiedUser = "system",
                             Name = "Administrators",
-                            SystemId = new Guid("56225f52-f52b-40f2-ac2d-3f25bcb338cb")
+                            SystemId = new Guid("4114d6e5-8af3-42aa-9c89-2199dcbe213b")
                         });
                 });
 
@@ -214,11 +216,14 @@ namespace Programatica.AspNetCore31AppSkeleton.Data.Migrations.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2020, 10, 21, 17, 37, 36, 152, DateTimeKind.Utc).AddTicks(1035),
+                            CreatedDate = new DateTime(2020, 10, 22, 20, 56, 40, 940, DateTimeKind.Utc).AddTicks(9045),
                             CreatedUser = "system",
                             IsDestroyed = false,
                             IsSystem = true,
-                            SystemId = new Guid("1b3144ae-ac96-465f-b898-50cf9fcee464"),
+                            LastModifiedDate = new DateTime(2020, 10, 22, 20, 56, 40, 941, DateTimeKind.Utc).AddTicks(2455),
+                            LastModifiedUser = "system",
+                            Password = "pass",
+                            SystemId = new Guid("fd80bb33-e1a4-4c3d-98c5-37f97dc78bfa"),
                             Username = "admin"
                         });
                 });

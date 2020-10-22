@@ -44,6 +44,8 @@ namespace Programatica.AspNetCore31AppSkeleton.Data.Migrations.Context
                     Password = "pass",
                     CreatedDate = DateTime.UtcNow,
                     CreatedUser = "system",
+                    LastModifiedDate = DateTime.UtcNow,
+                    LastModifiedUser = "system",
                     IsSystem = true
                 }
             );
@@ -56,6 +58,8 @@ namespace Programatica.AspNetCore31AppSkeleton.Data.Migrations.Context
                     Name = "Administrators",
                     CreatedDate = DateTime.UtcNow,
                     CreatedUser = "system",
+                    LastModifiedDate = DateTime.UtcNow,
+                    LastModifiedUser = "system",
                     IsSystem = true
                 }
             );

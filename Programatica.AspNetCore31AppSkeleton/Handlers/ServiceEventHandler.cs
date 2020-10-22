@@ -44,6 +44,10 @@ namespace Programatica.AspNetCore31AppSkeleton.Handlers
 
         public void OnBeforeDeleting(T model)
         {
+            if (model.IsSystem)
+            {
+                throw new System.Exception("IModel system objects cant be deleted.");
+            }
         }
 
         public void OnBeforeDestroying(T model)
@@ -58,6 +62,7 @@ namespace Programatica.AspNetCore31AppSkeleton.Handlers
         {
             var current = _modelRepository.GetData(model.Id);
             model.SystemId = current.SystemId;
+            model.IsSystem = current.IsSystem;
             model.CreatedDate = current.CreatedDate;
             model.CreatedUser = current.CreatedUser;
         }

@@ -4,11 +4,12 @@ using Programatica.AspNetCore31AppSkeleton.ViewModels;
 
 namespace Programatica.AspNetCore31AppSkeleton.Profiles
 {
-    public class DummyProfile : Profile
+    public class ModelProfile : Profile
     {
-        public DummyProfile()
+        public ModelProfile()
         {
             CreateMap<Dummy, DummyViewModel>().ReverseMap();
+            CreateMap<User, UserViewModel>().ReverseMap();
         }
 
     }

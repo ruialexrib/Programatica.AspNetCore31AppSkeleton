@@ -53,8 +53,8 @@
     <e-grid-columns>
         <e-grid-column width="70" field="Id" headerText="ID" isPrimaryKey="true"></e-grid-column>
         <e-grid-column width="200" field="Username" headerText="USERNAME"></e-grid-column>
-        <e-grid-column width="120" field="CreatedUser" headerText="CREATED USER"></e-grid-column>
-        <e-grid-column width="120" field="CreatedDate" headerText="CREATED DATE" customFormat="@(new { type ="date", format="yyyy-MM-dd" })" type="date"></e-grid-column>
+        <e-grid-column width="200" field="Email" headerText="EMAIL"></e-grid-column>
+        <e-grid-column width="200" field="Fullname" headerText="FULLNAME"></e-grid-column>
         <e-grid-column width="120" field="LastModifiedUser" headerText="MODIF. USER"></e-grid-column>
         <e-grid-column width="120" field="LastModifiedDate" headerText="MODIF. DATE" customFormat="@(new { type ="date", format="yyyy-MM-dd" })" type="date"></e-grid-column>
 
@@ -97,7 +97,7 @@
 
         function on_grid_click(args){
             recordId = args.data.Id;
-            recordName = args.data.Description;
+            recordName = args.data.Username;
         }
 
         function on_cmd_search_click(e) {
@@ -146,9 +146,17 @@
 
         function on_cmd_save_click(e) {
             e.preventDefault();
-            var url = "@Url.Action("Create", "Grid")";
+            var url = "@Url.Action("Create", "Users")";
             var data = {
-                Description: $("#Description").val()
+                Username: $("#Username").val(),
+                Password: $("#Password").val(),
+                Email: $("#Email").val(),
+                Fullname: $("#Fullname").val(),
+                Address: $("#Address").val(),
+                PostalCode: $("#PostalCode").val(),
+                City: $("#City").val(),
+                Country: $("#Country").val(),
+                Comments: $("#Comments").val(),
             };
             var token = global.gettoken();
 
@@ -166,13 +174,18 @@
 
         function on_cmd_edit_click(e) {
             e.preventDefault();
-            var url = "@Url.Action("Edit", "Grid")";
+            var url = "@Url.Action("Edit", "Users")";
             var data = {
                 Id: $("#Id").val(),
-                SystemId: $("#SystemId").val(),
-                Description: $("#Description").val(),
-                CreatedUser: $("#CreatedUser").val(),
-                CreatedDate: $("#CreatedDate").val()
+                Username: $("#Username").val(),
+                Password: $("#Password").val(),
+                Email: $("#Email").val(),
+                Fullname: $("#Fullname").val(),
+                Address: $("#Address").val(),
+                PostalCode: $("#PostalCode").val(),
+                City: $("#City").val(),
+                Country: $("#Country").val(),
+                Comments: $("#Comments").val(),
             };
             var token = global.gettoken();
 
@@ -193,7 +206,7 @@
             modal.show(url)
                 .then((h) => {
                     debug("modal show event ok");
-                        modal.setsize(modalsizes.NORMAL);
+                    modal.setsize(modalsizes.LARGE);
                 })
                 .catch((e) => {
                     global.toasterror(e);
@@ -205,7 +218,7 @@
             modal.show(url)
                 .then((h) => {
                     debug("modal show event ok");
-                        modal.setsize(modalsizes.NORMAL);
+                    modal.setsize(modalsizes.LARGE);
                 })
                 .catch((e) => alert(e));
         }

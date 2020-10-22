@@ -1,4 +1,5 @@
-﻿using Programatica.Framework.Data.Models;
+﻿using Programatica.Framework.Core.Adapter;
+using Programatica.Framework.Data.Models;
 using Programatica.Framework.Data.Repository;
 using Programatica.Framework.Services.Handlers;
 
@@ -9,10 +10,14 @@ namespace Programatica.AspNetCore31AppSkeleton.Handlers
     {
 
         private readonly IRepository<T> _modelRepository;
+        private readonly IDateTimeAdapter _dateTimeAdapter;
+        private readonly IAuthUserAdapter _authUserAdapter;
 
-        public ServiceEventHandler(IRepository<T> modelRepository)
+        public ServiceEventHandler(IRepository<T> modelRepository, IDateTimeAdapter dateTimeAdapter, IAuthUserAdapter authUserAdapter)
         {
             _modelRepository = modelRepository;
+            _dateTimeAdapter = dateTimeAdapter;
+            _authUserAdapter = authUserAdapter;
         }
 
         public void OnAfterCreated(T model)
@@ -33,6 +38,8 @@ namespace Programatica.AspNetCore31AppSkeleton.Handlers
 
         public void OnBeforeCreating(T model)
         {
+            model.LastModifiedDate = _dateTimeAdapter.UtcNow;
+            model.LastModifiedUser = _authUserAdapter.Name;
         }
 
         public void OnBeforeDeleting(T model)

@@ -66,9 +66,6 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
             return dm.RequiresCounts ? Json(new { result = DataSource, count }) : Json(DataSource);
         }
 
-
-
-
         [HttpGet]
         public IActionResult Create()
         {
@@ -106,7 +103,6 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
                 };
             }
         }
-
 
         [HttpGet]
         public IActionResult Edit(int id)

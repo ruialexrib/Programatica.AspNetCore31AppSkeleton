@@ -78,8 +78,11 @@ namespace Programatica.AspNetCore31AppSkeleton
             services.AddTransient<IEventHandler<Dummy>, ServiceEventHandler<Dummy>>();
             services.AddTransient<IEventHandler<User>, AuditEventHandler<User>>();
             services.AddTransient<IEventHandler<User>, ServiceEventHandler<User>>();
+            services.AddTransient<IEventHandler<Role>, AuditEventHandler<Role>>();
+            services.AddTransient<IEventHandler<Role>, ServiceEventHandler<Role>>();
             services.AddTransient<IList<IEventHandler<Dummy>>>(p => p.GetServices<IEventHandler<Dummy>>().ToList());
             services.AddTransient<IList<IEventHandler<User>>>(p => p.GetServices<IEventHandler<User>>().ToList());
+            services.AddTransient<IList<IEventHandler<Role>>>(p => p.GetServices<IEventHandler<Role>>().ToList());
             services.AddTransient<IList<IEventHandler<TrackChange>>>(p => p.GetServices<IEventHandler<TrackChange>>().ToList());
 
             // injector

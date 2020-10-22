@@ -41,6 +41,7 @@ namespace Programatica.AspNetCore31AppSkeleton.Data.Migrations.Context
                 {
                     Id = 1,
                     Username = "admin",
+                    Password = "pass",
                     CreatedDate = DateTime.UtcNow,
                     CreatedUser = "system",
                     IsSystem = true

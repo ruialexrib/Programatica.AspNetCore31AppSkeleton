@@ -23,12 +23,20 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login(LoginViewModel vm)
+        public async Task<IActionResult> Login(LoginViewModel vm)
         {
             if (ModelState.IsValid)
             {
-                _authenticationService.SignIn(HttpContext, vm.Username, vm.Password, vm.IsPersistent);
-                return RedirectToAction("Index", "Home", null);
+                try
+                {
+                    await _authenticationService.SignIn(HttpContext, vm.Username, vm.Password, vm.IsPersistent);
+                    return RedirectToAction("Index", "Home", null);
+                }
+                catch (Exception e)
+                {
+                    ModelState.AddModelError(string.Empty, e.Message);
+                    return View(vm);
+                }
             }else
             {
                 return View(vm);

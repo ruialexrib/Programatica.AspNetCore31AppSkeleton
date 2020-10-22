@@ -10,6 +10,7 @@ namespace Programatica.AspNetCore31AppSkeleton.Profiles
         {
             CreateMap<Dummy, DummyViewModel>().ReverseMap();
             CreateMap<User, UserViewModel>().ReverseMap();
+            CreateMap<Role, RoleViewModel>().ReverseMap();
         }
 
     }

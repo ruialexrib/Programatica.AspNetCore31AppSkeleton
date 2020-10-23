@@ -2,20 +2,19 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Programatica.AspNetCore31AppSkeleton.Controllers.Base;
 using Programatica.AspNetCore31AppSkeleton.Data.Models;
 using Programatica.AspNetCore31AppSkeleton.ViewModels;
-using Programatica.Framework.Data.Repository;
 using Programatica.Framework.Services;
 using Syncfusion.EJ2.Base;
 using System;
 using System.Collections;
 using System.Linq;
-using System.Threading;
 
 namespace Programatica.AspNetCore31AppSkeleton.Controllers
 {
     [Authorize(Roles = "Admin")]
-    public class GridController : Controller
+    public class GridController : BaseController
     {
         private readonly IService<Dummy> _dummyService;
         private readonly IMapper _mapper;
@@ -24,11 +23,14 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
         {
             _dummyService = dummyService;
             _mapper = mapper;
+
+            PageWarnings.Add("Warning from GridController Constructor");
         }
 
         // GET: GridController
         public ActionResult Index()
         {
+            PageMessages.Add("Message from GridController ActionResult Index()");
             return View();
         }
 
@@ -165,7 +167,7 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
                     StatusCode = StatusCodes.Status400BadRequest
                 };
             }
-            
+
         }
     }
 }

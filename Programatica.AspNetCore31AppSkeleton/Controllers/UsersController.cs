@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Programatica.AspNetCore31AppSkeleton.Controllers.Base;
 using Programatica.AspNetCore31AppSkeleton.Data.Models;
 using Programatica.AspNetCore31AppSkeleton.ViewModels;
 using Programatica.Framework.Services;
@@ -14,7 +15,7 @@ using Syncfusion.EJ2.Base;
 namespace Programatica.AspNetCore31AppSkeleton.Controllers
 {
 
-    public class UsersController : Controller
+    public class UsersController : BaseController
     {
         private readonly IService<User> _userService;
         private readonly IMapper _mapper;
@@ -23,6 +24,8 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
         {
             _userService = userService;
             _mapper = mapper;
+
+            PageMessages.Add("Message from UsersController Constructor");
         }
 
 
@@ -79,7 +82,6 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
             {
                 try
                 {
-
                     _userService.Create(_mapper.Map<User>(vm));
                     return new JsonResult(new { result = "ok" })
                     {

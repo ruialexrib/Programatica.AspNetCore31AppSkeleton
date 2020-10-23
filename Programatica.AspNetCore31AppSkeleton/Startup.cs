@@ -72,6 +72,7 @@ namespace Programatica.AspNetCore31AppSkeleton
             services.AddTransient<IDateTimeAdapter, DateTimeAdapter>();
             services.AddTransient<IAuthUserAdapter, ClaimBasedAuthAdapter>();
             services.AddTransient<IJsonSerializerAdapter, JsonSerializerAdapter>();
+            services.AddTransient<IPageAdapter, PageAdapter>();
 
             // event handler
             services.AddTransient<IEventHandler<Dummy>, AuditEventHandler<Dummy>>();

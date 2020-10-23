@@ -4,6 +4,7 @@ using System.Linq;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Programatica.AspNetCore31AppSkeleton.Controllers.Base;
 using Programatica.AspNetCore31AppSkeleton.Data.Models;
 using Programatica.AspNetCore31AppSkeleton.ViewModels;
 using Programatica.Framework.Services;
@@ -11,7 +12,7 @@ using Syncfusion.EJ2.Base;
 
 namespace Programatica.AspNetCore31AppSkeleton.Controllers
 {
-    public class RolesController : Controller
+    public class RolesController : BaseController
     {
         private readonly IService<Role> _roleService;
         private readonly IMapper _mapper;

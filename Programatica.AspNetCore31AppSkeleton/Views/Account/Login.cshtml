@@ -1,10 +1,13 @@
 ﻿@model Programatica.AspNetCore31AppSkeleton.ViewModels.LoginViewModel
+@using Programatica.AspNetCore31AppSkeleton.Extensions
+@inject Programatica.AspNetCore31AppSkeleton.Adapters.IPageAdapter _page
 
 @{ Layout = ""; }
 
 <!DOCTYPE html>
 <html>
 <head>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>AppSkeleton | Log in</title>
@@ -21,8 +24,13 @@
     <link href="~/lib/adminlte/css/adminlte.css" rel="stylesheet" />
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <!-- plugins -->
+    <link href="~/plugins/toastr/toastr.css" rel="stylesheet" />
+
 </head>
+
 <body class="hold-transition login-page">
+
     <div class="login-box">
         <div class="login-logo">
             <a href="#"><b>App</b>Skeleton</a>
@@ -80,6 +88,48 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
     <!-- AdminLTE App -->
     <script src="~/lib/adminlte/js/adminlte.js"></script>
+    <!-- plugins -->
+    <script src="~/plugins/toastr/toastr.min.js"></script>
+    <!-- site -->
+    <script src="~/js/cfg.js"></script>
+    <script src="~/js/global.js"></script>
+    <script src="~/js/modal.js"></script>
+    <script src="~/js/site.js"></script>
+
+    <script type="text/javascript">
+
+        var _page = _page || {};
+
+        $(document).ready(function () {
+            _page.controllerName = '@_page.ControllerName';
+            _page.actionName = '@_page.ActionName';
+            _page.messages = [];
+            _page.warnings = [];
+            _page.alerts = [];
+
+            // add messages
+            @foreach(var m in _page.PageMessages.OrEmptyIfNull())
+            {
+                @:_page.messages.push('@m');
+            }
+            @foreach(var w in _page.PageWarnings.OrEmptyIfNull())
+            {
+                @:_page.warnings.push('@w');
+            }
+            @foreach(var a in _page.PageAlerts.OrEmptyIfNull())
+            {
+                @:_page.alerts.push('@a');
+            }
+
+            _page.messages.forEach((m) => { global.toastinfo(m); });
+            _page.warnings.forEach((w) => { global.toastwarning(w); });
+            _page.alerts.forEach((a) => { global.toasterror(a); });
+
+            global.toastinfo("ControllerName:<br>" + _page.controllerName);
+            global.toastinfo("ActionName:<br>" + _page.actionName);
+        });
+
+    </script>
 
 </body>
 </html>

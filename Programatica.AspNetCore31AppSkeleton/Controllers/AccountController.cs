@@ -1,20 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Programatica.AspNetCore31AppSkeleton.Controllers.Base;
 using Programatica.AspNetCore31AppSkeleton.Services;
 using Programatica.AspNetCore31AppSkeleton.ViewModels;
 
 namespace Programatica.AspNetCore31AppSkeleton.Controllers
 {
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         private readonly IAuthenticationService _authenticationService;
 
         public AccountController(IAuthenticationService authenticationService)
         {
             _authenticationService = authenticationService;
+
+            PageMessages.Add("Message from AccountController Constructor");
         }
 
         public IActionResult Login()
@@ -35,9 +36,11 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
                 catch (Exception e)
                 {
                     ModelState.AddModelError(string.Empty, e.Message);
+                    PageAlerts.Add("Your login was not successfull.");
                     return View(vm);
                 }
-            }else
+            }
+            else
             {
                 return View(vm);
             }

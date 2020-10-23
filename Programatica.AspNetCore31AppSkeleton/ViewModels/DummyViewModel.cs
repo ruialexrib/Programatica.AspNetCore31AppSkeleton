@@ -1,10 +1,9 @@
-﻿using Programatica.Framework.Data.Models;
-using System;
+﻿using Programatica.AspNetCore31AppSkeleton.ViewModels.Base;
 using System.ComponentModel.DataAnnotations;
 
 namespace Programatica.AspNetCore31AppSkeleton.ViewModels
 {
-    public class DummyViewModel : BaseModel
+    public class DummyViewModel : BaseViewModel
     {
         [Required]
         public string Description { get; set; }

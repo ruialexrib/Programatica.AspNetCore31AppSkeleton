@@ -1,8 +1,8 @@
-﻿using Programatica.Framework.Data.Models;
+﻿using Programatica.AspNetCore31AppSkeleton.ViewModels.Base;
 
 namespace Programatica.AspNetCore31AppSkeleton.ViewModels
 {
-    public class UserViewModel : BaseModel
+    public class UserViewModel : BaseViewModel
     {
         public string Username { get; set; }
         public string Password { get; set; }

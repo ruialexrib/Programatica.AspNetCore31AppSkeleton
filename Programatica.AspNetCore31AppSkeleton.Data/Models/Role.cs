@@ -7,6 +7,5 @@ namespace Programatica.AspNetCore31AppSkeleton.Data.Models
     {
         public string Name { get; set; }
 
-        public ICollection<UserRole> Users { get; set; }
     }
 }

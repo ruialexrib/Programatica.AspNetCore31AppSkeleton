@@ -1,5 +1,6 @@
 ﻿using System;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Programatica.AspNetCore31AppSkeleton.Controllers.Base;
@@ -9,7 +10,7 @@ using Programatica.Framework.Services;
 
 namespace Programatica.AspNetCore31AppSkeleton.Controllers
 {
-
+    [Authorize(Roles = "Administrators")]
     public class UsersController : BaseModelController<User>
     {
         private readonly IService<User> _userService;

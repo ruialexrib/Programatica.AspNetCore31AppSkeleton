@@ -58,7 +58,7 @@ namespace Programatica.AspNetCore31AppSkeleton
             services.AddDbContext<IDbContext, AppDbContext>(opt =>
                             {
                                 opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
-                            }, ServiceLifetime.Transient);
+                            }, ServiceLifetime.Scoped);
 
             // inmemory context
             // comment this to use sql server
@@ -66,32 +66,35 @@ namespace Programatica.AspNetCore31AppSkeleton
             //services.AddDbContext<IDbContext, AppDbContext>(opt => opt.UseInMemoryDatabase(builder.InitialCatalog), ServiceLifetime.Transient);
 
             // repository
-            services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
             // adapters
-            services.AddTransient<IDateTimeAdapter, DateTimeAdapter>();
-            services.AddTransient<IAuthUserAdapter, ClaimBasedAuthAdapter>();
-            services.AddTransient<IJsonSerializerAdapter, JsonSerializerAdapter>();
-            services.AddTransient<IPageAdapter, PageAdapter>();
+            services.AddScoped<IDateTimeAdapter, DateTimeAdapter>();
+            services.AddScoped<IAuthUserAdapter, ClaimBasedAuthAdapter>();
+            services.AddScoped<IJsonSerializerAdapter, JsonSerializerAdapter>();
+            services.AddScoped<IPageAdapter, PageAdapter>();
 
             // event handler
-            services.AddTransient<IEventHandler<Dummy>, AuditEventHandler<Dummy>>();
-            services.AddTransient<IEventHandler<Dummy>, ServiceEventHandler<Dummy>>();
-            services.AddTransient<IEventHandler<User>, AuditEventHandler<User>>();
-            services.AddTransient<IEventHandler<User>, ServiceEventHandler<User>>();
-            services.AddTransient<IEventHandler<Role>, AuditEventHandler<Role>>();
-            services.AddTransient<IEventHandler<Role>, ServiceEventHandler<Role>>();
-            services.AddTransient<IList<IEventHandler<Dummy>>>(p => p.GetServices<IEventHandler<Dummy>>().ToList());
-            services.AddTransient<IList<IEventHandler<User>>>(p => p.GetServices<IEventHandler<User>>().ToList());
-            services.AddTransient<IList<IEventHandler<Role>>>(p => p.GetServices<IEventHandler<Role>>().ToList());
-            services.AddTransient<IList<IEventHandler<TrackChange>>>(p => p.GetServices<IEventHandler<TrackChange>>().ToList());
+            services.AddScoped<IEventHandler<Dummy>, AuditEventHandler<Dummy>>();
+            services.AddScoped<IEventHandler<Dummy>, ServiceEventHandler<Dummy>>();
+            services.AddScoped<IEventHandler<User>, AuditEventHandler<User>>();
+            services.AddScoped<IEventHandler<User>, ServiceEventHandler<User>>();
+            services.AddScoped<IEventHandler<Role>, AuditEventHandler<Role>>();
+            services.AddScoped<IEventHandler<Role>, ServiceEventHandler<Role>>();
+            services.AddScoped<IEventHandler<UserRole>, AuditEventHandler<UserRole>>();
+            services.AddScoped<IEventHandler<UserRole>, ServiceEventHandler<UserRole>>();
+            services.AddScoped<IList<IEventHandler<Dummy>>>(p => p.GetServices<IEventHandler<Dummy>>().ToList());
+            services.AddScoped<IList<IEventHandler<User>>>(p => p.GetServices<IEventHandler<User>>().ToList());
+            services.AddScoped<IList<IEventHandler<Role>>>(p => p.GetServices<IEventHandler<Role>>().ToList());
+            services.AddScoped<IList<IEventHandler<UserRole>>>(p => p.GetServices<IEventHandler<UserRole>>().ToList());
+            services.AddScoped<IList<IEventHandler<TrackChange>>>(p => p.GetServices<IEventHandler<TrackChange>>().ToList());
 
             // injector
-            services.AddTransient(typeof(IInjector<>), typeof(Injector<>));
+            services.AddScoped(typeof(IInjector<>), typeof(Injector<>));
 
             // service
-            services.AddTransient(typeof(IService<>), typeof(Service<>));
-            services.AddTransient<Services.IAuthenticationService, Services.AuthenticationService>();
+            services.AddScoped(typeof(IService<>), typeof(Service<>));
+            services.AddScoped<Services.IAuthenticationService, Services.AuthenticationService>();
 
             // others
             services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();

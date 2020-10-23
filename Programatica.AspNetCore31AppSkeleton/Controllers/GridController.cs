@@ -10,7 +10,7 @@ using System;
 
 namespace Programatica.AspNetCore31AppSkeleton.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Administrators, Users")]
     public class GridController : BaseModelController<Dummy>
     {
         private readonly IService<Dummy> _dummyService;

@@ -1,5 +1,6 @@
 ﻿using System;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Programatica.AspNetCore31AppSkeleton.Controllers.Base;
@@ -9,6 +10,7 @@ using Programatica.Framework.Services;
 
 namespace Programatica.AspNetCore31AppSkeleton.Controllers
 {
+    [Authorize(Roles = "Administrators")]
     public class RolesController : BaseModelController<Role>
     {
         private readonly IService<Role> _roleService;
@@ -85,7 +87,7 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
                 {
                     return new JsonResult(new { result = "error", message = e.Message })
                     {
-                        StatusCode = StatusCodes.Status200OK
+                        StatusCode = StatusCodes.Status400BadRequest
                     };
                 }
             }

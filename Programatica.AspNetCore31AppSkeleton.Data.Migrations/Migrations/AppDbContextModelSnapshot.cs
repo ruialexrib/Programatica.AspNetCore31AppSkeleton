@@ -67,22 +67,22 @@ namespace Programatica.AspNetCore31AppSkeleton.Data.Migrations.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2020, 10, 22, 20, 56, 40, 945, DateTimeKind.Utc).AddTicks(9011),
+                            CreatedDate = new DateTime(2020, 10, 23, 18, 52, 22, 67, DateTimeKind.Utc).AddTicks(9175),
                             CreatedUser = "system",
                             Description = "Dummy One",
                             IsDestroyed = false,
                             IsSystem = false,
-                            SystemId = new Guid("909725a8-1f9e-414a-b4b9-d0a14361052b")
+                            SystemId = new Guid("9b1d2103-15a5-439d-9951-7b535503033a")
                         },
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2020, 10, 22, 20, 56, 40, 945, DateTimeKind.Utc).AddTicks(9132),
+                            CreatedDate = new DateTime(2020, 10, 23, 18, 52, 22, 67, DateTimeKind.Utc).AddTicks(9279),
                             CreatedUser = "system",
                             Description = "Dummy Two",
                             IsDestroyed = false,
                             IsSystem = false,
-                            SystemId = new Guid("5c09a973-49cd-48e3-aa46-b3076cfcf6b7")
+                            SystemId = new Guid("fab62bdf-b7f6-445e-b594-880dd21bd7ae")
                         });
                 });
 
@@ -134,14 +134,26 @@ namespace Programatica.AspNetCore31AppSkeleton.Data.Migrations.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2020, 10, 22, 20, 56, 40, 945, DateTimeKind.Utc).AddTicks(5637),
+                            CreatedDate = new DateTime(2020, 10, 23, 18, 52, 22, 67, DateTimeKind.Utc).AddTicks(452),
                             CreatedUser = "system",
                             IsDestroyed = false,
                             IsSystem = true,
-                            LastModifiedDate = new DateTime(2020, 10, 22, 20, 56, 40, 945, DateTimeKind.Utc).AddTicks(5692),
+                            LastModifiedDate = new DateTime(2020, 10, 23, 18, 52, 22, 67, DateTimeKind.Utc).AddTicks(513),
                             LastModifiedUser = "system",
                             Name = "Administrators",
-                            SystemId = new Guid("4114d6e5-8af3-42aa-9c89-2199dcbe213b")
+                            SystemId = new Guid("e67e981a-1a4a-4f74-b2b7-37cf1435903c")
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedDate = new DateTime(2020, 10, 23, 18, 52, 22, 67, DateTimeKind.Utc).AddTicks(609),
+                            CreatedUser = "system",
+                            IsDestroyed = false,
+                            IsSystem = true,
+                            LastModifiedDate = new DateTime(2020, 10, 23, 18, 52, 22, 67, DateTimeKind.Utc).AddTicks(613),
+                            LastModifiedUser = "system",
+                            Name = "Users",
+                            SystemId = new Guid("58cf4e21-bfb2-4c11-b4b6-2246a2579bda")
                         });
                 });
 
@@ -214,25 +226,41 @@ namespace Programatica.AspNetCore31AppSkeleton.Data.Migrations.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2020, 10, 22, 20, 56, 40, 940, DateTimeKind.Utc).AddTicks(9045),
+                            CreatedDate = new DateTime(2020, 10, 23, 18, 52, 22, 62, DateTimeKind.Utc).AddTicks(3901),
                             CreatedUser = "system",
+                            Email = "admin@server.com",
+                            Fullname = "System Administrator",
                             IsDestroyed = false,
                             IsSystem = true,
-                            LastModifiedDate = new DateTime(2020, 10, 22, 20, 56, 40, 941, DateTimeKind.Utc).AddTicks(2455),
+                            LastModifiedDate = new DateTime(2020, 10, 23, 18, 52, 22, 62, DateTimeKind.Utc).AddTicks(6888),
                             LastModifiedUser = "system",
                             Password = "pass",
-                            SystemId = new Guid("fd80bb33-e1a4-4c3d-98c5-37f97dc78bfa"),
+                            SystemId = new Guid("33c46243-cef2-4126-9364-bce89f5ad46e"),
                             Username = "admin"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedDate = new DateTime(2020, 10, 23, 18, 52, 22, 63, DateTimeKind.Utc).AddTicks(549),
+                            CreatedUser = "system",
+                            Email = "user@server.com",
+                            Fullname = "Just an User",
+                            IsDestroyed = false,
+                            IsSystem = false,
+                            LastModifiedDate = new DateTime(2020, 10, 23, 18, 52, 22, 63, DateTimeKind.Utc).AddTicks(566),
+                            LastModifiedUser = "system",
+                            Password = "pass",
+                            SystemId = new Guid("eb1cf9fe-7a11-4c3b-bcf3-aea230055f34"),
+                            Username = "user"
                         });
                 });
 
             modelBuilder.Entity("Programatica.AspNetCore31AppSkeleton.Data.Models.UserRole", b =>
                 {
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RoleId")
-                        .HasColumnType("int");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Comments")
                         .HasColumnType("nvarchar(max)");
@@ -242,9 +270,6 @@ namespace Programatica.AspNetCore31AppSkeleton.Data.Migrations.Migrations
 
                     b.Property<string>("CreatedUser")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
 
                     b.Property<bool>("IsDestroyed")
                         .HasColumnType("bit");
@@ -264,14 +289,63 @@ namespace Programatica.AspNetCore31AppSkeleton.Data.Migrations.Migrations
                     b.Property<string>("LastModifiedUser")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
                     b.Property<Guid>("SystemId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("UserId", "RoleId");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("RoleId");
 
+                    b.HasIndex("UserId");
+
                     b.ToTable("UserRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedDate = new DateTime(2020, 10, 23, 18, 52, 22, 67, DateTimeKind.Utc).AddTicks(5518),
+                            CreatedUser = "system",
+                            IsDestroyed = false,
+                            IsSystem = true,
+                            LastModifiedDate = new DateTime(2020, 10, 23, 18, 52, 22, 67, DateTimeKind.Utc).AddTicks(5539),
+                            LastModifiedUser = "system",
+                            RoleId = 1,
+                            SystemId = new Guid("bb5ff4c3-de6d-405d-9edb-b54f08b66664"),
+                            UserId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedDate = new DateTime(2020, 10, 23, 18, 52, 22, 67, DateTimeKind.Utc).AddTicks(5676),
+                            CreatedUser = "system",
+                            IsDestroyed = false,
+                            IsSystem = true,
+                            LastModifiedDate = new DateTime(2020, 10, 23, 18, 52, 22, 67, DateTimeKind.Utc).AddTicks(5680),
+                            LastModifiedUser = "system",
+                            RoleId = 2,
+                            SystemId = new Guid("73d85165-c40f-4a49-b874-47723e36c9d1"),
+                            UserId = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedDate = new DateTime(2020, 10, 23, 18, 52, 22, 67, DateTimeKind.Utc).AddTicks(5732),
+                            CreatedUser = "system",
+                            IsDestroyed = false,
+                            IsSystem = true,
+                            LastModifiedDate = new DateTime(2020, 10, 23, 18, 52, 22, 67, DateTimeKind.Utc).AddTicks(5737),
+                            LastModifiedUser = "system",
+                            RoleId = 2,
+                            SystemId = new Guid("744862fc-3d59-4e87-99e2-33494fb21c16"),
+                            UserId = 2
+                        });
                 });
 
             modelBuilder.Entity("Programatica.Framework.Data.Models.Audit", b =>
@@ -387,13 +461,13 @@ namespace Programatica.AspNetCore31AppSkeleton.Data.Migrations.Migrations
             modelBuilder.Entity("Programatica.AspNetCore31AppSkeleton.Data.Models.UserRole", b =>
                 {
                     b.HasOne("Programatica.AspNetCore31AppSkeleton.Data.Models.Role", "Role")
-                        .WithMany("Users")
+                        .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Programatica.AspNetCore31AppSkeleton.Data.Models.User", "User")
-                        .WithMany("UserRoles")
+                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

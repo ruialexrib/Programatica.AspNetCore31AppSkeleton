@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Programatica.AspNetCore31AppSkeleton.Controllers.Base;
 using Programatica.AspNetCore31AppSkeleton.Services;
@@ -46,6 +47,7 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
             }
         }
 
+        [Authorize(Roles = "Administrators, Users")]
         public IActionResult Logoff()
         {
             _authenticationService.SignOut(HttpContext);

@@ -22,19 +22,6 @@ namespace Programatica.AspNetCore31AppSkeleton.Data.Migrations.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
-            modelBuilder.Entity<UserRole>()
-                .HasKey(ur => new { ur.UserId, ur.RoleId });
-
-            modelBuilder.Entity<UserRole>()
-                .HasOne(ur => ur.User)
-                .WithMany(r => r.UserRoles)
-                .HasForeignKey(ur => ur.UserId);
-
-            modelBuilder.Entity<UserRole>()
-                .HasOne(ur => ur.Role)
-                .WithMany(u => u.Users)
-                .HasForeignKey(ur => ur.RoleId);
-
             // seed users
             modelBuilder.Entity<User>().HasData(
                 new User
@@ -42,11 +29,26 @@ namespace Programatica.AspNetCore31AppSkeleton.Data.Migrations.Context
                     Id = 1,
                     Username = "admin",
                     Password = "pass",
+                    Email="admin@server.com",
+                    Fullname="System Administrator",
                     CreatedDate = DateTime.UtcNow,
                     CreatedUser = "system",
                     LastModifiedDate = DateTime.UtcNow,
                     LastModifiedUser = "system",
                     IsSystem = true
+                },
+                new User
+                {
+                    Id = 2,
+                    Username = "user",
+                    Password = "pass",
+                    Email = "user@server.com",
+                    Fullname = "Just an User",
+                    CreatedDate = DateTime.UtcNow,
+                    CreatedUser = "system",
+                    LastModifiedDate = DateTime.UtcNow,
+                    LastModifiedUser = "system",
+                    IsSystem = false
                 }
             );
 
@@ -56,6 +58,53 @@ namespace Programatica.AspNetCore31AppSkeleton.Data.Migrations.Context
                 {
                     Id = 1,
                     Name = "Administrators",
+                    CreatedDate = DateTime.UtcNow,
+                    CreatedUser = "system",
+                    LastModifiedDate = DateTime.UtcNow,
+                    LastModifiedUser = "system",
+                    IsSystem = true
+                },
+                new Role
+                {
+                    Id = 2,
+                    Name = "Users",
+                    CreatedDate = DateTime.UtcNow,
+                    CreatedUser = "system",
+                    LastModifiedDate = DateTime.UtcNow,
+                    LastModifiedUser = "system",
+                    IsSystem = true
+                }
+            );
+
+            // seed permissions
+            modelBuilder.Entity<UserRole>().HasData(
+                new UserRole
+                {
+                    Id = 1,
+                    UserId = 1,
+                    RoleId = 1,
+                    CreatedDate = DateTime.UtcNow,
+                    CreatedUser = "system",
+                    LastModifiedDate = DateTime.UtcNow,
+                    LastModifiedUser = "system",
+                    IsSystem = true
+                },
+                new UserRole
+                {
+                    Id = 2,
+                    UserId = 1,
+                    RoleId = 2,
+                    CreatedDate = DateTime.UtcNow,
+                    CreatedUser = "system",
+                    LastModifiedDate = DateTime.UtcNow,
+                    LastModifiedUser = "system",
+                    IsSystem = true
+                },
+                new UserRole
+                {
+                    Id = 3,
+                    UserId = 2,
+                    RoleId = 2,
                     CreatedDate = DateTime.UtcNow,
                     CreatedUser = "system",
                     LastModifiedDate = DateTime.UtcNow,

@@ -24,7 +24,9 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
             _dummyService = dummyService;
             _mapper = mapper;
 
+            PageMessages.Add("Message from GridController Constructor");
             PageWarnings.Add("Warning from GridController Constructor");
+            PageAlerts.Add("Alert from GridController Constructor");
         }
 
         [HttpPost]

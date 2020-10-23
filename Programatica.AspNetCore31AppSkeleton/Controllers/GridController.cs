@@ -71,7 +71,10 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            PageMessages.Add("Message from GridController ActionResult Create()");
             return PartialView("_Create");
+
+            
         }
 
         [HttpPost]

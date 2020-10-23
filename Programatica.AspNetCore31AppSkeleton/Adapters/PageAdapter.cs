@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.Extensions.Configuration;
-using Programatica.AspNetCore31AppSkeleton.ViewModels;
 using System.Collections.Generic;
 
 namespace Programatica.AspNetCore31AppSkeleton.Adapters

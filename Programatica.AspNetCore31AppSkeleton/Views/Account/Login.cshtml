@@ -50,7 +50,7 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input asp-for="Password" class="form-control" placeholder="Password (type something)" />
+                        <input asp-for="Password" class="form-control" placeholder="Password (type pass)" />
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -101,8 +101,7 @@
         var _page = _page || {};
 
         $(document).ready(function () {
-            _page.controllerName = '@_page.ControllerName';
-            _page.actionName = '@_page.ActionName';
+
             _page.messages = [];
             _page.warnings = [];
             _page.alerts = [];
@@ -125,9 +124,7 @@
             _page.warnings.forEach((w) => { global.toastwarning(w); });
             _page.alerts.forEach((a) => { global.toasterror(a); });
 
-            global.toastinfo("ControllerName:<br>" + _page.controllerName);
-            global.toastinfo("ActionName:<br>" + _page.actionName);
-        });
+          });
 
     </script>
 

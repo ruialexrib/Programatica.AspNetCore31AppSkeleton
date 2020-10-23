@@ -14,12 +14,11 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
         public AccountController(IAuthenticationService authenticationService)
         {
             _authenticationService = authenticationService;
-
-            PageMessages.Add("Message from AccountController Constructor");
         }
 
         public IActionResult Login()
         {
+            PageMessages.Add("For demo purpose insert 'username: admin' and 'password: pass'");
             return View();
         }
 
@@ -36,12 +35,13 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
                 catch (Exception e)
                 {
                     ModelState.AddModelError(string.Empty, e.Message);
-                    PageAlerts.Add("Your login was not successfull.");
+                    PageAlerts.Add(e.Message);
                     return View(vm);
                 }
             }
             else
             {
+                PageAlerts.Add("Model validation errors.");
                 return View(vm);
             }
         }

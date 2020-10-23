@@ -75,13 +75,7 @@
                 @:_page.alerts.push('@a');
             }
 
-            _page.messages.forEach((m) => { global.toastinfo(m); });
-            _page.warnings.forEach((w) => { global.toastwarning(w); });
-            _page.alerts.forEach((a) => { global.toasterror(a); });
-
-            global.toastinfo("ControllerName:<br>" + _page.controllerName);
-            global.toastinfo("ActionName:<br>" + _page.actionName);
-    });
+        });
 
     </script>
 
@@ -89,7 +83,21 @@
 
     <!-- Syncfusion Essential JS 2 ScriptManager -->
     <ejs-scripts></ejs-scripts>
+
+    <!-- generic view scripts -->
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            _page.messages.forEach((m) => { global.toastinfo(m); });
+            _page.warnings.forEach((w) => { global.toastwarning(w); });
+            _page.alerts.forEach((a) => { global.toasterror(a); });
+
+            global.toastinfo("ControllerName:<br>" + _page.controllerName);
+            global.toastinfo("ActionName:<br>" + _page.actionName);
+        });
+
+    </script>
 </body>
-</html>
+</html >
 
 

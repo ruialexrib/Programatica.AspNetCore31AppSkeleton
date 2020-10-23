@@ -10,6 +10,7 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers.Base
         public List<string> PageWarnings { get; set; }
         public List<string> PageAlerts { get; set; }
 
+
         public BaseController()
         {
             PageMessages = new List<string>();

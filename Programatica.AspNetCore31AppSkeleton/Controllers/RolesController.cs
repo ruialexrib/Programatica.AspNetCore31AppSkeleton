@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Linq;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -8,65 +6,21 @@ using Programatica.AspNetCore31AppSkeleton.Controllers.Base;
 using Programatica.AspNetCore31AppSkeleton.Data.Models;
 using Programatica.AspNetCore31AppSkeleton.ViewModels;
 using Programatica.Framework.Services;
-using Syncfusion.EJ2.Base;
 
 namespace Programatica.AspNetCore31AppSkeleton.Controllers
 {
-    public class RolesController : BaseController
+    public class RolesController : BaseModelController<Role>
     {
         private readonly IService<Role> _roleService;
         private readonly IMapper _mapper;
 
-        public RolesController(IService<Role> roleService, IMapper mapper)
+        public RolesController(
+            IService<Role> roleService,
+            IMapper mapper)
+            : base(roleService)
         {
             _roleService = roleService;
             _mapper = mapper;
-        }
-
-
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-        public ActionResult UrlDatasource([FromBody] DataManagerRequest dm)
-        {
-            IEnumerable DataSource = _roleService.Get();
-
-            DataOperations operation = new DataOperations();
-
-            if (dm.Search != null && dm.Search.Count > 0)
-            {
-                DataSource = operation.PerformSearching(DataSource, dm.Search);  //Search
-            }
-
-            if (dm.Sorted != null && dm.Sorted.Count > 0) //Sorting
-            {
-                DataSource = operation.PerformSorting(DataSource, dm.Sorted);
-            }
-
-            if (dm.Where != null && dm.Where.Count > 0) //Filtering
-            {
-                DataSource = operation.PerformFiltering(DataSource, dm.Where, dm.Where[0].Operator);
-            }
-
-            int count = DataSource.Cast<Role>().Count();
-
-            if (dm.Skip != 0)
-            {
-                DataSource = operation.PerformSkip(DataSource, dm.Skip);   //Paging
-            }
-            if (dm.Take != 0)
-            {
-                DataSource = operation.PerformTake(DataSource, dm.Take);
-            }
-            return dm.RequiresCounts ? Json(new { result = DataSource, count }) : Json(DataSource);
-        }
-
-        [HttpGet]
-        public IActionResult Create()
-        {
-            return PartialView("_Create");
         }
 
         [HttpPost]

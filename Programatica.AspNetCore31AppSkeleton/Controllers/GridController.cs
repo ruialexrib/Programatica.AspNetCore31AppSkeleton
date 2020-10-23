@@ -36,8 +36,7 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
             if (ModelState.IsValid)
             {
                 try
-                {
-
+                {   
                     _dummyService.Create(_mapper.Map<Dummy>(vm));
                     return new JsonResult(new { result = "ok" })
                     {

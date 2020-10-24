@@ -5,6 +5,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Internal;
+using Microsoft.Extensions.Logging;
 using Programatica.AspNetCore31AppSkeleton.Controllers.Base;
 using Programatica.AspNetCore31AppSkeleton.Data.Models;
 using Programatica.AspNetCore31AppSkeleton.ViewModels;
@@ -15,20 +16,19 @@ using Syncfusion.EJ2.Base;
 namespace Programatica.AspNetCore31AppSkeleton.Controllers
 {
     [Authorize(Roles = "Administrators")]
-    public class PermissionsController : BaseModelController<UserRole, PermissionViewModel>
+    public class PermissionsController : BaseModelController<UserRole, PermissionViewModel, PermissionsController>
     {
-        private readonly IMapper _mapper;
         private readonly IRepository<User> _userRepository;
         private readonly IRepository<Role> _roleRepository;
 
         public PermissionsController(
             IService<UserRole> modelService,
             IMapper mapper,
+            ILogger<PermissionsController> logger,
             IRepository<User> userRepository,
             IRepository<Role> roleRepository)
-            : base(modelService, mapper)
+            : base(modelService, mapper, logger)
         {
-            _mapper = mapper;
             _userRepository = userRepository;
             _roleRepository = roleRepository;
         }

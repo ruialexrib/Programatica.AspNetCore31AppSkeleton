@@ -3,6 +3,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Programatica.AspNetCore31AppSkeleton.Controllers.Base;
 using Programatica.AspNetCore31AppSkeleton.Data.Models;
 using Programatica.AspNetCore31AppSkeleton.ViewModels;
@@ -11,19 +12,15 @@ using Programatica.Framework.Services;
 namespace Programatica.AspNetCore31AppSkeleton.Controllers
 {
     [Authorize(Roles = "Administrators")]
-    public class UsersController : BaseModelController<User, UserViewModel>
+    public class UsersController : BaseModelController<User, UserViewModel, UsersController>
     {
-        private readonly IService<User> _userService;
-        private readonly IMapper _mapper;
 
         public UsersController(
             IService<User> userService,
-            IMapper mapper)
-            : base(userService, mapper)
+            IMapper mapper,
+            ILogger<UsersController> logger)
+            : base(userService, mapper, logger)
         {
-            _userService = userService;
-            _mapper = mapper;
-
         }
 
     }

@@ -3,6 +3,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Programatica.AspNetCore31AppSkeleton.Controllers.Base;
 using Programatica.AspNetCore31AppSkeleton.Data.Models;
 using Programatica.AspNetCore31AppSkeleton.ViewModels;
@@ -11,18 +12,15 @@ using Programatica.Framework.Services;
 namespace Programatica.AspNetCore31AppSkeleton.Controllers
 {
     [Authorize(Roles = "Administrators")]
-    public class RolesController : BaseModelController<Role, RoleViewModel>
+    public class RolesController : BaseModelController<Role, RoleViewModel, RolesController>
     {
-        private readonly IService<Role> _roleService;
-        private readonly IMapper _mapper;
 
         public RolesController(
             IService<Role> roleService,
-            IMapper mapper)
-            : base(roleService, mapper)
+            IMapper mapper,
+            ILogger<RolesController> logger)
+            : base(roleService, mapper, logger)
         {
-            _roleService = roleService;
-            _mapper = mapper;
         }
 
     }

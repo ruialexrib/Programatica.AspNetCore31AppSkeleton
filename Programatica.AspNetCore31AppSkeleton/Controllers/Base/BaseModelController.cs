@@ -4,6 +4,7 @@ using System.Linq;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Programatica.AspNetCore31AppSkeleton.ViewModels.Base;
 using Programatica.Framework.Data.Models;
 using Programatica.Framework.Services;
@@ -11,19 +12,24 @@ using Syncfusion.EJ2.Base;
 
 namespace Programatica.AspNetCore31AppSkeleton.Controllers.Base
 {
-    public class BaseModelController<TModel, TViewModel> : BaseController
+    public class BaseModelController<TModel, TViewModel, TController> : BaseController
         where TModel : IModel
         where TViewModel : class
+        where TController : BaseModelController<TModel, TViewModel, TController>
     {
         protected readonly IService<TModel> _modelService;
         private readonly IMapper _mapper;
+        private readonly ILogger<TController> _logger;
 
         public BaseModelController(
             IService<TModel> modelService, 
-            IMapper mapper)
+            IMapper mapper,
+            ILogger<TController> logger)
         {
             _modelService = modelService;
             _mapper = mapper;
+            _logger = logger;
+
         }
 
         public virtual IActionResult Index()
@@ -62,6 +68,7 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers.Base
             {
                 DataSource = operation.PerformTake(DataSource, dm.Take);
             }
+
             return dm.RequiresCounts ? Json(new { result = DataSource, count }) : Json(DataSource);
         }
 

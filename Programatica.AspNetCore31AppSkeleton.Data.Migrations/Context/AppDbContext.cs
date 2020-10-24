@@ -2,6 +2,7 @@
 using Programatica.AspNetCore31AppSkeleton.Data.Models;
 using Programatica.Framework.Data.Context;
 using System;
+using System.Linq;
 
 //https://snede.net/you-dont-need-a-idesigntimedbcontextfactory/
 
@@ -21,7 +22,6 @@ namespace Programatica.AspNetCore31AppSkeleton.Data.Migrations.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
             // seed users
             modelBuilder.Entity<User>().HasData(
                 new User
@@ -130,6 +130,12 @@ namespace Programatica.AspNetCore31AppSkeleton.Data.Migrations.Context
                     CreatedUser = "system"
                 }
             );
+
+            // disable ManyToMany Cascade Delete
+            foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
+            {
+                relationship.DeleteBehavior = DeleteBehavior.Restrict;
+            }
         }
     }
 }

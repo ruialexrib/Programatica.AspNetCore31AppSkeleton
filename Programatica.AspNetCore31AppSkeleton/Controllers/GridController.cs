@@ -11,15 +11,15 @@ using System;
 namespace Programatica.AspNetCore31AppSkeleton.Controllers
 {
     [Authorize(Roles = "Administrators, Users")]
-    public class GridController : BaseModelController<Dummy>
+    public class GridController : BaseModelController<Dummy, DummyViewModel>
     {
         private readonly IService<Dummy> _dummyService;
         private readonly IMapper _mapper;
 
         public GridController(
-            IService<Dummy> dummyService, 
+            IService<Dummy> dummyService,
             IMapper mapper)
-            :base(dummyService)
+            : base(dummyService, mapper)
         {
             _dummyService = dummyService;
             _mapper = mapper;
@@ -28,100 +28,7 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
             PageWarnings.Add("Warning from GridController Constructor");
             PageAlerts.Add("Alert from GridController Constructor");
         }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public JsonResult Create([FromBody] DummyViewModel vm)
-        {
-            if (ModelState.IsValid)
-            {
-                try
-                {   
-                    _dummyService.Create(_mapper.Map<Dummy>(vm));
-                    return new JsonResult(new { result = "ok" })
-                    {
-                        StatusCode = StatusCodes.Status200OK
-                    };
-                }
-                catch (Exception e)
-                {
-                    return new JsonResult(new { result = "error", message = e.Message })
-                    {
-                        StatusCode = StatusCodes.Status200OK
-                    };
-                }
-            }
-            else
-            {
-                return new JsonResult(new { result = "error", message = "Invalid Model" })
-                {
-                    StatusCode = StatusCodes.Status400BadRequest
-                };
-            }
-        }
-
-        [HttpGet]
-        public IActionResult Edit(int id)
-        {
-            Dummy dummy = _dummyService.Get(id);
-            if (dummy == null)
-            {
-                return NotFound();
-            }
-            var vm = _mapper.Map<DummyViewModel>(dummy);
-            return PartialView("_Edit", vm);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public JsonResult Edit([FromBody] DummyViewModel vm)
-        {
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _dummyService.Modify(_mapper.Map<Dummy>(vm));
-                    return new JsonResult(new { result = "ok" })
-                    {
-                        StatusCode = StatusCodes.Status200OK
-                    };
-                }
-                catch (Exception e)
-                {
-                    return new JsonResult(new { result = "error", message = e.Message })
-                    {
-                        StatusCode = StatusCodes.Status200OK
-                    };
-                }
-            }
-            else
-            {
-                return new JsonResult(new { result = "error", message = "Invalid Model" })
-                {
-                    StatusCode = StatusCodes.Status400BadRequest
-                };
-            }
-        }
-
-        [HttpPost]
-        public JsonResult Delete([FromBody] DummyViewModel vm)
-        {
-            try
-            {
-                _dummyService.Delete(vm.Id);
-                return new JsonResult(new { result = "ok" })
-                {
-                    StatusCode = StatusCodes.Status200OK
-                };
-            }
-            catch (Exception e)
-            {
-                return new JsonResult(new { result = "error", message = e.Message })
-                {
-                    StatusCode = StatusCodes.Status400BadRequest
-                };
-            }
-
-        }
+          
+ 
     }
 }

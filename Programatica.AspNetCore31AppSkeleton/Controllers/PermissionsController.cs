@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Internal;
 using Programatica.AspNetCore31AppSkeleton.Controllers.Base;
@@ -18,7 +15,7 @@ using Syncfusion.EJ2.Base;
 namespace Programatica.AspNetCore31AppSkeleton.Controllers
 {
     [Authorize(Roles = "Administrators")]
-    public class PermissionsController : BaseModelController<UserRole>
+    public class PermissionsController : BaseModelController<UserRole, PermissionViewModel>
     {
         private readonly IMapper _mapper;
         private readonly IRepository<User> _userRepository;
@@ -29,7 +26,7 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
             IMapper mapper,
             IRepository<User> userRepository,
             IRepository<Role> roleRepository)
-            : base(modelService)
+            : base(modelService, mapper)
         {
             _mapper = mapper;
             _userRepository = userRepository;
@@ -102,57 +99,5 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
             return PartialView("_Create", vm);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public JsonResult Create([FromBody] PermissionViewModel vm)
-        {
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    var userRole = _mapper.Map<UserRole>(vm);
-                    _modelService.Create(userRole);
-                    return new JsonResult(new { result = "ok" })
-                    {
-                        StatusCode = StatusCodes.Status200OK
-                    };
-                }
-                catch (Exception e)
-                {
-                    return new JsonResult(new { result = "error", message = e.Message })
-                    {
-                        StatusCode = StatusCodes.Status400BadRequest
-                    };
-                }
-            }
-            else
-            {
-                return new JsonResult(new { result = "error", message = "Invalid Model" })
-                {
-                    StatusCode = StatusCodes.Status400BadRequest
-                };
-            }
-        }
-
-        [HttpPost]
-        public JsonResult Delete([FromBody] PermissionViewModel vm)
-        {
-            try
-            {
-                _modelService.Delete(vm.Id);
-                return new JsonResult(new { result = "ok" })
-                {
-                    StatusCode = StatusCodes.Status200OK
-                };
-            }
-            catch (Exception e)
-            {
-                return new JsonResult(new { result = "error", message = e.Message })
-                {
-                    StatusCode = StatusCodes.Status400BadRequest
-                };
-            }
-
-        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 using Microsoft.VisualBasic;
 using Programatica.AspNetCore31AppSkeleton.Data.Models;
 using Programatica.Framework.Core.Adapter;
@@ -21,17 +22,20 @@ namespace Programatica.AspNetCore31AppSkeleton.Services
         private readonly IService<User> _userService;
         private readonly IService<Role> _roleService;
         private readonly IService<UserRole> _userRoleService;
+        private readonly ILogger<AuthenticationService> _logger;
 
         public AuthenticationService(
             IDateTimeAdapter dateTimeAdapter,
             IService<User> userService,
             IService<Role> roleService,
-            IService<UserRole> userRoleService)
+            IService<UserRole> userRoleService,
+            ILogger<AuthenticationService> logger)
         {
             _dateTimeAdapter = dateTimeAdapter;
             _userService = userService;
             _roleService = roleService;
             _userRoleService = userRoleService;
+            _logger = logger;
         }
 
         public async Task SignIn(HttpContext httpContext, string username, string password, bool isPersistent = false)
@@ -43,15 +47,18 @@ namespace Programatica.AspNetCore31AppSkeleton.Services
                 ClaimsPrincipal principal = new ClaimsPrincipal(identity);
 
                 await httpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+                _logger.LogInformation($"User: {username} signin sucessfully.");
             }
             else
             {
+                _logger.LogInformation($"Wrong username or password");
                 throw new AuthenticationException("Wrong username or password");
             }
         }
 
         public async Task SignOut(HttpContext httpContext)
         {
+            _logger.LogInformation($"User signout sucessfully.");
             await httpContext.SignOutAsync();
         }
 

@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Programatica.AspNetCore31AppSkeleton.Controllers.Base;
 using Programatica.AspNetCore31AppSkeleton.Services;
 using Programatica.AspNetCore31AppSkeleton.ViewModels;
@@ -11,10 +12,14 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
     public class AccountController : BaseController
     {
         private readonly IAuthenticationService _authenticationService;
+        private readonly ILogger<AccountController> _logger;
 
-        public AccountController(IAuthenticationService authenticationService)
+        public AccountController(
+            IAuthenticationService authenticationService,
+            ILogger<AccountController> logger)
         {
             _authenticationService = authenticationService;
+            _logger = logger;
         }
 
         public IActionResult Login()

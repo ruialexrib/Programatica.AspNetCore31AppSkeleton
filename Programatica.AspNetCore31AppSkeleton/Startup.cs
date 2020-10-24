@@ -83,6 +83,7 @@ namespace Programatica.AspNetCore31AppSkeleton
             services.AddScoped<IEventHandler<Role>, ServiceEventHandler<Role>>();
             services.AddScoped<IEventHandler<UserRole>, AuditEventHandler<UserRole>>();
             services.AddScoped<IEventHandler<UserRole>, ServiceEventHandler<UserRole>>();
+            services.AddScoped<IEventHandler<UserRole>, PermissionEventHandler>();
             services.AddScoped<IList<IEventHandler<Dummy>>>(p => p.GetServices<IEventHandler<Dummy>>().ToList());
             services.AddScoped<IList<IEventHandler<User>>>(p => p.GetServices<IEventHandler<User>>().ToList());
             services.AddScoped<IList<IEventHandler<Role>>>(p => p.GetServices<IEventHandler<Role>>().ToList());

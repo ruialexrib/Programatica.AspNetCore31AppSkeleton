@@ -18,8 +18,8 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers.Base
         where TController : BaseModelController<TModel, TViewModel, TController>
     {
         protected readonly IService<TModel> _modelService;
-        private readonly IMapper _mapper;
-        private readonly ILogger<TController> _logger;
+        protected readonly IMapper _mapper;
+        protected readonly ILogger<TController> _logger;
 
         public BaseModelController(
             IService<TModel> modelService, 
@@ -96,7 +96,7 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers.Base
                 {
                     return new JsonResult(new { result = "error", message = e.Message })
                     {
-                        StatusCode = StatusCodes.Status200OK
+                        StatusCode = StatusCodes.Status400BadRequest
                     };
                 }
             }
@@ -139,7 +139,7 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers.Base
                 {
                     return new JsonResult(new { result = "error", message = e.Message })
                     {
-                        StatusCode = StatusCodes.Status200OK
+                        StatusCode = StatusCodes.Status400BadRequest
                     };
                 }
             }

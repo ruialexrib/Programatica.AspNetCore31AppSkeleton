@@ -99,5 +99,21 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
             return PartialView("_Create", vm);
         }
 
+        [HttpGet]
+        public override IActionResult Edit(int id)
+        {
+            UserRole tmodel = _modelService.Get(id);
+            if (tmodel == null)
+            {
+                return NotFound();
+            }
+            var vm = _mapper.Map<PermissionViewModel>(tmodel);
+
+            vm.ListOfUsers = _userRepository.GetData().ToList();
+            vm.ListOfRoles = _roleRepository.GetData().ToList();
+
+            return PartialView("_Edit", vm);
+        }
+
     }
 }

@@ -1,0 +1,51 @@
+﻿@model Programatica.AspNetCore31AppSkeleton.ViewModels.PermissionViewModel
+
+<div class="modal-header">
+    <h5 class="modal-title"><i class="far fa-edit"></i> Edit Permission</h5>
+</div>
+
+<div class="modal-body">
+
+    <div class="row">
+        <div class="col-md-12">
+            <form asp-action="Edit">
+
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-group">
+                    <label asp-for="Id" class="control-label"></label>
+                    <input asp-for="Id" class="form-control" disabled="disabled" />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="ListOfUsers" class="control-label"></label>
+                    <select asp-for="SelectedUserId"
+                            asp-items="@(new SelectList(Model.ListOfUsers,"Id","Username"))" class="form-control">
+                        <option>Please select one</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="ListOfRoles" class="control-label"></label>
+                    <select asp-for="SelectedRoleId"
+                            asp-items="@(new SelectList(Model.ListOfRoles,"Id","Name"))" class="form-control">
+                        <option>Please select one</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Comments" class="control-label"></label>
+                    <textarea asp-for="Comments" class="form-control"></textarea>
+                    <span asp-validation-for="Comments" class="text-danger"></span>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+</div>
+
+<div class="modal-footer">
+    <a href="#" class="btn btn-secondary" onclick="on_cmd_close_click(event)">CLOSE</a>
+    <a href="#" class="btn btn-primary" onclick="on_cmd_edit_click(event)" data-loading-text="SAVING...">SAVE</a>
+</div>

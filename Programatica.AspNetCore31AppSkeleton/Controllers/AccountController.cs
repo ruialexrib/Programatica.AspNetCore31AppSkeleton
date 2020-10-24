@@ -58,5 +58,11 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
             _authenticationService.SignOut(HttpContext);
             return RedirectToAction("Login", "Account", null);
         }
+
+        public IActionResult AccessDenied()
+        {
+            PageAlerts.Add("Access Denied");
+            return View();
+        }
     }
 }

@@ -10,10 +10,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Serialization;
 using Programatica.AspNetCore31AppSkeleton.Adapters;
 using Programatica.AspNetCore31AppSkeleton.Data.Migrations.Context;
 using Programatica.AspNetCore31AppSkeleton.Data.Models;
+using Programatica.AspNetCore31AppSkeleton.Extensions;
 using Programatica.AspNetCore31AppSkeleton.Handlers;
 using Programatica.Framework.Core.Adapter;
 using Programatica.Framework.Data.Context;
@@ -27,12 +29,14 @@ namespace Programatica.AspNetCore31AppSkeleton
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
+
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -45,6 +49,7 @@ namespace Programatica.AspNetCore31AppSkeleton
                     {
                         options.LoginPath = "/Account/Login";
                         options.LogoutPath = "/Account/Logoff";
+                        options.AccessDeniedPath = "/Account/AccessDenied";
                     });
 
             services.AddControllersWithViews()
@@ -65,40 +70,8 @@ namespace Programatica.AspNetCore31AppSkeleton
             //SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder(Configuration.GetConnectionString("DefaultConnection"));
             //services.AddDbContext<IDbContext, AppDbContext>(opt => opt.UseInMemoryDatabase(builder.InitialCatalog), ServiceLifetime.Transient);
 
-            // repository
-            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-
-            // adapters
-            services.AddScoped<IDateTimeAdapter, DateTimeAdapter>();
-            services.AddScoped<IAuthUserAdapter, ClaimBasedAuthAdapter>();
-            services.AddScoped<IJsonSerializerAdapter, JsonSerializerAdapter>();
-            services.AddScoped<IPageAdapter, PageAdapter>();
-
-            // event handler
-            services.AddScoped<IEventHandler<Dummy>, AuditEventHandler<Dummy>>();
-            services.AddScoped<IEventHandler<Dummy>, ServiceEventHandler<Dummy>>();
-            services.AddScoped<IEventHandler<User>, AuditEventHandler<User>>();
-            services.AddScoped<IEventHandler<User>, ServiceEventHandler<User>>();
-            services.AddScoped<IEventHandler<Role>, AuditEventHandler<Role>>();
-            services.AddScoped<IEventHandler<Role>, ServiceEventHandler<Role>>();
-            services.AddScoped<IEventHandler<UserRole>, AuditEventHandler<UserRole>>();
-            services.AddScoped<IEventHandler<UserRole>, ServiceEventHandler<UserRole>>();
-            services.AddScoped<IEventHandler<UserRole>, PermissionEventHandler>();
-            services.AddScoped<IList<IEventHandler<Dummy>>>(p => p.GetServices<IEventHandler<Dummy>>().ToList());
-            services.AddScoped<IList<IEventHandler<User>>>(p => p.GetServices<IEventHandler<User>>().ToList());
-            services.AddScoped<IList<IEventHandler<Role>>>(p => p.GetServices<IEventHandler<Role>>().ToList());
-            services.AddScoped<IList<IEventHandler<UserRole>>>(p => p.GetServices<IEventHandler<UserRole>>().ToList());
-            services.AddScoped<IList<IEventHandler<TrackChange>>>(p => p.GetServices<IEventHandler<TrackChange>>().ToList());
-
-            // injector
-            services.AddScoped(typeof(IInjector<>), typeof(Injector<>));
-
-            // service
-            services.AddScoped(typeof(IService<>), typeof(Service<>));
-            services.AddScoped<Services.IAuthenticationService, Services.AuthenticationService>();
-
-            // others
-            services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
+            // dependecy injection
+            services.AddServiceDescriptors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

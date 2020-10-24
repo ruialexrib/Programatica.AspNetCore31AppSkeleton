@@ -7,10 +7,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AppSkeleton | Log in</title>
+    <title>AppSkeleton | Access Deined</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -26,64 +25,39 @@
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <!-- plugins -->
     <link href="~/plugins/toastr/toastr.css" rel="stylesheet" />
+    <!-- page -->
+    <link href="~/css/site.css" rel="stylesheet" />
 
 </head>
 
-<body class="hold-transition login-page">
+<body class="hold-transition">
 
-    <div class="login-box vertical-center">
-        <div class="login-logo">
-            <img src="~/img/logo.png" width="200" />
-            <br />
-            <a href="#"><b>App</b>Skeleton</a>
-        </div>
-        <!-- /.login-logo -->
-        <div class="card">
-            <div class="card-body login-card-body">
-                <p class="login-box-msg">Sign in to start your session</p>
+    <div class="error-page vertical-center">
 
-                <form asp-action="Login">
-                    <div class="input-group mb-3">
-                        <input asp-for="Username" class="form-control" placeholder="Username (type admin)" />
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-user"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="input-group mb-3">
-                        <input asp-for="Password" class="form-control" placeholder="Password (type pass)" />
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-lock"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-8">
-                            <div class="icheck-primary">
-                                <input type="checkbox" asp-for="IsPersistent" />
-                                <label for="IsPersistent">
-                                    Remember Me
-                                </label>
-                            </div>
-                        </div>
-                        <!-- /.col -->
-                        <div class="col-4">
-                            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
-                        </div>
-                        <!-- /.col -->
-                    </div>
-                    <div class="row">
-                        <div asp-validation-summary="All" class="text-danger"></div>
-                    </div>
-                </form>
+        <div class="grid">
 
+            <div class="row mt-1">
+                <h1 class="text-danger display-3"><i class="fas fa-ban"></i> Error 403 - Forbidden</h1>
             </div>
-            <!-- /.login-card-body -->
+
+            <div class="row mt-1">
+                <h3 class="">Oops! It seems you are not authorized to access this page.</h3>
+            </div>
+
+            <div class="row mt-1">
+                <p class="lead text-justify font-italic">
+                    The HTTP 403 is a HTTP status code meaning access to the requested resource is forbidden for some reason. The server understood the request, but will not fulfill it due to client-related issues. IIS defines non standard "sub-status" error codes that provide a more specific reason for responding with the 403 status code.
+                </p>
+            </div>
+
+            <div class="row mt-1">
+                <a asp-controller="Home" asp-action="Index" class="btn btn-default"><i class="fas fa-home"></i> BACK TO HOME</a>
+            </div>
+
         </div>
+
     </div>
-    <!-- /.login-box -->
+
 
     <!-- jQuery -->
     <script src="~/lib/jquery/dist/jquery.js"></script>
@@ -133,3 +107,4 @@
 
 </body>
 </html>
+

@@ -21,13 +21,21 @@ body {
     background-color: rgb(250,250,250) !important;
 }
 
+.vertical-center {
+    min-height: 100%; /* Fallback for browsers do NOT support vh unit */
+    min-height: 100vh; /* These two lines are counted as one :-)       */
+    display: flex;
+    align-items: center;
+}
+
+
 /* bootstrap overrides */
 .content-header {
     padding: 10px 0.75rem;
 }
 
 .content-wrapper {
-    background-color: #fff;
+    background-color: rgb(244, 246, 249);
 }
 
 /* material overrides */

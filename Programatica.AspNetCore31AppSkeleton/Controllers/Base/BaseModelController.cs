@@ -13,21 +13,20 @@ using Syncfusion.EJ2.Base;
 
 namespace Programatica.AspNetCore31AppSkeleton.Controllers.Base
 {
-    public class BaseModelController<TModel, TViewModel, TController> : BaseController, EJ2DataGridBaseController<TModel>
+    public class BaseModelController<TModel, TViewModel, TController> : EJ2DataGridBaseController<TModel>
         where TModel : IModel
         where TViewModel : class
         where TController : BaseModelController<TModel, TViewModel, TController>
     {
-        protected readonly IService<TModel> _modelService;
         protected readonly IMapper _mapper;
         protected readonly ILogger<TController> _logger;
 
         public BaseModelController(
-            IService<TModel> modelService, 
+            IService<TModel> modelService,
             IMapper mapper,
             ILogger<TController> logger)
+            : base(modelService)
         {
-            _modelService = modelService;
             _mapper = mapper;
             _logger = logger;
 

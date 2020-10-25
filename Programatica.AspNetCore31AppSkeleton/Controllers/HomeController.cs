@@ -2,9 +2,9 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Programatica.AspNetCore31AppSkeleton.Controllers.Base;
 using Programatica.AspNetCore31AppSkeleton.Models;
 using Programatica.AspNetCore31AppSkeleton.Services;
+using Programatica.Framework.Mvc.Controllers;
 
 namespace Programatica.AspNetCore31AppSkeleton.Controllers
 {

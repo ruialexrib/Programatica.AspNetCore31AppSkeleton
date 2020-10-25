@@ -1,25 +1,21 @@
 ﻿using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Programatica.AspNetCore31AppSkeleton.Adapters;
-using Programatica.AspNetCore31AppSkeleton.Data.Migrations.Context;
 using Programatica.AspNetCore31AppSkeleton.Data.Models;
 using Programatica.AspNetCore31AppSkeleton.Handlers;
+using Programatica.AspNetCore31AppSkeleton.Services;
 using Programatica.Framework.Core.Adapter;
-using Programatica.Framework.Data.Context;
 using Programatica.Framework.Data.Models;
 using Programatica.Framework.Data.Repository;
 using Programatica.Framework.Mvc.Adapters;
+using Programatica.Framework.Mvc.Authentication;
 using Programatica.Framework.Mvc.Options;
 using Programatica.Framework.Services;
 using Programatica.Framework.Services.Handlers;
 using Programatica.Framework.Services.Injector;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Programatica.AspNetCore31AppSkeleton.Extensions
 {
@@ -70,7 +66,8 @@ namespace Programatica.AspNetCore31AppSkeleton.Extensions
 
             // service
             services.AddScoped(typeof(IService<>), typeof(Service<>));
-            services.AddScoped<Services.IAuthenticationService, Services.AuthenticationService>();
+            services.AddScoped<IAuthenticationService, AuthenticationService>();
+            services.AddScoped<IAuthenticationUtility, AuthenticationUtility>();
 
             // options
             services.Configure<ClaimBasedAuthAdapterOptions>(Startup.Configuration.GetSection("ClaimBasedAuthAdapterOptions")) ;

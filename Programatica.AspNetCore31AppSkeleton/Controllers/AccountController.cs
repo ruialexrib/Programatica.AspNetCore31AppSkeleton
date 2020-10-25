@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Programatica.AspNetCore31AppSkeleton.Adapters;
 using Programatica.AspNetCore31AppSkeleton.Controllers.Base;
 using Programatica.AspNetCore31AppSkeleton.Services;
 using Programatica.AspNetCore31AppSkeleton.ViewModels;
@@ -13,13 +14,16 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
     {
         private readonly IAuthenticationService _authenticationService;
         private readonly ILogger<AccountController> _logger;
+        private readonly IPageAdapter _pageAdapter;
 
         public AccountController(
             IAuthenticationService authenticationService,
-            ILogger<AccountController> logger)
+            ILogger<AccountController> logger,
+            IPageAdapter pageAdapter)
         {
             _authenticationService = authenticationService;
             _logger = logger;
+            _pageAdapter = pageAdapter;
         }
 
         public IActionResult Login()
@@ -63,6 +67,12 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
         {
             PageAlerts.Add("Access Denied");
             return View();
+        }
+
+        private string Base64Encode(string plainText)
+        {
+            var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
+            return System.Convert.ToBase64String(plainTextBytes);
         }
     }
 }

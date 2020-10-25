@@ -169,7 +169,7 @@
                 })
                 .catch((status) => {
                     var s = JSON.parse(status);
-                    debug(s);
+                    global.toasterror(s.message);
                 });
         }
 
@@ -198,7 +198,7 @@
                 })
                 .catch((status) => {
                     var s = JSON.parse(status);
-                    debug(s);
+                    global.toasterror(s.message);
                 });
         }
 
@@ -237,7 +237,7 @@
                 })
                 .catch((status) => {
                     var s = JSON.parse(status);
-                    global.toasterror(s);
+                    global.toasterror(s.message);
                 });
         }
 

@@ -1,9 +1,13 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Programatica.AspNetCore31AppSkeleton.Adapters;
+using Programatica.AspNetCore31AppSkeleton.Data.Migrations.Context;
 using Programatica.AspNetCore31AppSkeleton.Data.Models;
 using Programatica.AspNetCore31AppSkeleton.Handlers;
 using Programatica.Framework.Core.Adapter;
+using Programatica.Framework.Data.Context;
 using Programatica.Framework.Data.Models;
 using Programatica.Framework.Data.Repository;
 using Programatica.Framework.Services;
@@ -18,7 +22,20 @@ namespace Programatica.AspNetCore31AppSkeleton.Extensions
 {
     public static class ServiceCollectionExtensions
     {
-        public static void AddServiceDescriptors(this IServiceCollection services)
+        public static void AddCustomAuthentication(this IServiceCollection services)
+        {
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme,
+                options =>
+                {
+                    options.LoginPath = "/Account/Login";
+                    options.LogoutPath = "/Account/Logoff";
+                    options.AccessDeniedPath = "/Account/AccessDenied";
+                });
+        }
+
+
+        public static void AddInfrastructureServices(this IServiceCollection services)
         {
             // repository
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
@@ -54,6 +71,7 @@ namespace Programatica.AspNetCore31AppSkeleton.Extensions
 
             // others
             services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
+            
         }
     }
 }

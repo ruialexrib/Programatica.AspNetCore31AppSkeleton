@@ -1,29 +1,17 @@
-using System.Collections.Generic;
-using System.Linq;
+using System;
 using AutoMapper;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Serialization;
-using Programatica.AspNetCore31AppSkeleton.Adapters;
 using Programatica.AspNetCore31AppSkeleton.Data.Migrations.Context;
-using Programatica.AspNetCore31AppSkeleton.Data.Models;
 using Programatica.AspNetCore31AppSkeleton.Extensions;
-using Programatica.AspNetCore31AppSkeleton.Handlers;
-using Programatica.Framework.Core.Adapter;
 using Programatica.Framework.Data.Context;
-using Programatica.Framework.Data.Models;
-using Programatica.Framework.Data.Repository;
-using Programatica.Framework.Services;
-using Programatica.Framework.Services.Handlers;
-using Programatica.Framework.Services.Injector;
 
 namespace Programatica.AspNetCore31AppSkeleton
 {
@@ -36,47 +24,42 @@ namespace Programatica.AspNetCore31AppSkeleton
             Configuration = configuration;
         }
 
-
-
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAutoMapper(typeof(Startup));
 
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                    .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme,
-                    options =>
-                    {
-                        options.LoginPath = "/Account/Login";
-                        options.LogoutPath = "/Account/Logoff";
-                        options.AccessDeniedPath = "/Account/AccessDenied";
-                    });
+            services.AddCustomAuthentication();
 
-            services.AddControllersWithViews()
-                    .AddNewtonsoftJson(options =>
-                    {
-                        options.SerializerSettings.ContractResolver = new DefaultContractResolver();
-                    });
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(20);
+            });
+
+            services
+                .AddControllersWithViews()
+                .AddNewtonsoftJson(options => { options.SerializerSettings.ContractResolver = new DefaultContractResolver(); });
+
 
             // sqlserver context
             // uncomment this to use sql server
             services.AddDbContext<IDbContext, AppDbContext>(opt =>
-                            {
-                                opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
-                            }, ServiceLifetime.Scoped);
+                { opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")); }, ServiceLifetime.Scoped);
 
             // inmemory context
             // comment this to use sql server
             //SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder(Configuration.GetConnectionString("DefaultConnection"));
             //services.AddDbContext<IDbContext, AppDbContext>(opt => opt.UseInMemoryDatabase(builder.InitialCatalog), ServiceLifetime.Transient);
 
-            // dependecy injection
-            services.AddServiceDescriptors();
+            // Infrastructure Services
+            services.AddInfrastructureServices();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Startup> logger)
         {
+            logger.LogInformation("Configuring...");
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -93,6 +76,7 @@ namespace Programatica.AspNetCore31AppSkeleton
             app.UseAuthentication();
             app.UseRouting();
             app.UseAuthorization();
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {

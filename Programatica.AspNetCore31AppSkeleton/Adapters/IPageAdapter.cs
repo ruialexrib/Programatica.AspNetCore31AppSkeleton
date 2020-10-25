@@ -6,6 +6,7 @@ namespace Programatica.AspNetCore31AppSkeleton.Adapters
     public interface IPageAdapter
     {
         string ConnectionString { get; }
+
         List<string> PageMessages { get;  }
         List<string> PageWarnings { get; }
         List<string> PageAlerts { get; }

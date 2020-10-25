@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Programatica.AspNetCore31AppSkeleton.Adapters;
 using Programatica.AspNetCore31AppSkeleton.ViewModels;
 using Programatica.Framework.Mvc.Authentication;
 using Programatica.Framework.Mvc.Controllers;
@@ -13,17 +12,15 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
     public class AccountController : BaseController
     {
         private readonly IAuthenticationService _authenticationService;
+#pragma warning disable IDE0052 // Remove unread private members
         private readonly ILogger<AccountController> _logger;
-        private readonly IPageAdapter _pageAdapter;
 
         public AccountController(
             IAuthenticationService authenticationService,
-            ILogger<AccountController> logger,
-            IPageAdapter pageAdapter)
+            ILogger<AccountController> logger)
         {
             _authenticationService = authenticationService;
             _logger = logger;
-            _pageAdapter = pageAdapter;
         }
 
         public IActionResult Login()
@@ -39,7 +36,7 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
             {
                 try
                 {
-                    await _authenticationService.SignIn(HttpContext, vm.Username, vm.Password, vm.IsPersistent);
+                    await _authenticationService.SignIn(HttpContext, vm.Username, vm.Password, vm.IsPersistent).ConfigureAwait(false);
                     return RedirectToAction("Index", "Home", null);
                 }
                 catch (Exception e)
@@ -67,12 +64,6 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
         {
             PageAlerts.Add("Access Denied");
             return View();
-        }
-
-        private string Base64Encode(string plainText)
-        {
-            var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
-            return System.Convert.ToBase64String(plainTextBytes);
         }
     }
 }

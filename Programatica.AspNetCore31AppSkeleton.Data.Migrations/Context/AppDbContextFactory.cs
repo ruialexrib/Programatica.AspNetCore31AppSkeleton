@@ -7,7 +7,6 @@ namespace Programatica.AspNetCore31AppSkeleton.Data.Migrations.Context
 {
     public class AppDbContextFactory : IDesignTimeDbContextFactory<AppDbContext>
     {
-
         public AppDbContext CreateDbContext(string[] args)
         {
             IConfigurationRoot configuration = new ConfigurationBuilder()
@@ -21,7 +20,6 @@ namespace Programatica.AspNetCore31AppSkeleton.Data.Migrations.Context
             builder.UseSqlServer(connectionString);
 
             return new AppDbContext(builder.Options);
-
         }
     }
 }

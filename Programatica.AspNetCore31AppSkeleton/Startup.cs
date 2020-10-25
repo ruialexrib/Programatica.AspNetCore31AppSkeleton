@@ -31,20 +31,15 @@ namespace Programatica.AspNetCore31AppSkeleton
 
             services.AddCustomAuthentication();
 
-            services.AddSession(options =>
-            {
-                options.IdleTimeout = TimeSpan.FromMinutes(20);
-            });
+            services.AddSession(options => options.IdleTimeout = TimeSpan.FromMinutes(20));
 
             services
                 .AddControllersWithViews()
-                .AddNewtonsoftJson(options => { options.SerializerSettings.ContractResolver = new DefaultContractResolver(); });
-
+                .AddNewtonsoftJson(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
 
             // sqlserver context
             // uncomment this to use sql server
-            services.AddDbContext<IDbContext, AppDbContext>(opt =>
-                { opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")); }, ServiceLifetime.Scoped);
+            services.AddDbContext<IDbContext, AppDbContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")), ServiceLifetime.Scoped);
 
             // inmemory context
             // comment this to use sql server

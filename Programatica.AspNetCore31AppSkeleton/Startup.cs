@@ -17,7 +17,7 @@ namespace Programatica.AspNetCore31AppSkeleton
 {
     public class Startup
     {
-        public IConfiguration Configuration { get; }
+        public static IConfiguration Configuration { get; private set; }
 
         public Startup(IConfiguration configuration)
         {

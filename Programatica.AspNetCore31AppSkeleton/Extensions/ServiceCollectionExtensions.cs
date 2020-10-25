@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Programatica.AspNetCore31AppSkeleton.Adapters;
 using Programatica.AspNetCore31AppSkeleton.Data.Migrations.Context;
@@ -10,6 +11,8 @@ using Programatica.Framework.Core.Adapter;
 using Programatica.Framework.Data.Context;
 using Programatica.Framework.Data.Models;
 using Programatica.Framework.Data.Repository;
+using Programatica.Framework.Mvc.Adapters;
+using Programatica.Framework.Mvc.Options;
 using Programatica.Framework.Services;
 using Programatica.Framework.Services.Handlers;
 using Programatica.Framework.Services.Injector;
@@ -68,6 +71,9 @@ namespace Programatica.AspNetCore31AppSkeleton.Extensions
             // service
             services.AddScoped(typeof(IService<>), typeof(Service<>));
             services.AddScoped<Services.IAuthenticationService, Services.AuthenticationService>();
+
+            // options
+            services.Configure<ClaimBasedAuthAdapterOptions>(Startup.Configuration.GetSection("ClaimBasedAuthAdapterOptions")) ;
 
             // others
             services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();

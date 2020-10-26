@@ -71,6 +71,11 @@
         var recordName;
 
         $(document).ready(function () {
+            resizeGrid();
+        });
+
+        $(window).resize(function () {
+            resizeGrid();
         });
 
         function on_grid_databound(args) {
@@ -250,6 +255,11 @@
             var grid = $("#Grid")[0].ej2_instances[0];
             var searchString = $("#txt-search").val();
             grid.search(searchString);
+        }
+
+        function resizeGrid() {
+            var grid = $("#Grid")[0].ej2_instances[0];
+            grid.height = $(window).height() - 300;
         }
 
     </script>

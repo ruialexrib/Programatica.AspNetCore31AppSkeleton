@@ -30,9 +30,8 @@ namespace Programatica.AspNetCore31AppSkeleton.Extensions
     public static class ServiceCollectionExtensions
     {
 
-        public static void ConfigInfrastructureServices(this IServiceCollection services)
+        public static void ConfigureInfrastructureServices(this IServiceCollection services)
         {
-
             ConfigureLogging(services);
             ConfigureAutoMapper(services);
             ConfigureAuthentication(services);
@@ -45,9 +44,7 @@ namespace Programatica.AspNetCore31AppSkeleton.Extensions
             ConfigureAdapters(services);
             ConfigureEventHandlers(services);
             ConfigureBusiness(services);
-
         }
-
 
         private static void ConfigureDatabase(IServiceCollection services)
         {
@@ -77,7 +74,6 @@ namespace Programatica.AspNetCore31AppSkeleton.Extensions
                                                                 .Configuration
                                                                 .GetSection("ClaimBasedAuthAdapterOptions")
                                                              );
-
         }
 
         private static void ConfigureAutoMapper(IServiceCollection services)

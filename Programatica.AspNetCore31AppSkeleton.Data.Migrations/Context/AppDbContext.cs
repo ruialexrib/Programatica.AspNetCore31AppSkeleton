@@ -132,7 +132,10 @@ namespace Programatica.AspNetCore31AppSkeleton.Data.Migrations.Context
             );
 
             // disable ManyToMany Cascade Delete
-            foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
+            var fks = modelBuilder.Model.GetEntityTypes()
+                                        .SelectMany(e => e.GetForeignKeys());
+
+            foreach (var relationship in fks)
             {
                 relationship.DeleteBehavior = DeleteBehavior.Restrict;
             }

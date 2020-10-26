@@ -36,7 +36,12 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
             {
                 try
                 {
-                    await _authenticationService.SignIn(HttpContext, vm.Username, vm.Password, vm.IsPersistent).ConfigureAwait(false);
+                    await _authenticationService.SignIn(HttpContext,
+                                                        vm.Username,
+                                                        vm.Password, 
+                                                        vm.IsPersistent)
+                                                .ConfigureAwait(false);
+
                     return RedirectToAction("Index", "Home", null);
                 }
                 catch (Exception e)

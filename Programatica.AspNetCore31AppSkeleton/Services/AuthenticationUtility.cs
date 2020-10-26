@@ -50,11 +50,17 @@ namespace Programatica.AspNetCore31AppSkeleton.Services
         public IEnumerable<Claim> GetUserRoleClaims(string user)
         {
             List<Claim> claims = new List<Claim>();
-            var u = _userService.Get().Where(x => x.Username.Equals(user)).FirstOrDefault();
-            var userRoles = _userRoleService.Get().Where(x => x.UserId == u.Id);
+            var u = _userService.Get()
+                                .Where(x => x.Username.Equals(user))
+                                .FirstOrDefault();
+
+            var userRoles = _userRoleService.Get()
+                                            .Where(x => x.UserId == u.Id);
 
             claims.AddRange(from UserRole ur in userRoles
-                            let role = _roleService.Get().Where(x => x.Id == ur.RoleId).FirstOrDefault()
+                            let role = _roleService.Get()
+                                                   .Where(x => x.Id == ur.RoleId)
+                                                   .FirstOrDefault()
                             select new Claim(ClaimTypes.Role, role.Name));
             return claims;
         }
@@ -62,8 +68,8 @@ namespace Programatica.AspNetCore31AppSkeleton.Services
         public bool AuthByUsernameAndPassword(string username, string password)
         {
             var user = _userService.Get()
-                                    .Where(x => x.Username.Equals(username) && x.Password.Equals(password))
-                                    .FirstOrDefault();
+                                   .Where(x => x.Username.Equals(username) && x.Password.Equals(password))
+                                   .FirstOrDefault();
             return user != null;
         }
     }

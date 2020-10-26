@@ -8,7 +8,6 @@ namespace Programatica.AspNetCore31AppSkeleton.Handlers
     public class ServiceEventHandler<T> : IEventHandler<T>
                         where T : IModel
     {
-
         private readonly IRepository<T> _modelRepository;
         private readonly IDateTimeAdapter _dateTimeAdapter;
         private readonly IAuthUserAdapter _authUserAdapter;

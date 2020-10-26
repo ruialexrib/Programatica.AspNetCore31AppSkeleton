@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Linq;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -9,7 +7,6 @@ using Programatica.AspNetCore31AppSkeleton.ViewModels.Base;
 using Programatica.Framework.Data.Models;
 using Programatica.Framework.Mvc.Controllers;
 using Programatica.Framework.Services;
-using Syncfusion.EJ2.Base;
 
 namespace Programatica.AspNetCore31AppSkeleton.Controllers.Base
 {

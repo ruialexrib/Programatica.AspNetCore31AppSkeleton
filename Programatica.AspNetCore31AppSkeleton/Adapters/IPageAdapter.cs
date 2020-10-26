@@ -1,5 +1,4 @@
-﻿using Programatica.AspNetCore31AppSkeleton.ViewModels;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Programatica.AspNetCore31AppSkeleton.Adapters
 {

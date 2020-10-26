@@ -66,12 +66,11 @@ namespace Programatica.AspNetCore31AppSkeleton.Handlers
 
         private bool IsSameUserAndRole(UserRole model)
         {
-            return _userRoleRepository
-                        .GetData()
-                        .Where(x => x.UserId == model.UserId &&
-                                    x.RoleId == model.RoleId &&
-                                    x.Id != model.Id)
-                        .FirstOrDefault() != null;
+            return _userRoleRepository.GetData()
+                                      .Where(x => x.UserId == model.UserId &&
+                                                  x.RoleId == model.RoleId &&
+                                                  x.Id != model.Id)
+                                      .FirstOrDefault() != null;
         }
 
         private bool IsSameForCurrentUser(UserRole model)

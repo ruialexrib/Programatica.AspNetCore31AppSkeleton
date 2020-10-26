@@ -38,24 +38,24 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
         {
             //join data
             IEnumerable DataSource = _modelService.Get()
-                                        .Join(_userRepository.GetData(),
-                                            ur => ur.UserId,
-                                            u => u.Id,
-                                            (ur, u) => new { ur, u })
-                                        .Join(_roleRepository.GetData(),
-                                            j1 => j1.ur.RoleId,
-                                            r => r.Id,
-                                            (j1, r) => new { j1, r })
-                                        .Select(s => new PermissionViewModel
-                                        {
-                                            Id = s.j1.ur.Id,
-                                            Username = s.j1.u.Username,
-                                            UserId = s.j1.u.Id,
-                                            Role = s.r.Name,
-                                            RoleId = s.r.Id,
-                                            LastModifiedDate = s.j1.ur.LastModifiedDate,
-                                            LastModifiedUser = s.j1.ur.LastModifiedUser
-                                        });
+                                                  .Join(_userRepository.GetData(),
+                                                        ur => ur.UserId,
+                                                        u => u.Id,
+                                                        (ur, u) => new { ur, u })
+                                                  .Join(_roleRepository.GetData(),
+                                                        j1 => j1.ur.RoleId,
+                                                        r => r.Id,
+                                                        (j1, r) => new { j1, r })
+                                                  .Select(s => new PermissionViewModel
+                                                  {
+                                                      Id = s.j1.ur.Id,
+                                                      Username = s.j1.u.Username,
+                                                      UserId = s.j1.u.Id,
+                                                      Role = s.r.Name,
+                                                      RoleId = s.r.Id,
+                                                      LastModifiedDate = s.j1.ur.LastModifiedDate,
+                                                      LastModifiedUser = s.j1.ur.LastModifiedUser
+                                                  });
 
             DataOperations operation = new DataOperations();
 

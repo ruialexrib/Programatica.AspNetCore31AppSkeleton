@@ -1,11 +1,18 @@
-﻿using Microsoft.AspNetCore.Authentication.Cookies;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Newtonsoft.Json.Serialization;
 using Programatica.AspNetCore31AppSkeleton.Adapters;
+using Programatica.AspNetCore31AppSkeleton.Data.Migrations.Context;
 using Programatica.AspNetCore31AppSkeleton.Data.Models;
 using Programatica.AspNetCore31AppSkeleton.Handlers;
 using Programatica.AspNetCore31AppSkeleton.Services;
 using Programatica.Framework.Core.Adapter;
+using Programatica.Framework.Data.Context;
 using Programatica.Framework.Data.Models;
 using Programatica.Framework.Data.Repository;
 using Programatica.Framework.Mvc.Adapters;
@@ -14,6 +21,7 @@ using Programatica.Framework.Mvc.Options;
 using Programatica.Framework.Services;
 using Programatica.Framework.Services.Handlers;
 using Programatica.Framework.Services.Injector;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -21,7 +29,39 @@ namespace Programatica.AspNetCore31AppSkeleton.Extensions
 {
     public static class ServiceCollectionExtensions
     {
-        public static void AddCustomAuthentication(this IServiceCollection services)
+
+        public static void ConfigInfrastructureServices(this IServiceCollection services)
+        {
+
+            ConfigureLogging(services);
+            ConfigureAutoMapper(services);
+            ConfigureAuthentication(services);
+            ConfigureSession(services);
+            ConfigureDatabase(services);
+            ConfigureMvc(services);
+            ConfigureHttpContext(services);
+
+            ConfigureRepositories(services);
+            ConfigureAdapters(services);
+            ConfigureEventHandlers(services);
+            ConfigureBusiness(services);
+
+        }
+
+
+        private static void ConfigureDatabase(IServiceCollection services)
+        {
+            // sqlserver context
+            // uncomment this to use sql server
+            services.AddDbContext<IDbContext, AppDbContext>(opt => opt.UseSqlServer(Startup.Configuration.GetConnectionString("DefaultConnection")), ServiceLifetime.Scoped);
+
+            // inmemory context
+            // comment this to use sql server
+            //SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder(Configuration.GetConnectionString("DefaultConnection"));
+            //services.AddDbContext<IDbContext, AppDbContext>(opt => opt.UseInMemoryDatabase(builder.InitialCatalog), ServiceLifetime.Transient);
+        }
+
+        private static void ConfigureAuthentication(IServiceCollection services)
         {
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme,
@@ -31,21 +71,52 @@ namespace Programatica.AspNetCore31AppSkeleton.Extensions
                     options.LogoutPath = "/Account/Logoff";
                     options.AccessDeniedPath = "/Account/AccessDenied";
                 });
+
+            // options
+            services.Configure<ClaimBasedAuthAdapterOptions>(Startup
+                                                                .Configuration
+                                                                .GetSection("ClaimBasedAuthAdapterOptions")
+                                                             );
+
         }
 
-
-        public static void AddInfrastructureServices(this IServiceCollection services)
+        private static void ConfigureAutoMapper(IServiceCollection services)
         {
-            // repository
-            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddAutoMapper(typeof(Startup));
+        }
 
-            // adapters
+        private static void ConfigureSession(IServiceCollection services)
+        {
+            services.AddSession(options => options
+                                            .IdleTimeout = TimeSpan.FromMinutes(20)
+                                );
+        }
+
+        private static void ConfigureMvc(IServiceCollection services)
+        {
+            services
+                .AddControllersWithViews()
+                .AddNewtonsoftJson(options => options
+                                                .SerializerSettings
+                                                .ContractResolver = new DefaultContractResolver()
+                                   );
+        }
+
+        private static void ConfigureRepositories(IServiceCollection services)
+        {
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+        }
+
+        private static void ConfigureAdapters(IServiceCollection services)
+        {
             services.AddScoped<IDateTimeAdapter, DateTimeAdapter>();
             services.AddScoped<IAuthUserAdapter, ClaimBasedAuthAdapter>();
             services.AddScoped<IJsonSerializerAdapter, JsonSerializerAdapter>();
             services.AddScoped<IPageAdapter, PageAdapter>();
+        }
 
-            // event handler
+        private static void ConfigureEventHandlers(IServiceCollection services)
+        {
             services.AddScoped<IEventHandler<Dummy>, AuditEventHandler<Dummy>>();
             services.AddScoped<IEventHandler<Dummy>, ServiceEventHandler<Dummy>>();
             services.AddScoped<IEventHandler<User>, AuditEventHandler<User>>();
@@ -60,7 +131,10 @@ namespace Programatica.AspNetCore31AppSkeleton.Extensions
             services.AddScoped<IList<IEventHandler<Role>>>(p => p.GetServices<IEventHandler<Role>>().ToList());
             services.AddScoped<IList<IEventHandler<UserRole>>>(p => p.GetServices<IEventHandler<UserRole>>().ToList());
             services.AddScoped<IList<IEventHandler<TrackChange>>>(p => p.GetServices<IEventHandler<TrackChange>>().ToList());
+        }
 
+        private static void ConfigureBusiness(IServiceCollection services)
+        {
             // injector
             services.AddScoped(typeof(IInjector<>), typeof(Injector<>));
 
@@ -68,13 +142,20 @@ namespace Programatica.AspNetCore31AppSkeleton.Extensions
             services.AddScoped(typeof(IService<>), typeof(Service<>));
             services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddScoped<IAuthenticationUtility, AuthenticationUtility>();
-
-            // options
-            services.Configure<ClaimBasedAuthAdapterOptions>(Startup.Configuration.GetSection("ClaimBasedAuthAdapterOptions")) ;
-
-            // others
-            services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
-            
         }
+
+        private static void ConfigureHttpContext(IServiceCollection services)
+        {
+            services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
+        }
+
+        private static void ConfigureLogging(IServiceCollection services)
+        {
+            services.AddLogging(builder => builder.AddConsole()
+                                                  .AddDebug()
+                                                  .AddConfiguration(Startup.Configuration.GetSection("Logging"))
+                               );
+        }
+
     }
 }

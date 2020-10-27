@@ -1,5 +1,11 @@
-﻿<div id="modal-container" class="modal fade" role="dialog" data-backdrop="static">
-    <div id="modal-dialog" class='modal-dialog'>
-        <div id="modal-content" class="modal-content"></div>
-    </div>
-</div>
+﻿@for (int i = 1; i <= 3; i++)
+{
+    <text>
+        <div id="modal-container@(i)" class="modal fade" role="dialog" data-backdrop="static">
+            <div id="modal-dialog@(i)" class='modal-dialog modal-dialog-centered'>
+                <div id="modal-content@(i)" class="modal-content"></div>
+            </div>
+        </div>
+    </text>
+}
+

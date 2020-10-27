@@ -1,9 +1,17 @@
 ﻿var cfg = cfg || {};
 
 cfg.modal = cfg.modal || {};
-cfg.modal.container = "#modal-container";
-cfg.modal.dialog = "#modal-dialog";
-cfg.modal.content = "#modal-content";
+cfg.modal.container1 = "#modal-container1";
+cfg.modal.dialog1 = "#modal-dialog1";
+cfg.modal.content1 = "#modal-content1";
+
+cfg.modal.container2 = "#modal-container2";
+cfg.modal.dialog2 = "#modal-dialog2";
+cfg.modal.content2 = "#modal-content2";
+
+cfg.modal.container3 = "#modal-container3";
+cfg.modal.dialog3 = "#modal-dialog3";
+cfg.modal.content3 = "#modal-content3";
 
 cfg.bootbox = cfg.bootbox || {};
 cfg.bootbox.btnYes = "YES";

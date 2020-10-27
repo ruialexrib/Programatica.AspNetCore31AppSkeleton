@@ -1,6 +1,6 @@
 using System;
 
-namespace Programatica.AspNetCore31AppSkeleton.Models
+namespace Programatica.AspNetCore31AppSkeleton.ViewModels
 {
     public class ErrorViewModel
     {

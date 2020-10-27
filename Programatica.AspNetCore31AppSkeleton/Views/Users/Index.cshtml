@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Programatica.AspNetCore31AppSkeleton.Data.Models.User>
+﻿@model IEnumerable<User>
 
 @{
     ViewData["Title"] = "USERS PAGE";
@@ -81,6 +81,40 @@
         function on_grid_databound(args) {
         }
 
+        function on_cmd_modal(e) {
+            e.preventDefault();
+            showModalView();
+        }
+
+        function on_cmd_modal2(e) {
+            e.preventDefault();
+            showModalView2();
+        }
+
+        function showModalView() {
+            var url = "@Url.Action("Modal", "Users")";
+            modal.show(url, 2)
+                .then((h) => {
+                    debug("modal show event ok");
+                    modal.setsize(modalsizes.LARGE, 2);
+                })
+                .catch((e) => {
+                    global.toasterror(e);
+                });
+        }
+
+        function showModalView2() {
+            var url = "@Url.Action("Modal2", "Users")";
+            modal.show(url, 3)
+                .then((h) => {
+                    debug("modal show event ok");
+                    modal.setsize(modalsizes.NORMAL, 3);
+                })
+                .catch((e) => {
+                    global.toasterror(e);
+                });
+        }
+
         function on_cmd_clearfilter_click(e) {
             var grid = $("#Grid")[0].ej2_instances[0];
             grid.clearFiltering();
@@ -145,9 +179,9 @@
             global.toastinfo("Data refreshed!");
         }
 
-        function on_cmd_close_click(e) {
+        function on_cmd_close_click(e, l) {
             e.preventDefault();
-            modal.close();
+            modal.close(l);
         }
 
         function on_cmd_save_click(e) {
@@ -212,7 +246,7 @@
             modal.show(url)
                 .then((h) => {
                     debug("modal show event ok");
-                    modal.setsize(modalsizes.LARGE);
+                    modal.setsize(modalsizes.NORMAL);
                 })
                 .catch((e) => {
                     global.toasterror(e);
@@ -221,7 +255,7 @@
 
         function showUpdateRecordView(id) {
             var url = "@Url.Action("Edit", "Users")?id=" + id ;
-            modal.show(url)
+            modal.show(url, 1)
                 .then((h) => {
                     debug("modal show event ok");
                     modal.setsize(modalsizes.LARGE);

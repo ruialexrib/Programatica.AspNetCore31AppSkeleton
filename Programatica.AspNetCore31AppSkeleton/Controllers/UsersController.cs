@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Programatica.AspNetCore31AppSkeleton.Controllers.Base;
 using Programatica.AspNetCore31AppSkeleton.Data.Models;
@@ -18,6 +19,18 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
             ILogger<UsersController> logger)
             : base(userService, mapper, logger)
         {
+        }
+
+        [HttpGet]
+        public IActionResult Modal()
+        {
+            return PartialView("_Modal");
+        }
+
+        [HttpGet]
+        public IActionResult Modal2()
+        {
+            return PartialView("_Modal2");
         }
 
     }

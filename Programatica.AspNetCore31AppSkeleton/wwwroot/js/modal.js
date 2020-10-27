@@ -12,15 +12,13 @@ const modalsizes = {
     LARGE: 'modal-lg'
 }
 
-modal.show = function (url, returnurl, prevreturnurl) {
+modal.show = function (url, level = 1) {
     return new Promise((resolve, reject) => {
 
-        var container = $(cfg.modal.container);
-        var content = $(cfg.modal.content);
+        var container = $(cfg.modal["container" + level]);
+        var content = $(cfg.modal["content" + level])
 
         modal.url = url;
-        modal.returnurl = returnurl;
-        modal.prevreturnurl = prevreturnurl;
         modal.guid = global.guid();
 
         global.get(url)
@@ -38,9 +36,10 @@ modal.show = function (url, returnurl, prevreturnurl) {
     });
 };
 
-/// set size
-modal.setsize = function (size) {
-    var dialog = $(cfg.modal.dialog);
+modal.setsize = function (size, level = 1) {
+
+    var dialog = $(cfg.modal["dialog" + level]);
+
     dialog.removeClass('modal-sm').removeClass('modal-lg').removeClass('modal-xl').removeClass('modal-xxl');
     if (size) {
         modal.size = size;
@@ -48,13 +47,24 @@ modal.setsize = function (size) {
     }
 }
 
-/// closes modal
-modal.close = function () {
-    var container = $(cfg.modal.container);
-    var content = $(cfg.modal.content);
+modal.close = function (level = 1) {
+
+    var container = $(cfg.modal["container" + level]);
+    var content = $(cfg.modal["content" + level])
+
+    switch (level) {
+        case 1:
+            container = $(cfg.modal.container1);
+            content = $(cfg.modal.content1);
+            break;
+        case 2:
+            container = $(cfg.modal.container2);
+            content = $(cfg.modal.content2);
+            break;
+        default:
+    }
 
     modal.url = "";
-    modal.returnurl = "";
     modal.size = "";
 
     content.empty();

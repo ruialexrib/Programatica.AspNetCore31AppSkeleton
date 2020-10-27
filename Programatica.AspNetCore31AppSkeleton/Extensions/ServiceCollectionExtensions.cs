@@ -113,14 +113,18 @@ namespace Programatica.AspNetCore31AppSkeleton.Extensions
 
         private static void ConfigureEventHandlers(IServiceCollection services)
         {
-            services.AddScoped<IEventHandler<Dummy>, AuditEventHandler<Dummy>>();
             services.AddScoped<IEventHandler<Dummy>, ServiceEventHandler<Dummy>>();
-            services.AddScoped<IEventHandler<User>, AuditEventHandler<User>>();
+            services.AddScoped<IEventHandler<Dummy>, AuditEventHandler<Dummy>>();
+
             services.AddScoped<IEventHandler<User>, ServiceEventHandler<User>>();
-            services.AddScoped<IEventHandler<Role>, AuditEventHandler<Role>>();
+            services.AddScoped<IEventHandler<User>, AuditEventHandler<User>>();
+
             services.AddScoped<IEventHandler<Role>, ServiceEventHandler<Role>>();
-            services.AddScoped<IEventHandler<UserRole>, AuditEventHandler<UserRole>>();
+            services.AddScoped<IEventHandler<Role>, AuditEventHandler<Role>>();
+
             services.AddScoped<IEventHandler<UserRole>, ServiceEventHandler<UserRole>>();
+            services.AddScoped<IEventHandler<UserRole>, AuditEventHandler<UserRole>>();
+
             services.AddScoped<IEventHandler<UserRole>, PermissionEventHandler>();
             services.AddScoped<IList<IEventHandler<Dummy>>>(p => p.GetServices<IEventHandler<Dummy>>().ToList());
             services.AddScoped<IList<IEventHandler<User>>>(p => p.GetServices<IEventHandler<User>>().ToList());

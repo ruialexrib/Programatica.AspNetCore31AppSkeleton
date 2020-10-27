@@ -5,20 +5,29 @@ using Microsoft.Extensions.Logging;
 using Programatica.AspNetCore31AppSkeleton.Controllers.Base;
 using Programatica.AspNetCore31AppSkeleton.Data.Models;
 using Programatica.AspNetCore31AppSkeleton.ViewModels;
+using Programatica.Framework.Data.Models;
 using Programatica.Framework.Services;
+using Syncfusion.EJ2.Linq;
+using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
+using System.Linq;
+using Programatica.Framework.Data.Repository;
 
 namespace Programatica.AspNetCore31AppSkeleton.Controllers
 {
     [Authorize(Roles = "Administrators")]
     public class UsersController : BaseModelController<User, UserViewModel, UsersController>
     {
+        private readonly IRepository<Audit> _auditRepository;
 
         public UsersController(
             IService<User> userService,
             IMapper mapper,
-            ILogger<UsersController> logger)
+            ILogger<UsersController> logger,
+            IRepository<Audit> auditRepository)
             : base(userService, mapper, logger)
         {
+            _auditRepository = auditRepository;
         }
 
         [HttpGet]
@@ -33,5 +42,18 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
             return PartialView("_Modal2");
         }
 
+        [HttpGet]
+        public override IActionResult Edit(int id)
+        {
+            User tmodel = _modelService.Get(id);
+            var audits = _auditRepository.GetData().Where(x => x.ContentSystemId == tmodel.SystemId).ToList();
+            if (tmodel == null)
+            {
+                return NotFound();
+            }
+            var vm = _mapper.Map<UserViewModel>(tmodel);
+            vm.Audits = audits;
+            return PartialView("_Edit", vm);
+        }
     }
 }

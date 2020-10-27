@@ -1,25 +1,24 @@
 ﻿var modal = modal || {};
 
-modal.url = null;
-modal.returnurl = null;
-modal.prevreturnurl = null;
-modal.size = null;
-modal.guid = null;
-
 const modalsizes = {
     SMALL: 'modal-sm',
     NORMAL: '',
     LARGE: 'modal-lg'
 }
 
-modal.show = function (url, level = 1) {
+modal.show = function (url, size = modalsizes.NORMAL) {
     return new Promise((resolve, reject) => {
 
-        var container = $(cfg.modal["container" + level]);
-        var content = $(cfg.modal["content" + level])
+        var containerguid = global.guid();
+        var dialoguid = global.guid();
+        var contentguid = global.guid();
 
-        modal.url = url;
-        modal.guid = global.guid();
+        modal.create(containerguid, dialoguid, contentguid, size);
+
+        var container = $("#" + containerguid);
+        var content = $("#" + contentguid);
+
+        $(container).attr('modal-url', url);
 
         global.get(url)
             .then((html) => {
@@ -36,37 +35,25 @@ modal.show = function (url, level = 1) {
     });
 };
 
-modal.setsize = function (size, level = 1) {
+modal.close = function (e) {
 
-    var dialog = $(cfg.modal["dialog" + level]);
-
-    dialog.removeClass('modal-sm').removeClass('modal-lg').removeClass('modal-xl').removeClass('modal-xxl');
-    if (size) {
-        modal.size = size;
-        dialog.addClass(size);
-    }
-}
-
-modal.close = function (level = 1) {
-
-    var container = $(cfg.modal["container" + level]);
-    var content = $(cfg.modal["content" + level])
-
-    switch (level) {
-        case 1:
-            container = $(cfg.modal.container1);
-            content = $(cfg.modal.content1);
-            break;
-        case 2:
-            container = $(cfg.modal.container2);
-            content = $(cfg.modal.content2);
-            break;
-        default:
-    }
-
-    modal.url = "";
-    modal.size = "";
+    var t = e.target;
+    var container = $(t).closest(".modal");
+    var content = container.find(".modal-content");
 
     content.empty();
     container.modal('hide');
+
+    setTimeout(function () {
+        modal.destroy(container);
+    }, 500)
 };
+
+modal.create = function (containerguid, dialogguid, contentguid, size) {
+    var modalList = $("#modalList");
+    modalList.append("<div id='" + containerguid + "' class='modal fade' role='dialog' data-backdrop='static'><div id='" + dialogguid + "'class='modal-dialog " + size + "'><div id='" + contentguid + "' class='modal-content'></div></div></div>");
+}
+
+modal.destroy = function (container) {
+    $(container).remove();
+}

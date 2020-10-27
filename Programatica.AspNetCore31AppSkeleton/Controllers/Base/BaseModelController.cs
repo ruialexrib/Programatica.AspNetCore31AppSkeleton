@@ -48,8 +48,8 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers.Base
             {
                 try
                 {
-                    _modelService.Create(_mapper.Map<TModel>(vm));
-                    return new JsonResult(new { result = "ok" })
+                    var m = _modelService.Create(_mapper.Map<TModel>(vm));
+                    return new JsonResult(new { result = "ok", id = m.Id.ToString() })
                     {
                         StatusCode = StatusCodes.Status200OK
                     };

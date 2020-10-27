@@ -9,64 +9,100 @@
     <div class="row">
         <div class="col-md-12">
             <form asp-action="Edit">
-
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input asp-for="Id" class="form-control" hidden="hidden" />
 
-                <div class="form-row">
-                    <div class="col">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="true">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="contacts-tab" data-toggle="tab" href="#contacts" role="tab" aria-controls="contacts" aria-selected="false">Contacts</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="others-tab" data-toggle="tab" href="#others" role="tab" aria-controls="others" aria-selected="false">Others</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="audit-tab" data-toggle="tab" href="#audit" role="tab" aria-controls="audit" aria-selected="false">Audit</a>
+                    </li>
+                </ul>
 
-                        <div class="form-group">
-                            <label asp-for="Id" class="control-label"></label>
-                            <input asp-for="Id" class="form-control" disabled="disabled" />
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Username" class="control-label"></label>
-                            <input asp-for="Username" class="form-control" />
-                            <span asp-validation-for="Username" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Password" class="control-label"></label>
-                            <input asp-for="Password" class="form-control" />
-                            <span asp-validation-for="Password" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Fullname" class="control-label"></label>
-                            <input asp-for="Fullname" class="form-control" />
-                            <span asp-validation-for="Fullname" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Email" class="control-label"></label>
-                            <input asp-for="Email" class="form-control" />
-                            <span asp-validation-for="Email" class="text-danger"></span>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="col-md-12 p-3">
+                            <div class="form-group">
+                                <label asp-for="Username" class="control-label"></label>
+                                <input asp-for="Username" class="form-control" />
+                                <span asp-validation-for="Username" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Password" class="control-label"></label>
+                                <input asp-for="Password" class="form-control" />
+                                <span asp-validation-for="Password" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Fullname" class="control-label"></label>
+                                <input asp-for="Fullname" class="form-control" />
+                                <span asp-validation-for="Fullname" class="text-danger"></span>
+                            </div>
                         </div>
                     </div>
-                    <div class="col">
-                        <div class="form-group">
-                            <label asp-for="Address" class="control-label"></label>
-                            <input asp-for="Address" class="form-control" />
-                            <span asp-validation-for="Address" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="PostalCode" class="control-label"></label>
-                            <input asp-for="PostalCode" class="form-control" />
-                            <span asp-validation-for="PostalCode" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="City" class="control-label"></label>
-                            <input asp-for="City" class="form-control" />
-                            <span asp-validation-for="City" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Country" class="control-label"></label>
-                            <input asp-for="Country" class="form-control" />
-                            <span asp-validation-for="Country" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Comments" class="control-label"></label>
-                            <textarea asp-for="Comments" class="form-control"></textarea>
-                            <span asp-validation-for="Comments" class="text-danger"></span>
+                    <div class="tab-pane fade" id="contacts" role="tabpanel" aria-labelledby="contacts-tab">
+                        <div class="col-md-12 p-3">
+                            <div class="form-group">
+                                <label asp-for="Email" class="control-label"></label>
+                                <input asp-for="Email" class="form-control" />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Address" class="control-label"></label>
+                                <input asp-for="Address" class="form-control" />
+                                <span asp-validation-for="Address" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="PostalCode" class="control-label"></label>
+                                <input asp-for="PostalCode" class="form-control" />
+                                <span asp-validation-for="PostalCode" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="City" class="control-label"></label>
+                                <input asp-for="City" class="form-control" />
+                                <span asp-validation-for="City" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Country" class="control-label"></label>
+                                <input asp-for="Country" class="form-control" />
+                                <span asp-validation-for="Country" class="text-danger"></span>
+                            </div>
                         </div>
                     </div>
+                    <div class="tab-pane fade" id="others" role="tabpanel" aria-labelledby="others-tab">
+                        <div class="col-md-12 p-3">
+                            <div class="form-group">
+                                <label asp-for="Comments" class="control-label"></label>
+                                <textarea asp-for="Comments" class="form-control"></textarea>
+                                <span asp-validation-for="Comments" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="audit" role="tabpanel" aria-labelledby="audit-tab">
+                        <div class="col-md-12 p-3">
+
+                            <ejs-grid id="GridAudit" width="auto" dataSource="@Model.Audits" allowPaging="true">
+                                <e-grid-pagesettings pageSizes="true" pageSize="5">
+                                </e-grid-pagesettings>
+                                <e-grid-columns>
+                                    <e-grid-column field="ContentFunction" headerText="FUNCTION" width="150"></e-grid-column>
+                                    <e-grid-column width="150" field="CreatedUser" headerText="DATE"></e-grid-column>
+                                    <e-grid-column width="150" field="CreatedDate" headerText="USER" customFormat="@(new { type ="date", format="yyyy-MM-dd HH:mm:ss" })" type="date"></e-grid-column>
+                                </e-grid-columns>
+
+                            </ejs-grid>
+
+                        </div>
+                    </div>
+
                 </div>
 
             </form>
@@ -79,3 +115,14 @@
     <a href="#" class="btn btn-secondary" onclick="on_cmd_close_click(event)">CLOSE</a>
     <a href="#" class="btn btn-primary" onclick="on_cmd_edit_click(event)" data-loading-text="SAVING...">SAVE</a>
 </div>
+
+<ejs-scripts></ejs-scripts>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        var grid = $("#GridAudit")[0].ej2_instances[0];
+        grid.HScroll = false;
+    });
+
+</script>

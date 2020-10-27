@@ -145,7 +145,7 @@
 
         function on_cmd_close_click(e) {
             e.preventDefault();
-            modal.close();
+            modal.close(e);
         }
 
         function on_cmd_save_click(e) {
@@ -159,7 +159,7 @@
 
             global.submit(url, data, token)
                 .then((status) => {
-                    modal.close();
+                    modal.close(e);
                     refreshRecords();
                     global.toastsuccess("Record created with success!");
                 })
@@ -181,7 +181,7 @@
 
             global.submit(url, data, token)
                 .then((status) => {
-                    modal.close();
+                    modal.close(e);
                     refreshRecords();
                     global.toastsuccess("Record updated with success!");
                 })
@@ -193,10 +193,9 @@
 
         function showCreateRecordView() {
             var url = "@Url.Action("Create", "Roles")";
-            modal.show(url)
+            modal.show(url, modalsizes.NORMAL)
                 .then((h) => {
                     debug("modal show event ok");
-                    modal.setsize(modalsizes.NORMAL);
                 })
                 .catch((e) => {
                     global.toasterror(e);
@@ -205,10 +204,9 @@
 
         function showUpdateRecordView(id) {
             var url = "@Url.Action("Edit", "Roles")?id=" + id ;
-            modal.show(url)
+            modal.show(url, modalsizes.NORMAL)
                 .then((h) => {
                     debug("modal show event ok");
-                    modal.setsize(modalsizes.NORMAL);
                 })
                 .catch((e) => alert(e));
         }

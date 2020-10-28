@@ -3,7 +3,8 @@
 const modalsizes = {
     SMALL: 'modal-sm',
     NORMAL: '',
-    LARGE: 'modal-lg'
+    LARGE: 'modal-lg',
+    XLARGE: 'modal-xl'
 }
 
 modal.show = function (url, size = modalsizes.NORMAL) {

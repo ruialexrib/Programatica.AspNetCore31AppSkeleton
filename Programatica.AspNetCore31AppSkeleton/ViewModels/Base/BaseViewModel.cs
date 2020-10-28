@@ -5,6 +5,5 @@ namespace Programatica.AspNetCore31AppSkeleton.ViewModels.Base
 {
     public class BaseViewModel : BaseModel
     {
-        public List<Audit> Audits { get; set; }
     }
 }

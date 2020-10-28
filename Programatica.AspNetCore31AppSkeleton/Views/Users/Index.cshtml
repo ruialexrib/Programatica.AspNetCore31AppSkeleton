@@ -18,10 +18,19 @@
         <li class="nav-item">
             <a href="#" class="nav-link text-dark" onclick="on_cmd_refresh_click(event)"><i class="fas fa-sync-alt"></i> REFRESH</a>
         </li>
-        <!-- Dropdown -->
+
         <li class="nav-item dropdown d-none d-md-block">
             <a class="nav-link  text-dark dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                <i class="fas fa-ellipsis-v"></i> MORE OPTIONS
+                <i class="fas fa-ellipsis-v"></i> NAVIGATION
+            </a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item text-dark" href="#" onclick="on_cmd_audit(event)"><i class="fas fa-lock"></i> AUDIT</a>
+            </div>
+        </li>
+
+        <li class="nav-item dropdown d-none d-md-block">
+            <a class="nav-link  text-dark dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                <i class="fas fa-ellipsis-v"></i> OPTIONS
             </a>
             <div class="dropdown-menu">
                 <a class="dropdown-item text-dark" href="#" onclick="on_cmd_togglegroup_click(event)"><i class="far fa-object-ungroup"></i> TOGGLE GROUP</a>
@@ -29,6 +38,7 @@
                 <a class="dropdown-item text-dark" href="#" onclick="on_cmd_clearsearch_click(event)"><i class="fas fa-search"></i> CLEAR SEARCH</a>
             </div>
         </li>
+
     </ul>
     <section class="d-none d-md-block">
         <form class="form-inline">
@@ -69,6 +79,7 @@
 
         var recordId;
         var recordName;
+        var recordSystemId;
 
         $(document).ready(function () {
             resizeGrid();
@@ -81,6 +92,11 @@
         function on_grid_databound(args) {
         }
 
+        function on_cmd_audit(e) {
+            e.preventDefault();
+            showAuditView();
+        }
+
         function on_cmd_modal(e) {
             e.preventDefault();
             showModalView();
@@ -89,6 +105,18 @@
         function on_cmd_modal2(e) {
             e.preventDefault();
             showModalView2();
+        }
+
+        function showAuditView() {
+            var systemId = recordSystemId;
+            var url = "@Url.Action("ModelAudit", "Audits")?systemid=" + systemId;
+            modal.show(url, modalsizes.LARGE)
+                .then((h) => {
+                    debug("modal show event ok");
+                })
+                .catch((e) => {
+                    global.toasterror(e);
+                });
         }
 
         function showModalView() {
@@ -136,6 +164,7 @@
         function on_grid_click(args){
             recordId = args.data.Id;
             recordName = args.data.Username;
+            recordSystemId = args.data.SystemId;
         }
 
         function on_cmd_search_click(e) {
@@ -198,7 +227,7 @@
                     showUpdateRecordView(id);
                     modal.close(e);
                     refreshRecords();
-                    global.toastsuccess("Record created with success!");                    
+                    global.toastsuccess("Record created with success!");
                 })
                 .catch((status) => {
                     var s = JSON.parse(status);
@@ -248,7 +277,7 @@
 
         function showUpdateRecordView(id) {
             var url = "@Url.Action("Edit", "Users")?id=" + id;
-            modal.show(url, modalsizes.LARGE)
+            modal.show(url, modalsizes.NORMAL)
                 .then((h) => {
                     debug("modal show event ok");
                  })

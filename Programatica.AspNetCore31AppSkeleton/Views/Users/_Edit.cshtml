@@ -11,6 +11,7 @@
             <form asp-action="Edit">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input asp-for="Id" class="form-control" hidden="hidden" />
+                <input asp-for="SystemId" class="form-control" hidden="hidden" />
 
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item">
@@ -21,9 +22,6 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="others-tab" data-toggle="tab" href="#others" role="tab" aria-controls="others" aria-selected="false">Others</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="audit-tab" data-toggle="tab" href="#audit" role="tab" aria-controls="audit" aria-selected="false">Audit</a>
                     </li>
                 </ul>
 
@@ -86,23 +84,6 @@
                         </div>
                     </div>
 
-                    <div class="tab-pane fade" id="audit" role="tabpanel" aria-labelledby="audit-tab">
-                        <div class="col-md-12 p-3">
-
-                            <ejs-grid id="GridAudit" width="auto" dataSource="@Model.Audits" allowPaging="true">
-                                <e-grid-pagesettings pageSizes="true" pageSize="5">
-                                </e-grid-pagesettings>
-                                <e-grid-columns>
-                                    <e-grid-column field="ContentFunction" headerText="FUNCTION" width="150"></e-grid-column>
-                                    <e-grid-column width="150" field="CreatedUser" headerText="DATE"></e-grid-column>
-                                    <e-grid-column width="150" field="CreatedDate" headerText="USER" customFormat="@(new { type ="date", format="yyyy-MM-dd HH:mm:ss" })" type="date"></e-grid-column>
-                                </e-grid-columns>
-
-                            </ejs-grid>
-
-                        </div>
-                    </div>
-
                 </div>
 
             </form>
@@ -112,6 +93,7 @@
 </div>
 
 <div class="modal-footer">
+    <a href="#" class="btn btn-secondary" onclick="on_cmd_audit(event)">AUDIT</a>
     <a href="#" class="btn btn-secondary" onclick="on_cmd_close_click(event)">CLOSE</a>
     <a href="#" class="btn btn-primary" onclick="on_cmd_edit_click(event)" data-loading-text="SAVING...">SAVE</a>
 </div>

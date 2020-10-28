@@ -42,18 +42,5 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
             return PartialView("_Modal2");
         }
 
-        [HttpGet]
-        public override IActionResult Edit(int id)
-        {
-            User tmodel = _modelService.Get(id);
-            var audits = _auditRepository.GetData().Where(x => x.ContentSystemId == tmodel.SystemId).ToList();
-            if (tmodel == null)
-            {
-                return NotFound();
-            }
-            var vm = _mapper.Map<UserViewModel>(tmodel);
-            vm.Audits = audits;
-            return PartialView("_Edit", vm);
-        }
     }
 }

@@ -1,0 +1,39 @@
+﻿@model List<Audit>
+
+<div class="modal-header">
+    <h5 class="modal-title"><i class="far fa-lock"></i> Audit</h5>
+</div>
+
+<div class="modal-body">
+
+    <div class="row">
+        <div class="col-md-12 p-3">
+
+            <ejs-grid id="GridAudit2"
+                      width="auto"
+                      dataSource="@Model"
+                      allowPaging="true"
+                      allowSorting="true"
+                      allowFiltering="true">
+                <e-grid-pagesettings pageSizes="true" pageSize="5"></e-grid-pagesettings>
+                <e-grid-filterSettings type="Excel"></e-grid-filterSettings>
+                <e-grid-columns>
+                    <e-grid-column field="ContentFunction" headerText="FUNCTION" width="150"></e-grid-column>
+                    <e-grid-column width="150" field="CreatedUser" headerText="DATE"></e-grid-column>
+                    <e-grid-column width="150" field="CreatedDate" headerText="USER" customFormat="@(new { type ="date", format="yyyy-MM-dd HH:mm:ss" })" type="date"></e-grid-column>
+                </e-grid-columns>
+            </ejs-grid>
+
+        </div>
+    </div>
+
+</div>
+
+<div class="modal-footer">
+    <a href="#" class="btn btn-secondary" onclick="on_cmd_close_click(event)">CLOSE</a>
+</div>
+
+<ejs-scripts></ejs-scripts>
+
+<script type="text/javascript">
+</script>

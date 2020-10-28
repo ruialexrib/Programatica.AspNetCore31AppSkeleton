@@ -3,10 +3,10 @@
 
     var users = users || {};
 
-    users.record_id = null;
-    users.record_name = null;
-    users.record_systemid = null;
-    users.get_grid = () => $("#Grid")[0].ej2_instances[0];
+    users.record_id         = null;
+    users.record_name       = null;
+    users.record_systemid   = null;
+    users.get_grid          = () => $("#GridUsers")[0].ej2_instances[0];
 
     users.on_grid_databound = (args) => { };
 
@@ -131,9 +131,9 @@
         e.preventDefault();
         var url = "@Url.Action("Create", "Users")";
         var data = {
-            Username: $("#Username").val(),
-            Password: $("#Password").val(),
-            Fullname: $("#Fullname").val(),
+            Username: $("#form_create_users #Username").val(),
+            Password: $("#form_create_users #Password").val(),
+            Fullname: $("#form_create_users #Fullname").val(),
         };
         var token = global.gettoken();
 
@@ -156,16 +156,16 @@
         e.preventDefault();
         var url = "@Url.Action("Edit", "Users")";
         var data = {
-            Id: $("#Id").val(),
-            Username: $("#Username").val(),
-            Password: $("#Password").val(),
-            Email: $("#Email").val(),
-            Fullname: $("#Fullname").val(),
-            Address: $("#Address").val(),
-            PostalCode: $("#PostalCode").val(),
-            City: $("#City").val(),
-            Country: $("#Country").val(),
-            Comments: $("#Comments").val(),
+            Id:         $("#form_edit_users #Id").val(),
+            Username:   $("#form_edit_users #Username").val(),
+            Password:   $("#form_edit_users #Password").val(),
+            Email:      $("#form_edit_users #Email").val(),
+            Fullname:   $("#form_edit_users #Fullname").val(),
+            Address:    $("#form_edit_users #Address").val(),
+            PostalCode: $("#form_edit_users #PostalCode").val(),
+            City:       $("#form_edit_users #City").val(),
+            Country:    $("#form_edit_users #Country").val(),
+            Comments:   $("#form_edit_users #Comments").val(),
         };
         var token = global.gettoken();
         global.submit(url, data, token)

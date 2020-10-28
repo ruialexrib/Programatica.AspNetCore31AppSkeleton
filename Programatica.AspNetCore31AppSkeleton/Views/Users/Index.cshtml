@@ -107,40 +107,6 @@
             showModalView2();
         }
 
-        function showAuditView() {
-            var systemId = recordSystemId;
-            var url = "@Url.Action("ModelAudit", "Audits")?systemid=" + systemId;
-            modal.show(url, modalsizes.LARGE)
-                .then((h) => {
-                    debug("modal show event ok");
-                })
-                .catch((e) => {
-                    global.toasterror(e);
-                });
-        }
-
-        function showModalView() {
-            var url = "@Url.Action("Modal", "Users")";
-            modal.show(url, modalsizes.XLARGE)
-                .then((h) => {
-                    debug("modal show event ok");
-                })
-                .catch((e) => {
-                    global.toasterror(e);
-                });
-        }
-
-        function showModalView2() {
-            var url = "@Url.Action("Modal2", "Users")";
-            modal.show(url, modalsizes.SMALL)
-                .then((h) => {
-                    debug("modal show event ok");
-                })
-                .catch((e) => {
-                    global.toasterror(e);
-                });
-        }
-
         function on_cmd_clearfilter_click(e) {
             var grid = $("#Grid")[0].ej2_instances[0];
             grid.clearFiltering();
@@ -261,6 +227,40 @@
                 .catch((status) => {
                     var s = JSON.parse(status);
                     global.toasterror(s.message);
+                });
+        }
+
+                function showAuditView() {
+            var systemId = recordSystemId;
+            var url = "@Url.Action("ModelAudit", "Audits")?systemid=" + systemId;
+            modal.show(url, modalsizes.LARGE)
+                .then((h) => {
+                    debug("modal show event ok");
+                })
+                .catch((e) => {
+                    global.toasterror(e);
+                });
+        }
+
+        function showModalView() {
+            var url = "@Url.Action("Modal", "Users")";
+            modal.show(url, modalsizes.XLARGE)
+                .then((h) => {
+                    debug("modal show event ok");
+                })
+                .catch((e) => {
+                    global.toasterror(e);
+                });
+        }
+
+        function showModalView2() {
+            var url = "@Url.Action("Modal2", "Users")";
+            modal.show(url, modalsizes.SMALL)
+                .then((h) => {
+                    debug("modal show event ok");
+                })
+                .catch((e) => {
+                    global.toasterror(e);
                 });
         }
 

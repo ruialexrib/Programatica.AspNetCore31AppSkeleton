@@ -15,8 +15,7 @@
                       allowPaging="true"
                       allowSorting="true"
                       allowFiltering="true"
-                      recordDoubleClick="on_gridaudit_dblclick"
-                      >
+                      recordDoubleClick="audits.on_gridaudit_dblclick">
                 <e-grid-pagesettings pageSizes="true" pageSize="5"></e-grid-pagesettings>
                 <e-grid-filterSettings type="Excel"></e-grid-filterSettings>
                 <e-grid-columns>
@@ -33,7 +32,7 @@
 </div>
 
 <div class="modal-footer">
-    <a href="#" class="btn btn-secondary" onclick="on_cmd_close_click(event)">CLOSE</a>
+    <a href="#" class="btn btn-secondary" onclick="audits.close_view(event)">CLOSE</a>
 </div>
 
 <ejs-scripts></ejs-scripts>
@@ -43,9 +42,5 @@
     $(document).ready(function () {
     });
 
-    function on_gridaudit_dblclick(args) {
-        recordId = args.rowData.Id;
-        alert(recordId);
-    }
 
 </script>

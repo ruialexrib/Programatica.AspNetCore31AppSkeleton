@@ -93,18 +93,13 @@
 </div>
 
 <div class="modal-footer">
-    <a href="#" class="btn btn-secondary" onclick="on_cmd_audit(event)">AUDIT</a>
-    <a href="#" class="btn btn-secondary" onclick="on_cmd_close_click(event)">CLOSE</a>
-    <a href="#" class="btn btn-primary" onclick="on_cmd_edit_click(event)" data-loading-text="SAVING...">SAVE</a>
+    <a href="#" class="btn btn-secondary" onclick="audits.show_modelaudit_view(users.record_systemid)">AUDIT</a>
+    <a href="#" class="btn btn-secondary" onclick="users.close_view(event)">CLOSE</a>
+    <a href="#" class="btn btn-primary" onclick="users.modify(event)" data-loading-text="SAVING...">SAVE</a>
 </div>
 
 <ejs-scripts></ejs-scripts>
 
 <script type="text/javascript">
-
-    $(document).ready(function () {
-        var grid = $("#GridAudit")[0].ej2_instances[0];
-        grid.HScroll = false;
-    });
 
 </script>

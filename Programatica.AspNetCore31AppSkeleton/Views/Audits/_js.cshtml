@@ -1,0 +1,26 @@
+﻿<script type="text/javascript">
+
+    var audits = audits || {};
+
+    audits.on_gridaudit_dblclick = (args) => {
+        recordId = args.rowData.Id;
+        alert(recordId);
+    }
+
+    audits.show_modelaudit_view = (systemId) => {
+        var url = "@Url.Action("ModelAudit", "Audits")?systemid=" + systemId;
+        modal.show(url, modalsizes.LARGE)
+            .then((h) => {
+                debug("modal show event ok");
+            })
+            .catch((e) => {
+                global.toasterror(e);
+            });
+    }
+
+    audits.close_view = (e) => {
+        e.preventDefault();
+        modal.close(e);
+    };
+
+</script>

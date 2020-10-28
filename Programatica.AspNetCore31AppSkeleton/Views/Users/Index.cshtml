@@ -7,16 +7,16 @@
 <nav class="navbar navbar-expand navbar-light bg-light navbar-menu">
     <ul class="navbar-nav mr-auto">
         <li class="nav-item ">
-            <a href="#" class="nav-link text-dark" onclick="on_cmd_create_click(event)"><i class="fas fa-plus"></i> NEW</a>
+            <a href="#" class="nav-link text-dark" onclick="users.show_create_view()"><i class="fas fa-plus"></i> NEW</a>
         </li>
         <li class="nav-item ">
-            <a href="#" class="nav-link text-dark" onclick="on_cmd_update_click(event)"><i class="fas fa-edit"></i> UPDATE</a>
+            <a href="#" class="nav-link text-dark" onclick="users.show_update_view(users.record_id)"><i class="fas fa-edit"></i> UPDATE</a>
         </li>
         <li class="nav-item ">
-            <a href="#" class="nav-link text-dark" onclick="on_cmd_delete_click(event)"><i class="fas fa-trash"></i> DELETE</a>
+            <a href="#" class="nav-link text-dark" onclick="users.delete(users.record_id)"><i class="fas fa-trash"></i> DELETE</a>
         </li>
         <li class="nav-item">
-            <a href="#" class="nav-link text-dark" onclick="on_cmd_refresh_click(event)"><i class="fas fa-sync-alt"></i> REFRESH</a>
+            <a href="#" class="nav-link text-dark" onclick="users.refresh()"><i class="fas fa-sync-alt"></i> REFRESH</a>
         </li>
 
         <li class="nav-item dropdown d-none d-md-block">
@@ -24,7 +24,7 @@
                 <i class="fas fa-ellipsis-v"></i> NAVIGATION
             </a>
             <div class="dropdown-menu">
-                <a class="dropdown-item text-dark" href="#" onclick="on_cmd_audit(event)"><i class="fas fa-lock"></i> AUDIT</a>
+                <a class="dropdown-item text-dark" href="#" onclick="audits.show_modelaudit_view(users.record_systemid)"><i class="fas fa-lock"></i> AUDIT</a>
             </div>
         </li>
 
@@ -33,9 +33,9 @@
                 <i class="fas fa-ellipsis-v"></i> OPTIONS
             </a>
             <div class="dropdown-menu">
-                <a class="dropdown-item text-dark" href="#" onclick="on_cmd_togglegroup_click(event)"><i class="far fa-object-ungroup"></i> TOGGLE GROUP</a>
-                <a class="dropdown-item text-dark" href="#" onclick="on_cmd_clearfilter_click(event)"><i class="fas fa-filter"></i> CLEAR FILTERS</a>
-                <a class="dropdown-item text-dark" href="#" onclick="on_cmd_clearsearch_click(event)"><i class="fas fa-search"></i> CLEAR SEARCH</a>
+                <a class="dropdown-item text-dark" href="#" onclick="users.show_groups()"><i class="far fa-object-ungroup"></i> TOGGLE GROUP</a>
+                <a class="dropdown-item text-dark" href="#" onclick="users.clear_filters()"><i class="fas fa-filter"></i> CLEAR FILTERS</a>
+                <a class="dropdown-item text-dark" href="#" onclick="users.clear_search()"><i class="fas fa-search"></i> CLEAR SEARCH</a>
             </div>
         </li>
 
@@ -43,7 +43,7 @@
     <section class="d-none d-md-block">
         <form class="form-inline">
             <input id="txt-search" class="form-control form-control-sm" type="search" placeholder="Search" aria-label="Search">&nbsp;
-            <a href="#" class="btn-link text-dark" onclick="on_cmd_search_click(event)"><i class="fas fa-search"></i> SEARCH</a>
+            <a href="#" class="btn-link text-dark" onclick="users.search($('#txt-search').val())"><i class="fas fa-search"></i> SEARCH</a>
         </form>
     </section>
 </nav>
@@ -54,9 +54,9 @@
           allowSorting="true"
           allowFiltering="true"
           allowSelection="true"
-          dataBound="on_grid_databound"
-          recordDoubleClick="on_grid_dblclick"
-          rowSelected="on_grid_click">
+          dataBound="users.on_grid_databound"
+          recordDoubleClick="users.on_grid_dblclick"
+          rowSelected="users.on_grid_click">
     <e-grid-pagesettings pageSizes="true" pageSize="10">
     </e-grid-pagesettings>
     <e-data-manager url="@Url.Action("UrlDatasource", "Users")" adaptor="UrlAdaptor"></e-data-manager>
@@ -77,247 +77,15 @@
 
     <script type="text/javascript">
 
-        var recordId;
-        var recordName;
-        var recordSystemId;
 
         $(document).ready(function () {
-            resizeGrid();
+            users.resize();
         });
 
         $(window).resize(function () {
-            resizeGrid();
+            users.resize();
         });
 
-        function on_grid_databound(args) {
-        }
-
-        function on_cmd_audit(e) {
-            e.preventDefault();
-            showAuditView();
-        }
-
-        function on_cmd_modal(e) {
-            e.preventDefault();
-            showModalView();
-        }
-
-        function on_cmd_modal2(e) {
-            e.preventDefault();
-            showModalView2();
-        }
-
-        function on_cmd_clearfilter_click(e) {
-            var grid = $("#Grid")[0].ej2_instances[0];
-            grid.clearFiltering();
-        }
-
-        function on_cmd_clearsearch_click(e) {
-            var grid = $("#Grid")[0].ej2_instances[0];
-            grid.searchSettings.key = '';
-        }
-
-        function on_cmd_togglegroup_click(e) {
-            var grid = $("#Grid")[0].ej2_instances[0];
-            grid.allowGrouping = !grid.allowGrouping;
-        }
-
-        function on_grid_dblclick(args) {
-            recordId = args.rowData.Id;
-            showUpdateRecordView(recordId);
-        }
-
-        function on_grid_click(args){
-            recordId = args.data.Id;
-            recordName = args.data.Username;
-            recordSystemId = args.data.SystemId;
-        }
-
-        function on_cmd_search_click(e) {
-            e.preventDefault();
-            searchRecord();
-        }
-
-        function on_cmd_create_click(e) {
-            e.preventDefault();
-            showCreateRecordView();
-        }
-
-        function on_cmd_update_click(e) {
-            e.preventDefault();
-            if (recordId) {
-                showUpdateRecordView(recordId);
-            } else {
-                global.alert("You must select a record !");
-            }
-        }
-
-        function on_cmd_delete_click(e) {
-            e.preventDefault();
-            if (recordId) {
-                global.confirm(cfg.text.askConfirmDelete + `<br><b>'${recordName}'</b>`)
-                    .then((result) => {
-                        if (result === true) {
-                            deleteRecord(recordId);
-                        }
-                    });
-            } else {
-                global.alert("You must select a record !");
-            }
-        }
-
-        function on_cmd_refresh_click(e) {
-            e.preventDefault();
-            refreshRecords();
-            global.toastinfo("Data refreshed!");
-        }
-
-        function on_cmd_close_click(e) {
-            e.preventDefault();
-            modal.close(e);
-        }
-
-        function on_cmd_save_click(e) {
-            e.preventDefault();
-            var url = "@Url.Action("Create", "Users")";
-            var data = {
-                Username: $("#Username").val(),
-                Password: $("#Password").val(),
-                Fullname: $("#Fullname").val(),
-            };
-            var token = global.gettoken();
-
-            global.submit(url, data, token)
-                .then((status) => {
-                    var id = status.id;
-                    showUpdateRecordView(id);
-                    modal.close(e);
-                    refreshRecords();
-                    global.toastsuccess("Record created with success!");
-                })
-                .catch((status) => {
-                    var s = JSON.parse(status);
-                    global.toasterror(s.message);
-                });
-        }
-
-        function on_cmd_edit_click(e) {
-            e.preventDefault();
-            var url = "@Url.Action("Edit", "Users")";
-            var data = {
-                Id: $("#Id").val(),
-                Username: $("#Username").val(),
-                Password: $("#Password").val(),
-                Email: $("#Email").val(),
-                Fullname: $("#Fullname").val(),
-                Address: $("#Address").val(),
-                PostalCode: $("#PostalCode").val(),
-                City: $("#City").val(),
-                Country: $("#Country").val(),
-                Comments: $("#Comments").val(),
-            };
-            var token = global.gettoken();
-
-            global.submit(url, data, token)
-                .then((status) => {
-                    modal.close(e);
-                    refreshRecords();
-                    global.toastsuccess("Record updated with success!");
-                })
-                .catch((status) => {
-                    var s = JSON.parse(status);
-                    global.toasterror(s.message);
-                });
-        }
-
-                function showAuditView() {
-            var systemId = recordSystemId;
-            var url = "@Url.Action("ModelAudit", "Audits")?systemid=" + systemId;
-            modal.show(url, modalsizes.LARGE)
-                .then((h) => {
-                    debug("modal show event ok");
-                })
-                .catch((e) => {
-                    global.toasterror(e);
-                });
-        }
-
-        function showModalView() {
-            var url = "@Url.Action("Modal", "Users")";
-            modal.show(url, modalsizes.XLARGE)
-                .then((h) => {
-                    debug("modal show event ok");
-                })
-                .catch((e) => {
-                    global.toasterror(e);
-                });
-        }
-
-        function showModalView2() {
-            var url = "@Url.Action("Modal2", "Users")";
-            modal.show(url, modalsizes.SMALL)
-                .then((h) => {
-                    debug("modal show event ok");
-                })
-                .catch((e) => {
-                    global.toasterror(e);
-                });
-        }
-
-        function showCreateRecordView() {
-            var url = "@Url.Action("Create", "Users")";
-            modal.show(url, modalsizes.NORMAL)
-                .then((h) => {
-                    debug("modal show event ok");
-                })
-                .catch((e) => {
-                    global.toasterror(e);
-                });
-        }
-
-        function showUpdateRecordView(id) {
-            var url = "@Url.Action("Edit", "Users")?id=" + id;
-            modal.show(url, modalsizes.NORMAL)
-                .then((h) => {
-                    debug("modal show event ok");
-                 })
-                .catch((e) => {
-                    global.toasterror(e);
-                });
-        }
-
-        function deleteRecord(id) {
-            var url = "@Url.Action("Delete", "Users")";
-            var data = {
-                Id: id
-            };
-
-            global.submit(url, data)
-                .then((status) => {
-                    refreshRecords();
-                    global.toastsuccess("Record deleted with success!");
-                })
-                .catch((status) => {
-                    var s = JSON.parse(status);
-                    global.toasterror(s.message);
-                });
-        }
-
-        function refreshRecords() {
-            var grid = $("#Grid")[0].ej2_instances[0];
-            grid.refresh();
-        }
-
-        function searchRecord() {
-            var grid = $("#Grid")[0].ej2_instances[0];
-            var searchString = $("#txt-search").val();
-            grid.search(searchString);
-        }
-
-        function resizeGrid() {
-            var grid = $("#Grid")[0].ej2_instances[0];
-            grid.height = $(window).height() - 300;
-        }
 
     </script>
 }

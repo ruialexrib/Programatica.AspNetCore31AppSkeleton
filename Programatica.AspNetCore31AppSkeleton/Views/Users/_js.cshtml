@@ -1,0 +1,184 @@
+﻿
+<script type="text/javascript">
+
+    var users = users || {};
+
+    users.record_id = null;
+    users.record_name = null;
+    users.record_systemid = null;
+    users.get_grid = () => $("#Grid")[0].ej2_instances[0];
+
+    users.on_grid_databound = (args) => { };
+
+    users.on_grid_click = (args) => {
+        users.record_id = args.data.Id;
+        users.record_name = args.data.Username;
+        users.record_systemid = args.data.SystemId;
+    };
+
+    users.on_grid_dblclick = (args) => {
+        users.record_id = args.rowData.Id;
+        users.show_update_view(users.record_id);
+    };
+
+    users.show_update_view = (id) => {
+        if (id) {
+            var url = "@Url.Action("Edit", "Users")?id=" + id;
+            modal.show(url, modalsizes.NORMAL)
+                .then((h) => {
+                    debug("modal show event ok");
+                })
+                .catch((e) => {
+                    global.toasterror(e);
+                });
+        } else {
+            global.alert("You must select a record !");
+        }
+    };
+
+    users.show_create_view = () => {
+        var url = "@Url.Action("Create", "Users")";
+        modal.show(url, modalsizes.NORMAL)
+            .then((h) => {
+                debug("modal show event ok");
+            })
+            .catch((e) => {
+                global.toasterror(e);
+            });
+    }
+
+    users.show_modal = () => {
+        var url = "@Url.Action("Modal", "Users")";
+        modal.show(url, modalsizes.XLARGE)
+            .then((h) => {
+                debug("modal show event ok");
+            })
+            .catch((e) => {
+                global.toasterror(e);
+            });
+    };
+
+    users.show_modal2 = () => {
+        var url = "@Url.Action("Modal2", "Users")";
+        modal.show(url, modalsizes.XLARGE)
+            .then((h) => {
+                debug("modal show event ok");
+            })
+            .catch((e) => {
+                global.toasterror(e);
+            });
+    };
+
+    users.clear_filters = () => {
+        var grid = users.get_grid();
+        grid.clearFiltering();
+    };
+
+    users.clear_search = () => {
+        var grid = users.get_grid();
+        grid.searchSettings.key = '';
+    };
+
+    users.show_groups = () => {
+        var grid = users.get_grid();
+        grid.allowGrouping = !grid.allowGrouping;
+    };
+
+    users.search = (searchString) => {
+        var grid = users.get_grid();
+        grid.search(searchString);
+    };
+
+    users.delete = (id) => {
+        if (id) {
+            global.confirm(cfg.text.askConfirmDelete + `<br><b>'${users.record_name}'</b>`)
+                .then((result) => {
+                    if (result === true) {
+                        var url = "@Url.Action("Delete", "Users")";
+                        var data = { Id: id };
+                        global.submit(url, data)
+                            .then((status) => {
+                                users.refresh();
+                                global.toastsuccess("Record deleted with success!");
+                            })
+                            .catch((status) => {
+                                var s = JSON.parse(status);
+                                global.toasterror(s.message);
+                            });
+                    }
+                });
+        } else {
+            global.alert("You must select a record !");
+        }
+    };
+
+    users.refresh = () => {
+        var grid = users.get_grid();
+        grid.refresh();
+    };
+
+    users.resize = () => {
+        var grid = users.get_grid();
+        grid.height = $(window).height() - 300;
+    };
+
+    users.close_view = (e) => {
+        e.preventDefault();
+        modal.close(e);
+    };
+
+    users.insert = (e) => {
+        e.preventDefault();
+        var url = "@Url.Action("Create", "Users")";
+        var data = {
+            Username: $("#Username").val(),
+            Password: $("#Password").val(),
+            Fullname: $("#Fullname").val(),
+        };
+        var token = global.gettoken();
+
+        global.submit(url, data, token)
+            .then((status) => {
+                var id = status.id;
+                users.show_update_view(id);
+                modal.close(e);
+                users.refresh();
+                global.toastsuccess("Record created with success!");
+                })
+                .catch((status) => {
+                    var s = JSON.parse(status);
+                    global.toasterror(s.message);
+                });
+
+    };
+
+    users.modify = (e) => {
+        e.preventDefault();
+        var url = "@Url.Action("Edit", "Users")";
+        var data = {
+            Id: $("#Id").val(),
+            Username: $("#Username").val(),
+            Password: $("#Password").val(),
+            Email: $("#Email").val(),
+            Fullname: $("#Fullname").val(),
+            Address: $("#Address").val(),
+            PostalCode: $("#PostalCode").val(),
+            City: $("#City").val(),
+            Country: $("#Country").val(),
+            Comments: $("#Comments").val(),
+        };
+        var token = global.gettoken();
+        global.submit(url, data, token)
+            .then((status) => {
+                modal.close(e);
+                users.refresh();
+                global.toastsuccess("Record updated with success!");
+            })
+            .catch((status) => {
+                var s = JSON.parse(status);
+                global.toasterror(s.message);
+            });
+    };
+
+
+</script>

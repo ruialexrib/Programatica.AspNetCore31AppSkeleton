@@ -1,5 +1,11 @@
-﻿
-@model Programatica.AspNetCore31AppSkeleton.ViewModels.UserViewModel
+﻿@model Programatica.AspNetCore31AppSkeleton.ViewModels.UserViewModel
+
+@{
+    string on_save_click = Guid.NewGuid().JsNormalize();
+    string on_close_click = Guid.NewGuid().JsNormalize();
+    string on_modal_click = Guid.NewGuid().JsNormalize();
+    string form = Guid.NewGuid().JsNormalize();
+}
 
 <div class="modal-header">
     <h5 class="modal-title"><i class="far fa-edit"></i> Create User</h5>
@@ -9,7 +15,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            <form asp-action="Create" id="form_create_users">
+            <form asp-action="Create" id="@form">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -47,7 +53,52 @@
 </div>
 
 <div class="modal-footer">
-    <a href="#" class="btn btn-secondary" onclick="users.show_modal(event)">MODAL</a>
-    <a href="#" class="btn btn-secondary" onclick="users.close_view(event)">CLOSE</a>
-    <a href="#" class="btn btn-primary" onclick="users.insert(event)" data-loading-text="SAVING...">SAVE</a>
+    <a href="#" class="btn btn-secondary" onclick="@(on_modal_click)(event)">MODAL</a>
+    <a href="#" class="btn btn-secondary" onclick="@(on_close_click)(event)">CLOSE</a>
+    <a href="#" class="btn btn-primary" onclick="@(on_save_click)(event)" data-loading-text="SAVING...">SAVE</a>
 </div>
+
+<script type="text/javascript">
+
+    @on_save_click = (e) => {
+        e.preventDefault();
+        var url = "@Url.Action("Create", "Users")";
+        var data = {
+            Username: $("#@form #Username").val(),
+            Password: $("#@form #Password").val(),
+            Fullname: $("#@form #Fullname").val(),
+        };
+        var token = global.gettoken();
+
+        global.submit(url, data, token)
+            .then((status) => {
+                var id = status.id;
+                users.show_update_view(id);
+                modal.close(e);
+                users.refresh();
+                global.toastsuccess("Record created with success!");
+                })
+                .catch((status) => {
+                    var s = JSON.parse(status);
+                    global.toasterror(s.message);
+                });
+
+    };
+
+    @on_close_click = (e) => {
+        e.preventDefault();
+        modal.close(e);
+    };
+
+    @on_modal_click = () => {
+        var url = "@Url.Action("Modal", "Users")";
+        modal.show(url, modalsizes.XLARGE)
+            .then((h) => {
+                debug("modal show event ok");
+            })
+            .catch((e) => {
+                global.toasterror(e);
+            });
+    };
+
+</script>

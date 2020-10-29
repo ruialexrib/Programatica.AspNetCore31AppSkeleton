@@ -2,13 +2,6 @@
 
     var audits = audits || {};
 
-    audits.get_grid = () => $("#GridAudits")[0].ej2_instances[0];
-
-    audits.on_grid_dblclick = (args) => {
-        var id = args.rowData.Id;
-        alert(id);
-    }
-
     audits.show_modelaudit_view = (systemId) => {
         var url = "@Url.Action("ModelAudit", "Audits")?systemid=" + systemId;
         modal.show(url, modalsizes.LARGE)
@@ -19,10 +12,5 @@
                 global.toasterror(e);
             });
     }
-
-    audits.close_view = (e) => {
-        e.preventDefault();
-        modal.close(e);
-    };
 
 </script>

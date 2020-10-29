@@ -47,7 +47,7 @@
             });
     }
 
-    users.show_modal = () => {
+    @*users.show_modal = () => {
         var url = "@Url.Action("Modal", "Users")";
         modal.show(url, modalsizes.XLARGE)
             .then((h) => {
@@ -56,9 +56,9 @@
             .catch((e) => {
                 global.toasterror(e);
             });
-    };
+    };*@
 
-    users.show_modal2 = () => {
+    @*users.show_modal2 = () => {
         var url = "@Url.Action("Modal2", "Users")";
         modal.show(url, modalsizes.LARGE)
             .then((h) => {
@@ -67,7 +67,7 @@
             .catch((e) => {
                 global.toasterror(e);
             });
-    };
+    };*@
 
     users.clear_filters = () => {
         var grid = users.get_grid();
@@ -122,12 +122,12 @@
         grid.height = $(window).height() - 300;
     };
 
-    users.close_view = (e) => {
-        e.preventDefault();
-        modal.close(e);
-    };
+    //users.close_view = (e) => {
+    //    e.preventDefault();
+    //    modal.close(e);
+    //};
 
-    users.insert = (e) => {
+    @*users.insert = (e) => {
         e.preventDefault();
         var url = "@Url.Action("Create", "Users")";
         var data = {
@@ -150,9 +150,9 @@
                     global.toasterror(s.message);
                 });
 
-    };
+    };*@
 
-    users.modify = (e) => {
+    @*users.modify = (e) => {
         e.preventDefault();
         var url = "@Url.Action("Edit", "Users")";
         var data = {
@@ -178,7 +178,7 @@
                 var s = JSON.parse(status);
                 global.toasterror(s.message);
             });
-    };
+    };*@
 
 
 </script>

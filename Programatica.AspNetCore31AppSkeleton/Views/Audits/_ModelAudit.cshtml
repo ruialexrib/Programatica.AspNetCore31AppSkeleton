@@ -1,5 +1,13 @@
 ﻿@model List<Audit>
 
+@{
+
+    string on_grid_dblclick = Guid.NewGuid().JsNormalize();
+    string on_close_click = Guid.NewGuid().JsNormalize();
+    string grid = Guid.NewGuid().JsNormalize();
+}
+
+
 <div class="modal-header">
     <h5 class="modal-title"><i class="far fa-lock"></i> Audit</h5>
 </div>
@@ -9,13 +17,13 @@
     <div class="row">
         <div class="col-md-12 p-3">
 
-            <ejs-grid id="GridAudits"
+            <ejs-grid id="@grid"
                       width="auto"
                       dataSource="@Model"
                       allowPaging="true"
                       allowSorting="true"
                       allowFiltering="true"
-                      recordDoubleClick="audits.on_grid_dblclick">
+                      recordDoubleClick="@on_grid_dblclick">
                 <e-grid-pagesettings pageSizes="true" pageSize="5"></e-grid-pagesettings>
                 <e-grid-filterSettings type="Excel"></e-grid-filterSettings>
                 <e-grid-columns>
@@ -32,15 +40,22 @@
 </div>
 
 <div class="modal-footer">
-    <a href="#" class="btn btn-secondary" onclick="audits.close_view(event)">CLOSE</a>
+    <a href="#" class="btn btn-secondary" onclick="@(on_close_click)(event)">CLOSE</a>
 </div>
-
-<ejs-scripts></ejs-scripts>
 
 <script type="text/javascript">
 
-    $(document).ready(function () {
-    });
+    @on_grid_dblclick = (args) => {
+        var id = args.rowData.Id;
+        alert(id);
+    }
 
+    @on_close_click = (e) => {
+        e.preventDefault();
+        modal.close(e);
+    };
 
 </script>
+
+<ejs-scripts></ejs-scripts>
+

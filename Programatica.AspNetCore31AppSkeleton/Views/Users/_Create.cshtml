@@ -62,6 +62,7 @@
 
     @on_save_click = (e) => {
         e.preventDefault();
+
         var url = "@Url.Action("Create", "Users")";
         var data = {
             Username: $("#@form #Username").val(),
@@ -74,15 +75,15 @@
             .then((status) => {
                 var id = status.id;
                 users.show_update_view(id);
-                modal.close(e);
                 users.refresh();
                 global.toastsuccess("Record created with success!");
-                })
-                .catch((status) => {
+                modal.close(e);
+            })
+            .catch((status) => {
                     var s = JSON.parse(status);
                     global.toasterror(s.message);
-                });
-
+            });
+       
     };
 
     @on_close_click = (e) => {
@@ -94,7 +95,6 @@
         var url = "@Url.Action("Modal", "Users")";
         modal.show(url, modalsizes.XLARGE)
             .then((h) => {
-                debug("modal show event ok");
             })
             .catch((e) => {
                 global.toasterror(e);

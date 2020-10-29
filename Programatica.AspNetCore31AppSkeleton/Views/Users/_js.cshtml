@@ -26,12 +26,12 @@
             var url = "@Url.Action("Edit", "Users")?id=" + id;
             modal.show(url, modalsizes.NORMAL)
                 .then((h) => {
-                    debug("modal show event ok");
                 })
                 .catch((e) => {
                     global.toasterror(e);
                 });
-        } else {
+        }
+        else {
             global.alert("You must select a record !");
         }
     };
@@ -40,34 +40,11 @@
         var url = "@Url.Action("Create", "Users")";
         modal.show(url, modalsizes.NORMAL)
             .then((h) => {
-                debug("modal show event ok");
             })
             .catch((e) => {
                 global.toasterror(e);
             });
     }
-
-    @*users.show_modal = () => {
-        var url = "@Url.Action("Modal", "Users")";
-        modal.show(url, modalsizes.XLARGE)
-            .then((h) => {
-                debug("modal show event ok");
-            })
-            .catch((e) => {
-                global.toasterror(e);
-            });
-    };*@
-
-    @*users.show_modal2 = () => {
-        var url = "@Url.Action("Modal2", "Users")";
-        modal.show(url, modalsizes.LARGE)
-            .then((h) => {
-                debug("modal show event ok");
-            })
-            .catch((e) => {
-                global.toasterror(e);
-            });
-    };*@
 
     users.clear_filters = () => {
         var grid = users.get_grid();
@@ -107,7 +84,8 @@
                             });
                     }
                 });
-        } else {
+        }
+        else {
             global.alert("You must select a record !");
         }
     };
@@ -122,63 +100,5 @@
         grid.height = $(window).height() - 300;
     };
 
-    //users.close_view = (e) => {
-    //    e.preventDefault();
-    //    modal.close(e);
-    //};
-
-    @*users.insert = (e) => {
-        e.preventDefault();
-        var url = "@Url.Action("Create", "Users")";
-        var data = {
-            Username: $("#form_create_users #Username").val(),
-            Password: $("#form_create_users #Password").val(),
-            Fullname: $("#form_create_users #Fullname").val(),
-        };
-        var token = global.gettoken();
-
-        global.submit(url, data, token)
-            .then((status) => {
-                var id = status.id;
-                users.show_update_view(id);
-                modal.close(e);
-                users.refresh();
-                global.toastsuccess("Record created with success!");
-                })
-                .catch((status) => {
-                    var s = JSON.parse(status);
-                    global.toasterror(s.message);
-                });
-
-    };*@
-
-    @*users.modify = (e) => {
-        e.preventDefault();
-        var url = "@Url.Action("Edit", "Users")";
-        var data = {
-            Id:         $("#form_edit_users #Id").val(),
-            Username:   $("#form_edit_users #Username").val(),
-            Password:   $("#form_edit_users #Password").val(),
-            Email:      $("#form_edit_users #Email").val(),
-            Fullname:   $("#form_edit_users #Fullname").val(),
-            Address:    $("#form_edit_users #Address").val(),
-            PostalCode: $("#form_edit_users #PostalCode").val(),
-            City:       $("#form_edit_users #City").val(),
-            Country:    $("#form_edit_users #Country").val(),
-            Comments:   $("#form_edit_users #Comments").val(),
-        };
-        var token = global.gettoken();
-        global.submit(url, data, token)
-            .then((status) => {
-                modal.close(e);
-                users.refresh();
-                global.toastsuccess("Record updated with success!");
-            })
-            .catch((status) => {
-                var s = JSON.parse(status);
-                global.toasterror(s.message);
-            });
-    };*@
-
-
+   
 </script>

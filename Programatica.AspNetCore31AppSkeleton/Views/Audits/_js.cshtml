@@ -2,9 +2,11 @@
 
     var audits = audits || {};
 
-    audits.on_gridaudit_dblclick = (args) => {
-        recordId = args.rowData.Id;
-        alert(recordId);
+    audits.get_grid = () => $("#GridAudits")[0].ej2_instances[0];
+
+    audits.on_grid_dblclick = (args) => {
+        var id = args.rowData.Id;
+        alert(id);
     }
 
     audits.show_modelaudit_view = (systemId) => {

@@ -49,13 +49,17 @@ namespace Programatica.AspNetCore31AppSkeleton.Extensions
         private static void ConfigureDatabase(IServiceCollection services)
         {
             // sqlserver context
-            // uncomment this to use sql server
-            services.AddDbContext<IDbContext, AppDbContext>(opt => opt.UseSqlServer(Startup.Configuration.GetConnectionString("DefaultConnection")), ServiceLifetime.Scoped);
+            //services.AddDbContext<IDbContext, AppDbContext>(opt => opt.UseSqlServer(Startup.Configuration.GetConnectionString("DefaultConnection")), ServiceLifetime.Scoped);
 
             // inmemory context
-            // comment this to use sql server
             //SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder(Configuration.GetConnectionString("DefaultConnection"));
             //services.AddDbContext<IDbContext, AppDbContext>(opt => opt.UseInMemoryDatabase(builder.InitialCatalog), ServiceLifetime.Transient);
+
+            // mysql context
+            services.AddDbContext<IDbContext, AppDbContext> (opt =>
+                opt.UseMySql(Startup.Configuration.GetConnectionString("DefaultConnection"))
+            );
+
         }
 
         private static void ConfigureAuthentication(IServiceCollection services)

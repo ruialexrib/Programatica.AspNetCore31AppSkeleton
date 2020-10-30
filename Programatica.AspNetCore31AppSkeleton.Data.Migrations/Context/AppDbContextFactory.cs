@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using System.IO;
 
 namespace Programatica.AspNetCore31AppSkeleton.Data.Migrations.Context
@@ -16,8 +17,15 @@ namespace Programatica.AspNetCore31AppSkeleton.Data.Migrations.Context
 
             var builder = new DbContextOptionsBuilder<AppDbContext>();
 
+            // sql server
+            // var connectionString = configuration.GetConnectionString("DefaultConnection");
+            // builder.UseSqlServer(connectionString);
+
+            // mysql
             var connectionString = configuration.GetConnectionString("DefaultConnection");
-            builder.UseSqlServer(connectionString);
+            builder.UseMySql(connectionString,
+                             opt => opt.ServerVersion(new System.Version(5, 5, 60), ServerType.MySql)
+                             );
 
             return new AppDbContext(builder.Options);
         }

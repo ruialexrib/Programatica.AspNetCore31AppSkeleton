@@ -2,7 +2,6 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Programatica.AspNetCore31AppSkeleton.Data.Migrations.Context;
@@ -10,7 +9,7 @@ using Programatica.AspNetCore31AppSkeleton.Data.Migrations.Context;
 namespace Programatica.AspNetCore31AppSkeleton.Data.Migrations.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20201024202400_InitialCreate")]
+    [Migration("20201030154210_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -18,48 +17,46 @@ namespace Programatica.AspNetCore31AppSkeleton.Data.Migrations.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.8")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("Programatica.AspNetCore31AppSkeleton.Data.Models.Dummy", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
                     b.Property<string>("Comments")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<DateTime?>("CreatedDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("CreatedUser")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<bool>("IsDestroyed")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<bool>("IsSystem")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<DateTime?>("LastDestroyedDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("LastDestroyedUser")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<DateTime?>("LastModifiedDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("LastModifiedUser")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<Guid>("SystemId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.HasKey("Id");
 
@@ -69,22 +66,22 @@ namespace Programatica.AspNetCore31AppSkeleton.Data.Migrations.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2020, 10, 24, 20, 23, 59, 565, DateTimeKind.Utc).AddTicks(19),
+                            CreatedDate = new DateTime(2020, 10, 30, 15, 42, 9, 219, DateTimeKind.Utc).AddTicks(6111),
                             CreatedUser = "system",
                             Description = "Dummy One",
                             IsDestroyed = false,
                             IsSystem = false,
-                            SystemId = new Guid("a6427530-552e-4c94-b3b2-135783349a1b")
+                            SystemId = new Guid("4a067272-268d-4516-9932-55bc082c4b6b")
                         },
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2020, 10, 24, 20, 23, 59, 565, DateTimeKind.Utc).AddTicks(92),
+                            CreatedDate = new DateTime(2020, 10, 30, 15, 42, 9, 219, DateTimeKind.Utc).AddTicks(6223),
                             CreatedUser = "system",
                             Description = "Dummy Two",
                             IsDestroyed = false,
                             IsSystem = false,
-                            SystemId = new Guid("6b84b360-0b0b-42bc-83d7-c8632f995acb")
+                            SystemId = new Guid("189a4c34-520d-45e8-83d1-34b27c6b2493")
                         });
                 });
 
@@ -92,41 +89,40 @@ namespace Programatica.AspNetCore31AppSkeleton.Data.Migrations.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
                     b.Property<string>("Comments")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<DateTime?>("CreatedDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("CreatedUser")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<bool>("IsDestroyed")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<bool>("IsSystem")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<DateTime?>("LastDestroyedDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("LastDestroyedUser")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<DateTime?>("LastModifiedDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("LastModifiedUser")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<Guid>("SystemId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.HasKey("Id");
 
@@ -136,26 +132,26 @@ namespace Programatica.AspNetCore31AppSkeleton.Data.Migrations.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2020, 10, 24, 20, 23, 59, 564, DateTimeKind.Utc).AddTicks(3989),
+                            CreatedDate = new DateTime(2020, 10, 30, 15, 42, 9, 218, DateTimeKind.Utc).AddTicks(7570),
                             CreatedUser = "system",
                             IsDestroyed = false,
                             IsSystem = true,
-                            LastModifiedDate = new DateTime(2020, 10, 24, 20, 23, 59, 564, DateTimeKind.Utc).AddTicks(4002),
+                            LastModifiedDate = new DateTime(2020, 10, 30, 15, 42, 9, 218, DateTimeKind.Utc).AddTicks(7614),
                             LastModifiedUser = "system",
                             Name = "Administrators",
-                            SystemId = new Guid("b6792038-8051-4baa-85a1-8c4662104746")
+                            SystemId = new Guid("24daa007-fd94-4c96-be8d-91b2b851b1f1")
                         },
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2020, 10, 24, 20, 23, 59, 564, DateTimeKind.Utc).AddTicks(4054),
+                            CreatedDate = new DateTime(2020, 10, 30, 15, 42, 9, 218, DateTimeKind.Utc).AddTicks(7733),
                             CreatedUser = "system",
                             IsDestroyed = false,
                             IsSystem = true,
-                            LastModifiedDate = new DateTime(2020, 10, 24, 20, 23, 59, 564, DateTimeKind.Utc).AddTicks(4056),
+                            LastModifiedDate = new DateTime(2020, 10, 30, 15, 42, 9, 218, DateTimeKind.Utc).AddTicks(7739),
                             LastModifiedUser = "system",
                             Name = "Users",
-                            SystemId = new Guid("817536d5-b9d1-4596-9b93-84fd69224c32")
+                            SystemId = new Guid("5cdca36c-ae8b-4a26-8604-b7feb9904c89")
                         });
                 });
 
@@ -163,62 +159,61 @@ namespace Programatica.AspNetCore31AppSkeleton.Data.Migrations.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
                     b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("City")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Comments")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Country")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<DateTime?>("CreatedDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("CreatedUser")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Fullname")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<bool>("IsDestroyed")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<bool>("IsSystem")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<DateTime?>("LastDestroyedDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("LastDestroyedUser")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<DateTime?>("LastModifiedDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("LastModifiedUser")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Password")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("PostalCode")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<Guid>("SystemId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("Username")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.HasKey("Id");
 
@@ -228,31 +223,31 @@ namespace Programatica.AspNetCore31AppSkeleton.Data.Migrations.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2020, 10, 24, 20, 23, 59, 561, DateTimeKind.Utc).AddTicks(7128),
+                            CreatedDate = new DateTime(2020, 10, 30, 15, 42, 9, 214, DateTimeKind.Utc).AddTicks(4131),
                             CreatedUser = "system",
                             Email = "admin@server.com",
                             Fullname = "System Administrator",
                             IsDestroyed = false,
                             IsSystem = true,
-                            LastModifiedDate = new DateTime(2020, 10, 24, 20, 23, 59, 561, DateTimeKind.Utc).AddTicks(9037),
+                            LastModifiedDate = new DateTime(2020, 10, 30, 15, 42, 9, 214, DateTimeKind.Utc).AddTicks(6924),
                             LastModifiedUser = "system",
                             Password = "pass",
-                            SystemId = new Guid("7c5b5953-30c2-4438-b53b-edc03607d4f3"),
+                            SystemId = new Guid("93bcdfe9-12d0-4935-bb77-25d9c6b87727"),
                             Username = "admin"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2020, 10, 24, 20, 23, 59, 562, DateTimeKind.Utc).AddTicks(1519),
+                            CreatedDate = new DateTime(2020, 10, 30, 15, 42, 9, 215, DateTimeKind.Utc).AddTicks(583),
                             CreatedUser = "system",
                             Email = "user@server.com",
                             Fullname = "Just an User",
                             IsDestroyed = false,
                             IsSystem = false,
-                            LastModifiedDate = new DateTime(2020, 10, 24, 20, 23, 59, 562, DateTimeKind.Utc).AddTicks(1529),
+                            LastModifiedDate = new DateTime(2020, 10, 30, 15, 42, 9, 215, DateTimeKind.Utc).AddTicks(596),
                             LastModifiedUser = "system",
                             Password = "pass",
-                            SystemId = new Guid("6b7d97ee-36a5-450d-b71f-1c581abbc230"),
+                            SystemId = new Guid("299fd20e-b34b-4a2a-82dd-821319c16458"),
                             Username = "user"
                         });
                 });
@@ -261,41 +256,40 @@ namespace Programatica.AspNetCore31AppSkeleton.Data.Migrations.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
                     b.Property<string>("Comments")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<DateTime?>("CreatedDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("CreatedUser")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<bool>("IsDestroyed")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<bool>("IsSystem")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<DateTime?>("LastDestroyedDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("LastDestroyedUser")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<DateTime?>("LastModifiedDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("LastModifiedUser")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<int>("RoleId")
                         .HasColumnType("int");
 
                     b.Property<Guid>("SystemId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -312,40 +306,40 @@ namespace Programatica.AspNetCore31AppSkeleton.Data.Migrations.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2020, 10, 24, 20, 23, 59, 564, DateTimeKind.Utc).AddTicks(7508),
+                            CreatedDate = new DateTime(2020, 10, 30, 15, 42, 9, 219, DateTimeKind.Utc).AddTicks(2493),
                             CreatedUser = "system",
                             IsDestroyed = false,
                             IsSystem = true,
-                            LastModifiedDate = new DateTime(2020, 10, 24, 20, 23, 59, 564, DateTimeKind.Utc).AddTicks(7523),
+                            LastModifiedDate = new DateTime(2020, 10, 30, 15, 42, 9, 219, DateTimeKind.Utc).AddTicks(2509),
                             LastModifiedUser = "system",
                             RoleId = 1,
-                            SystemId = new Guid("2eb6046f-d29e-4cb8-b614-14abcacc9b1c"),
+                            SystemId = new Guid("80154792-1e60-41d8-ba67-ef2cf4ac18c0"),
                             UserId = 1
                         },
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2020, 10, 24, 20, 23, 59, 564, DateTimeKind.Utc).AddTicks(7603),
+                            CreatedDate = new DateTime(2020, 10, 30, 15, 42, 9, 219, DateTimeKind.Utc).AddTicks(2639),
                             CreatedUser = "system",
                             IsDestroyed = false,
                             IsSystem = true,
-                            LastModifiedDate = new DateTime(2020, 10, 24, 20, 23, 59, 564, DateTimeKind.Utc).AddTicks(7605),
+                            LastModifiedDate = new DateTime(2020, 10, 30, 15, 42, 9, 219, DateTimeKind.Utc).AddTicks(2643),
                             LastModifiedUser = "system",
                             RoleId = 2,
-                            SystemId = new Guid("2ea5761e-d266-4d6c-9ced-bee49f34b85b"),
+                            SystemId = new Guid("3c10461f-e02c-424c-8bd7-320e9ecbad40"),
                             UserId = 1
                         },
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2020, 10, 24, 20, 23, 59, 564, DateTimeKind.Utc).AddTicks(7644),
+                            CreatedDate = new DateTime(2020, 10, 30, 15, 42, 9, 219, DateTimeKind.Utc).AddTicks(2651),
                             CreatedUser = "system",
                             IsDestroyed = false,
                             IsSystem = true,
-                            LastModifiedDate = new DateTime(2020, 10, 24, 20, 23, 59, 564, DateTimeKind.Utc).AddTicks(7646),
+                            LastModifiedDate = new DateTime(2020, 10, 30, 15, 42, 9, 219, DateTimeKind.Utc).AddTicks(2654),
                             LastModifiedUser = "system",
                             RoleId = 2,
-                            SystemId = new Guid("72beb2ac-787d-47f0-ab56-5a157dad90eb"),
+                            SystemId = new Guid("7ae0fcf9-20ba-445f-9e4d-dcbfe6b5e842"),
                             UserId = 2
                         });
                 });
@@ -354,50 +348,49 @@ namespace Programatica.AspNetCore31AppSkeleton.Data.Migrations.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
                     b.Property<string>("Comments")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("ContentFunction")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<int>("ContentId")
                         .HasColumnType("int");
 
                     b.Property<Guid>("ContentSystemId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("ContentType")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<DateTime?>("CreatedDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("CreatedUser")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<bool>("IsDestroyed")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<bool>("IsSystem")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<DateTime?>("LastDestroyedDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("LastDestroyedUser")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<DateTime?>("LastModifiedDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("LastModifiedUser")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<Guid>("SystemId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.HasKey("Id");
 
@@ -408,50 +401,49 @@ namespace Programatica.AspNetCore31AppSkeleton.Data.Migrations.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
                     b.Property<int>("AuditId")
                         .HasColumnType("int");
 
                     b.Property<string>("Comments")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<DateTime?>("CreatedDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("CreatedUser")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("FieldName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<bool>("IsDestroyed")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<bool>("IsSystem")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<DateTime?>("LastDestroyedDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("LastDestroyedUser")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<DateTime?>("LastModifiedDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("LastModifiedUser")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("NewValue")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("OldValue")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<Guid>("SystemId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.HasKey("Id");
 

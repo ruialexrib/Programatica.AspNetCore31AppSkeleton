@@ -12,7 +12,7 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers.Base
 {
     public class BaseModelController<TModel, TViewModel, TController> : EJ2DataGridBaseController<TModel>
         where TModel : IModel
-        where TViewModel : class
+        where TViewModel : IModel
         where TController : BaseModelController<TModel, TViewModel, TController>
     {
         protected readonly IMapper _mapper;
@@ -92,7 +92,7 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers.Base
                 try
                 {
                     _modelService.Modify(_mapper.Map<TModel>(vm));
-                    return new JsonResult(new { result = "ok" })
+                    return new JsonResult(new { result = "ok", id = vm.Id.ToString() })
                     {
                         StatusCode = StatusCodes.Status200OK
                     };

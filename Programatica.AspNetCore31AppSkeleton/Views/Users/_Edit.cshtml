@@ -2,7 +2,6 @@
 
 @{
     string on_save_click = Guid.NewGuid().JsNormalize();
-    string on_close_click = Guid.NewGuid().JsNormalize();
     string form = Guid.NewGuid().JsNormalize();
 }
 
@@ -100,7 +99,7 @@
 
 <div class="modal-footer">
     <a href="#" class="btn btn-secondary" onclick="audits.show_modelaudit_view($('#@form #SystemId').val())">AUDIT</a>
-    <a href="#" class="btn btn-secondary" onclick="@(on_close_click)(event)">CLOSE</a>
+    <a href="#" class="btn btn-secondary" onclick="modal.close(event)">CLOSE</a>
     <a href="#" class="btn btn-primary" onclick="@(on_save_click)(event)" data-loading-text="SAVING...">SAVE</a>
 </div>
 
@@ -124,19 +123,15 @@
         var token = global.gettoken();
         global.submit(url, data, token)
             .then((status) => {
+                var id = status.id;
                 modal.close(e);
-                users.refresh();
-                global.toastsuccess("Record updated with success!");
+                layout.refresh_usersgrid();
+                global.toastsuccess("Record [" + id + "] updated with success!");
             })
             .catch((status) => {
                 var s = JSON.parse(status);
                 global.toasterror(s.message);
             });
-    };
-
-    @on_close_click = (e) => {
-        e.preventDefault();
-        modal.close(e);
     };
 
 </script>

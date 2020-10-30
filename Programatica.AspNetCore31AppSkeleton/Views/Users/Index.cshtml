@@ -1,22 +1,48 @@
 ﻿@model IEnumerable<User>
 
 @{
+    #region properties
+    string record_id = Guid.NewGuid().JsNormalize();
+    string record_name = Guid.NewGuid().JsNormalize();
+    string record_systemid = Guid.NewGuid().JsNormalize();
+    string grid_name = Guid.NewGuid().JsNormalize();
+    string search_box = Guid.NewGuid().JsNormalize();
+    #endregion
+
+    #region events
+    string on_grid_databound = Guid.NewGuid().JsNormalize();
+    string on_grid_click = Guid.NewGuid().JsNormalize();
+    string on_grid_dblclick = Guid.NewGuid().JsNormalize();
+    #endregion
+
+    #region methods
+    string clear_filters = Guid.NewGuid().JsNormalize();
+    string clear_search = Guid.NewGuid().JsNormalize();
+    string show_groups = Guid.NewGuid().JsNormalize();
+    string search = Guid.NewGuid().JsNormalize();
+    string delete = Guid.NewGuid().JsNormalize();
+    string resize = Guid.NewGuid().JsNormalize();
+    #endregion
+
+}
+
+@{
     ViewData["Title"] = "USERS PAGE";
 }
 
 <nav class="navbar navbar-expand navbar-light bg-light navbar-menu">
     <ul class="navbar-nav mr-auto">
         <li class="nav-item ">
-            <a href="#" class="nav-link text-dark" onclick="users.show_create_view()"><i class="fas fa-plus"></i> NEW</a>
+            <a href="#" class="nav-link text-dark" onclick="layout.show_users_create()"><i class="fas fa-plus"></i> NEW</a>
         </li>
         <li class="nav-item ">
-            <a href="#" class="nav-link text-dark" onclick="users.show_update_view(users.record_id)"><i class="fas fa-edit"></i> UPDATE</a>
+            <a href="#" class="nav-link text-dark" onclick="layout.show_users_edit(@record_id)"><i class="fas fa-edit"></i> UPDATE</a>
         </li>
         <li class="nav-item ">
-            <a href="#" class="nav-link text-dark" onclick="users.delete(users.record_id)"><i class="fas fa-trash"></i> DELETE</a>
+            <a href="#" class="nav-link text-dark" onclick="@(delete)(@(record_id))"><i class="fas fa-trash"></i> DELETE</a>
         </li>
         <li class="nav-item">
-            <a href="#" class="nav-link text-dark" onclick="users.refresh()"><i class="fas fa-sync-alt"></i> REFRESH</a>
+            <a href="#" class="nav-link text-dark" onclick="layout.refresh_usersgrid()"><i class="fas fa-sync-alt"></i> REFRESH</a>
         </li>
 
         <li class="nav-item dropdown d-none d-md-block">
@@ -24,7 +50,7 @@
                 <i class="fas fa-ellipsis-v"></i> NAVIGATION
             </a>
             <div class="dropdown-menu">
-                <a class="dropdown-item text-dark" href="#" onclick="audits.show_modelaudit_view(users.record_systemid)"><i class="fas fa-lock"></i> AUDIT</a>
+                <a class="dropdown-item text-dark" href="#" onclick="layout.show_audits_modelaudit(@record_systemid)"><i class="fas fa-lock"></i> AUDIT</a>
             </div>
         </li>
 
@@ -33,17 +59,17 @@
                 <i class="fas fa-ellipsis-v"></i> OPTIONS
             </a>
             <div class="dropdown-menu">
-                <a class="dropdown-item text-dark" href="#" onclick="users.show_groups()"><i class="far fa-object-ungroup"></i> TOGGLE GROUP</a>
-                <a class="dropdown-item text-dark" href="#" onclick="users.clear_filters()"><i class="fas fa-filter"></i> CLEAR FILTERS</a>
-                <a class="dropdown-item text-dark" href="#" onclick="users.clear_search()"><i class="fas fa-search"></i> CLEAR SEARCH</a>
+                <a class="dropdown-item text-dark" href="#" onclick="@(show_groups)()"><i class="far fa-object-ungroup"></i> TOGGLE GROUP</a>
+                <a class="dropdown-item text-dark" href="#" onclick="@(clear_filters)()"><i class="fas fa-filter"></i> CLEAR FILTERS</a>
+                <a class="dropdown-item text-dark" href="#" onclick="@(clear_search)()"><i class="fas fa-search"></i> CLEAR SEARCH</a>
             </div>
         </li>
 
     </ul>
     <section class="d-none d-md-block">
         <form class="form-inline">
-            <input id="txt-search" class="form-control form-control-sm" type="search" placeholder="Search" aria-label="Search">&nbsp;
-            <a href="#" class="btn-link text-dark" onclick="users.search($('#txt-search').val())"><i class="fas fa-search"></i> SEARCH</a>
+            <input id="@search_box" class="form-control form-control-sm" type="search" placeholder="Search" aria-label="Search">&nbsp;
+            <a href="#" class="btn-link text-dark" onclick="@(search)($('#@(search_box)').val())"><i class="fas fa-search"></i> SEARCH</a>
         </form>
     </section>
 </nav>
@@ -54,9 +80,9 @@
           allowSorting="true"
           allowFiltering="true"
           allowSelection="true"
-          dataBound="users.on_grid_databound"
-          recordDoubleClick="users.on_grid_dblclick"
-          rowSelected="users.on_grid_click">
+          dataBound="@(on_grid_databound)"
+          recordDoubleClick="@(on_grid_dblclick)"
+          rowSelected="@(on_grid_click)">
     <e-grid-pagesettings pageSizes="true" pageSize="10">
     </e-grid-pagesettings>
     <e-data-manager url="@Url.Action("UrlDatasource", "Users")" adaptor="UrlAdaptor"></e-data-manager>
@@ -77,15 +103,79 @@
 
     <script type="text/javascript">
 
+        @record_id          = null;
+        @record_name        = null;
+        @record_systemid    = null;
 
         $(document).ready(function () {
-            users.resize();
+            @(resize)();
         });
 
         $(window).resize(function () {
-            users.resize();
+            @(resize)();
         });
 
+        @on_grid_databound = (args) => { };
+
+        @on_grid_click = (args) => {
+            @record_id          = args.data.Id;
+            @record_name        = args.data.Username;
+            @record_systemid    = args.data.SystemId;
+        };
+
+        @on_grid_dblclick = (args) => {
+            @record_id = args.rowData.Id;
+            layout.show_users_edit(@record_id);
+        };
+
+        @clear_filters = () => {
+            var grid = layout.get_usersgrid();
+            grid.clearFiltering();
+        };
+
+        @clear_search = () => {
+            var grid = layout.get_usersgrid();
+            grid.searchSettings.key = '';
+        };
+
+        @show_groups = () => {
+            var grid = layout.get_usersgrid();
+            grid.allowGrouping = !grid.allowGrouping;
+        };
+
+        @search = (searchString) => {
+            var grid = layout.get_usersgrid();
+            grid.search(searchString);
+        };
+
+        @delete = (id) => {
+            if (id) {
+                global.confirm(cfg.text.askConfirmDelete + `<br><b>'${@record_name}'</b>`)
+                    .then((result) => {
+                        if (result === true) {
+                            var url = "@Url.Action("Delete", "Users")";
+                            var data = { Id: id };
+                            global.submit(url, data)
+                                .then((status) => {
+                                    layout.refresh_usersgrid();
+                                    global.toastsuccess("Record [" + id + "] deleted with success!");
+                                })
+                                .catch((status) => {
+                                    var s = JSON.parse(status);
+                                    global.toasterror(s.message);
+                                });
+                        }
+                    });
+            }
+            else {
+                global.alert("You must select a record !");
+            }
+        };
+
+        @resize = () => {
+            var grid = layout.get_usersgrid();
+            grid.height = $(window).height() - 300;
+        };
 
     </script>
 }

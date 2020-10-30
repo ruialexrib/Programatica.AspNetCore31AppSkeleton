@@ -1,7 +1,4 @@
-﻿
-@{
-    string on_close_click = Guid.NewGuid().JsNormalize();
-    string on_modal_click = Guid.NewGuid().JsNormalize();
+﻿@{
 }
 
 <div class="modal-header">
@@ -17,26 +14,9 @@
 </div>
 
 <div class="modal-footer">
-    <a href="#" class="btn btn-secondary" onclick="@(on_modal_click)(event)">MODAL</a>
-    <a href="#" class="btn btn-secondary" onclick="@(on_close_click)(event)">CLOSE</a>
+    <a href="#" class="btn btn-secondary" onclick="layout.show_users_modal2(event)">MODAL</a>
+    <a href="#" class="btn btn-secondary" onclick="modal.close(event)">CLOSE</a>
 </div>
 
 <script type="text/javascript">
-
-    @on_close_click = (e) => {
-        e.preventDefault();
-        modal.close(e);
-    };
-
-    @on_modal_click = () => {
-        var url = "@Url.Action("Modal2", "Users")";
-        modal.show(url, modalsizes.LARGE)
-            .then((h) => {
-                debug("modal show event ok");
-            })
-            .catch((e) => {
-                global.toasterror(e);
-            });
-    };
-
 </script>

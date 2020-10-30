@@ -2,8 +2,6 @@
 
 @{
     string on_save_click = Guid.NewGuid().JsNormalize();
-    string on_close_click = Guid.NewGuid().JsNormalize();
-    string on_modal_click = Guid.NewGuid().JsNormalize();
     string form = Guid.NewGuid().JsNormalize();
 }
 
@@ -53,8 +51,8 @@
 </div>
 
 <div class="modal-footer">
-    <a href="#" class="btn btn-secondary" onclick="@(on_modal_click)(event)">MODAL</a>
-    <a href="#" class="btn btn-secondary" onclick="@(on_close_click)(event)">CLOSE</a>
+    <a href="#" class="btn btn-secondary" onclick="layout.show_users_modal(event)">MODAL</a>
+    <a href="#" class="btn btn-secondary" onclick="modal.close(event)">CLOSE</a>
     <a href="#" class="btn btn-primary" onclick="@(on_save_click)(event)" data-loading-text="SAVING...">SAVE</a>
 </div>
 
@@ -74,30 +72,14 @@
         global.submit(url, data, token)
             .then((status) => {
                 var id = status.id;
-                users.show_update_view(id);
-                users.refresh();
-                global.toastsuccess("Record created with success!");
+                layout.show_users_edit(id);
+                layout.refresh_usersgrid();
                 modal.close(e);
+                global.toastsuccess("Record [" + id + "] created with success!");
             })
             .catch((status) => {
                     var s = JSON.parse(status);
                     global.toasterror(s.message);
-            });
-       
-    };
-
-    @on_close_click = (e) => {
-        e.preventDefault();
-        modal.close(e);
-    };
-
-    @on_modal_click = () => {
-        var url = "@Url.Action("Modal", "Users")";
-        modal.show(url, modalsizes.XLARGE)
-            .then((h) => {
-            })
-            .catch((e) => {
-                global.toasterror(e);
             });
     };
 

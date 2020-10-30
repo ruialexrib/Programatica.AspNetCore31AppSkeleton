@@ -94,9 +94,84 @@
 
             global.toastinfo("ControllerName:<br>" + _page.controllerName);
             global.toastinfo("ActionName:<br>" + _page.actionName);
+
+
         });
 
     </script>
+
+
+    <!-- generic view scripts -->
+    <script type="text/javascript">
+
+        var layout = layout || {};
+
+        layout.get_usersgrid = () => $("#GridUsers")[0].ej2_instances[0];
+
+        layout.refresh_usersgrid = () => {
+            var grid = layout.get_usersgrid();
+            if (grid) {
+                grid.refresh();
+            }
+        };
+
+        layout.show_users_create = () => {
+            var url = "@Url.Action("Create", "Users")";
+            modal.show(url, modalsizes.NORMAL)
+                .then((h) => {
+                })
+                .catch((e) => {
+                    global.toasterror(e);
+                });
+        }
+
+        layout.show_users_edit = (id) => {
+            if (id) {
+                var url = "@Url.Action("Edit", "Users")?id=" + id;
+                modal.show(url, modalsizes.NORMAL)
+                    .then((h) => {
+                    })
+                    .catch((e) => {
+                        global.toasterror(e);
+                    });
+            }
+            else {
+                global.alert("You must select a record !");
+            }
+        };
+
+        layout.show_users_modal = () => {
+            var url = "@Url.Action("Modal", "Users")";
+            modal.show(url, modalsizes.XLARGE)
+                .then((h) => {
+                })
+                .catch((e) => {
+                    global.toasterror(e);
+                });
+        };
+
+        layout.show_users_modal2 = () => {
+            var url = "@Url.Action("Modal2", "Users")";
+            modal.show(url, modalsizes.LARGE)
+                .then((h) => {
+                })
+                .catch((e) => {
+                    global.toasterror(e);
+                });
+        };
+
+        layout.show_audits_modelaudit = (systemId) => {
+            var url = "@Url.Action("ModelAudit", "Audits")?systemid=" + systemId;
+            modal.show(url, modalsizes.LARGE)
+                .then((h) => {
+                })
+                .catch((e) => {
+                    global.toasterror(e);
+                });
+        }
+
+    </script>
+
 </body>
 </html>
 

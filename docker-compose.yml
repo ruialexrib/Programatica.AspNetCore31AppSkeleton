@@ -9,7 +9,7 @@ services:
        MYSQL_PASSWORD: secret
      volumes:
        - dbdata:/var/lib/mysql
-     restart: always
+     restart: unless-stopped
      container_name: mysqldb
    aspnetcoreappskeleton:
      depends_on:
@@ -18,6 +18,6 @@ services:
      ports:
        - "8088:80"
      container_name: app
-     restart: always
+     restart: unless-stopped
 volumes:
     dbdata:

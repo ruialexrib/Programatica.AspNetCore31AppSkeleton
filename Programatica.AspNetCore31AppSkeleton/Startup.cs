@@ -1,10 +1,13 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Programatica.AspNetCore31AppSkeleton.Data.Migrations.Context;
 using Programatica.AspNetCore31AppSkeleton.Extensions;
+using Programatica.Framework.Data.Context;
 
 namespace Programatica.AspNetCore31AppSkeleton
 {
@@ -24,9 +27,10 @@ namespace Programatica.AspNetCore31AppSkeleton
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Startup> logger)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Startup> logger, IDbContext context)
         {
-            logger.LogInformation("Configuring...");
+            //https://stackoverflow.com/questions/42355481/auto-create-database-in-entity-framework-core
+            context.Database.Migrate();
 
             if (env.IsDevelopment())
             {

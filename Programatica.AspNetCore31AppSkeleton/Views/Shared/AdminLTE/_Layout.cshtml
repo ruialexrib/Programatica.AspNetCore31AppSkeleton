@@ -1,7 +1,6 @@
-﻿@inject Programatica.Framework.Mvc.Adapters.IPageAdapter _page
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -9,6 +8,7 @@
     <title>AppSkeleton | Demo</title>
     <partial name="AdminLTE/_Styles" />
 </head>
+
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
         <partial name="AdminLTE/_TopNavigation" />
@@ -46,137 +46,11 @@
     </div>
     <partial name="AdminLTE/_Scripts" />
 
-    <!-- global IPageAdapter razor scripts -->
-    <script type="text/javascript">
-
-        var _page = _page || {};
-
-        $(document).ready(function () {
-            _page.connectionString  = '@_page.ConnectionString';
-            _page.controllerName    = '@_page.ControllerName';
-            _page.actionName        = '@_page.ActionName';
-            _page.messages          = [];
-            _page.warnings          = [];
-            _page.alerts            = [];
-
-            // add messages
-            @foreach(var m in _page.PageMessages.OrEmptyIfNull())
-            {
-                @:_page.messages.push('@m');
-            }
-            @foreach(var w in _page.PageWarnings.OrEmptyIfNull())
-            {
-                @:_page.warnings.push('@w');
-            }
-            @foreach(var a in _page.PageAlerts.OrEmptyIfNull())
-            {
-                @:_page.alerts.push('@a');
-            }
-
-        });
-
-    </script>
 
     @RenderSection("Scripts", required: false)
 
     <!-- Syncfusion Essential JS 2 ScriptManager -->
     <ejs-scripts></ejs-scripts>
-
-    <!-- generic view scripts -->
-    <script type="text/javascript">
-
-        $(document).ready(function () {
-            _page.messages.forEach((m) => { global.toastinfo(m); });
-            _page.warnings.forEach((w) => { global.toastwarning(w); });
-            _page.alerts.forEach((a) => { global.toasterror(a); });
-
-            global.toastinfo("ControllerName:<br>" + _page.controllerName);
-            global.toastinfo("ActionName:<br>" + _page.actionName);
-        });
-
-    </script>
-
-
-    <!-- generic view scripts -->
-    <script type="text/javascript">
-
-        var layout = layout || {};
-
-        layout.get_usersgrid = () => $("#GridUsers")[0].ej2_instances[0];
-
-        layout.refresh_usersgrid = () => {
-            var grid = layout.get_usersgrid();
-            if (grid) {
-                grid.refresh();
-            }
-        };
-
-        layout.show_users_create = () => {
-            var url = "@Url.Action("Create", "Users")";
-            modal.show(url, modalsizes.NORMAL)
-                .then((h) => {
-                })
-                .catch((e) => {
-                    global.toasterror(e);
-                });
-        }
-
-        layout.show_users_edit = (id) => {
-            if (id) {
-                var url = "@Url.Action("Edit", "Users")?id=" + id;
-                modal.show(url, modalsizes.NORMAL)
-                    .then((h) => {
-                    })
-                    .catch((e) => {
-                        global.toasterror(e);
-                    });
-            }
-            else {
-                global.alert("You must select a record !");
-            }
-        };
-
-        layout.show_users_modal = () => {
-            var url = "@Url.Action("Modal", "Users")";
-            modal.show(url, modalsizes.XLARGE)
-                .then((h) => {
-                })
-                .catch((e) => {
-                    global.toasterror(e);
-                });
-        };
-
-        layout.show_users_modal2 = () => {
-            var url = "@Url.Action("Modal2", "Users")";
-            modal.show(url, modalsizes.LARGE)
-                .then((h) => {
-                })
-                .catch((e) => {
-                    global.toasterror(e);
-                });
-        };
-
-        layout.show_audits_audithistory = (systemId) => {
-            var url = "@Url.Action("AuditHistory", "Audits")?systemid=" + systemId;
-            modal.show(url, modalsizes.LARGE)
-                .then((h) => {
-                })
-                .catch((e) => {
-                    global.toasterror(e);
-                });
-        }
-
-        layout.show_audits_trackchanges = (auditId) => {
-            var url = "@Url.Action("TrackChanges", "Audits")?auditId=" + auditId;
-            modal.show(url, modalsizes.LARGE)
-                .then((h) => {
-                })
-                .catch((e) => {
-                    global.toasterror(e);
-                });
-        }
-
-    </script>
 
 </body>
 </html>

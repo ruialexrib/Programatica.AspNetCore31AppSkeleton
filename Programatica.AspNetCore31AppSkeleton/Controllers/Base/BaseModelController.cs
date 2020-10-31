@@ -26,7 +26,6 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers.Base
         {
             _mapper = mapper;
             _logger = logger;
-
         }
 
         public virtual IActionResult Index()
@@ -74,7 +73,7 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers.Base
         [HttpGet]
         public virtual IActionResult Edit(int id)
         {
-            TModel tmodel = _modelService.Get(id);
+            TModel tmodel = _modelService.Inspect(id);
             if (tmodel == null)
             {
                 return NotFound();

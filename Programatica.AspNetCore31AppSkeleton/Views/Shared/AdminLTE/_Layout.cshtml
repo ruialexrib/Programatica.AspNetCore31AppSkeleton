@@ -1,6 +1,4 @@
-﻿@using Programatica.Framework.Core.Extensions
-@inject Programatica.Framework.Mvc.Adapters.IPageAdapter _page
-
+﻿@inject Programatica.Framework.Mvc.Adapters.IPageAdapter _page
 
 <!DOCTYPE html>
 <html lang="en">
@@ -54,12 +52,12 @@
         var _page = _page || {};
 
         $(document).ready(function () {
-            _page.connectionString = '@_page.ConnectionString';
-            _page.controllerName = '@_page.ControllerName';
-            _page.actionName = '@_page.ActionName';
-            _page.messages = [];
-            _page.warnings = [];
-            _page.alerts = [];
+            _page.connectionString  = '@_page.ConnectionString';
+            _page.controllerName    = '@_page.ControllerName';
+            _page.actionName        = '@_page.ActionName';
+            _page.messages          = [];
+            _page.warnings          = [];
+            _page.alerts            = [];
 
             // add messages
             @foreach(var m in _page.PageMessages.OrEmptyIfNull())

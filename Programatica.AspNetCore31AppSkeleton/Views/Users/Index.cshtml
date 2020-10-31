@@ -1,29 +1,21 @@
 ﻿@model IEnumerable<User>
 
 @{
-    #region properties
-    string record_id = Guid.NewGuid().JsNormalize();
-    string record_name = Guid.NewGuid().JsNormalize();
-    string record_systemid = Guid.NewGuid().JsNormalize();
-    string grid_name = Guid.NewGuid().JsNormalize();
-    string search_box = Guid.NewGuid().JsNormalize();
-    #endregion
+    string record_id = Razor.Rnd();
+    string record_name = Razor.Rnd();
+    string record_systemid = Razor.Rnd();
+    string search_box = Razor.Rnd();
 
-    #region events
-    string on_grid_databound = Guid.NewGuid().JsNormalize();
-    string on_grid_click = Guid.NewGuid().JsNormalize();
-    string on_grid_dblclick = Guid.NewGuid().JsNormalize();
-    #endregion
+    string on_grid_databound = Razor.Rnd();
+    string on_grid_click = Razor.Rnd();
+    string on_grid_dblclick = Razor.Rnd();
 
-    #region methods
-    string clear_filters = Guid.NewGuid().JsNormalize();
-    string clear_search = Guid.NewGuid().JsNormalize();
-    string show_groups = Guid.NewGuid().JsNormalize();
-    string search = Guid.NewGuid().JsNormalize();
-    string delete = Guid.NewGuid().JsNormalize();
-    string resize = Guid.NewGuid().JsNormalize();
-    #endregion
-
+    string clear_filters = Razor.Rnd();
+    string clear_search = Razor.Rnd();
+    string show_groups = Razor.Rnd();
+    string search = Razor.Rnd();
+    string delete = Razor.Rnd();
+    string resize = Razor.Rnd();
 }
 
 @{
@@ -95,7 +87,6 @@
         <e-grid-column width="200" field="Fullname" headerText="FULLNAME"></e-grid-column>
         <e-grid-column width="120" field="LastModifiedUser" headerText="MODIF. USER"></e-grid-column>
         <e-grid-column width="120" field="LastModifiedDate" headerText="MODIF. DATE" customFormat="@(new { type ="date", format="yyyy-MM-dd HH:mm:ss" })" type="date"></e-grid-column>
-
     </e-grid-columns>
 </ejs-grid>
 
@@ -114,13 +105,6 @@
 
         $(window).resize(function () {
             @(resize)();
-        });
-
-        $('#@(search_box)').on("keypress", function (e) {
-            if (e.keyCode == 13) {
-                e.preventDefault();
-                @(search)($('#@(search_box)').val());
-            }
         });
 
         $('#@(search_box)').on("input", function (e) {

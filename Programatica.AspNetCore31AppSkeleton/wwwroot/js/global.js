@@ -49,6 +49,8 @@ global.guid = function () {
     });
 }
 
+global.nanoid = () => Math.random().toString(36).slice(-6);
+
 global.isJsonString = (str) => {
     try {
         JSON.parse(str);

@@ -16,6 +16,7 @@
     <PackageReference Include="Programatica.Framework.Core.Extensions" Version="1.0.0" />
     <PackageReference Include="Programatica.Framework.Mvc" Version="1.0.20" />
     <PackageReference Include="Programatica.Framework.Services" Version="1.0.20" />
+    <PackageReference Include="shortid" Version="3.0.0" />
     <PackageReference Include="Syncfusion.EJ2.AspNet.Core" Version="18.3.0.42" />
   </ItemGroup>
 

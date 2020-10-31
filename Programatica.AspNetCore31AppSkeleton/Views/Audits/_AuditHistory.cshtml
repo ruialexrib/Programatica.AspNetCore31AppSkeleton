@@ -1,10 +1,10 @@
 ﻿@model List<AuditViewModel>
 
 @{
-    string on_grid_dblclick = Guid.NewGuid().JsNormalize();
-    string on_close_click = Guid.NewGuid().JsNormalize();
-    string on_grid_customizeCell = Guid.NewGuid().JsNormalize();
-    string grid = Guid.NewGuid().JsNormalize();
+    string on_grid_dblclick = Razor.Rnd();
+    string on_close_click = Razor.Rnd();
+    string on_grid_customizeCell = Razor.Rnd();
+    string grid = Razor.Rnd();
 
     var systemid = @Model.FirstOrDefault().ContentSystemId;
     var type = @Model.FirstOrDefault().ContentType;

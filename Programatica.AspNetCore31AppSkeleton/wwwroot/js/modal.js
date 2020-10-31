@@ -10,9 +10,9 @@ const modalsizes = {
 modal.show = function (url, size = modalsizes.NORMAL) {
     return new Promise((resolve, reject) => {
 
-        var containerguid = global.guid();
-        var dialoguid = global.guid();
-        var contentguid = global.guid();
+        var containerguid = global.nanoid();
+        var dialoguid = global.nanoid();
+        var contentguid = global.nanoid();
 
         modal.create(containerguid, dialoguid, contentguid, size);
 

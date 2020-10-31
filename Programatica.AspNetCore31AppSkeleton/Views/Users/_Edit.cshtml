@@ -1,8 +1,8 @@
 ﻿@model UserViewModel
 
 @{
-    string on_save_click = Guid.NewGuid().JsNormalize();
-    string form = Guid.NewGuid().JsNormalize();
+    string on_save_click = Razor.Rnd();
+    string form = Razor.Rnd();
 }
 
 <div class="modal-header">

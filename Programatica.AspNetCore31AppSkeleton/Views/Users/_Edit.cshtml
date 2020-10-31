@@ -15,8 +15,8 @@
         <div class="col-md-12">
             <form asp-action="Edit" id="@form">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <input asp-for="Id" class="form-control" hidden="hidden" />
-                <input asp-for="SystemId" class="form-control" hidden="hidden" />
+                @*<input asp-for="Id" class="form-control" hidden="hidden" />
+                    <input asp-for="SystemId" class="form-control" hidden="hidden" />*@
 
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item">
@@ -26,65 +26,154 @@
                         <a class="nav-link" id="contacts-tab" data-toggle="tab" href="#contacts" role="tab" aria-controls="contacts" aria-selected="false">Contacts</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="others-tab" data-toggle="tab" href="#others" role="tab" aria-controls="others" aria-selected="false">Others</a>
+                        <a class="nav-link" id="comments-tab" data-toggle="tab" href="#comments" role="tab" aria-controls="comments" aria-selected="false">Comments</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="audit-tab" data-toggle="tab" href="#audit" role="tab" aria-controls="audit" aria-selected="false">Audit</a>
                     </li>
                 </ul>
 
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                         <div class="col-md-12 p-3">
-                            <div class="form-group">
-                                <label asp-for="Username" class="control-label"></label>
-                                <input asp-for="Username" class="form-control" />
-                                <span asp-validation-for="Username" class="text-danger"></span>
+                            <div class="form-group row">
+                                <div class="col-sm-3">
+                                    <label asp-for="Username" class="control-label"></label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input asp-for="Username" class="form-control" />
+                                    <span asp-validation-for="Username" class="text-danger"></span>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label asp-for="Password" class="control-label"></label>
-                                <input asp-for="Password" class="form-control" />
-                                <span asp-validation-for="Password" class="text-danger"></span>
+                            <div class="form-group row">
+                                <div class="col-sm-3">
+                                    <label asp-for="Password" class="control-label"></label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input asp-for="Password" class="form-control" />
+                                    <span asp-validation-for="Password" class="text-danger"></span>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label asp-for="Fullname" class="control-label"></label>
-                                <input asp-for="Fullname" class="form-control" />
-                                <span asp-validation-for="Fullname" class="text-danger"></span>
+                            <div class="form-group row">
+                                <div class="col-sm-3">
+                                    <label asp-for="Fullname" class="control-label"></label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input asp-for="Fullname" class="form-control" />
+                                    <span asp-validation-for="Fullname" class="text-danger"></span>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="tab-pane fade" id="contacts" role="tabpanel" aria-labelledby="contacts-tab">
                         <div class="col-md-12 p-3">
-                            <div class="form-group">
-                                <label asp-for="Email" class="control-label"></label>
-                                <input asp-for="Email" class="form-control" />
-                                <span asp-validation-for="Email" class="text-danger"></span>
+                            <div class="form-group row">
+                                <div class="col-sm-3">
+                                    <label asp-for="Email" class="control-label"></label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input asp-for="Email" class="form-control" />
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label asp-for="Address" class="control-label"></label>
-                                <input asp-for="Address" class="form-control" />
-                                <span asp-validation-for="Address" class="text-danger"></span>
+                            <div class="form-group row">
+                                <div class="col-sm-3">
+                                    <label asp-for="Address" class="control-label"></label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input asp-for="Address" class="form-control" />
+                                    <span asp-validation-for="Address" class="text-danger"></span>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label asp-for="PostalCode" class="control-label"></label>
-                                <input asp-for="PostalCode" class="form-control" />
-                                <span asp-validation-for="PostalCode" class="text-danger"></span>
+                            <div class="form-group row">
+                                <div class="col-sm-3">
+                                    <label asp-for="PostalCode" class="control-label"></label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input asp-for="PostalCode" class="form-control" />
+                                    <span asp-validation-for="PostalCode" class="text-danger"></span>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label asp-for="City" class="control-label"></label>
-                                <input asp-for="City" class="form-control" />
-                                <span asp-validation-for="City" class="text-danger"></span>
+                            <div class="form-group row">
+                                <div class="col-sm-3">
+                                    <label asp-for="City" class="control-label"></label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input asp-for="City" class="form-control" />
+                                    <span asp-validation-for="City" class="text-danger"></span>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label asp-for="Country" class="control-label"></label>
-                                <input asp-for="Country" class="form-control" />
-                                <span asp-validation-for="Country" class="text-danger"></span>
+                            <div class="form-group row">
+                                <div class="col-sm-3">
+                                    <label asp-for="Country" class="control-label"></label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input asp-for="Country" class="form-control" />
+                                    <span asp-validation-for="Country" class="text-danger"></span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="others" role="tabpanel" aria-labelledby="others-tab">
+                    <div class="tab-pane fade" id="comments" role="tabpanel" aria-labelledby="comments-tab">
                         <div class="col-md-12 p-3">
                             <div class="form-group">
-                                <label asp-for="Comments" class="control-label"></label>
-                                <textarea asp-for="Comments" class="form-control"></textarea>
+                                <textarea asp-for="Comments" class="form-control" rows="10"></textarea>
                                 <span asp-validation-for="Comments" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="audit" role="tabpanel" aria-labelledby="audit-tab">
+                        <div class="col-md-12 p-3">
+                            <div class="form-group row">
+                                <div class="col-sm-3">
+                                    <label asp-for="Id" class="control-label"></label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input asp-for="Id" class="form-control" disabled />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-3">
+                                    <label asp-for="SystemId" class="control-label"></label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input asp-for="SystemId" class="form-control" disabled />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-3">
+                                    <label asp-for="CreatedDate" class="control-label"></label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input asp-for="CreatedDate" class="form-control" disabled />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-3">
+                                    <label asp-for="CreatedUser" class="control-label"></label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input asp-for="CreatedUser" class="form-control" disabled />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-3">
+                                    <label asp-for="LastModifiedDate" class="control-label"></label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input asp-for="LastModifiedDate" class="form-control" disabled />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-3">
+                                    <label asp-for="LastModifiedUser" class="control-label"></label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input asp-for="LastModifiedUser" class="form-control" disabled />
+                                </div>
+                            </div>
+                            <div class="form-group row float-right">
+                                <a href="#" class="btn btn-link" onclick="layout.show_audits_audithistory($('#@form #SystemId').val())">Show Audit History</a>
                             </div>
                         </div>
                     </div>
@@ -98,7 +187,6 @@
 </div>
 
 <div class="modal-footer">
-    <a href="#" class="btn btn-secondary" onclick="layout.show_audits_modelaudit($('#@form #SystemId').val())">AUDIT</a>
     <a href="#" class="btn btn-secondary" onclick="modal.close(event)">CLOSE</a>
     <a href="#" class="btn btn-primary" onclick="@(on_save_click)(event)" data-loading-text="SAVING...">SAVE</a>
 </div>

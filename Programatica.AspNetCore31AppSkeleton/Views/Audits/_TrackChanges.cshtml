@@ -1,14 +1,14 @@
-﻿@model List<Audit>
+﻿@model List<TrackChange>
 
 @{
-    string on_grid_dblclick = Guid.NewGuid().JsNormalize();
     string on_close_click = Guid.NewGuid().JsNormalize();
     string grid = Guid.NewGuid().JsNormalize();
+
 }
 
 
 <div class="modal-header">
-    <h5 class="modal-title"><i class="far fa-lock"></i> Audit</h5>
+    <h5 class="modal-title"><i class="fa fa-lock"></i> Track Changes </h5>
 </div>
 
 <div class="modal-body">
@@ -21,15 +21,16 @@
                       dataSource="@Model"
                       allowPaging="true"
                       allowSorting="true"
-                      allowFiltering="true"
-                      recordDoubleClick="@on_grid_dblclick">
+                      allowFiltering="true">
                 <e-grid-pagesettings pageSizes="true" pageSize="5"></e-grid-pagesettings>
                 <e-grid-filterSettings type="Excel"></e-grid-filterSettings>
                 <e-grid-columns>
-                    <e-grid-column width="70" field="Id" headerText="ID" isPrimaryKey="true"></e-grid-column>
-                    <e-grid-column field="ContentFunction" headerText="FUNCTION" width="150"></e-grid-column>
-                    <e-grid-column width="150" field="CreatedUser" headerText="USER"></e-grid-column>
-                    <e-grid-column width="150" field="CreatedDate" headerText="DATE" customFormat="@(new { type ="date", format="yyyy-MM-dd HH:mm:ss" })" type="date"></e-grid-column>
+                    <e-grid-column field="FieldName" headerText="FIELD NAME"></e-grid-column>
+                    <e-grid-column field="OldValue" headerText="OLD VALUE" clipMode="EllipsisWithTooltip"></e-grid-column>
+                    <e-grid-column field="NewValue" headerText="NEW VALUE" clipMode="EllipsisWithTooltip"></e-grid-column>
+                    <e-grid-column field="CreatedUser" headerText="USER"></e-grid-column>
+                    <e-grid-column field="CreatedDate" headerText="DATE" customFormat="@(new { type ="date", format="yyyy-MM-dd HH:mm:ss" })" type="date"></e-grid-column>
+
                 </e-grid-columns>
             </ejs-grid>
 
@@ -44,10 +45,6 @@
 
 <script type="text/javascript">
 
-    @on_grid_dblclick = (args) => {
-        var id = args.rowData.Id;
-        alert(id);
-    }
 
     @on_close_click = (e) => {
         e.preventDefault();

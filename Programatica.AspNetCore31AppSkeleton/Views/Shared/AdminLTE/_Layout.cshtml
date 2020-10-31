@@ -156,8 +156,18 @@
                 });
         };
 
-        layout.show_audits_modelaudit = (systemId) => {
-            var url = "@Url.Action("ModelAudit", "Audits")?systemid=" + systemId;
+        layout.show_audits_audithistory = (systemId) => {
+            var url = "@Url.Action("AuditHistory", "Audits")?systemid=" + systemId;
+            modal.show(url, modalsizes.LARGE)
+                .then((h) => {
+                })
+                .catch((e) => {
+                    global.toasterror(e);
+                });
+        }
+
+        layout.show_audits_trackchanges = (auditId) => {
+            var url = "@Url.Action("TrackChanges", "Audits")?auditId=" + auditId;
             modal.show(url, modalsizes.LARGE)
                 .then((h) => {
                 })

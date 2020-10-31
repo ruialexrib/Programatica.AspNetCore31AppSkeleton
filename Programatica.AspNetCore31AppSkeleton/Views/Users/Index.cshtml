@@ -47,29 +47,30 @@
 
         <li class="nav-item dropdown d-none d-md-block">
             <a class="nav-link  text-dark dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                <i class="fas fa-ellipsis-v"></i> NAVIGATION
+                VIEW
             </a>
             <div class="dropdown-menu">
-                <a class="dropdown-item text-dark" href="#" onclick="layout.show_audits_modelaudit(@record_systemid)"><i class="fas fa-lock"></i> AUDIT</a>
+                <a class="dropdown-item text-dark" href="#" onclick="@(show_groups)()"><i class="far fa-object-ungroup"></i> TOGGLE GROUP</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item text-dark" href="#" onclick="@(clear_filters)()"><i class="fas fa-filter"></i> CLEAR FILTERS</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item text-dark" href="#" onclick="@(clear_search)()"><i class="fas fa-search"></i> CLEAR SEARCH</a>
             </div>
         </li>
 
         <li class="nav-item dropdown d-none d-md-block">
             <a class="nav-link  text-dark dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                <i class="fas fa-ellipsis-v"></i> OPTIONS
+                NAVIGATION
             </a>
             <div class="dropdown-menu">
-                <a class="dropdown-item text-dark" href="#" onclick="@(show_groups)()"><i class="far fa-object-ungroup"></i> TOGGLE GROUP</a>
-                <a class="dropdown-item text-dark" href="#" onclick="@(clear_filters)()"><i class="fas fa-filter"></i> CLEAR FILTERS</a>
-                <a class="dropdown-item text-dark" href="#" onclick="@(clear_search)()"><i class="fas fa-search"></i> CLEAR SEARCH</a>
+                <a class="dropdown-item text-dark" href="#" onclick="layout.show_audits_audithistory(@record_systemid)"><i class="fas fa-lock"></i> AUDIT</a>
             </div>
         </li>
 
     </ul>
     <section class="d-none d-md-block">
         <form class="form-inline">
-            <input id="@search_box" class="form-control form-control-sm" type="search" placeholder="Search" aria-label="Search">&nbsp;
-            <a href="#" class="btn-link text-dark" onclick="@(search)($('#@(search_box)').val())"><i class="fas fa-search"></i> SEARCH</a>
+            <input id="@search_box" class="form-control" type="search" placeholder="Search" aria-label="Search">&nbsp;
         </form>
     </section>
 </nav>
@@ -115,6 +116,17 @@
             @(resize)();
         });
 
+        $('#@(search_box)').on("keypress", function (e) {
+            if (e.keyCode == 13) {
+                e.preventDefault();
+                @(search)($('#@(search_box)').val());
+            }
+        });
+
+        $('#@(search_box)').on("input", function (e) {
+            @(search)($('#@(search_box)').val());
+        });
+
         @on_grid_databound = (args) => { };
 
         @on_grid_click = (args) => {
@@ -136,6 +148,7 @@
         @clear_search = () => {
             var grid = layout.get_usersgrid();
             grid.searchSettings.key = '';
+            $('#@(search_box)').val('');
         };
 
         @show_groups = () => {

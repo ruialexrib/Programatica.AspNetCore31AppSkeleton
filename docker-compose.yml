@@ -8,7 +8,7 @@ services:
     environment:
       - MYSQL_USER=root
       - MYSQL_PASSWORD=appskeleton_user
-      - MYSQL_ROOT_PASSWORD=hoJx$6SM1T1QlCH
+      - MYSQL_ROOT_PASSWORD=hoJx6SM1T1QlCH
       - MYSQL_DATABASE=appskeleton_db
     ports:
       - "3306"
@@ -20,7 +20,7 @@ services:
     environment:
       PMA_HOST: appskeleton_mysql_server
       PMA_USER: root
-      PMA_PASSWORD: hoJx$6SM1T1QlCH
+      PMA_PASSWORD: hoJx6SM1T1QlCH
       PMA_PORT: 3306
     ports:
       - "8091:80"
@@ -38,4 +38,4 @@ services:
     depends_on:
       - appskeleton_mysql_server
     environment:
-      - ConnectionStrings:DefaultConnection=Server=appskeleton_mysql_server;Port=3306;DataBase=appskeleton_db;Uid=root;Pwd=hoJx$6SM1T1QlCH
+      - ConnectionStrings:DefaultConnection=Server=appskeleton_mysql_server;Port=3306;DataBase=appskeleton_db;Uid=root;Pwd=hoJx6SM1T1QlCH

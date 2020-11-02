@@ -40,6 +40,22 @@ docker push yourcontainer/aspnetcore31appskeleton
 docker run -d -p 8080:80 --restart unless-stopped --name aspnetcore31appskeleton yourcontainer/aspnetcore31appskeleton
 ```
 
+##### Docker-compose
+
+The following docker-compose will create 3 new containers: mysql database, phpmyadmin and asp.net core app.
+You can try in your browser @ http://localhost:8090
+```
+# compose containers and run in dettached mode
+docker-compose up -d
+
+# stop all and remove all containers
+docker-compose down -d
+
+# update all images
+docker-compose pull
+docker-compose restart
+```
+
 ### Live Demo
 
-[Im running inside a docker, hosted in a raspberrypi4, connected to an azure database... how cool is that ?!](http://ruialexrib.ddns.net:8088) :thumbsup:
+[Im running inside a docker, hosted in a raspberrypi4, connected to mysql... how cool is that ?!](http://ruialexrib.ddns.net:8090) :thumbsup:

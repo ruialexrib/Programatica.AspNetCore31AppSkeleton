@@ -1,0 +1,57 @@
+﻿@model List<TrackChange>
+
+@{
+    string on_close_click = Razor.Rnd();
+    string grid = Razor.Rnd();
+
+}
+
+
+<div class="modal-header">
+    <h5 class="modal-title"><i class="fa fa-lock"></i> Track Changes </h5>
+</div>
+
+<div class="modal-body">
+
+    <div class="row">
+        <div class="col-md-12 p-3">
+
+            <ejs-grid id="@grid"
+                      width="auto"
+                      dataSource="@Model"
+                      allowPaging="true"
+                      allowSorting="true"
+                      allowFiltering="true">
+                <e-grid-pagesettings pageSizes="true" pageSize="5"></e-grid-pagesettings>
+                <e-grid-filterSettings type="Excel"></e-grid-filterSettings>
+                <e-grid-columns>
+                    <e-grid-column field="FieldName" headerText="FIELD NAME"></e-grid-column>
+                    <e-grid-column field="OldValue" headerText="OLD VALUE" clipMode="EllipsisWithTooltip"></e-grid-column>
+                    <e-grid-column field="NewValue" headerText="NEW VALUE" clipMode="EllipsisWithTooltip"></e-grid-column>
+                    <e-grid-column field="CreatedUser" headerText="USER"></e-grid-column>
+                    <e-grid-column field="CreatedDate" headerText="DATE" customFormat="@(new { type ="date", format="yyyy-MM-dd HH:mm:ss" })" type="date"></e-grid-column>
+
+                </e-grid-columns>
+            </ejs-grid>
+
+        </div>
+    </div>
+
+</div>
+
+<div class="modal-footer">
+    <a href="#" class="btn btn-secondary" onclick="@(on_close_click)(event)">CLOSE</a>
+</div>
+
+<script type="text/javascript">
+
+
+    @on_close_click = (e) => {
+        e.preventDefault();
+        modal.close(e);
+    };
+
+</script>
+
+<ejs-scripts></ejs-scripts>
+

@@ -48,6 +48,9 @@ The docker-compose will create 3 new containers:
 * asp.net core app http://localhost:8090
 
 ```
+# get docker-compose file from repository
+wget https://raw.githubusercontent.com/ruialexrib/Programatica.AspNetCore31AppSkeleton/main/docker-compose.yml
+
 # compose containers and run in dettached mode
 docker-compose up -d
 

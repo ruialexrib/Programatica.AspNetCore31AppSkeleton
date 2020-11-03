@@ -3,10 +3,11 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.Extensions.Configuration;
 using Programatica.Framework.Mvc.Adapters;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace Programatica.AspNetCore31AppSkeleton.Adapters
 {
-    public class PageAdapter : IPageAdapter
+    public class PageAdapter : IAppPageAdapter
     {
         private readonly IConfiguration _configuration;
         private readonly IHttpContextAccessor _httpContextAccessor;
@@ -55,5 +56,6 @@ namespace Programatica.AspNetCore31AppSkeleton.Adapters
             get { return _tempData["ControllerAction"] as string; }
         }
 
+        public string AppVersion { get { return Assembly.GetEntryAssembly().GetName().Version.ToString(); }  }
     }
 }

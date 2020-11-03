@@ -112,7 +112,7 @@ namespace Programatica.AspNetCore31AppSkeleton.Extensions
             services.AddScoped<IDateTimeAdapter, DateTimeAdapter>();
             services.AddScoped<IAuthUserAdapter, ClaimBasedAuthAdapter>();
             services.AddScoped<IJsonSerializerAdapter, JsonSerializerAdapter>();
-            services.AddScoped<IPageAdapter, PageAdapter>();
+            services.AddScoped<IAppPageAdapter, PageAdapter>();
         }
 
         private static void ConfigureEventHandlers(IServiceCollection services)

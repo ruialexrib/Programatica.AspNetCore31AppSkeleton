@@ -1,6 +1,6 @@
 ﻿@model LoginViewModel
 @using Programatica.Framework.Core.Extensions
-@inject Programatica.Framework.Mvc.Adapters.IPageAdapter _page
+@inject IAppPageAdapter _page
 
 @{ Layout = ""; }
 
@@ -105,9 +105,10 @@
 
         $(document).ready(function () {
 
-            _page.messages = [];
-            _page.warnings = [];
-            _page.alerts = [];
+            _page.messages      = [];
+            _page.warnings      = [];
+            _page.alerts        = [];
+            _page.appversion    = '@_page.AppVersion';
 
             // add messages
             @foreach(var m in _page.PageMessages.OrEmptyIfNull())
@@ -126,6 +127,8 @@
             _page.messages.forEach((m) => { global.toastinfo(m); });
             _page.warnings.forEach((w) => { global.toastwarning(w); });
             _page.alerts.forEach((a) => { global.toasterror(a); });
+
+            global.toastinfo(_page.appversion);
 
           });
 

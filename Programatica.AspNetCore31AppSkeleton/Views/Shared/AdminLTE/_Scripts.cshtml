@@ -1,4 +1,4 @@
-﻿@inject IPageAdapter _page
+﻿@inject IAppPageAdapter _page
 <!-- jquery -->
 <script src="~/lib/jquery/dist/jquery.js"></script>
 <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
@@ -30,7 +30,8 @@
         $(document).ready(function () {
             _page.connectionString  = '@_page.ConnectionString';
             _page.controllerName    = '@_page.ControllerName';
-            _page.actionName        = '@_page.ActionName';
+            _page.actionName = '@_page.ActionName';
+            _page.appversion = '@_page.AppVersion';
             _page.messages          = [];
             _page.warnings          = [];
             _page.alerts            = [];

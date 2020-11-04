@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -34,15 +35,15 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
         }
 
 
-        public override ActionResult UrlDatasource([FromBody] DataManagerRequest dm)
+        public override async Task<ActionResult> UrlDatasource([FromBody] DataManagerRequest dm)
         {
             //join data
-            IEnumerable DataSource = _modelService.Get()
-                                                  .Join(_userRepository.GetData(),
+            IEnumerable DataSource = (await _modelService.GetAsync())
+                                                  .Join(await _userRepository.GetDataAsync(),
                                                         ur => ur.UserId,
                                                         u => u.Id,
                                                         (ur, u) => new { ur, u })
-                                                  .Join(_roleRepository.GetData(),
+                                                  .Join(await _roleRepository.GetDataAsync(),
                                                         j1 => j1.ur.RoleId,
                                                         r => r.Id,
                                                         (j1, r) => new { j1, r })
@@ -100,9 +101,9 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
         }
 
         [HttpGet]
-        public override IActionResult Edit(int id)
+        public override async Task<IActionResult> Edit(int id)
         {
-            UserRole tmodel = _modelService.Get(id);
+            UserRole tmodel = await _modelService.GetAsync(id);
             if (tmodel == null)
             {
                 return NotFound();

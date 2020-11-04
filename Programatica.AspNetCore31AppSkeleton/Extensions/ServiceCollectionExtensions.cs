@@ -56,9 +56,9 @@ namespace Programatica.AspNetCore31AppSkeleton.Extensions
             //services.AddDbContext<IDbContext, AppDbContext>(opt => opt.UseInMemoryDatabase(builder.InitialCatalog), ServiceLifetime.Transient);
 
             // mysql context
-            services.AddDbContext<IDbContext, AppDbContext> (opt =>
-                opt.UseMySql(Startup.Configuration.GetConnectionString("DefaultConnection"))
-            );
+            services.AddDbContext<IDbContext, AppDbContext>(opt =>
+               opt.UseMySql(Startup.Configuration.GetConnectionString("DefaultConnection"))
+               );
 
         }
 

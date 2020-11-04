@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -41,13 +42,13 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers.Base
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public virtual JsonResult Create([FromBody] TViewModel vm)
+        public virtual async Task<JsonResult> Create([FromBody] TViewModel vm)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    var m = _modelService.Create(_mapper.Map<TModel>(vm));
+                    var m = await _modelService.CreateAsync(_mapper.Map<TModel>(vm));
                     return new JsonResult(new { result = "ok", id = m.Id.ToString() })
                     {
                         StatusCode = StatusCodes.Status200OK
@@ -71,9 +72,9 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers.Base
         }
 
         [HttpGet]
-        public virtual IActionResult Edit(int id)
+        public virtual async Task<IActionResult> Edit(int id)
         {
-            TModel tmodel = _modelService.Inspect(id);
+            TModel tmodel = await _modelService.InspectAsync(id);
             if (tmodel == null)
             {
                 return NotFound();
@@ -84,13 +85,13 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers.Base
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public virtual JsonResult Edit([FromBody] TViewModel vm)
+        public virtual async Task<JsonResult> Edit([FromBody] TViewModel vm)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _modelService.Modify(_mapper.Map<TModel>(vm));
+                    await _modelService.ModifyAsync(_mapper.Map<TModel>(vm));
                     return new JsonResult(new { result = "ok", id = vm.Id.ToString() })
                     {
                         StatusCode = StatusCodes.Status200OK
@@ -114,11 +115,11 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers.Base
         }
 
         [HttpPost]
-        public virtual JsonResult Delete([FromBody] DeleteViewModel vm)
+        public virtual async Task<JsonResult> Delete([FromBody] DeleteViewModel vm)
         {
             try
             {
-                _modelService.Delete(vm.Id);
+                await _modelService.DeleteAsync(vm.Id);
                 return new JsonResult(new { result = "ok" })
                 {
                     StatusCode = StatusCodes.Status200OK

@@ -126,6 +126,5 @@ namespace Programatica.AspNetCore31AppSkeleton.Handlers
             var authUser = _authUserAdapter.Name;
             return username.Equals(authUser);
         }
-
     }
 }

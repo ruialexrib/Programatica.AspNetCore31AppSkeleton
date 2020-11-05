@@ -13,7 +13,7 @@
             $(target).empty();
             $(target).text(text);
             $(target).prop('disabled', false);
-        }, 5000);
+        }, 10000);
     }
 });
 

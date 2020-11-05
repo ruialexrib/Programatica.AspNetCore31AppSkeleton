@@ -94,7 +94,6 @@ namespace Programatica.AspNetCore31AppSkeleton.Handlers
 
         #endregion
 
-
         public async Task OnBeforeCreatingAsync(UserRole model)
         {
             if (await IsSameUserAndRole(model)) throw new Exception("The record already exists.");

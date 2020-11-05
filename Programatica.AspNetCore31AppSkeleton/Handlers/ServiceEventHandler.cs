@@ -81,7 +81,6 @@ namespace Programatica.AspNetCore31AppSkeleton.Handlers
 
         #endregion
 
-
         public Task OnBeforeCreatingAsync(T model)
         {
             model.LastModifiedDate = _dateTimeAdapter.UtcNow;

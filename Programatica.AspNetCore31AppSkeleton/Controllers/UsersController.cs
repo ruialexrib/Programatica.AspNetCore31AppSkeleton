@@ -7,11 +7,8 @@ using Programatica.AspNetCore31AppSkeleton.Data.Models;
 using Programatica.AspNetCore31AppSkeleton.ViewModels;
 using Programatica.Framework.Data.Models;
 using Programatica.Framework.Services;
-using Syncfusion.EJ2.Linq;
-using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
-using System.Linq;
 using Programatica.Framework.Data.Repository;
+using System.Threading.Tasks;
 
 namespace Programatica.AspNetCore31AppSkeleton.Controllers
 {
@@ -31,15 +28,15 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
         }
 
         [HttpGet]
-        public IActionResult Modal()
+        public async Task<IActionResult> Modal()
         {
-            return PartialView("_Modal");
+            return await Task.Run(() => PartialView("_Modal"));
         }
 
         [HttpGet]
-        public IActionResult Modal2()
+        public async Task<IActionResult> Modal2()
         {
-            return PartialView("_Modal2");
+            return await Task.Run(() => PartialView("_Modal2"));
         }
 
     }

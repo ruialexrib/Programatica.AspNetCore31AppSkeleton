@@ -29,15 +29,15 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers.Base
             _logger = logger;
         }
 
-        public virtual IActionResult Index()
+        public virtual async Task<IActionResult> Index()
         {
-            return View();
+            return await Task.Run(() => View());
         }
 
         [HttpGet]
-        public virtual IActionResult Create()
+        public virtual async Task<IActionResult> Create()
         {
-            return PartialView("_Create");
+            return await Task.Run(() => PartialView("_Create"));
         }
 
         [HttpPost]

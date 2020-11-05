@@ -4,6 +4,7 @@ using Programatica.Framework.Data.Repository;
 using Programatica.Framework.Services.Handlers;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Programatica.AspNetCore31AppSkeleton.Handlers
 {
@@ -23,6 +24,8 @@ namespace Programatica.AspNetCore31AppSkeleton.Handlers
             _authUserAdapter = authUserAdapter;
         }
 
+        #region unused events
+
         public void OnAfterCreated(UserRole model)
         {
         }
@@ -41,13 +44,10 @@ namespace Programatica.AspNetCore31AppSkeleton.Handlers
 
         public void OnBeforeCreating(UserRole model)
         {
-            if (IsSameUserAndRole(model)) throw new Exception("The record already exists.");
-            if (IsSameForCurrentUser(model)) throw new Exception("Changing permissions for the current user is not allowed.");
         }
 
         public void OnBeforeDeleting(UserRole model)
         {
-            if (IsSameForCurrentUser(model)) throw new Exception("Changing permissions for the current user is not allowed.");
         }
 
         public void OnBeforeDestroying(UserRole model)
@@ -60,24 +60,73 @@ namespace Programatica.AspNetCore31AppSkeleton.Handlers
 
         public void OnBeforeModifying(UserRole model)
         {
-            if (IsSameUserAndRole(model)) throw new Exception("The record already exists.");
-            if (IsSameForCurrentUser(model)) throw new Exception("Changing permissions for the current user is not allowed.");
         }
 
-        private bool IsSameUserAndRole(UserRole model)
+        public Task OnAfterCreatedAsync(UserRole model)
         {
-            return _userRoleRepository.GetData()
+            return Task.CompletedTask;
+        }
+
+        public Task OnAfterModifiedAsync(UserRole model)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task OnBeforeDestroyingAsync(UserRole model)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task OnAfterDestroyedAsync(UserRole model)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task OnAfterDeletedAsync(UserRole model)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task OnBeforeInspectingAsync(UserRole model)
+        {
+            return Task.CompletedTask;
+        }
+
+        #endregion
+
+
+        public async Task OnBeforeCreatingAsync(UserRole model)
+        {
+            if (await IsSameUserAndRole(model)) throw new Exception("The record already exists.");
+            if (await IsSameForCurrentUser(model)) throw new Exception("Changing permissions for the current user is not allowed.");
+        }
+
+        public async Task OnBeforeModifyingAsync(UserRole model)
+        {
+            if (await IsSameUserAndRole(model)) throw new Exception("The record already exists.");
+            if (await IsSameForCurrentUser(model)) throw new Exception("Changing permissions for the current user is not allowed.");
+        }
+
+        public async Task OnBeforeDeletingAsync(UserRole model)
+        {
+            if (await IsSameForCurrentUser(model)) throw new Exception("Changing permissions for the current user is not allowed.");
+        }
+
+        private async Task<bool> IsSameUserAndRole(UserRole model)
+        {
+            return (await _userRoleRepository.GetDataAsync())
                                       .Where(x => x.UserId == model.UserId &&
                                                   x.RoleId == model.RoleId &&
                                                   x.Id != model.Id)
                                       .FirstOrDefault() != null;
         }
 
-        private bool IsSameForCurrentUser(UserRole model)
+        private async Task<bool> IsSameForCurrentUser(UserRole model)
         {
-            var username = _userRepository.GetData(model.UserId).Username;
+            var username = (await _userRepository.GetDataAsync(model.UserId)).Username;
             var authUser = _authUserAdapter.Name;
             return username.Equals(authUser);
         }
+
     }
 }

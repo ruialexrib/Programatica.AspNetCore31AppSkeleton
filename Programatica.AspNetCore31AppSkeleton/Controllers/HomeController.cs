@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -22,29 +23,28 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
             _authenticationService = authenticationService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            return await Task.Run(() => View());
         }
 
-        public IActionResult License()
+        public async Task<IActionResult> License()
         {
-            return View();
+            return await Task.Run(() => View());
         }
 
-        public IActionResult Credits()
+        public async Task<IActionResult> Credits()
         {
-            return View();
+            return await Task.Run(() => View());
         }
-
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        public async Task<IActionResult> Error()
         {
-            return View(new ErrorViewModel
+            return await Task.Run(() => View(new ErrorViewModel
             {
                 RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
-            });
+            }));
         }
     }
 }

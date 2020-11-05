@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Programatica.AspNetCore31AppSkeleton.ViewModels;
@@ -26,9 +27,9 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
         }
 
         [HttpGet]
-        public IActionResult AuditHistory(string systemid)
+        public async Task<IActionResult> AuditHistory(string systemid)
         {
-            var vm = _auditRepository.GetData()
+            var vm = (await _auditRepository.GetDataAsync())
                                      .Where(x => x.ContentSystemId == Guid.Parse(systemid))
                                      .Select(x => new AuditViewModel
                                      {
@@ -48,9 +49,9 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
         }
 
         [HttpGet]
-        public IActionResult TrackChanges(int auditId)
+        public async Task<IActionResult> TrackChanges(int auditId)
         {
-            var vm = _trackChangesRepository.GetData()
+            var vm = (await _trackChangesRepository.GetDataAsync())
                                             .Where(x => x.AuditId == auditId)
                                             .ToList();
             return PartialView("_TrackChanges", vm);

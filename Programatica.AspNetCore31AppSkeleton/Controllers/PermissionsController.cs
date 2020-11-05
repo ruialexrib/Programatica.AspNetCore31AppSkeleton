@@ -89,12 +89,12 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
         }
 
         [HttpGet]
-        public override IActionResult Create()
+        public override async Task<IActionResult> Create()
         {
             var vm = new PermissionViewModel
             {
-                ListOfUsers = _userRepository.GetData().ToList(),
-                ListOfRoles = _roleRepository.GetData().ToList()
+                ListOfUsers = (await _userRepository.GetDataAsync()).ToList(),
+                ListOfRoles = (await _roleRepository.GetDataAsync()).ToList()
             };
 
             return PartialView("_Create", vm);

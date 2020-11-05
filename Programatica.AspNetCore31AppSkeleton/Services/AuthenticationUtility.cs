@@ -8,6 +8,7 @@ using Programatica.Framework.Services;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace Programatica.AspNetCore31AppSkeleton.Services
 {
@@ -36,21 +37,21 @@ namespace Programatica.AspNetCore31AppSkeleton.Services
             _options = options.Value;
         }
 
-        public IEnumerable<Claim> GetUserPrincipalClaims(string user, string password)
+        public async Task<IEnumerable<Claim>> GetUserPrincipalClaims(string user, string password)
         {
             List<Claim> claims = new List<Claim>();
 
             claims.Add(new Claim(_options.UserNameFieldName, user));
             claims.Add(new Claim(_options.PasswordFieldName, password));
             claims.Add(new Claim(_options.LastLoginDateTimeFieldName, _dateTimeAdapter.UtcNow.ToString()));
-            claims.AddRange(GetUserRoleClaims(user));
+            claims.AddRange(await GetUserRoleClaims(user));
             return claims;
         }
 
-        public IEnumerable<Claim> GetUserRoleClaims(string user)
+        public async Task<IEnumerable<Claim>> GetUserRoleClaims(string user)
         {
             List<Claim> claims = new List<Claim>();
-            var u = _userService.Get()
+            var u = (await _userService.GetAsync())
                                 .Where(x => x.Username.Equals(user))
                                 .FirstOrDefault();
 
@@ -65,9 +66,9 @@ namespace Programatica.AspNetCore31AppSkeleton.Services
             return claims;
         }
 
-        public bool AuthByUsernameAndPassword(string username, string password)
+        public async Task<bool> AuthByUsernameAndPassword(string username, string password)
         {
-            var user = _userService.Get()
+            var user = (await _userService.GetAsync())
                                    .Where(x => x.Username.Equals(username) && x.Password.Equals(password))
                                    .FirstOrDefault();
             return user != null;

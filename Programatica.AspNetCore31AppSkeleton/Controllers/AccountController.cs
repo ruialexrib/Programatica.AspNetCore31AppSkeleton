@@ -12,7 +12,6 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
     public class AccountController : BaseController
     {
         private readonly IAuthenticationService _authenticationService;
-#pragma warning disable IDE0052 // Remove unread private members
         private readonly ILogger<AccountController> _logger;
 
         public AccountController(
@@ -23,10 +22,10 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
             _logger = logger;
         }
 
-        public IActionResult Login()
+        public async Task<IActionResult> Login()
         {
             PageMessages.Add("For demo purpose insert 'username: admin' and 'password: pass'");
-            return View();
+            return await Task.Run(() => View());
         }
 
         [HttpPost]
@@ -38,7 +37,7 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
                 {
                     await _authenticationService.SignIn(HttpContext,
                                                         vm.Username,
-                                                        vm.Password, 
+                                                        vm.Password,
                                                         vm.IsPersistent)
                                                 .ConfigureAwait(false);
 
@@ -59,16 +58,16 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
         }
 
         [Authorize(Roles = "Administrators, Users")]
-        public IActionResult Logoff()
+        public async Task<IActionResult> Logoff()
         {
-            _authenticationService.SignOut(HttpContext);
+            await _authenticationService.SignOut(HttpContext);
             return RedirectToAction("Login", "Account", null);
         }
 
-        public IActionResult AccessDenied()
+        public async Task<IActionResult> AccessDenied()
         {
             PageAlerts.Add("Access Denied");
-            return View();
+            return await Task.Run(() => View());
         }
     }
 }

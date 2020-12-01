@@ -18,6 +18,7 @@ using Programatica.Framework.Data.Repository;
 using Programatica.Framework.Mvc.Adapters;
 using Programatica.Framework.Mvc.Authentication;
 using Programatica.Framework.Mvc.Options;
+using Programatica.Framework.Mvc.Services;
 using Programatica.Framework.Services;
 using Programatica.Framework.Services.Handlers;
 using Programatica.Framework.Services.Injector;
@@ -44,6 +45,8 @@ namespace Programatica.AspNetCore31AppSkeleton.Extensions
             ConfigureAdapters(services);
             ConfigureEventHandlers(services);
             ConfigureBusiness(services);
+            ConfigureServices(services);
+
         }
 
         private static void ConfigureDatabase(IServiceCollection services)
@@ -57,7 +60,7 @@ namespace Programatica.AspNetCore31AppSkeleton.Extensions
 
             // mysql context
             services.AddDbContext<IDbContext, AppDbContext>(opt =>
-               opt.UseMySql(Startup.Configuration.GetConnectionString("DefaultConnection"))
+                   opt.UseMySql(Startup.Configuration.GetConnectionString("DefaultConnection"))
                );
 
         }
@@ -159,6 +162,11 @@ namespace Programatica.AspNetCore31AppSkeleton.Extensions
                                                   .AddDebug()
                                                   .AddConfiguration(Startup.Configuration.GetSection("Logging"))
                                );
+        }
+
+        private static void ConfigureServices(IServiceCollection services)
+        {
+            services.AddTransient<IMvcControllerDiscoveryService, MvcControllerDiscoveryService>();
         }
 
     }

@@ -143,6 +143,37 @@ namespace Programatica.AspNetCore31AppSkeleton.Data.Migrations.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Permissions",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    SystemId = table.Column<Guid>(nullable: false),
+                    Comments = table.Column<string>(nullable: true),
+                    CreatedDate = table.Column<DateTime>(nullable: true),
+                    CreatedUser = table.Column<string>(nullable: true),
+                    LastModifiedDate = table.Column<DateTime>(nullable: true),
+                    LastModifiedUser = table.Column<string>(nullable: true),
+                    LastDestroyedDate = table.Column<DateTime>(nullable: true),
+                    LastDestroyedUser = table.Column<string>(nullable: true),
+                    IsSystem = table.Column<bool>(nullable: false),
+                    IsDestroyed = table.Column<bool>(nullable: false),
+                    RoleId = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    DisplayName = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Permissions", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Permissions_Roles_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "Roles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "UserRoles",
                 columns: table => new
                 {
@@ -183,8 +214,8 @@ namespace Programatica.AspNetCore31AppSkeleton.Data.Migrations.Migrations
                 columns: new[] { "Id", "Comments", "CreatedDate", "CreatedUser", "Description", "IsDestroyed", "IsSystem", "LastDestroyedDate", "LastDestroyedUser", "LastModifiedDate", "LastModifiedUser", "SystemId" },
                 values: new object[,]
                 {
-                    { 1, null, new DateTime(2020, 10, 30, 15, 42, 9, 219, DateTimeKind.Utc).AddTicks(6111), "system", "Dummy One", false, false, null, null, null, null, new Guid("4a067272-268d-4516-9932-55bc082c4b6b") },
-                    { 2, null, new DateTime(2020, 10, 30, 15, 42, 9, 219, DateTimeKind.Utc).AddTicks(6223), "system", "Dummy Two", false, false, null, null, null, null, new Guid("189a4c34-520d-45e8-83d1-34b27c6b2493") }
+                    { 1, null, new DateTime(2020, 11, 30, 19, 23, 29, 300, DateTimeKind.Utc).AddTicks(6994), "system", "Dummy One", false, false, null, null, null, null, new Guid("cab3f1a5-a947-44ea-aec8-5fdb3399c45e") },
+                    { 2, null, new DateTime(2020, 11, 30, 19, 23, 29, 300, DateTimeKind.Utc).AddTicks(7068), "system", "Dummy Two", false, false, null, null, null, null, new Guid("7b4dbc1b-26ea-4348-8883-87151a475661") }
                 });
 
             migrationBuilder.InsertData(
@@ -192,8 +223,8 @@ namespace Programatica.AspNetCore31AppSkeleton.Data.Migrations.Migrations
                 columns: new[] { "Id", "Comments", "CreatedDate", "CreatedUser", "IsDestroyed", "IsSystem", "LastDestroyedDate", "LastDestroyedUser", "LastModifiedDate", "LastModifiedUser", "Name", "SystemId" },
                 values: new object[,]
                 {
-                    { 1, null, new DateTime(2020, 10, 30, 15, 42, 9, 218, DateTimeKind.Utc).AddTicks(7570), "system", false, true, null, null, new DateTime(2020, 10, 30, 15, 42, 9, 218, DateTimeKind.Utc).AddTicks(7614), "system", "Administrators", new Guid("24daa007-fd94-4c96-be8d-91b2b851b1f1") },
-                    { 2, null, new DateTime(2020, 10, 30, 15, 42, 9, 218, DateTimeKind.Utc).AddTicks(7733), "system", false, true, null, null, new DateTime(2020, 10, 30, 15, 42, 9, 218, DateTimeKind.Utc).AddTicks(7739), "system", "Users", new Guid("5cdca36c-ae8b-4a26-8604-b7feb9904c89") }
+                    { 1, null, new DateTime(2020, 11, 30, 19, 23, 29, 299, DateTimeKind.Utc).AddTicks(9956), "system", false, true, null, null, new DateTime(2020, 11, 30, 19, 23, 29, 300, DateTimeKind.Utc).AddTicks(15), "system", "Administrators", new Guid("c01b88af-005d-4470-a7f8-b3ff31aa2146") },
+                    { 2, null, new DateTime(2020, 11, 30, 19, 23, 29, 300, DateTimeKind.Utc).AddTicks(137), "system", false, true, null, null, new DateTime(2020, 11, 30, 19, 23, 29, 300, DateTimeKind.Utc).AddTicks(143), "system", "Users", new Guid("7dfdbc70-8642-45d6-bc09-dca9e6637502") }
                 });
 
             migrationBuilder.InsertData(
@@ -201,24 +232,29 @@ namespace Programatica.AspNetCore31AppSkeleton.Data.Migrations.Migrations
                 columns: new[] { "Id", "Address", "City", "Comments", "Country", "CreatedDate", "CreatedUser", "Email", "Fullname", "IsDestroyed", "IsSystem", "LastDestroyedDate", "LastDestroyedUser", "LastModifiedDate", "LastModifiedUser", "Password", "PostalCode", "SystemId", "Username" },
                 values: new object[,]
                 {
-                    { 1, null, null, null, null, new DateTime(2020, 10, 30, 15, 42, 9, 214, DateTimeKind.Utc).AddTicks(4131), "system", "admin@server.com", "System Administrator", false, true, null, null, new DateTime(2020, 10, 30, 15, 42, 9, 214, DateTimeKind.Utc).AddTicks(6924), "system", "pass", null, new Guid("93bcdfe9-12d0-4935-bb77-25d9c6b87727"), "admin" },
-                    { 2, null, null, null, null, new DateTime(2020, 10, 30, 15, 42, 9, 215, DateTimeKind.Utc).AddTicks(583), "system", "user@server.com", "Just an User", false, false, null, null, new DateTime(2020, 10, 30, 15, 42, 9, 215, DateTimeKind.Utc).AddTicks(596), "system", "pass", null, new Guid("299fd20e-b34b-4a2a-82dd-821319c16458"), "user" }
+                    { 1, null, null, null, null, new DateTime(2020, 11, 30, 19, 23, 29, 295, DateTimeKind.Utc).AddTicks(7797), "system", "admin@server.com", "System Administrator", false, true, null, null, new DateTime(2020, 11, 30, 19, 23, 29, 296, DateTimeKind.Utc).AddTicks(432), "system", "pass", null, new Guid("10a78207-b339-4ce1-845b-2bb16e017e99"), "admin" },
+                    { 2, null, null, null, null, new DateTime(2020, 11, 30, 19, 23, 29, 296, DateTimeKind.Utc).AddTicks(3757), "system", "user@server.com", "Just an User", false, false, null, null, new DateTime(2020, 11, 30, 19, 23, 29, 296, DateTimeKind.Utc).AddTicks(3773), "system", "pass", null, new Guid("68709fb4-d2ed-434f-83a0-63f04bed7813"), "user" }
                 });
 
             migrationBuilder.InsertData(
                 table: "UserRoles",
                 columns: new[] { "Id", "Comments", "CreatedDate", "CreatedUser", "IsDestroyed", "IsSystem", "LastDestroyedDate", "LastDestroyedUser", "LastModifiedDate", "LastModifiedUser", "RoleId", "SystemId", "UserId" },
-                values: new object[] { 1, null, new DateTime(2020, 10, 30, 15, 42, 9, 219, DateTimeKind.Utc).AddTicks(2493), "system", false, true, null, null, new DateTime(2020, 10, 30, 15, 42, 9, 219, DateTimeKind.Utc).AddTicks(2509), "system", 1, new Guid("80154792-1e60-41d8-ba67-ef2cf4ac18c0"), 1 });
+                values: new object[] { 1, null, new DateTime(2020, 11, 30, 19, 23, 29, 300, DateTimeKind.Utc).AddTicks(4405), "system", false, true, null, null, new DateTime(2020, 11, 30, 19, 23, 29, 300, DateTimeKind.Utc).AddTicks(4422), "system", 1, new Guid("37981984-9dd0-4704-97c7-8b82071c9ad5"), 1 });
 
             migrationBuilder.InsertData(
                 table: "UserRoles",
                 columns: new[] { "Id", "Comments", "CreatedDate", "CreatedUser", "IsDestroyed", "IsSystem", "LastDestroyedDate", "LastDestroyedUser", "LastModifiedDate", "LastModifiedUser", "RoleId", "SystemId", "UserId" },
-                values: new object[] { 2, null, new DateTime(2020, 10, 30, 15, 42, 9, 219, DateTimeKind.Utc).AddTicks(2639), "system", false, true, null, null, new DateTime(2020, 10, 30, 15, 42, 9, 219, DateTimeKind.Utc).AddTicks(2643), "system", 2, new Guid("3c10461f-e02c-424c-8bd7-320e9ecbad40"), 1 });
+                values: new object[] { 2, null, new DateTime(2020, 11, 30, 19, 23, 29, 300, DateTimeKind.Utc).AddTicks(4554), "system", false, true, null, null, new DateTime(2020, 11, 30, 19, 23, 29, 300, DateTimeKind.Utc).AddTicks(4557), "system", 2, new Guid("9e4bf35d-b450-45ce-b517-b14fe03281ac"), 1 });
 
             migrationBuilder.InsertData(
                 table: "UserRoles",
                 columns: new[] { "Id", "Comments", "CreatedDate", "CreatedUser", "IsDestroyed", "IsSystem", "LastDestroyedDate", "LastDestroyedUser", "LastModifiedDate", "LastModifiedUser", "RoleId", "SystemId", "UserId" },
-                values: new object[] { 3, null, new DateTime(2020, 10, 30, 15, 42, 9, 219, DateTimeKind.Utc).AddTicks(2651), "system", false, true, null, null, new DateTime(2020, 10, 30, 15, 42, 9, 219, DateTimeKind.Utc).AddTicks(2654), "system", 2, new Guid("7ae0fcf9-20ba-445f-9e4d-dcbfe6b5e842"), 2 });
+                values: new object[] { 3, null, new DateTime(2020, 11, 30, 19, 23, 29, 300, DateTimeKind.Utc).AddTicks(4561), "system", false, true, null, null, new DateTime(2020, 11, 30, 19, 23, 29, 300, DateTimeKind.Utc).AddTicks(4563), "system", 2, new Guid("1ee1e968-a413-43cf-8467-b3e89424bf0c"), 2 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Permissions_RoleId",
+                table: "Permissions",
+                column: "RoleId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TrackChanges_AuditId",
@@ -240,6 +276,9 @@ namespace Programatica.AspNetCore31AppSkeleton.Data.Migrations.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Dummies");
+
+            migrationBuilder.DropTable(
+                name: "Permissions");
 
             migrationBuilder.DropTable(
                 name: "TrackChanges");

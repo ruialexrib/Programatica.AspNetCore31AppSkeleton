@@ -29,6 +29,7 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
         [HttpGet]
         public async Task<IActionResult> AuditHistory(string systemid)
         {
+            var trackchanges = await _trackChangesRepository.GetDataAsync();
             var vm = (await _auditRepository.GetDataAsync())
                                      .Where(x => x.ContentSystemId == Guid.Parse(systemid))
                                      .Select(x => new AuditViewModel
@@ -40,9 +41,9 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
                                          ContentType = x.ContentType,
                                          CreatedDate = x.CreatedDate,
                                          CreatedUser = x.CreatedUser,
-                                         TrackedFieldsCount = _trackChangesRepository.GetData()
-                                                                                     .Where(z => z.AuditId == x.Id)
-                                                                                     .Count()
+                                         TrackedFieldsCount = trackchanges
+                                                                .Where(z => z.AuditId == x.Id)
+                                                                .Count()
                                      })
                                      .ToList();
             return PartialView("_AuditHistory", vm);

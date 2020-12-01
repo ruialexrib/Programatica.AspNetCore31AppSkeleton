@@ -1,0 +1,51 @@
+﻿@model List<UserRoleViewModel>
+
+@{
+    string on_close_click = Razor.Rnd();
+    string grid = Razor.Rnd();
+}
+
+<div class="modal-header">
+    <h5 class="modal-title"><i class="fa fa-table"></i> User Roles </h5>
+</div>
+
+<div class="modal-body">
+
+    <div class="row">
+        <div class="col-md-12 p-3">
+
+            <ejs-grid id="@grid"
+                      width="auto"
+                      dataSource="@Model"
+                      allowPaging="false"
+                      allowSorting="true"
+                      allowFiltering="true">
+                <e-grid-filterSettings type="Excel"></e-grid-filterSettings>
+                <e-grid-columns>
+                    <e-grid-column width="70" field="Id" headerText="ID" isPrimaryKey="true"></e-grid-column>
+                    <e-grid-column field="RoleName" headerText="ROLE"></e-grid-column>
+                    <e-grid-column field="Comments" headerText="COMMENTS"></e-grid-column>
+
+                </e-grid-columns>
+            </ejs-grid>
+
+        </div>
+    </div>
+
+</div>
+
+<div class="modal-footer">
+    <a href="#" class="btn btn-secondary" onclick="@(on_close_click)(event)">CLOSE</a>
+</div>
+
+<script type="text/javascript">
+
+
+    @on_close_click = (e) => {
+        e.preventDefault();
+        modal.close(e);
+    };
+
+</script>
+
+<ejs-scripts></ejs-scripts>

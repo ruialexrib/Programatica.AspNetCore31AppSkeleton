@@ -33,7 +33,7 @@ namespace Programatica.AspNetCore31AppSkeleton
             IDbContext context)
         {
             //https://stackoverflow.com/questions/42355481/auto-create-database-in-entity-framework-core
-            logger.LogInformation("Migrationg database.");
+            logger.LogInformation("Migrating database.");
             context.Database.Migrate();
 
             if (env.IsDevelopment())

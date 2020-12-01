@@ -1,21 +1,16 @@
-﻿@model PermissionViewModel
+﻿@model UserRoleViewModel
 
 <div class="modal-header">
-    <h5 class="modal-title"><i class="far fa-edit"></i> Edit Permission</h5>
+    <h5 class="modal-title"><i class="far fa-edit"></i> Create User Role</h5>
 </div>
 
 <div class="modal-body">
 
     <div class="row">
         <div class="col-md-12">
-            <form asp-action="Edit">
+            <form asp-action="Create">
 
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-                <div class="form-group">
-                    <label asp-for="Id" class="control-label"></label>
-                    <input asp-for="Id" class="form-control" disabled="disabled" />
-                </div>
 
                 <div class="form-group">
                     <label asp-for="ListOfUsers" class="control-label"></label>
@@ -47,5 +42,5 @@
 
 <div class="modal-footer">
     <a href="#" class="btn btn-secondary" onclick="on_cmd_close_click(event)">CLOSE</a>
-    <a href="#" class="btn btn-primary" onclick="on_cmd_edit_click(event)" data-loading-text="SAVING...">SAVE</a>
+    <a href="#" class="btn btn-primary" onclick="on_cmd_save_click(event)" data-loading-text="SAVING...">SAVE</a>
 </div>

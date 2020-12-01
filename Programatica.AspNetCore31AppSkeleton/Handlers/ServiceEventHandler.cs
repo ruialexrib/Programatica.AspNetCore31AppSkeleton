@@ -22,62 +22,35 @@ namespace Programatica.AspNetCore31AppSkeleton.Handlers
 
         #region unused events
 
-        public void OnAfterCreated(T model)
-        { }
-
         public Task OnAfterCreatedAsync(T model)
         {
             return Task.CompletedTask;
         }
-
-        public void OnAfterDeleted(T model)
-        { }
 
         public Task OnAfterDeletedAsync(T model)
         {
             return Task.CompletedTask;
         }
 
-        public void OnAfterDestroyed(T model)
-        { }
-
         public Task OnAfterDestroyedAsync(T model)
         {
             return Task.CompletedTask;
         }
-
-        public void OnAfterModified(T model)
-        { }
 
         public Task OnAfterModifiedAsync(T model)
         {
             return Task.CompletedTask;
         }
 
-        public void OnBeforeCreating(T model)
-        { }
-
-        public void OnBeforeDeleting(T model)
-        { }
-
-        public void OnBeforeDestroying(T model)
-        { }
-
         public Task OnBeforeDestroyingAsync(T model)
         {
             return Task.CompletedTask;
         }
 
-        public void OnBeforeInspecting(T model)
-        { }
-
         public Task OnBeforeInspectingAsync(T model)
         {
             return Task.CompletedTask;
         }
-
-        public void OnBeforeModifying(T model)
-        { }
 
         #endregion
 
@@ -97,14 +70,13 @@ namespace Programatica.AspNetCore31AppSkeleton.Handlers
             return Task.CompletedTask;
         }
 
-        public Task OnBeforeModifyingAsync(T model)
+        public async Task OnBeforeModifyingAsync(T model)
         {
-            var current = _modelRepository.GetData(model.Id);
+            var current =await _modelRepository.GetDataAsync(model.Id);
             model.SystemId = current.SystemId;
             model.IsSystem = current.IsSystem;
             model.CreatedDate = current.CreatedDate;
             model.CreatedUser = current.CreatedUser;
-            return Task.CompletedTask;
         }
 
     }

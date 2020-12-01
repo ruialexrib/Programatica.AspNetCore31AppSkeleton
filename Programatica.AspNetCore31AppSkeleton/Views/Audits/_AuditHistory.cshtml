@@ -6,13 +6,11 @@
     string on_grid_customizeCell = Razor.Rnd();
     string grid = Razor.Rnd();
 
-    var systemid = @Model.FirstOrDefault().ContentSystemId;
-    var type = @Model.FirstOrDefault().ContentType;
 }
 
 
 <div class="modal-header">
-    <h5 class="modal-title"><i class="fa fa-lock"></i> Audit History for '@systemid' @type type </h5>
+    <h5 class="modal-title"><i class="fa fa-lock"></i> Audit History </h5>
 </div>
 
 <div class="modal-body">

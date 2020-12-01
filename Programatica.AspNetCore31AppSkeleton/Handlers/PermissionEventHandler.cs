@@ -26,42 +26,6 @@ namespace Programatica.AspNetCore31AppSkeleton.Handlers
 
         #region unused events
 
-        public void OnAfterCreated(UserRole model)
-        {
-        }
-
-        public void OnAfterDeleted(UserRole model)
-        {
-        }
-
-        public void OnAfterDestroyed(UserRole model)
-        {
-        }
-
-        public void OnAfterModified(UserRole model)
-        {
-        }
-
-        public void OnBeforeCreating(UserRole model)
-        {
-        }
-
-        public void OnBeforeDeleting(UserRole model)
-        {
-        }
-
-        public void OnBeforeDestroying(UserRole model)
-        {
-        }
-
-        public void OnBeforeInspecting(UserRole model)
-        {
-        }
-
-        public void OnBeforeModifying(UserRole model)
-        {
-        }
-
         public Task OnAfterCreatedAsync(UserRole model)
         {
             return Task.CompletedTask;

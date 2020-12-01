@@ -55,13 +55,14 @@ namespace Programatica.AspNetCore31AppSkeleton.Services
                                 .Where(x => x.Username.Equals(user))
                                 .FirstOrDefault();
 
-            var userRoles = _userRoleService.Get()
+            var userRoles = (await _userRoleService.GetAsync())
                                             .Where(x => x.UserId == u.Id);
 
+            var roles = await _roleService.GetAsync();
             claims.AddRange(from UserRole ur in userRoles
-                            let role = _roleService.Get()
-                                                   .Where(x => x.Id == ur.RoleId)
-                                                   .FirstOrDefault()
+                            let role = roles
+                                    .Where(x => x.Id == ur.RoleId)
+                                    .FirstOrDefault()
                             select new Claim(ClaimTypes.Role, role.Name));
             return claims;
         }

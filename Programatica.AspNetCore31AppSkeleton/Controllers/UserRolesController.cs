@@ -33,7 +33,7 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
             IRepository<Role> roleRepository,
             IMapper mapper,
             ILogger<UserRolesController> logger)
-         {
+        {
             _userRoleService = userRoleService;
             _userRepository = userRepository;
             _roleRepository = roleRepository;
@@ -54,6 +54,7 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
                                                       UserId = s.UserId,
                                                       RoleName = s.Role.Name,
                                                       RoleId = s.RoleId,
+                                                      Comments = s.Comments,
                                                       LastModifiedDate = s.LastModifiedDate,
                                                       LastModifiedUser = s.LastModifiedUser
                                                   });
@@ -68,12 +69,14 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Create()
+        public async Task<IActionResult> Create(int? userId)
         {
             var vm = new UserRoleViewModel
             {
                 ListOfUsers = (await _userRepository.GetDataAsync()).ToList(),
-                ListOfRoles = (await _roleRepository.GetDataAsync()).ToList()
+                ListOfRoles = (await _roleRepository.GetDataAsync()).ToList(),
+                SelectedUserId = userId,
+                CanChangeUser = userId == null
             };
 
             return PartialView("_Create", vm);
@@ -176,7 +179,35 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
                     StatusCode = StatusCodes.Status400BadRequest
                 };
             }
+        }
 
+        [HttpGet]
+        public async Task<IActionResult> IndexByUser(int userId)
+        {
+            var userRoles = (await _userRoleService.GetAsync(x => x.Include(z => z.User)
+                                                                   .Include(z => z.Role)))
+                                   .Where(x => x.UserId.Equals(userId))
+                                   .Select(x => new UserRoleViewModel
+                                   {
+                                       Id = x.Id,
+                                       SystemId = x.SystemId,
+                                       UserId = x.UserId,
+                                       UserName = x.User.Username,
+                                       RoleId = x.RoleId,
+                                       RoleName = x.Role.Name,
+                                       Comments = x.Comments,
+                                       CreatedDate = x.CreatedDate,
+                                       CreatedUser = x.CreatedUser
+                                   })
+                                   .ToList();
+
+            var vm = new UserRolesByUserViewModel
+            {
+                ListOfUserRoleViewModel = userRoles,
+                UserId = userId
+            };
+
+            return PartialView("_IndexByUser", vm);
         }
 
     }

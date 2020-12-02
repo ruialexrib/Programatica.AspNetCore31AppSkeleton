@@ -14,8 +14,9 @@
 
                 <div class="form-group">
                     <label asp-for="ListOfUsers" class="control-label"></label>
-                    <select asp-for="SelectedUserId"
-                            asp-items="@(new SelectList(Model.ListOfUsers,"Id","Username"))" class="form-control">
+                    <select asp-for="SelectedUserId"                            
+                            disabled="@(!Model.CanChangeUser)"
+                            asp-items="@(new SelectList(Model.ListOfUsers,"Id","Username"))" class="form-control" >
                         <option>Please select one</option>
                     </select>
                 </div>
@@ -41,6 +42,6 @@
 </div>
 
 <div class="modal-footer">
-    <a href="#" class="btn btn-secondary" onclick="on_cmd_close_click(event)">CLOSE</a>
+    <a href="#" class="btn btn-secondary" onclick="modal.close(event)">CLOSE</a>
     <a href="#" class="btn btn-primary" onclick="on_cmd_save_click(event)" data-loading-text="SAVING...">SAVE</a>
 </div>

@@ -13,8 +13,10 @@ namespace Programatica.AspNetCore31AppSkeleton.ViewModels
         public string RoleName { get; set; }
 
         public List<User> ListOfUsers { get; set; }
-        public int SelectedUserId { get; set; }
+        public int? SelectedUserId { get; set; }
         public List<Role> ListOfRoles { get; set; }
         public int SelectedRoleId { get; set; }
+
+        public bool CanChangeUser { get; set; }
     }
 }

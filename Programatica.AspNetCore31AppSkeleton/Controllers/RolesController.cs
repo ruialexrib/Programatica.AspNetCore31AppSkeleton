@@ -153,49 +153,5 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
 
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        [HttpGet]
-        public async Task<IActionResult> RolesByUser(int userId)
-        {
-            //var a = await _userRoleService.GetAsync(1);
-            //var b = await _userRoleService.GetAsync(1, x => x.Include(z => z.User).Include(z => z.Role));
-            //var c = await _modelService.GetAsync(1);
-            //var d = await _modelService.GetAsync(1, x => x.Include(z => z.UserRoles).ThenInclude(y=>y.User));
-
-            var userRoles = (await _userRoleRepository.GetDataAsync(x => x.Include(z => z.User)
-                                                                   .Include(z => z.Role)))
-                                   .Where(x => x.UserId.Equals(userId))
-                                   .Select(x => new UserRoleViewModel
-                                   {
-                                       Id = x.Id,
-                                       SystemId = x.SystemId,
-                                       UserId = x.UserId,
-                                       UserName = x.User.Username,
-                                       RoleId = x.RoleId,
-                                       RoleName = x.Role.Name,
-                                       CreatedDate = x.CreatedDate,
-                                       CreatedUser = x.CreatedUser
-                                   })
-                                   .ToList();
-
-            return PartialView("_RolesByUser", userRoles);
-        }
     }
 }

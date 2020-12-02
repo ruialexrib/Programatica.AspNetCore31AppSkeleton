@@ -14,7 +14,7 @@ namespace Programatica.AspNetCore31AppSkeleton.Data.Migrations.Context
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }
-        public DbSet<Permission> Permissions { get; set; }
+        public DbSet<RoleAction> RoleActions { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)

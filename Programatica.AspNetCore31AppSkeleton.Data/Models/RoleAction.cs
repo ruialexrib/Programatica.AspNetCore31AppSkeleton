@@ -1,11 +1,8 @@
 ﻿using Programatica.Framework.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Programatica.AspNetCore31AppSkeleton.Data.Models
 {
-    public class Permission : BaseModel
+    public class RoleAction : BaseModel
     {
         public int RoleId { get; set; }
         public virtual Role Role { get; set; }

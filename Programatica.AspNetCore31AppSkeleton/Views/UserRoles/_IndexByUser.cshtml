@@ -1,8 +1,10 @@
-﻿@model List<UserRoleViewModel>
+﻿@model UserRolesByUserViewModel
 
 @{
     string on_close_click = Razor.Rnd();
     string grid = Razor.Rnd();
+
+    string user_id = Razor.Rnd();
 }
 
 <div class="modal-header">
@@ -14,9 +16,17 @@
     <div class="row">
         <div class="col-md-12 p-3">
 
+            <nav class="navbar navbar-expand navbar-light bg-light navbar-menu">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item ">
+                        <a href="#" class="nav-link text-dark" onclick="layout.show_form('userId', @(user_id),'UserRoles','Create', modalsizes.SMALL)"><i class="fas fa-plus"></i> NEW</a>
+                    </li>
+                </ul>
+            </nav>
+
             <ejs-grid id="@grid"
                       width="auto"
-                      dataSource="@Model"
+                      dataSource="@Model.ListOfUserRoleViewModel"
                       allowPaging="false"
                       allowSorting="true"
                       allowFiltering="true">
@@ -35,16 +45,12 @@
 </div>
 
 <div class="modal-footer">
-    <a href="#" class="btn btn-secondary" onclick="@(on_close_click)(event)">CLOSE</a>
+    <a href="#" class="btn btn-secondary" onclick="modal.close(event)">CLOSE</a>
 </div>
 
 <script type="text/javascript">
 
-
-    @on_close_click = (e) => {
-        e.preventDefault();
-        modal.close(e);
-    };
+    @user_id = @(Model.UserId);
 
 </script>
 

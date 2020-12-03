@@ -1,6 +1,8 @@
 ﻿@model IEnumerable<User>
 
 @{
+    // dynamic js
+    
     string record_id = Razor.Rnd();
     string record_name = Razor.Rnd();
     string record_systemid = Razor.Rnd();
@@ -19,45 +21,45 @@
 }
 
 @{
-    ViewData["Title"] = "USERS PAGE";
+    ViewData["Title"] = "Manage users list";
 }
 
 <nav class="navbar navbar-expand navbar-light bg-light navbar-menu">
     <ul class="navbar-nav mr-auto">
         <li class="nav-item ">
-            <a href="#" class="nav-link text-dark" onclick="layout.show_users_create()"><i class="fas fa-plus"></i> NEW</a>
+            <a href="#" class="nav-link text-dark" onclick='layout.frm("@Url.Action("Create", "Users")", modalsizes.NORMAL)'><i class="fas fa-plus"></i> New record</a>
         </li>
         <li class="nav-item ">
-            <a href="#" class="nav-link text-dark" onclick="layout.show_users_edit(@record_id)"><i class="fas fa-edit"></i> UPDATE</a>
+            <a href="#" class="nav-link text-dark" onclick='layout.frm("@Url.Action("Edit", "Users")?id=" + @record_id, modalsizes.NORMAL)'><i class="fas fa-edit"></i> Update</a>
         </li>
         <li class="nav-item ">
-            <a href="#" class="nav-link text-dark" onclick="@(delete)(@(record_id))"><i class="fas fa-trash"></i> DELETE</a>
+            <a href="#" class="nav-link text-dark" onclick="@(delete)(@(record_id))"><i class="fas fa-trash"></i> Delete</a>
         </li>
         <li class="nav-item">
-            <a href="#" class="nav-link text-dark" onclick="layout.refresh_usersgrid()"><i class="fas fa-sync-alt"></i> REFRESH</a>
+            <a href="#" class="nav-link text-dark" onclick="layout.refresh_usersgrid()"><i class="fas fa-sync-alt"></i> Refresh</a>
         </li>
 
         <li class="nav-item dropdown d-none d-md-block">
             <a class="nav-link  text-dark dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                VIEW
+                View
             </a>
             <div class="dropdown-menu">
-                <a class="dropdown-item text-dark" href="#" onclick="@(show_groups)()"><i class="far fa-object-ungroup"></i> TOGGLE GROUP</a>
+                <a class="dropdown-item text-dark" href="#" onclick="@(show_groups)()"><i class="far fa-object-ungroup"></i> Toggle groups</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item text-dark" href="#" onclick="@(clear_filters)()"><i class="fas fa-filter"></i> CLEAR FILTERS</a>
+                <a class="dropdown-item text-dark" href="#" onclick="@(clear_filters)()"><i class="fas fa-filter"></i> Clear filters</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item text-dark" href="#" onclick="@(clear_search)()"><i class="fas fa-search"></i> CLEAR SEARCH</a>
+                <a class="dropdown-item text-dark" href="#" onclick="@(clear_search)()"><i class="fas fa-search"></i> Clear search</a>
             </div>
         </li>
 
         <li class="nav-item dropdown d-none d-md-block">
             <a class="nav-link  text-dark dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                NAVIGATION
+                Navigation
             </a>
             <div class="dropdown-menu">
-                <a class="dropdown-item text-dark" href="#" onclick="layout.show_form('systemid', @record_systemid, 'Audits', 'AuditHistory', modalsizes.LARGE)"><i class="fas fa-lock"></i> AUDIT</a>
+                <a class="dropdown-item text-dark" href="#" onclick='layout.frm("@Url.Action("AuditHistory", "Audits")?systemid=" + @record_systemid, modalsizes.LARGE)'><i class="fas fa-lock"></i> Audit</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item text-dark" href="#" onclick="layout.show_form('userId', @record_id, 'UserRoles', 'IndexByUser', modalsizes.NORMAL)"><i class="fas fa-users "></i> USER ROLES</a>
+                <a class="dropdown-item text-dark" href="#" onclick='layout.frm("@Url.Action("IndexByUser", "UserRoles")?userId=" + @record_id, modalsizes.NORMAL)'><i class="fas fa-users "></i> User roles</a>
             </div>
         </li>
 
@@ -83,12 +85,12 @@
     <e-data-manager url="@Url.Action("UrlDatasource", "Users")" adaptor="UrlAdaptor"></e-data-manager>
     <e-grid-filterSettings type="Excel"></e-grid-filterSettings>
     <e-grid-columns>
-        <e-grid-column width="70" field="Id" headerText="ID" isPrimaryKey="true"></e-grid-column>
-        <e-grid-column width="200" field="Username" headerText="USERNAME"></e-grid-column>
-        <e-grid-column width="200" field="Email" headerText="EMAIL"></e-grid-column>
-        <e-grid-column width="200" field="Fullname" headerText="FULLNAME"></e-grid-column>
-        <e-grid-column width="120" field="LastModifiedUser" headerText="MODIF. USER"></e-grid-column>
-        <e-grid-column width="120" field="LastModifiedDate" headerText="MODIF. DATE" customFormat="@(new { type ="date", format="yyyy-MM-dd HH:mm:ss" })" type="date"></e-grid-column>
+        <e-grid-column width="70" field="Id" headerText="Id" isPrimaryKey="true"></e-grid-column>
+        <e-grid-column width="200" field="Username" headerText="Username"></e-grid-column>
+        <e-grid-column width="200" field="Email" headerText="Email"></e-grid-column>
+        <e-grid-column width="200" field="Fullname" headerText="Fullname"></e-grid-column>
+        <e-grid-column width="120" field="LastModifiedUser" headerText="Modif. user"></e-grid-column>
+        <e-grid-column width="120" field="LastModifiedDate" headerText="Modif. date" customFormat="@(new { type ="date", format="yyyy-MM-dd HH:mm:ss" })" type="date"></e-grid-column>
     </e-grid-columns>
 </ejs-grid>
 
@@ -123,7 +125,7 @@
 
         @on_grid_dblclick = (args) => {
             @record_id = args.rowData.Id;
-            layout.show_users_edit(@record_id);
+            layout.frm("@Url.Action("Edit", "Users")?id=" + @record_id, modalsizes.NORMAL);
         };
 
         @clear_filters = () => {

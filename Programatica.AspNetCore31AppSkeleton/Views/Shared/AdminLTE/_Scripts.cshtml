@@ -73,8 +73,20 @@
 
     var layout = layout || {};
 
-    layout.show_form = (paramName, paramValue, controller, action, modalsize) => {
-        var url = "@Url.Content("~/")" + controller + "/" + action + "?" + paramName + "=" + paramValue;
+    layout.show_form = (controller, action, modalsize, paramName, paramValue) => {
+        var url = "@Url.Content("~/")" + controller + "/" + action;
+        if (paramName && paramValue) {
+            url = url + "?" + paramName + "=" + paramValue;
+        }
+        modal.show(url, modalsize)
+            .then((h) => {
+            })
+            .catch((e) => {
+                global.toasterror(e);
+            });
+    };
+
+    layout.frm = (url, modalsize) => {
         modal.show(url, modalsize)
             .then((h) => {
             })
@@ -120,7 +132,7 @@
         }
     };
 
-    layout.show_users_create = () => {
+    @*layout.show_users_create = () => {
         var url = "@Url.Action("Create", "Users")";
         modal.show(url, modalsizes.NORMAL)
             .then((h) => {
@@ -128,9 +140,9 @@
             .catch((e) => {
                 global.toasterror(e);
             });
-    }
+    }*@
 
-    layout.show_users_edit = (id) => {
+    @*layout.show_users_edit = (id) => {
         if (id) {
             var url = "@Url.Action("Edit", "Users")?id=" + id;
             modal.show(url, modalsizes.NORMAL)
@@ -143,9 +155,9 @@
         else {
             global.alert("You must select a record !");
         }
-    };
+    };*@
 
-    layout.show_users_modal = () => {
+    @*layout.show_users_modal = () => {
         var url = "@Url.Action("Modal", "Users")";
         modal.show(url, modalsizes.XLARGE)
             .then((h) => {
@@ -153,9 +165,9 @@
             .catch((e) => {
                 global.toasterror(e);
             });
-    };
+    };*@
 
-    layout.show_users_modal2 = () => {
+    @*layout.show_users_modal2 = () => {
         var url = "@Url.Action("Modal2", "Users")";
         modal.show(url, modalsizes.LARGE)
             .then((h) => {
@@ -163,7 +175,7 @@
             .catch((e) => {
                 global.toasterror(e);
             });
-    };
+    };*@
 
     @*layout.show_users_roles = (id) => {
         var url = "@Url.Action("IndexByUser", "UserRoles")?userId=" + id;

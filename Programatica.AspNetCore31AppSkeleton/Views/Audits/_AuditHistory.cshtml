@@ -1,4 +1,4 @@
-﻿@model List<AuditViewModel>
+﻿@model AuditHistoryViewModel
 
 @{
     string on_grid_dblclick = Razor.Rnd();
@@ -16,46 +16,138 @@
 <div class="modal-body">
 
     <div class="row">
-        <div class="col-md-12 p-3">
+        <div class="col-md-12">
 
-            <div class="alert alert-light alert-dismissible fade show" role="alert">
-                Double click audit record to view fileds track changes.
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="history-tab" data-toggle="tab" href="#history" role="tab" aria-controls="history" aria-selected="false">Audit history</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="details-tab" data-toggle="tab" href="#details" role="tab" aria-controls="details" aria-selected="true">Model details</a>
+                </li>
+            </ul>
+            <!-- /.nav nav-pills -->
+
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade" id="details" role="tabpanel" aria-labelledby="details-tab">
+                    <div class="col-12 p-3">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group row">
+                                    <div class="col-4">
+                                        <label asp-for="Id" class="control-label"></label>
+                                    </div>
+                                    <div class="col-8">
+                                        <input asp-for="Id" class="form-control" disabled />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group row">
+                                    <div class="col-4">
+                                        <label asp-for="SystemId" class="control-label"></label>
+                                    </div>
+                                    <div class="col-8">
+                                        <input asp-for="SystemId" class="form-control" disabled />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group row">
+                                    <div class="col-4">
+                                        <label asp-for="CreatedDate" class="control-label"></label>
+                                    </div>
+                                    <div class="col-8">
+                                        <input asp-for="CreatedDate" class="form-control" disabled />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group row">
+                                    <div class="col-4">
+                                        <label asp-for="CreatedUser" class="control-label"></label>
+                                    </div>
+                                    <div class="col-8">
+                                        <input asp-for="CreatedUser" class="form-control" disabled />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group row">
+                                    <div class="col-4">
+                                        <label asp-for="LastModifiedDate" class="control-label"></label>
+                                    </div>
+                                    <div class="col-8">
+                                        <input asp-for="LastModifiedDate" class="form-control" disabled />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group row">
+                                    <div class="col-4">
+                                        <label asp-for="LastModifiedUser" class="control-label"></label>
+                                    </div>
+                                    <div class="col-8">
+                                        <input asp-for="LastModifiedUser" class="form-control" disabled />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /details-tab -->
+
+                <div class="tab-pane fade show active" id="history" role="tabpanel" aria-labelledby="history-tab">
+                    <div class="col-12 p-3">
+
+                        @{
+                            List<object> filterSettings = new List<object>();
+                            filterSettings.Add(new { field = "ContentFunction", matchCase = false, @operator = "notequal", predicate = "and", value = "Inspect" });
+                        }
+
+                        @{
+                            List<object> sortSettings = new List<object>();
+                            sortSettings.Add(new { field = "CreatedDate", direction = "Descending" });
+                        }
+
+                        <ejs-grid id="@grid"
+                                  width="auto"
+                                  dataSource="@Model.ListOfAuditViewModel"
+                                  allowPaging="true"
+                                  allowSorting="true"
+                                  allowFiltering="true"
+                                  recordDoubleClick="@on_grid_dblclick"
+                                  queryCellInfo="@on_grid_customizeCell">
+                            <e-grid-pagesettings pageSizes="true" pageSize="5"></e-grid-pagesettings>
+                            <e-grid-filterSettings columns="filterSettings" type="Excel"></e-grid-filterSettings>
+                            <e-grid-sortsettings columns="sortSettings"></e-grid-sortsettings>
+                            <e-grid-columns>
+                                <e-grid-column width="70" field="Id" headerText="Id" isPrimaryKey="true"></e-grid-column>
+                                <e-grid-column field="ContentFunction" headerText="Function"></e-grid-column>
+                                <e-grid-column field="CreatedUser" headerText="User"></e-grid-column>
+                                <e-grid-column field="CreatedDate" headerText="Date" customFormat="@(new { type ="date", format="yyyy-MM-dd HH:mm:ss" })" type="date"></e-grid-column>
+                                <e-grid-column field="TrackedFieldsCount" headerText="Fields"></e-grid-column>
+
+                            </e-grid-columns>
+                        </ejs-grid>
+
+                        <div class="alert alert-info alert-dismissible fade show mt-3" role="alert">
+                            Double click audit record to view fileds track changes.
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- history-tab -->
+
             </div>
-
-
-            @{
-                List<object> filterSettings = new List<object>();
-                filterSettings.Add(new { field = "ContentFunction", matchCase = false, @operator = "notequal", predicate = "and", value = "Inspect" });
-            }
-
-            @{
-                List<object> sortSettings = new List<object>();
-                sortSettings.Add(new { field = "CreatedDate", direction = "Descending" });
-            }
-
-        <ejs-grid id="@grid"
-                  width="auto"
-                  dataSource="@Model"
-                  allowPaging="true"
-                  allowSorting="true"
-                  allowFiltering="true"
-                  recordDoubleClick="@on_grid_dblclick"
-                  queryCellInfo="@on_grid_customizeCell">
-            <e-grid-pagesettings pageSizes="true" pageSize="5"></e-grid-pagesettings>
-            <e-grid-filterSettings columns="filterSettings" type="Excel"></e-grid-filterSettings>
-            <e-grid-sortsettings columns="sortSettings"></e-grid-sortsettings>
-            <e-grid-columns>
-                <e-grid-column width="70" field="Id" headerText="ID" isPrimaryKey="true"></e-grid-column>
-                <e-grid-column field="ContentFunction" headerText="FUNCTION"></e-grid-column>
-                <e-grid-column field="CreatedUser" headerText="USER"></e-grid-column>
-                <e-grid-column field="CreatedDate" headerText="DATE" customFormat="@(new { type ="date", format="yyyy-MM-dd HH:mm:ss" })" type="date"></e-grid-column>
-                <e-grid-column field="TrackedFieldsCount" headerText="FIELDS"></e-grid-column>
-
-            </e-grid-columns>
-        </ejs-grid>
+            <!-- /.tab-content* -->
 
         </div>
     </div>

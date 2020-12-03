@@ -30,7 +30,7 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
         public async Task<IActionResult> AuditHistory(string systemid)
         {
             var trackchanges = await _trackChangesRepository.GetDataAsync();
-            var vm = (await _auditRepository.GetDataAsync())
+            var audits = (await _auditRepository.GetDataAsync())
                                      .Where(x => x.ContentSystemId == Guid.Parse(systemid))
                                      .Select(x => new AuditViewModel
                                      {
@@ -45,7 +45,23 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
                                                                 .Where(z => z.AuditId == x.Id)
                                                                 .Count()
                                      })
+                                     .OrderBy(x => x.CreatedDate)
                                      .ToList();
+
+            var created = audits.Where(x => x.ContentFunction.Equals("Create")).FirstOrDefault();
+            var lastmodified = audits.Where(x => x.ContentFunction.Equals("Modify")).LastOrDefault();
+
+            var vm = new AuditHistoryViewModel
+            {
+                ListOfAuditViewModel = audits,
+                Id = created.ContentId,
+                SystemId = created.ContentSystemId,
+                CreatedDate = created.CreatedDate,
+                CreatedUser = created.CreatedUser,
+                LastModifiedDate = lastmodified.CreatedDate,
+                LastModifiedUser = lastmodified.CreatedUser
+            };
+
             return PartialView("_AuditHistory", vm);
         }
 

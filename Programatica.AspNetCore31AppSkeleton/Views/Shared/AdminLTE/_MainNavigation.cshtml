@@ -1,13 +1,14 @@
 ﻿@inject Programatica.Framework.Core.Adapter.IAuthUserAdapter _authUserAdapter
 @inject IAppPageAdapter _page
 <!-- Main Sidebar Container -->
-<aside class="main-sidebar sidebar-dark-primary elevation-4">
+<aside class="main-sidebar sidebar-dark-primary elevation-2">
     <!-- Brand Logo -->
     <a asp-controller="Home" asp-action="Index" class="brand-link">
-        <img src="~/img/AdminLTELogo.png" alt="AppSkeleton Logo" class="brand-image img-circle elevation-3"
+        <img src="~/img/brand.png" alt="AppSkeleton Logo" class="brand-image img-circle elevation-0"
              style="opacity: .8">
-        <span class="brand-text font-weight-light">APP SKELETON</span>
+        <span class="brand-text font-weight-light">App Skeleton <span class="text-muted text-xs">[@_page.AppVersion]</span></span>
     </a>
+
 
     <!-- Sidebar -->
     <div class="sidebar">
@@ -17,7 +18,7 @@
                 <img src="~/img/ruialexrib.jpg" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">@_authUserAdapter.Name </a>
+                <a href="#" class="d-block">@_authUserAdapter.Name <span class="text-muted text-xs">[@_authUserAdapter.LastLoginDateTime]</span></a>
             </div>
         </div>
 

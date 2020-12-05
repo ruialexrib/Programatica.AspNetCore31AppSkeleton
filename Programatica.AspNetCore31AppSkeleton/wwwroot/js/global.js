@@ -30,6 +30,7 @@ global.submit = function (url, data, token) {
             dataType: "json",
             contentType: "application/json"
         }).done(function (status) {
+            console.log("ok");
             resolve(status);
         }).fail(function (jqXHR) {
             reject(jqXHR.responseText);

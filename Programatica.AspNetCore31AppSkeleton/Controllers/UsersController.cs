@@ -160,12 +160,5 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
             return PartialView("_Modal");
         }
 
-        [HttpGet]
-        [DisplayName("Open Modal2 Form")]
-        public IActionResult Modal2()
-        {
-            return PartialView("_Modal2");
-        }
-
     }
 }

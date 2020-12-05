@@ -36,6 +36,7 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
                                      {
                                          Id = x.Id,
                                          SystemId = x.SystemId,
+                                         ContentId = x.ContentId,
                                          ContentSystemId = x.ContentSystemId,
                                          ContentFunction = x.ContentFunction,
                                          ContentType = x.ContentType,

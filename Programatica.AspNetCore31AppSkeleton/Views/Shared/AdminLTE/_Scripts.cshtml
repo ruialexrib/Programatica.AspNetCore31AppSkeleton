@@ -15,6 +15,7 @@
 <script src="~/plugins/bootbox/bootbox.all.js"></script>
 <script src="~/plugins/toastr/toastr.min.js"></script>
 <script src="~/plugins/pace/pace.min.js"></script>
+<script src="~/plugins/jquery-ui/jquery-ui.js"></script>
 
 <!-- site -->
 <script src="~/js/cfg.js"></script>
@@ -62,8 +63,8 @@
         _page.warnings.forEach((w) => { global.toastwarning(w); });
         _page.alerts.forEach((a) => { global.toasterror(a); });
 
-        global.toastinfo("ControllerName:<br>" + _page.controllerName);
-        global.toastinfo("ActionName:<br>" + _page.actionName);
+        //global.toastinfo("ControllerName:<br>" + _page.controllerName);
+        //global.toastinfo("ActionName:<br>" + _page.actionName);
     });
 
 </script>
@@ -73,10 +74,10 @@
 
     var layout = layout || {};
 
-    layout.show_form = (controller, action, modalsize, paramName, paramValue) => {
+    layout.modal = (controller, action, params, modalsize) => {
         var url = "@Url.Content("~/")" + controller + "/" + action;
-        if (paramName && paramValue) {
-            url = url + "?" + paramName + "=" + paramValue;
+        if (params) {
+            url = url + "?" + params;
         }
         modal.show(url, modalsize)
             .then((h) => {
@@ -85,16 +86,6 @@
                 global.toasterror(e);
             });
     };
-
-    layout.frm = (url, modalsize) => {
-        modal.show(url, modalsize)
-            .then((h) => {
-            })
-            .catch((e) => {
-                global.toasterror(e);
-            });
-    };
-
 
         @*layout.show_audits_audithistory = (systemId) => {
             var url = "@Url.Action("AuditHistory", "Audits")?systemid=" + systemId;

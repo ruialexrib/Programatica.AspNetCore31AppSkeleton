@@ -2,11 +2,14 @@
 
 @{
     string on_save_click = Razor.Rnd();
+    string on_modal_click = Razor.Rnd();
     string form = Razor.Rnd();
 }
 
 <div class="modal-header">
     <h5 class="modal-title"><i class="far fa-edit"></i> Create User</h5>
+    <a href="#" class="close" aria-label="Close" onclick="modal.close(event)"><span aria-hidden="true">&times;</span></a>
+
 </div>
 
 <div class="modal-body">
@@ -51,9 +54,9 @@
 </div>
 
 <div class="modal-footer">
-    <a href="#" class="btn btn-secondary" onclick="layout.show_form('Users', 'Modal', modalsizes.XLARGE)">MODAL</a>
-    <a href="#" class="btn btn-secondary" onclick="modal.close(event)">CLOSE</a>
-    <a href="#" class="btn btn-primary" onclick="@(on_save_click)(event)" data-loading-text="SAVING...">SAVE</a>
+    <a href="#" class="btn btn-secondary" onclick="@(on_modal_click)()">Open modal</a>
+    <a href="#" class="btn btn-secondary" onclick="modal.close(event)">Close</a>
+    <a href="#" class="btn btn-primary" onclick="@(on_save_click)(event)" data-loading-text="Saving...">Save</a>
 </div>
 
 <script type="text/javascript">
@@ -61,26 +64,44 @@
     @on_save_click = (e) => {
         e.preventDefault();
 
-        var url = "@Url.Action("Create", "Users")";
-        var data = {
-            Username: $("#@form #Username").val(),
-            Password: $("#@form #Password").val(),
-            Fullname: $("#@form #Fullname").val(),
-        };
-        var token = global.gettoken();
+        try {
+            var url = "@Url.Action("Create", "Users")";
+            var data = {
+                Username: $("#@form #Username").val(),
+                Password: $("#@form #Password").val(),
+                Fullname: $("#@form #Fullname").val(),
+            };
+            var token = global.gettoken();
 
-        global.submit(url, data, token)
-            .then((status) => {
-                var id = status.id;
-                layout.show_users_edit(id);
-                layout.refresh_usersgrid();
-                modal.close(e);
-                global.toastsuccess("Record [" + id + "] created with success!");
-            })
-            .catch((status) => {
+            global.submit(url, data, token)
+                .then((status) => {
+                    try {
+                        var id = status.id;
+                        layout.modal("Users", "Edit", "id=" + id, modalsizes.NORMAL);
+                    } catch (e) {
+                        global.toasterror(e);
+                    } finally {
+                        layout.refresh_usersgrid();
+                        global.toastsuccess("Record [" + id + "] created with success!");
+                        modal.close(e);
+                    }
+                })
+                .catch((status) => {
+                    console.dir(status);
                     var s = JSON.parse(status);
                     global.toasterror(s.message);
-            });
+                });
+        } catch (e) {
+            global.toasterror(e);
+        }
     };
+
+    @on_modal_click = () => {
+        try {
+            layout.modal("Users", "Modal", null, modalsizes.XLARGE);
+        } catch (e) {
+            global.toasterror(e);
+        } 
+    }
 
 </script>

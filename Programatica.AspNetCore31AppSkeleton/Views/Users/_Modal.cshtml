@@ -1,8 +1,11 @@
 ﻿@{
+    string on_modal_click = Razor.Rnd();
 }
 
 <div class="modal-header">
-    <h5 class="modal-title"><i class="far fa-edit"></i> Modal #1</h5>
+    <h5 class="modal-title"><i class="far fa-edit"></i> Modal</h5>
+    <a href="#" class="close" aria-label="Close" onclick="modal.close(event)"><span aria-hidden="true">&times;</span></a>
+
 </div>
 
 <div class="modal-body">
@@ -14,9 +17,18 @@
 </div>
 
 <div class="modal-footer">
-    <a href="#" class="btn btn-secondary" onclick="layout.show_form('Users', 'Modal2', modalsizes.LARGE)">MODAL</a>
-    <a href="#" class="btn btn-secondary" onclick="modal.close(event)">CLOSE</a>
+    <a href="#" class="btn btn-secondary" onclick="@(on_modal_click)()">Open modal</a>
+    <a href="#" class="btn btn-secondary" onclick="modal.close(event)">Close</a>
 </div>
 
 <script type="text/javascript">
+
+    @on_modal_click = () => {
+        try {
+            layout.modal("Users", "Modal", null, modalsizes.LARGE);
+        } catch (e) {
+            global.toasterror(e);
+        }
+    }
+
 </script>

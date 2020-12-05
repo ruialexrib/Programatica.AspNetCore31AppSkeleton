@@ -2,7 +2,7 @@
 
 @{
     // dynamic js
-    
+
     string record_id = Razor.Rnd();
     string record_name = Razor.Rnd();
     string record_systemid = Razor.Rnd();
@@ -11,6 +11,10 @@
     string on_grid_databound = Razor.Rnd();
     string on_grid_click = Razor.Rnd();
     string on_grid_dblclick = Razor.Rnd();
+
+    string on_new_click = Razor.Rnd();
+    string on_edit_click = Razor.Rnd();
+    string on_audithistory_click = Razor.Rnd();
 
     string clear_filters = Razor.Rnd();
     string clear_search = Razor.Rnd();
@@ -27,10 +31,10 @@
 <nav class="navbar navbar-expand navbar-light bg-light navbar-menu">
     <ul class="navbar-nav mr-auto">
         <li class="nav-item ">
-            <a href="#" class="nav-link text-dark" onclick='layout.frm("@Url.Action("Create", "Users")", modalsizes.NORMAL)'><i class="fas fa-plus"></i> New record</a>
+            <a href="#" class="nav-link text-dark" onclick='@(on_new_click)()'><i class="fas fa-plus"></i> New record</a>
         </li>
         <li class="nav-item ">
-            <a href="#" class="nav-link text-dark" onclick='layout.frm("@Url.Action("Edit", "Users")?id=" + @record_id, modalsizes.NORMAL)'><i class="fas fa-edit"></i> Update</a>
+            <a href="#" class="nav-link text-dark" onclick='@(on_edit_click)(@record_id)'><i class="fas fa-edit"></i> Update</a>
         </li>
         <li class="nav-item ">
             <a href="#" class="nav-link text-dark" onclick="@(delete)(@(record_id))"><i class="fas fa-trash"></i> Delete</a>
@@ -57,9 +61,9 @@
                 Navigation
             </a>
             <div class="dropdown-menu">
-                <a class="dropdown-item text-dark" href="#" onclick='layout.frm("@Url.Action("AuditHistory", "Audits")?systemid=" + @record_systemid, modalsizes.LARGE)'><i class="fas fa-lock"></i> Audit</a>
+                <a class="dropdown-item text-dark" href="#" onclick='@(on_audithistory_click)(@record_systemid)'><i class="fas fa-lock"></i> Audit</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item text-dark" href="#" onclick='layout.frm("@Url.Action("IndexByUser", "UserRoles")?userId=" + @record_id, modalsizes.NORMAL)'><i class="fas fa-users "></i> User roles</a>
+                <a class="dropdown-item text-dark" href="#" onclick='layout.modal("UserRoles", "IndexByUser", "userId=" + @record_id, modalsizes.NORMAL)'><i class="fas fa-users "></i> User roles</a>
             </div>
         </li>
 
@@ -85,12 +89,10 @@
     <e-data-manager url="@Url.Action("UrlDatasource", "Users")" adaptor="UrlAdaptor"></e-data-manager>
     <e-grid-filterSettings type="Excel"></e-grid-filterSettings>
     <e-grid-columns>
-        <e-grid-column width="70" field="Id" headerText="Id" isPrimaryKey="true"></e-grid-column>
+        <e-grid-column width="100" field="Id" headerText="Id" isPrimaryKey="true"></e-grid-column>
         <e-grid-column width="200" field="Username" headerText="Username"></e-grid-column>
         <e-grid-column width="200" field="Email" headerText="Email"></e-grid-column>
         <e-grid-column width="200" field="Fullname" headerText="Fullname"></e-grid-column>
-        <e-grid-column width="120" field="LastModifiedUser" headerText="Modif. user"></e-grid-column>
-        <e-grid-column width="120" field="LastModifiedDate" headerText="Modif. date" customFormat="@(new { type ="date", format="yyyy-MM-dd HH:mm:ss" })" type="date"></e-grid-column>
     </e-grid-columns>
 </ejs-grid>
 
@@ -125,8 +127,28 @@
 
         @on_grid_dblclick = (args) => {
             @record_id = args.rowData.Id;
-            layout.frm("@Url.Action("Edit", "Users")?id=" + @record_id, modalsizes.NORMAL);
+            layout.modal("Users", "Edit", "id=" + @record_id, modalsizes.NORMAL)
         };
+
+        @on_new_click = () => {
+            layout.modal("Users", "Create", null, modalsizes.NORMAL);
+        }
+
+        @on_edit_click = (id) => {
+            if (id) {
+                layout.modal("Users", "Edit", "id=" + id, modalsizes.NORMAL)
+            } else {
+                global.toasterror("Record not selected");
+            }
+        }
+
+        @on_audithistory_click = (systemId) => {
+            if (systemId) {
+                layout.modal("Audits", "AuditHistory", "systemid=" + systemId, modalsizes.LARGE)
+            } else {
+                global.toasterror("Record not selected");
+            }
+        }
 
         @clear_filters = () => {
             var grid = layout.get_usersgrid();

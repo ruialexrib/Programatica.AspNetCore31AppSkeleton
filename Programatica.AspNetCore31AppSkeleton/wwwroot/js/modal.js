@@ -18,8 +18,10 @@ modal.show = function (url, size = modalsizes.NORMAL) {
 
         var container = $("#" + containerguid);
         var content = $("#" + contentguid);
+        var dialog = $("#" + dialoguid);
 
-        $(container).attr('modal-url', url);
+        $(container).attr('data-modal-url', url);
+        $(container).attr('data-modal-size', size != "" ? size : 'modal-nm');
 
         global.get(url)
             .then((html) => {
@@ -28,6 +30,9 @@ modal.show = function (url, size = modalsizes.NORMAL) {
                     keyboard: false
                 });
                 content.html(html);
+                dialog.draggable({
+                    handle: ".modal-header"
+                })
                 resolve(html);
             })
             .catch((error) => {
@@ -52,7 +57,7 @@ modal.close = function (e) {
 
 modal.create = function (containerguid, dialogguid, contentguid, size) {
     var modalList = $("#modalList");
-    modalList.append("<div id='" + containerguid + "' class='modal fade' role='dialog' data-backdrop='static'><div id='" + dialogguid + "'class='modal-dialog " + size + "'><div id='" + contentguid + "' class='modal-content'></div></div></div>");
+    modalList.append("<div id='" + containerguid + "' class='modal fade' role='dialog' data-backdrop='static'><div id='" + dialogguid + "'class='modal-dialog modal-dialog-centered " + size + "'><div id='" + contentguid + "' class='modal-content'></div></div></div>");
 }
 
 modal.destroy = function (container) {

@@ -3,8 +3,8 @@
 cfg.modal = cfg.modal || {};
 
 cfg.bootbox = cfg.bootbox || {};
-cfg.bootbox.btnYes = "YES";
-cfg.bootbox.btnNo = "NO";
+cfg.bootbox.btnYes = "Yes";
+cfg.bootbox.btnNo = "No";
 
 cfg.text = cfg.text || {};
 cfg.text.askConfirmTitle = '<i class="fas fa-exclamation-circle text-primary"></i> Please confirm';

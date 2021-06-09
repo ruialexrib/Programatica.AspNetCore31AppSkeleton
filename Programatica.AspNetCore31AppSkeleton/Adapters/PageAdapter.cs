@@ -51,6 +51,7 @@ namespace Programatica.AspNetCore31AppSkeleton.Adapters
         {
             get { return _tempData["ControllerName"] as string; }
         }
+
         public string ActionName
         {
             get { return _tempData["ControllerAction"] as string; }

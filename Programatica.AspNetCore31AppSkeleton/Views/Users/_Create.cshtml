@@ -1,8 +1,10 @@
-﻿@model Programatica.AspNetCore31AppSkeleton.ViewModels.UserViewModel
+﻿@model UserViewModel
+@inject IAppObjectsAdapter _objects
 
 @{
     string on_save_click = Razor.Rnd();
     string on_modal_click = Razor.Rnd();
+    string refresh_users = Razor.Rnd();
     string form = Razor.Rnd();
 }
 
@@ -81,7 +83,7 @@
                     } catch (e) {
                         global.toasterror(e);
                     } finally {
-                        layout.refresh_usersgrid();
+                        @(refresh_users)();
                         global.toastsuccess("Record [" + id + "] created with success!");
                         modal.close(e);
                     }
@@ -101,7 +103,15 @@
             layout.modal("Users", "Modal", null, modalsizes.XLARGE);
         } catch (e) {
             global.toasterror(e);
-        } 
+        }
+    }
+
+    @refresh_users = () => {
+        var gridname = '@_objects.Grid_Users';
+        var grid = $("#" + gridname)[0].ej2_instances[0];
+        if (grid) {
+            grid.refresh();
+        }
     }
 
 </script>

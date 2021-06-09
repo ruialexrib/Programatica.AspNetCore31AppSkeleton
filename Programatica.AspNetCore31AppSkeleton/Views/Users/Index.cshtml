@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<User>
+@inject IAppObjectsAdapter _objects
 
 @{
     // dynamic js
@@ -22,6 +23,8 @@
     string search = Razor.Rnd();
     string delete = Razor.Rnd();
     string resize = Razor.Rnd();
+    string refresh = Razor.Rnd();
+    string get_grid = Razor.Rnd();
 }
 
 @{
@@ -40,7 +43,7 @@
             <a href="#" class="nav-link text-dark" onclick="@(delete)(@(record_id))"><i class="fas fa-trash"></i> Delete</a>
         </li>
         <li class="nav-item">
-            <a href="#" class="nav-link text-dark" onclick="layout.refresh_usersgrid()"><i class="fas fa-sync-alt"></i> Refresh</a>
+            <a href="#" class="nav-link text-dark" onclick="@(refresh)()"><i class="fas fa-sync-alt"></i> Refresh</a>
         </li>
 
         <li class="nav-item dropdown d-none d-md-block">
@@ -75,7 +78,7 @@
     </section>
 </nav>
 
-<ejs-grid id="GridUsers"
+<ejs-grid id="@_objects.Grid_Users"
           height="400"
           allowPaging="true"
           allowSorting="true"
@@ -151,23 +154,23 @@
         }
 
         @clear_filters = () => {
-            var grid = layout.get_usersgrid();
+            var grid = @(get_grid)();
             grid.clearFiltering();
         };
 
         @clear_search = () => {
-            var grid = layout.get_usersgrid();
+            var grid = @(get_grid)();
             grid.searchSettings.key = '';
             $('#@(search_box)').val('');
         };
 
         @show_groups = () => {
-            var grid = layout.get_usersgrid();
+            var grid = @(get_grid)();
             grid.allowGrouping = !grid.allowGrouping;
         };
 
         @search = (searchString) => {
-            var grid = layout.get_usersgrid();
+            var grid = @(get_grid)();
             grid.search(searchString);
         };
 
@@ -180,7 +183,7 @@
                             var data = { Id: id };
                             global.submit(url, data)
                                 .then((status) => {
-                                    layout.refresh_usersgrid();
+                                    @(refresh)();
                                     global.toastsuccess("Record [" + id + "] deleted with success!");
                                 })
                                 .catch((status) => {
@@ -196,8 +199,20 @@
         };
 
         @resize = () => {
-            var grid = layout.get_usersgrid();
+            var grid = @(get_grid)();
             grid.height = $(window).height() - 300;
+        };
+
+        @refresh = () => {
+            var grid = @(get_grid)();
+            if (grid) {
+                grid.refresh();
+            }
+        };
+
+        @get_grid = () => {
+            var gridname = '@_objects.Grid_Users';
+            return $("#" + gridname)[0].ej2_instances[0];
         };
 
     </script>

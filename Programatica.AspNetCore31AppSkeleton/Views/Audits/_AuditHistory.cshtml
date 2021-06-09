@@ -162,7 +162,7 @@
 
     @on_grid_dblclick = (args) => {
         var id = args.rowData.Id;
-        layout.show_audits_trackchanges(id);
+        layout.modal("Audits", "TrackChanges", "auditId=" + id, modalsizes.LARGE);
     }
 
     @on_close_click = (e) => {

@@ -1,7 +1,9 @@
 ﻿@model UserViewModel
+@inject IAppObjectsAdapter _objects
 
 @{
     string on_save_click = Razor.Rnd();
+    string refresh_users = Razor.Rnd();
     string form = Razor.Rnd();
 }
 
@@ -160,13 +162,21 @@
             .then((status) => {
                 var id = status.id;
                 modal.close(e);
-                layout.refresh_usersgrid();
                 global.toastsuccess("Record [" + id + "] updated with success!");
+                @(refresh_users)();
             })
             .catch((status) => {
                 var s = JSON.parse(status);
                 global.toasterror(s.message);
             });
     };
+
+    @refresh_users = () => {
+        var gridname = '@_objects.Grid_Users';
+        var grid = $("#" + gridname)[0].ej2_instances[0];
+        if (grid) {
+            grid.refresh();
+        }
+    }
 
 </script>

@@ -1,62 +1,22 @@
 ﻿@model LoginViewModel
-@using Programatica.Framework.Core.Extensions
-@inject IAppPageAdapter _page
 
-@{ Layout = ""; }
+@{ Layout = "~/Views/Shared/AdminLTE/_LayoutEmpty.cshtml"; }
 
-<!DOCTYPE html>
-<html>
-<head>
-
-    <style>
-
-        html {
-            font-size: 13px !important;
-        }
-
-        body {
-            font-family: 'Amazon Ember', Roboto, 'Open Sans', "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !important;
-            font-size: 1rem !important;
-        }
-
-    </style>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AppSkeleton | Log in</title>
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- Font Awesome -->
-    <link href="~/plugins/fontawesome-free/css/all.css" rel="stylesheet" />
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <!-- icheck bootstrap -->
-    <link href="~/plugins/icheck-bootstrap/icheck-bootstrap.css" rel="stylesheet" />
-    <!-- Theme style -->
-    <link href="~/lib/adminlte/css/adminlte.css" rel="stylesheet" />
-    <!-- Google Font: Source Sans Pro -->
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-    <!-- plugins -->
-    <link href="~/plugins/toastr/toastr.css" rel="stylesheet" />
-
-
-</head>
-
-<body class="hold-transition login-page">
-
+<div class="login-page">
     <div class="login-box vertical-center">
+
         <div class="login-logo">
             <img src="~/img/logo.png" width="200" />
             <br />
             <a href="#"><b>App</b>Skeleton</a>
         </div>
-        <!-- /.login-logo -->
+
         <div class="card">
             <div class="card-body login-card-body">
                 <p class="login-box-msg">Sign in to start your session</p>
 
                 <form asp-action="Login">
+
                     <div class="input-group mb-3">
                         <input asp-for="Username" class="form-control" placeholder="Username (type admin)" />
                         <div class="input-group-append">
@@ -65,6 +25,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="input-group mb-3">
                         <input asp-for="Password" class="form-control" placeholder="Password (type pass)" />
                         <div class="input-group-append">
@@ -73,8 +34,9 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="row">
-                        <div class="col-8">
+                        <div class="col-6">
                             <div class="icheck-primary">
                                 <input type="checkbox" asp-for="IsPersistent" />
                                 <label for="IsPersistent">
@@ -82,70 +44,17 @@
                                 </label>
                             </div>
                         </div>
-                        <!-- /.col -->
-                        <div class="col-4">
-                            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                        <div class="col-6">
+                            <button type="submit" class="btn btn-primary btn-block btn-lg" data-loading-text="Signing in...">Sign In</button>
                         </div>
-                        <!-- /.col -->
                     </div>
-                    <div class="row">
-                        <div asp-validation-summary="All" class="text-danger"></div>
-                    </div>
+
                 </form>
 
             </div>
-            <!-- /.login-card-body -->
+
         </div>
+
     </div>
-    <!-- /.login-box -->
-    <!-- jQuery -->
-    <script src="~/lib/jquery/dist/jquery.js"></script>
-    <!-- Bootstrap 4 -->
-    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-    <!-- AdminLTE App -->
-    <script src="~/lib/adminlte/js/adminlte.js"></script>
-    <!-- plugins -->
-    <script src="~/plugins/toastr/toastr.min.js"></script>
-    <!-- site -->
-    <script src="~/js/cfg.js"></script>
-    <script src="~/js/global.js"></script>
-    <script src="~/js/modal.js"></script>
-    <script src="~/js/site.js"></script>
 
-    <script type="text/javascript">
-
-        var _page = _page || {};
-
-        $(document).ready(function () {
-
-            _page.messages      = [];
-            _page.warnings      = [];
-            _page.alerts        = [];
-            _page.appversion    = '@_page.AppVersion';
-
-            // add messages
-            @foreach(var m in _page.PageMessages.OrEmptyIfNull())
-            {
-                @:_page.messages.push('@m');
-            }
-            @foreach(var w in _page.PageWarnings.OrEmptyIfNull())
-            {
-                @:_page.warnings.push('@w');
-            }
-            @foreach(var a in _page.PageAlerts.OrEmptyIfNull())
-            {
-                @:_page.alerts.push('@a');
-            }
-
-            _page.messages.forEach((m) => { global.toastinfo(m); });
-            _page.warnings.forEach((w) => { global.toastwarning(w); });
-            _page.alerts.forEach((a) => { global.toasterror(a); });
-
-            global.toastinfo(_page.appversion);
-
-          });
-
-    </script>
-
-</body>
-</html>
+</div>

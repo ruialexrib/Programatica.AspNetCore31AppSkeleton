@@ -157,6 +157,7 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
         [DisplayName("Open Modal Form")]
         public IActionResult Modal()
         {
+            PageMessages.Add("Messagem from controller in modal window");
             return PartialView("_Modal");
         }
 

@@ -1,4 +1,6 @@
-﻿@{
+﻿@inject IAppPageAdapter _page
+
+@{
     ViewData["Title"] = "Home page";
 }
 
@@ -28,8 +30,8 @@
     <script type="text/javascript">
 
         $(document).ready(function () {
-            global.toastinfo("Database ConnectionString:<br>" + _page.connectionString);
+            global.toastinfo("Database ConnectionString:<br>@_page.ConnectionString");
         });
 
-     </script>
+    </script>
 }

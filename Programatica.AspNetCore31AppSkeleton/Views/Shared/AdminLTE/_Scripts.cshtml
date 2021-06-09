@@ -28,47 +28,22 @@
 <!-- global IPageAdapter razor scripts -->
 <script type="text/javascript">
 
-        var _page = _page || {};
-
         $(document).ready(function () {
-            _page.connectionString  = '@_page.ConnectionString';
-            _page.controllerName    = '@_page.ControllerName';
-            _page.actionName        = '@_page.ActionName';
-            _page.appversion        = '@_page.AppVersion';
-            _page.messages          = [];
-            _page.warnings          = [];
-            _page.alerts            = [];
-            _page.objects           = [];
-
             // add messages
             @foreach(var m in _page.PageMessages.OrEmptyIfNull())
             {
-                @:_page.messages.push('@m');
+                @:global.toastinfo("@m");
             }
             @foreach(var w in _page.PageWarnings.OrEmptyIfNull())
             {
-                @:_page.warnings.push('@w');
+                @:global.toastwarning("@w");
             }
             @foreach(var a in _page.PageAlerts.OrEmptyIfNull())
             {
-                @:_page.alerts.push('@a');
+                @:global.toasterror("@a");
             }
 
         });
-
-</script>
-
-<!-- _page messages script -->
-<script type="text/javascript">
-
-    $(document).ready(function () {
-        _page.messages.forEach((m) => { global.toastinfo(m); });
-        _page.warnings.forEach((w) => { global.toastwarning(w); });
-        _page.alerts.forEach((a) => { global.toasterror(a); });
-
-        //global.toastinfo("ControllerName:<br>" + _page.controllerName);
-        //global.toastinfo("ActionName:<br>" + _page.actionName);
-    });
 
 </script>
 

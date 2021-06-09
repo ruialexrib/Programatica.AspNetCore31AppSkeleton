@@ -4,9 +4,12 @@
     var atr = $(target).attr("data-loading-text");
 
     if (atr) {
-        $(target).prop('disabled', true);
-        $(target).text(atr);
-        $(target).append(' <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>');
+
+        setTimeout(function () {
+            $(target).prop('disabled', true);
+            $(target).text(atr);
+            $(target).append(' <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>');
+        }, 5);
 
         /* perform processing then reset button when done */
         setTimeout(function () {

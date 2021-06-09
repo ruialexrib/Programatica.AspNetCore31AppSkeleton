@@ -1,0 +1,31 @@
+﻿@inject IAppPageAdapter _page
+
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    @RenderBody()
+</body>
+
+</html>
+
+<!-- global IPageAdapter razor scripts -->
+<script type="text/javascript">
+
+        $(document).ready(function () {
+            // add messages
+            @foreach(var m in _page.PageMessages.OrEmptyIfNull())
+            {
+                @:global.toastinfo("@m");
+            }
+            @foreach(var w in _page.PageWarnings.OrEmptyIfNull())
+            {
+                @:global.toastwarning("@w");
+            }
+            @foreach(var a in _page.PageAlerts.OrEmptyIfNull())
+            {
+                @:global.toasterror("@a");
+            }
+        });
+
+</script>

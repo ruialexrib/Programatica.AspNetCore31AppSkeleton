@@ -5,5 +5,6 @@ namespace Programatica.AspNetCore31AppSkeleton.Adapters
     public interface IAppPageAdapter : IPageAdapter
     {
         string AppVersion { get; }
+        IAppObjectsAdapter AppObjectsAdapter { get; }
     }
 }

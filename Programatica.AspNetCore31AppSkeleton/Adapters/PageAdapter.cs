@@ -14,18 +14,23 @@ namespace Programatica.AspNetCore31AppSkeleton.Adapters
         private readonly ITempDataDictionaryFactory _tempDataDictionaryFactory;
         private readonly HttpContext _httpContext;
         private readonly ITempDataDictionary _tempData;
+        private readonly IAppObjectsAdapter _appObjectsAdapter;
 
         public PageAdapter(
             IConfiguration configuration,
             IHttpContextAccessor httpContextAccessor,
-            ITempDataDictionaryFactory tempDataDictionaryFactory)
+            ITempDataDictionaryFactory tempDataDictionaryFactory,
+            IAppObjectsAdapter appObjectsAdapter)
         {
             _configuration = configuration;
             _httpContextAccessor = httpContextAccessor;
             _tempDataDictionaryFactory = tempDataDictionaryFactory;
             _httpContext = _httpContextAccessor.HttpContext;
             _tempData = _tempDataDictionaryFactory.GetTempData(_httpContext);
+            _appObjectsAdapter = appObjectsAdapter;
         }
+
+        public IAppObjectsAdapter AppObjectsAdapter { get { return _appObjectsAdapter; } }
 
         public string ConnectionString
         {

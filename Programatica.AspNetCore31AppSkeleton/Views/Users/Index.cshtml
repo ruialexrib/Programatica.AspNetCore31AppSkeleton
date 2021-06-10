@@ -1,30 +1,30 @@
 ﻿@model IEnumerable<User>
-@inject IAppObjectsAdapter _objects
+@inject IAppPageAdapter _page
 
 @{
     // dynamic js
 
-    string record_id = Razor.Rnd();
-    string record_name = Razor.Rnd();
-    string record_systemid = Razor.Rnd();
-    string search_box = Razor.Rnd();
+    string var_record_id = Razor.Rnd();
+    string var_record_name = Razor.Rnd();
+    string var_record_systemid = Razor.Rnd();
 
-    string on_grid_databound = Razor.Rnd();
-    string on_grid_click = Razor.Rnd();
-    string on_grid_dblclick = Razor.Rnd();
+    string ui_search_box = Razor.Rnd();
 
-    string on_new_click = Razor.Rnd();
-    string on_edit_click = Razor.Rnd();
-    string on_audithistory_click = Razor.Rnd();
+    string event_on_grid_databound = Razor.Rnd();
+    string event_on_grid_click = Razor.Rnd();
+    string event_on_grid_dblclick = Razor.Rnd();
+    string event_on_new_click = Razor.Rnd();
+    string event_on_edit_click = Razor.Rnd();
+    string event_on_audithistory_click = Razor.Rnd();
 
-    string clear_filters = Razor.Rnd();
-    string clear_search = Razor.Rnd();
-    string show_groups = Razor.Rnd();
-    string search = Razor.Rnd();
-    string delete = Razor.Rnd();
-    string resize = Razor.Rnd();
-    string refresh = Razor.Rnd();
-    string get_grid = Razor.Rnd();
+    string func_clear_filters = Razor.Rnd();
+    string func_clear_search = Razor.Rnd();
+    string func_show_groups = Razor.Rnd();
+    string func_search = Razor.Rnd();
+    string func_delete = Razor.Rnd();
+    string func_resize = Razor.Rnd();
+    string func_refresh = Razor.Rnd();
+    string func_get_grid = Razor.Rnd();
 }
 
 @{
@@ -34,16 +34,16 @@
 <nav class="navbar navbar-expand navbar-light bg-light navbar-menu">
     <ul class="navbar-nav mr-auto">
         <li class="nav-item ">
-            <a href="#" class="nav-link text-dark" onclick='@(on_new_click)()'><i class="fas fa-plus"></i> New record</a>
+            <a href="#" class="nav-link text-dark" onclick='@(event_on_new_click)()'><i class="fas fa-plus"></i> New record</a>
         </li>
         <li class="nav-item ">
-            <a href="#" class="nav-link text-dark" onclick='@(on_edit_click)(@record_id)'><i class="fas fa-edit"></i> Update</a>
+            <a href="#" class="nav-link text-dark" onclick='@(event_on_edit_click)(@var_record_id)'><i class="fas fa-edit"></i> Update</a>
         </li>
         <li class="nav-item ">
-            <a href="#" class="nav-link text-dark" onclick="@(delete)(@(record_id))"><i class="fas fa-trash"></i> Delete</a>
+            <a href="#" class="nav-link text-dark" onclick="@(func_delete)(@(var_record_id))"><i class="fas fa-trash"></i> Delete</a>
         </li>
         <li class="nav-item">
-            <a href="#" class="nav-link text-dark" onclick="@(refresh)()"><i class="fas fa-sync-alt"></i> Refresh</a>
+            <a href="#" class="nav-link text-dark" onclick="@(func_refresh)()"><i class="fas fa-sync-alt"></i> Refresh</a>
         </li>
 
         <li class="nav-item dropdown d-none d-md-block">
@@ -51,11 +51,11 @@
                 View
             </a>
             <div class="dropdown-menu">
-                <a class="dropdown-item text-dark" href="#" onclick="@(show_groups)()"><i class="far fa-object-ungroup"></i> Toggle groups</a>
+                <a class="dropdown-item text-dark" href="#" onclick="@(func_show_groups)()"><i class="far fa-object-ungroup"></i> Toggle groups</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item text-dark" href="#" onclick="@(clear_filters)()"><i class="fas fa-filter"></i> Clear filters</a>
+                <a class="dropdown-item text-dark" href="#" onclick="@(func_clear_filters)()"><i class="fas fa-filter"></i> Clear filters</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item text-dark" href="#" onclick="@(clear_search)()"><i class="fas fa-search"></i> Clear search</a>
+                <a class="dropdown-item text-dark" href="#" onclick="@(func_clear_search)()"><i class="fas fa-search"></i> Clear search</a>
             </div>
         </li>
 
@@ -64,29 +64,29 @@
                 Navigation
             </a>
             <div class="dropdown-menu">
-                <a class="dropdown-item text-dark" href="#" onclick='@(on_audithistory_click)(@record_systemid)'><i class="fas fa-lock"></i> Audit</a>
+                <a class="dropdown-item text-dark" href="#" onclick='@(event_on_audithistory_click)(@var_record_systemid)'><i class="fas fa-lock"></i> Audit</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item text-dark" href="#" onclick='layout.modal("UserRoles", "IndexByUser", "userId=" + @record_id, modalsizes.NORMAL)'><i class="fas fa-users "></i> User roles</a>
+                <a class="dropdown-item text-dark" href="#" onclick='layout.modal("UserRoles", "IndexByUser", "userId=" + @var_record_id, modalsizes.NORMAL)'><i class="fas fa-users "></i> User roles</a>
             </div>
         </li>
 
     </ul>
     <section class="d-none d-md-block">
         <form class="form-inline">
-            <input id="@search_box" class="form-control" type="search" placeholder="Search" aria-label="Search">&nbsp;
+            <input id="@ui_search_box" class="form-control" type="search" placeholder="Search" aria-label="Search">&nbsp;
         </form>
     </section>
 </nav>
 
-<ejs-grid id="@_objects.Grid_Users"
+<ejs-grid id="@_page.AppObjectsAdapter.Grid_Users"
           height="400"
           allowPaging="true"
           allowSorting="true"
           allowFiltering="true"
           allowSelection="true"
-          dataBound="@(on_grid_databound)"
-          recordDoubleClick="@(on_grid_dblclick)"
-          rowSelected="@(on_grid_click)">
+          dataBound="@(event_on_grid_databound)"
+          recordDoubleClick="@(event_on_grid_dblclick)"
+          rowSelected="@(event_on_grid_click)">
     <e-grid-pagesettings pageSizes="true" pageSize="10">
     </e-grid-pagesettings>
     <e-data-manager url="@Url.Action("UrlDatasource", "Users")" adaptor="UrlAdaptor"></e-data-manager>
@@ -104,40 +104,40 @@
 
     <script type="text/javascript">
 
-        @record_id          = null;
-        @record_name        = null;
-        @record_systemid    = null;
+        @var_record_id          = null;
+        @var_record_name        = null;
+        @var_record_systemid    = null;
 
         $(document).ready(function () {
-            @(resize)();
+            @(func_resize)();
         });
 
         $(window).resize(function () {
-            @(resize)();
+            @(func_resize)();
         });
 
-        $('#@(search_box)').on("input", function (e) {
-            @(search)($('#@(search_box)').val());
+        $('#@(ui_search_box)').on("input", function (e) {
+            @(func_search)($('#@(ui_search_box)').val());
         });
 
-        @on_grid_databound = (args) => { };
+        @event_on_grid_databound = (args) => { };
 
-        @on_grid_click = (args) => {
-            @record_id          = args.data.Id;
-            @record_name        = args.data.Username;
-            @record_systemid    = args.data.SystemId;
+        @event_on_grid_click = (args) => {
+            @var_record_id          = args.data.Id;
+            @var_record_name        = args.data.Username;
+            @var_record_systemid    = args.data.SystemId;
         };
 
-        @on_grid_dblclick = (args) => {
-            @record_id = args.rowData.Id;
-            layout.modal("Users", "Edit", "id=" + @record_id, modalsizes.NORMAL)
+        @event_on_grid_dblclick = (args) => {
+            @var_record_id = args.rowData.Id;
+            layout.modal("Users", "Edit", "id=" + @var_record_id, modalsizes.NORMAL)
         };
 
-        @on_new_click = () => {
+        @event_on_new_click = () => {
             layout.modal("Users", "Create", null, modalsizes.NORMAL);
         }
 
-        @on_edit_click = (id) => {
+        @event_on_edit_click = (id) => {
             if (id) {
                 layout.modal("Users", "Edit", "id=" + id, modalsizes.NORMAL)
             } else {
@@ -145,7 +145,7 @@
             }
         }
 
-        @on_audithistory_click = (systemId) => {
+        @event_on_audithistory_click = (systemId) => {
             if (systemId) {
                 layout.modal("Audits", "AuditHistory", "systemid=" + systemId, modalsizes.LARGE)
             } else {
@@ -153,37 +153,37 @@
             }
         }
 
-        @clear_filters = () => {
-            var grid = @(get_grid)();
+        @func_clear_filters = () => {
+            var grid = @(func_get_grid)();
             grid.clearFiltering();
         };
 
-        @clear_search = () => {
-            var grid = @(get_grid)();
+        @func_clear_search = () => {
+            var grid = @(func_get_grid)();
             grid.searchSettings.key = '';
-            $('#@(search_box)').val('');
+            $('#@(ui_search_box)').val('');
         };
 
-        @show_groups = () => {
-            var grid = @(get_grid)();
+        @func_show_groups = () => {
+            var grid = @(func_get_grid)();
             grid.allowGrouping = !grid.allowGrouping;
         };
 
-        @search = (searchString) => {
-            var grid = @(get_grid)();
+        @func_search = (searchString) => {
+            var grid = @(func_get_grid)();
             grid.search(searchString);
         };
 
-        @delete = (id) => {
+        @func_delete = (id) => {
             if (id) {
-                global.confirm(cfg.text.askConfirmDelete + `<br><b>'${@record_name}'</b>`)
+                global.confirm(cfg.text.askConfirmDelete + `<br><b>'${@var_record_name}'</b>`)
                     .then((result) => {
                         if (result === true) {
                             var url = "@Url.Action("Delete", "Users")";
                             var data = { Id: id };
                             global.submit(url, data)
                                 .then((status) => {
-                                    @(refresh)();
+                                    @(func_refresh)();
                                     global.toastsuccess("Record [" + id + "] deleted with success!");
                                 })
                                 .catch((status) => {
@@ -198,20 +198,20 @@
             }
         };
 
-        @resize = () => {
-            var grid = @(get_grid)();
+        @func_resize = () => {
+            var grid = @(func_get_grid)();
             grid.height = $(window).height() - 300;
         };
 
-        @refresh = () => {
-            var grid = @(get_grid)();
+        @func_refresh = () => {
+            var grid = @(func_get_grid)();
             if (grid) {
                 grid.refresh();
             }
         };
 
-        @get_grid = () => {
-            var gridname = '@_objects.Grid_Users';
+        @func_get_grid = () => {
+            var gridname = '@_page.AppObjectsAdapter.Grid_Users';
             return $("#" + gridname)[0].ej2_instances[0];
         };
 

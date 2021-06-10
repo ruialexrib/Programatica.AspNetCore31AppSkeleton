@@ -1,5 +1,5 @@
 ﻿@model UserViewModel
-@inject IAppObjectsAdapter _objects
+@inject IAppPageAdapter _page
 
 @{
     string on_save_click = Razor.Rnd();
@@ -107,7 +107,7 @@
     }
 
     @refresh_users = () => {
-        var gridname = '@_objects.Grid_Users';
+        var gridname = '@_page.AppObjectsAdapter.Grid_Users';
         var grid = $("#" + gridname)[0].ej2_instances[0];
         if (grid) {
             grid.refresh();

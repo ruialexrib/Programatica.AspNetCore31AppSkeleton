@@ -1,5 +1,4 @@
-﻿@inject IAppPageAdapter _page
-
+﻿
 @{
     Layout = "~/Views/Shared/AdminLTE/_LayoutPartial.cshtml";
 }
@@ -25,24 +24,6 @@
     <a href="#" class="btn btn-secondary" onclick="@(on_modal_click)()">Open modal</a>
     <a href="#" class="btn btn-secondary" onclick="modal.close(event)">Close</a>
 </div>
-
-@*<script type="text/javascript">
-        $(document).ready(function () {
-            // add messages
-            @foreach(var m in _page.PageMessages.OrEmptyIfNull())
-            {
-                @:global.toastinfo("@m");
-            }
-            @foreach(var w in _page.PageWarnings.OrEmptyIfNull())
-            {
-                @:global.toastwarning("@w");
-            }
-            @foreach(var a in _page.PageAlerts.OrEmptyIfNull())
-            {
-                @:global.toasterror("@a");
-            }
-        });
-</script>*@
 
 <script type="text/javascript">
 

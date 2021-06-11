@@ -5,8 +5,12 @@
 
 <style>
     .login-box {
-        margin: 50px 30px 50px 30px;
-        width: 300px !important;
+        margin: 50px 10px 50px 10px;
+        width: 270px !important;
+    }
+
+    a, a:link, a:visited {
+        color: #007bff !important;
     }
 </style>
 
@@ -48,7 +52,7 @@
                         <div class="col-6">
                             <div class="icheck-primary">
                                 <input type="checkbox" asp-for="IsPersistent" />
-                                <label for="IsPersistent">
+                                <label for="IsPersistent" class="text-sm">
                                     Remember Me
                                 </label>
                             </div>
@@ -67,9 +71,10 @@
             <div class="row">
                 <div class="col-12">
                     <a asp-controller="Account" asp-action="TermsOfUse">
-                        <i class="fas fa-balance-scale"></i> Terms and conditions<br />
-                        <span class="text-xs text-muted">By accessing or using the Service you agree to be bound by these Terms. If you disagree with any part of the terms then you may not access the Service.</span>
+                        <i class="fas fa-balance-scale"></i> Terms and conditions
                     </a>
+                    <br />
+                    <span class="text-xs text-muted">By accessing or using the Service you agree to be bound by these Terms. If you disagree with any part of the terms then you may not access the Service.</span>
                 </div>
             </div>
         </div>
@@ -84,7 +89,7 @@
     <script type="text/javascript">
 
     $(document).ready(function () {
-        global.toastinfo("@_page.AppVersion");
+        @*global.toastinfo("@_page.AppVersion");*@
     });
 
     </script>

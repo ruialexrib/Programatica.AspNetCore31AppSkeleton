@@ -33,35 +33,51 @@
 
 <nav class="navbar navbar-expand navbar-light bg-light navbar-menu">
     <ul class="navbar-nav mr-auto">
-        <li class="nav-item ">
-            <a href="#" class="nav-link text-dark" onclick='@(event_on_new_click)()'><i class="fas fa-plus"></i> New</a>
-        </li>
-        <li class="nav-item ">
-            <a href="#" class="nav-link text-dark" onclick='@(event_on_edit_click)(@var_record_id)'><i class="fas fa-edit"></i> Update</a>
-        </li>
-        <li class="nav-item ">
-            <a href="#" class="nav-link text-dark" onclick="@(func_delete)(@(var_record_id))"><i class="fas fa-trash"></i> Delete</a>
-        </li>
-        <li class="nav-item">
-            <a href="#" class="nav-link text-dark" onclick="@(func_refresh)()"><i class="fas fa-sync-alt"></i> Refresh</a>
-        </li>
+
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                Options
+            </a>
+            <div class="dropdown-menu">
+                <a href="#" class="dropdown-item" onclick='@(event_on_new_click)()'>
+                    <i class="fas fa-plus"></i> New record<br />
+                    <span class="text-xs text-muted">Creates a new record</span>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item" onclick='@(event_on_edit_click)(@var_record_id)'>
+                    <i class="fas fa-edit"></i> Update<br />
+                    <span class="text-xs text-muted">Updates the selected record</span>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item" onclick="@(func_delete)(@(var_record_id))">
+                    <i class="fas fa-trash"></i> Delete<br />
+                    <span class="text-xs text-muted">Deletes the selected record</span>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item" onclick="@(func_refresh)()">
+                    <i class="fas fa-sync-alt"></i> Refresh
+                    <span class="text-xs text-muted">Refresh all records</span>
+                </a>
+
+            </div>
+        </li>                     
 
         <li class="nav-item dropdown d-none d-md-block">
-            <a class="nav-link  text-dark dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
                 View
             </a>
             <div class="dropdown-menu">
-                <a class="dropdown-item text-dark" href="#" onclick="@(func_show_groups)()">
+                <a class="dropdown-item" href="#" onclick="@(func_show_groups)()">
                     <i class="far fa-object-ungroup"></i> Toggle groups<br />
                     <span class="text-xs text-muted">Show/Hide the column group selector</span>
                 </a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item text-dark" href="#" onclick="@(func_clear_filters)()">
+                <a class="dropdown-item" href="#" onclick="@(func_clear_filters)()">
                     <i class="fas fa-filter"></i> Clear filters<br />
                     <span class="text-xs text-muted">Clear all current filters</span>
                 </a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item text-dark" href="#" onclick="@(func_clear_search)()">
+                <a class="dropdown-item" href="#" onclick="@(func_clear_search)()">
                     <i class="fas fa-search"></i> Clear search<br />
                     <span class="text-xs text-muted">Clear the current search criteria</span>
                 </a>
@@ -69,17 +85,17 @@
         </li>
 
         <li class="nav-item dropdown d-none d-md-block">
-            <a class="nav-link  text-dark dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
                 Navigation
             </a>
             <div class="dropdown-menu">
-                <a class="dropdown-item text-dark" href="#" onclick='@(event_on_audithistory_click)(@var_record_systemid)'>
+                <a class="dropdown-item" href="#" onclick='@(event_on_audithistory_click)(@var_record_systemid)'>
                     <i class="fas fa-lock"></i> Audit<br />
                     <span class="text-xs text-muted">Manage the audit changes of the selected record</span>
                 </a>
 
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item text-dark" href="#" onclick='layout.modal("UserRoles", "IndexByUser", "userId=" + @var_record_id, modalsizes.NORMAL)'>
+                <a class="dropdown-item " href="#" onclick='layout.modal("UserRoles", "IndexByUser", "userId=" + @var_record_id, modalsizes.NORMAL)'>
                     <i class="fas fa-users "></i> User roles<br />
                     <span class="text-xs text-muted">Manage the roles of the selected record</span>
                 </a>

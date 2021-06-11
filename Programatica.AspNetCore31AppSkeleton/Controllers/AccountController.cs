@@ -69,5 +69,10 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
             PageAlerts.Add("Access Denied");
             return await Task.Run(() => View());
         }
+
+        public async Task<IActionResult> TermsOfUse()
+        {
+            return await Task.Run(() => View());
+        }
     }
 }

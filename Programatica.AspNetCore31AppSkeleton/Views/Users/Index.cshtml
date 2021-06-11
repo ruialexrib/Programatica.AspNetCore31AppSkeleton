@@ -40,29 +40,29 @@
             </a>
             <div class="dropdown-menu">
                 <a href="#" class="dropdown-item" onclick='@(event_on_new_click)()'>
-                    <i class="fas fa-plus"></i> New record<br />
+                    <i class="fas fa-plus"></i> New <br />
                     <span class="text-xs text-muted">Creates a new record</span>
                 </a>
                 <div class="dropdown-divider"></div>
                 <a href="#" class="dropdown-item" onclick='@(event_on_edit_click)(@var_record_id)'>
-                    <i class="fas fa-edit"></i> Update<br />
-                    <span class="text-xs text-muted">Updates the selected record</span>
+                    <i class="fas fa-edit"></i> Edit<br />
+                    <span class="text-xs text-muted">Modify the selected record</span>
                 </a>
                 <div class="dropdown-divider"></div>
                 <a href="#" class="dropdown-item" onclick="@(func_delete)(@(var_record_id))">
                     <i class="fas fa-trash"></i> Delete<br />
-                    <span class="text-xs text-muted">Deletes the selected record</span>
+                    <span class="text-xs text-muted">Removes the selected record</span>
                 </a>
                 <div class="dropdown-divider"></div>
                 <a href="#" class="dropdown-item" onclick="@(func_refresh)()">
-                    <i class="fas fa-sync-alt"></i> Refresh
+                    <i class="fas fa-sync-alt"></i> Refresh<br />
                     <span class="text-xs text-muted">Refresh all records</span>
                 </a>
 
             </div>
         </li>                     
 
-        <li class="nav-item dropdown d-none d-md-block">
+        <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
                 View
             </a>
@@ -84,7 +84,7 @@
             </div>
         </li>
 
-        <li class="nav-item dropdown d-none d-md-block">
+        <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
                 Navigation
             </a>

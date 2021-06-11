@@ -74,5 +74,10 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
         {
             return await Task.Run(() => View());
         }
+
+        public async Task<IActionResult> License()
+        {
+            return await Task.Run(() => View());
+        }
     }
 }

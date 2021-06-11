@@ -62,6 +62,11 @@ namespace Programatica.AspNetCore31AppSkeleton.Adapters
             get { return _tempData["ControllerAction"] as string; }
         }
 
+        public string ElapsedTime
+        {
+            get { return _tempData["ElapsedTime"] as string; }
+        }
+
         public string AppVersion { get { return Assembly.GetEntryAssembly().GetName().Version.ToString(); }  }
     }
 }

@@ -1,9 +1,12 @@
-﻿  <!-- Main Footer -->
+﻿@inject IAppPageAdapter _page
+    <!-- Main Footer -->
 <footer class="main-footer fixed-bottom">
     <!-- To the right -->
-    <div class="float-right d-none d-sm-inline">
-        <i class="fab fa-github"></i>&nbsp;<a href="https://github.com/ruialexrib/Programatica.AspNetCore31AppSkeleton">Source code</a>
+    <div class="float-right d-none d-sm-inline text-sm">
+        <i class="fas fa-code-branch"></i>&nbsp;<a href="#">@_page.AppVersion</a>
     </div>
     <!-- Default to the left -->
-    Copyright &copy; 2020 <a href="https://github.com/ruialexrib">ruialexrib</a>. All rights reserved.
+    <span class="text-sm text-muted">
+        Page generated in @_page.ElapsedTime miliseconds.
+    </span>
 </footer>

@@ -46,5 +46,6 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
                 RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
             }));
         }
+
     }
 }

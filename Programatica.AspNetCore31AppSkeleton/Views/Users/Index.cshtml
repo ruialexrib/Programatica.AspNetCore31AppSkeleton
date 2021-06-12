@@ -31,36 +31,21 @@
     ViewData["Title"] = "Manage users list";
 }
 
-<nav class="navbar navbar-expand navbar-light bg-light navbar-menu">
+<nav class="navbar navbar-expand navbar-dark bg-dark ">
     <ul class="navbar-nav mr-auto">
 
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                Options
-            </a>
-            <div class="dropdown-menu">
-                <a href="#" class="dropdown-item" onclick='@(event_on_new_click)()'>
-                    <i class="fas fa-plus"></i> New <br />
-                    <span class="text-xs text-muted">Creates a new record</span>
-                </a>
-                <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item" onclick='@(event_on_edit_click)(@var_record_id)'>
-                    <i class="fas fa-edit"></i> Edit<br />
-                    <span class="text-xs text-muted">Modify the selected record</span>
-                </a>
-                <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item" onclick="@(func_delete)(@(var_record_id))">
-                    <i class="fas fa-trash"></i> Delete<br />
-                    <span class="text-xs text-muted">Removes the selected record</span>
-                </a>
-                <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item" onclick="@(func_refresh)()">
-                    <i class="fas fa-sync-alt"></i> Refresh<br />
-                    <span class="text-xs text-muted">Refresh all records</span>
-                </a>
-
-            </div>
-        </li>                     
+        <li class="nav-item ">
+            <a href="#" class="nav-link btn-success btn-sm" onclick='@(event_on_new_click)()'><i class="fas fa-plus"></i> New</a>
+        </li>
+        <li class="nav-item ">
+            <a href="#" class="nav-link" onclick='@(event_on_edit_click)(@var_record_id)'><i class="fas fa-edit"></i></a>
+        </li>
+        <li class="nav-item ">
+            <a href="#" class="nav-link" onclick="@(func_delete)(@(var_record_id))"><i class="fas fa-trash"></i></a>
+        </li>
+        <li class="nav-item">
+            <a href="#" class="nav-link" onclick="@(func_refresh)()"><i class="fas fa-sync-alt"></i></a>
+        </li>
 
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">

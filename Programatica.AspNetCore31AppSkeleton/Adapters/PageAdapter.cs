@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.Extensions.Configuration;
+using Programatica.Framework.Core.Adapter;
 using Programatica.Framework.Mvc.Adapters;
 using System.Collections.Generic;
 using System.Reflection;
@@ -15,12 +16,14 @@ namespace Programatica.AspNetCore31AppSkeleton.Adapters
         private readonly HttpContext _httpContext;
         private readonly ITempDataDictionary _tempData;
         private readonly IAppObjectsAdapter _appObjectsAdapter;
+        private readonly IAuthUserAdapter _authUserAdapter;
 
         public PageAdapter(
             IConfiguration configuration,
             IHttpContextAccessor httpContextAccessor,
             ITempDataDictionaryFactory tempDataDictionaryFactory,
-            IAppObjectsAdapter appObjectsAdapter)
+            IAppObjectsAdapter appObjectsAdapter,
+            IAuthUserAdapter authUserAdapter)
         {
             _configuration = configuration;
             _httpContextAccessor = httpContextAccessor;
@@ -28,9 +31,12 @@ namespace Programatica.AspNetCore31AppSkeleton.Adapters
             _httpContext = _httpContextAccessor.HttpContext;
             _tempData = _tempDataDictionaryFactory.GetTempData(_httpContext);
             _appObjectsAdapter = appObjectsAdapter;
+            _authUserAdapter = authUserAdapter;
         }
 
         public IAppObjectsAdapter AppObjectsAdapter { get { return _appObjectsAdapter; } }
+
+        public IAuthUserAdapter AuthUserAdapter { get { return _authUserAdapter; } }
 
         public string ConnectionString
         {

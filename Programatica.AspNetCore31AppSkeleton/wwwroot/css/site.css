@@ -85,6 +85,10 @@ label:not(.form-check-label):not(.custom-file-label) {
     font-size: 1.25rem;
 }
 
+.btn {
+    border-radius: 0px;
+}
+
 
 /* material overrides */
 
@@ -151,3 +155,16 @@ label:not(.form-check-label):not(.custom-file-label) {
     font-family: 'Amazon Ember', Roboto, 'Open Sans', "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
+/* adminlte override */
+
+.login-box,
+.register-box {
+    margin: 50px 10px;
+    width: 300px;
+}
+
+    .login-box a, 
+    .login-box a:link, 
+    .login-box a:visited {
+        color: #007bff !important;
+    }

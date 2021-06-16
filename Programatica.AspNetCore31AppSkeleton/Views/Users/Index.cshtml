@@ -31,11 +31,11 @@
     ViewData["Title"] = "Manage users list";
 }
 
-<nav class="navbar navbar-expand navbar-dark bg-dark ">
+<nav class="navbar navbar-expand navbar-dark bg-primary ">
     <ul class="navbar-nav mr-auto">
 
         <li class="nav-item ">
-            <a href="#" class="nav-link btn-success btn-sm" onclick='@(event_on_new_click)()'><i class="fas fa-plus"></i> New</a>
+            <a href="#" class="nav-link" onclick='@(event_on_new_click)()'><i class="fas fa-plus"></i></a>
         </li>
         <li class="nav-item ">
             <a href="#" class="nav-link" onclick='@(event_on_edit_click)(@var_record_id)'><i class="fas fa-edit"></i></a>

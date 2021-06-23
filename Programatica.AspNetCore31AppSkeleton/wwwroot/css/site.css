@@ -54,12 +54,10 @@ body {
 
 .modal-header {
     cursor: move;
-    background: rgb(253,253,253);
 }
 
 
 .modal-footer {
-    background: rgb(255,255,255);
 }
 
 .form-control {
@@ -77,6 +75,13 @@ body {
         box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
     }
 
+    .form-control::-webkit-input-placeholder {
+        color: #939ba2;
+        font-style: italic;
+        font-size: 0.9rem;
+    }
+
+
 label:not(.form-check-label):not(.custom-file-label) {
     font-weight: 500;
 }
@@ -88,6 +93,8 @@ label:not(.form-check-label):not(.custom-file-label) {
 .btn {
     border-radius: 0px;
 }
+
+
 
 
 /* material overrides */
@@ -163,8 +170,8 @@ label:not(.form-check-label):not(.custom-file-label) {
     width: 300px;
 }
 
-    .login-box a, 
-    .login-box a:link, 
+    .login-box a,
+    .login-box a:link,
     .login-box a:visited {
         color: #007bff !important;
     }

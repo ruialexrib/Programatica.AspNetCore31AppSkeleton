@@ -2,10 +2,10 @@
 @inject IAppPageAdapter _page
 
 @{
-    string on_save_click = Razor.ElementRndShortId("on_save_click");
-    string on_modal_click = Razor.ElementRndShortId("on_modal_click");
-    string refresh_users = Razor.ElementRndShortId("refresh_users");
-    string form = Razor.ElementRndShortId("form");
+    string on_save_click = Razor.GenerateElementId("on_save_click");
+    string on_modal_click = Razor.GenerateElementId("on_modal_click");
+    string refresh_users = Razor.GenerateElementId("refresh_users");
+    string form = Razor.GenerateElementId("form");
 }
 
 <div class="modal-header">

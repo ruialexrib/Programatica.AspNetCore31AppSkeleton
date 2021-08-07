@@ -2,16 +2,15 @@
 @inject IAppPageAdapter _page
 
 @{
-    string on_save_click = Razor.Rnd();
-    string on_modal_click = Razor.Rnd();
-    string refresh_users = Razor.Rnd();
-    string form = Razor.Rnd();
+    string on_save_click = Razor.ElementRndShortId("on_save_click");
+    string on_modal_click = Razor.ElementRndShortId("on_modal_click");
+    string refresh_users = Razor.ElementRndShortId("refresh_users");
+    string form = Razor.ElementRndShortId("form");
 }
 
 <div class="modal-header">
     <h5 class="modal-title"><i class="far fa-edit"></i> Create User</h5>
     <a href="#" class="close" aria-label="Close" onclick="modal.close(event)"><span aria-hidden="true">&times;</span></a>
-
 </div>
 
 <div class="modal-body">

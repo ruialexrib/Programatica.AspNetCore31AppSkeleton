@@ -1,10 +1,10 @@
 # support for arm32 - raspberrypi
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.1.2-buster-slim-arm32v7 AS base
+FROM 5.0.8-buster-slim-arm32v7 AS base
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
+FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /app 
 
 # copy csproj and restore as distinct layers

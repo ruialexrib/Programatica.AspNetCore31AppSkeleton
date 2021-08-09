@@ -45,7 +45,7 @@
         </li>
         <li class="nav-item dropdown d-none d-xl-block">
             <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                View
+                Options
             </a>
             <div class="dropdown-menu">
                 <a class="dropdown-item" href="#" onclick="@(func_show_groups)()">
@@ -132,7 +132,7 @@
 
         // $('#txt_search_box').on("input")
         $('#@(txt_search_box)').on("input", function (e) {
-            @(func_search)($('#@(txt_search_box)').val());
+            @(func_search)($(this).val());
         });
 
         // ev_on_grid_databound

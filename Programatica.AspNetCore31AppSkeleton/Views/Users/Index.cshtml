@@ -2,7 +2,7 @@
 @inject IAppPageAdapter _page
 
 @{
-    // dynamic js
+    ViewData["Title"] = "Manage users list";
 
     string var_record_id = Razor.GenerateElementId("var_record_id");
     string var_record_name = Razor.GenerateElementId("var_record_name");
@@ -10,32 +10,27 @@
 
     string txt_search_box = Razor.GenerateElementId("txt_search_box");
 
-    string ev_on_grid_databound = Razor.GenerateElementId("event_on_grid_databound");
-    string ev_on_grid_click = Razor.GenerateElementId("event_on_grid_click");
-    string ev_on_grid_dblclick = Razor.GenerateElementId("event_on_grid_dblclick");
-    string ev_on_new_click = Razor.GenerateElementId("event_on_new_click");
-    string ev_on_edit_click = Razor.GenerateElementId("event_on_edit_click");
-    string ev_on_audithistory_click = Razor.GenerateElementId("event_on_audithistory_click");
+    string ev_on_grid_databound = Razor.GenerateElementId("ev_on_grid_databound");
+    string ev_on_grid_click = Razor.GenerateElementId("ev_on_grid_click");
+    string ev_on_grid_dblclick = Razor.GenerateElementId("ev_on_grid_dblclick");
+    string ev_on_new_click = Razor.GenerateElementId("ev_on_new_click");
+    string ev_on_edit_click = Razor.GenerateElementId("ev_on_edit_click");
+    string ev_on_audithistory_click = Razor.GenerateElementId("ev_on_audithistory_click");
     string ev_on_useroles_click = Razor.GenerateElementId("ev_on_useroles_click");
 
-    string f_clear_filters = Razor.GenerateElementId("f_clear_filters");
-    string f_clear_search = Razor.GenerateElementId("f_clear_search");
-    string f_show_groups = Razor.GenerateElementId("f_show_groups");
-    string f_search = Razor.GenerateElementId("f_search");
-    string f_delete = Razor.GenerateElementId("f_delete");
-    string f_resize = Razor.GenerateElementId("f_resize");
-    string f_refresh = Razor.GenerateElementId("f_refresh");
-    string f_get_grid = Razor.GenerateElementId("f_get_grid");
-    string f_get_rec = Razor.GenerateElementId("f_get_rec");
-}
-
-@{
-    ViewData["Title"] = "Manage users list";
+    string func_clear_filters = Razor.GenerateElementId("func_clear_filters");
+    string func_clear_search = Razor.GenerateElementId("func_clear_search");
+    string func_show_groups = Razor.GenerateElementId("func_show_groups");
+    string func_search = Razor.GenerateElementId("func_search");
+    string func_delete = Razor.GenerateElementId("func_delete");
+    string func_resize = Razor.GenerateElementId("func_resize");
+    string func_refresh = Razor.GenerateElementId("func_refresh");
+    string func_get_grid = Razor.GenerateElementId("func_get_grid");
+    string func_get_rec = Razor.GenerateElementId("func_get_rec");
 }
 
 <nav class="navbar navbar-expand navbar-light ">
     <ul class="navbar-nav">
-
         <li class="nav-item ">
             <a href="#" class="nav-link text-success" onclick='@(ev_on_new_click)()'><i class="fas fa-plus"></i><span class="d-inline"> Create user</span></a>
         </li>
@@ -43,34 +38,32 @@
             <a href="#" class="nav-link" onclick='@(ev_on_edit_click)()'><i class="fas fa-edit"></i><span class="d-none d-md-inline"> Modify user</span></a>
         </li>
         <li class="nav-item ">
-            <a href="#" class="nav-link text-danger" onclick="@(f_delete)(@(var_record_id))"><i class="fas fa-trash"></i><span class="d-none d-md-inline"> Delete user</span></a>
+            <a href="#" class="nav-link text-danger" onclick="@(func_delete)(@(var_record_id))"><i class="fas fa-trash"></i><span class="d-none d-md-inline"> Delete user</span></a>
         </li>
         <li class="nav-item">
-            <a href="#" class="nav-link" onclick="@(f_refresh)()"><i class="fas fa-sync-alt"></i><span class="d-none d-md-inline"> Refresh</span></a>
+            <a href="#" class="nav-link" onclick="@(func_refresh)()"><i class="fas fa-sync-alt"></i><span class="d-none d-md-inline"> Refresh</span></a>
         </li>
-
         <li class="nav-item dropdown d-none d-xl-block">
             <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
                 View
             </a>
             <div class="dropdown-menu">
-                <a class="dropdown-item" href="#" onclick="@(f_show_groups)()">
+                <a class="dropdown-item" href="#" onclick="@(func_show_groups)()">
                     <i class="far fa-object-ungroup"></i> Toggle groups<br />
                     <span class="text-xs text-muted">Show/Hide the column group selector</span>
                 </a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#" onclick="@(f_clear_filters)()">
+                <a class="dropdown-item" href="#" onclick="@(func_clear_filters)()">
                     <i class="fas fa-filter"></i> Clear filters<br />
                     <span class="text-xs text-muted">Clear all current filters</span>
                 </a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#" onclick="@(f_clear_search)()">
+                <a class="dropdown-item" href="#" onclick="@(func_clear_search)()">
                     <i class="fas fa-search"></i> Clear search<br />
                     <span class="text-xs text-muted">Clear the current search criteria</span>
                 </a>
             </div>
         </li>
-
         <li class="nav-item dropdown d-none d-xl-block">
             <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
                 Navigation
@@ -88,7 +81,6 @@
                 </a>
             </div>
         </li>
-
     </ul>
     <ul class="navbar-nav ml-auto">
         <li class="nav-item d-none d-sm-block">
@@ -120,7 +112,6 @@
     </e-grid-columns>
 </ejs-grid>
 
-
 @section Scripts {
 
     <script type="text/javascript">
@@ -131,22 +122,22 @@
 
         // $(document).ready()
         $(document).ready(function () {
-            @(f_resize)();
+            @(func_resize)();
         });
 
         //  $(window).resize()
         $(window).resize(function () {
-            @(f_resize)();
+            @(func_resize)();
         });
 
         // $('#txt_search_box').on("input")
         $('#@(txt_search_box)').on("input", function (e) {
-            @(f_search)($('#@(txt_search_box)').val());
+            @(func_search)($('#@(txt_search_box)').val());
         });
 
         // ev_on_grid_databound
         @ev_on_grid_databound = (args) => {
-            @(f_get_grid)().selectionModule.selectRowsByRange(0, 0);
+            @(func_get_grid)().selectionModule.selectRowsByRange(0, 0);
         };
 
         // ev_on_grid_click
@@ -155,7 +146,7 @@
 
         // ev_on_grid_dblclick
         @ev_on_grid_dblclick = (args) => {
-            @(f_get_grid)().selectionModule.selectRowsByRange(args.rowIndex, args.rowIndex);
+            @(func_get_grid)().selectionModule.selectRowsByRange(args.rowIndex, args.rowIndex);
             @(ev_on_edit_click)();
         };
 
@@ -166,7 +157,7 @@
 
         // ev_on_edit_click
         @ev_on_edit_click = () => {
-            @(f_get_rec)();
+            @(func_get_rec)();
             if (@var_record_id) {
                 layout.modal("Users", "Edit", "id=" + @var_record_id, modalsizes.NORMAL)
             } else {
@@ -176,7 +167,7 @@
 
         // ev_on_audithistory_click
         @ev_on_audithistory_click = () => {
-            @(f_get_rec)();
+            @(func_get_rec)();
             if (@var_record_systemid) {
                 layout.modal("Audits", "AuditHistory", "systemid=" + @var_record_systemid, modalsizes.LARGE)
             } else {
@@ -186,7 +177,7 @@
 
         // ev_on_useroles_click
         @ev_on_useroles_click = () => {
-            @(f_get_rec)();
+            @(func_get_rec)();
             if (@var_record_id) {
                 layout.modal("UserRoles", "IndexByUser", "userId=" + @var_record_id, modalsizes.NORMAL)
             } else {
@@ -195,37 +186,37 @@
         }
 
         // f_get_rec
-        @f_get_rec = () => {
-            var selectedrow = @(f_get_grid)().getSelectedRecords()[0];
+        @func_get_rec = () => {
+            var selectedrow = @(func_get_grid)().getSelectedRecords()[0];
             @var_record_id          = selectedrow !== undefined ? selectedrow.Id : null;
             @var_record_name        = selectedrow !== undefined ? selectedrow.Username : null;
             @var_record_systemid    = selectedrow !== undefined ? selectedrow.SystemId : null;
         }
 
         // f_clear_filters
-        @f_clear_filters = () => {
-            @(f_get_grid)().clearFiltering();
+        @func_clear_filters = () => {
+            @(func_get_grid)().clearFiltering();
         };
 
         // f_clear_search
-        @f_clear_search = () => {
-            @(f_get_grid)().searchSettings.key = '';
+        @func_clear_search = () => {
+            @(func_get_grid)().searchSettings.key = '';
             $('#@(txt_search_box)').val('');
         };
 
         // f_show_groups
-        @f_show_groups = () => {
-            @(f_get_grid)().allowGrouping = !@(f_get_grid)().allowGrouping;
+        @func_show_groups = () => {
+            @(func_get_grid)().allowGrouping = !@(func_get_grid)().allowGrouping;
         };
 
         // f_search
-        @f_search = (searchString) => {
-            @(f_get_grid)().search(searchString);
+        @func_search = (searchString) => {
+            @(func_get_grid)().search(searchString);
         };
 
         // f_delete
-        @f_delete = () => {
-            @(f_get_rec)();
+        @func_delete = () => {
+            @(func_get_rec)();
             if (@var_record_id) {
                 global.confirm(cfg.text.askConfirmDelete + `<br><b>'${@var_record_name}'</b>`)
                     .then((result) => {
@@ -234,7 +225,7 @@
                             var data = { Id: @var_record_id };
                             global.submit(url, data)
                                 .then((status) => {
-                                    @(f_refresh)();
+                                    @(func_refresh)();
                                     global.toastsuccess("Record [" + @var_record_id + "] deleted with success!");
                                 })
                                 .catch((status) => {
@@ -250,19 +241,19 @@
         };
 
         // f_resize
-        @f_resize = () => {
-            @(f_get_grid)().height = $(window).height() - 300;
+        @func_resize = () => {
+            @(func_get_grid)().height = $(window).height() - 300;
         };
 
         // f_refresh
-        @f_refresh = () => {
-            if (@(f_get_grid)()) {
-                @(f_get_grid)().refresh();
+        @func_refresh = () => {
+            if (@(var_record_id)()) {
+                @(func_resize)().refresh();
             }
         };
 
         // f_get_grid
-        @f_get_grid = () => {
+        @func_get_grid = () => {
             var gridname = '@_page.AppObjectsAdapter.Grid_Users';
             return $("#" + gridname)[0].ej2_instances[0];
         };

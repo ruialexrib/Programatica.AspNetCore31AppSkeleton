@@ -12,7 +12,7 @@ namespace Programatica.AspNetCore31AppSkeleton.Adapters
             {
                 if (string.IsNullOrEmpty(_grid_users))
                 {
-                    _grid_users = Razor.Rnd();
+                    _grid_users = Razor.GenerateElementId("grid_users");
                 }
                 return _grid_users;
             }

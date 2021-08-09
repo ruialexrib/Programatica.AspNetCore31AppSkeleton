@@ -220,7 +220,7 @@ modal.close = function (e) {
 
 modal.create = function (containerguid, dialogguid, contentguid, size) {
     var modalList = $("#modalList");
-    modalList.append("<div id='" + containerguid + "' class='modal fade' role='dialog' data-backdrop='static'><div id='" + dialogguid + "'class='modal-dialog modal-dialog-centered " + size + "'><div id='" + contentguid + "' class='modal-content'></div></div></div>");
+    modalList.append("<div id='" + containerguid + "' class='modal fade' role='dialog' data-backdrop='static'><div id='" + dialogguid + "'class='modal-dialog " + size + "'><div id='" + contentguid + "' class='modal-content'></div></div></div>");
 }
 
 modal.destroy = function (container) {

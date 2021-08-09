@@ -13,16 +13,23 @@ using System;
 using System.Collections.Generic;
 using Programatica.AspNetCore31AppSkeleton.ViewModels.Base;
 using System.ComponentModel;
+using Programatica.AspNetCore31AppSkeleton.Filters;
 
 namespace Programatica.AspNetCore31AppSkeleton.Controllers
 {
-    [Authorize(Roles = "Administrators")]
+    [AuthorizedRole(roles: new string[] { "Administrators" })]
     public class UsersController : EJ2DataGridBaseController<User>
     {
         private readonly IService<User> _userService;
         protected readonly ILogger<UsersController> _logger;
         protected readonly IMapper _mapper;
 
+        /// <summary>
+        /// UsersController
+        /// </summary>
+        /// <param name="userService"></param>
+        /// <param name="mapper"></param>
+        /// <param name="logger"></param>
         public UsersController(
             IService<User> userService,
             IMapper mapper,
@@ -33,12 +40,20 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
             _logger = logger;
         }
 
+        /// <summary>
+        /// LoadDataAsync
+        /// </summary>
+        /// <returns></returns>
         protected override async Task<IEnumerable<User>> LoadDataAsync()
         {
             var data = await _userService.GetAsync();
             return data;
         }
 
+        /// <summary>
+        /// Index
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [AuthorizedAction(permission: "Teste")]
         [DisplayName("Manage User List")]
@@ -47,6 +62,10 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Create
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [DisplayName("Open New User Details Form")]
         public IActionResult Create()
@@ -54,6 +73,11 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
             return PartialView("_Create");
         }
 
+        /// <summary>
+        /// Create
+        /// </summary>
+        /// <param name="vm"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [DisplayName("Save New User Details Data")]
@@ -86,6 +110,11 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
             }
         }
 
+        /// <summary>
+        /// Edit
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         [DisplayName("Open User Details Form")]
         public virtual async Task<IActionResult> Edit(int id)
@@ -99,6 +128,11 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
             return PartialView("_Edit", vm);
         }
 
+        /// <summary>
+        /// Edit
+        /// </summary>
+        /// <param name="vm"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [DisplayName("Save User Details Data")]
@@ -131,6 +165,11 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
             }
         }
 
+        /// <summary>
+        /// Delete
+        /// </summary>
+        /// <param name="vm"></param>
+        /// <returns></returns>
         [HttpPost]
         [DisplayName("Delete User Details Data")]
         public virtual async Task<JsonResult> Delete([FromBody] DeleteViewModel vm)
@@ -153,6 +192,10 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
 
         }
 
+        /// <summary>
+        /// Modal
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [DisplayName("Open Modal Form")]
         public IActionResult Modal()

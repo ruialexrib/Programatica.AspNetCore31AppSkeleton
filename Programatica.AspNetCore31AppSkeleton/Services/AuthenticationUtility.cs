@@ -63,7 +63,7 @@ namespace Programatica.AspNetCore31AppSkeleton.Services
                             let role = roles
                                     .Where(x => x.Id == ur.RoleId)
                                     .FirstOrDefault()
-                            select new Claim(ClaimTypes.Role, role.Name));
+                            select new Claim(_options.UserRoleFieldName, role.Name));
             return claims;
         }
 

@@ -4,12 +4,13 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Programatica.AspNetCore31AppSkeleton.Filters;
 using Programatica.AspNetCore31AppSkeleton.ViewModels;
 using Programatica.Framework.Mvc.Controllers;
 
 namespace Programatica.AspNetCore31AppSkeleton.Controllers
 {
-    [Authorize(Roles = "Administrators, Users")]
+    [AuthorizedRole(roles: new string[] { "Administrators", "Users" })]
     public class HomeController : BaseController
     {
         private readonly ILogger<HomeController> _logger;

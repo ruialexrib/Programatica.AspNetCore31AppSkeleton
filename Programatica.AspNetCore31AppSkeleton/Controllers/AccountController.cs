@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Programatica.AspNetCore31AppSkeleton.Filters;
 using Programatica.AspNetCore31AppSkeleton.ViewModels;
 using Programatica.Framework.Mvc.Authentication;
 using Programatica.Framework.Mvc.Controllers;
@@ -57,7 +58,7 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
             }
         }
 
-        [Authorize(Roles = "Administrators, Users")]
+        [AuthorizedRole(roles: new string[] { "Administrators", "Users" })]
         public async Task<IActionResult> Logoff()
         {
             await _authenticationService.SignOut(HttpContext);

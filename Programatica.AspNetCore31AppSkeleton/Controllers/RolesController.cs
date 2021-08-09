@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Programatica.AspNetCore31AppSkeleton.Data.Models;
+using Programatica.AspNetCore31AppSkeleton.Filters;
 using Programatica.AspNetCore31AppSkeleton.ViewModels;
 using Programatica.AspNetCore31AppSkeleton.ViewModels.Base;
 using Programatica.Framework.Data.Repository;
@@ -18,7 +19,7 @@ using System.Threading.Tasks;
 
 namespace Programatica.AspNetCore31AppSkeleton.Controllers
 {
-    [Authorize(Roles = "Administrators")]
+    [AuthorizedRole(roles: new string[] { "Administrators" })]
     public class RolesController : EJ2DataGridBaseController<Role>
     {
         private readonly IRepository<UserRole> _userRoleRepository;

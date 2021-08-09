@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Programatica.AspNetCore31AppSkeleton.Data.Models;
+using Programatica.AspNetCore31AppSkeleton.Filters;
 using Programatica.AspNetCore31AppSkeleton.ViewModels;
 using Programatica.AspNetCore31AppSkeleton.ViewModels.Base;
 using Programatica.Framework.Mvc.Controllers;
@@ -15,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace Programatica.AspNetCore31AppSkeleton.Controllers
 {
-    [Authorize(Roles = "Administrators, Users")]
+    [AuthorizedRole(roles: new string[] { "Administrators", "Users" })]
     public class GridController : EJ2DataGridBaseController<Dummy>
     {
         private readonly IService<Dummy> _dummyService;

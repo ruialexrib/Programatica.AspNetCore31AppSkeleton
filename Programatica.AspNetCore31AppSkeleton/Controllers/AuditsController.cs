@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Programatica.AspNetCore31AppSkeleton.Filters;
 using Programatica.AspNetCore31AppSkeleton.ViewModels;
 using Programatica.Framework.Data.Models;
 using Programatica.Framework.Data.Repository;
@@ -10,6 +11,7 @@ using Programatica.Framework.Mvc.Controllers;
 
 namespace Programatica.AspNetCore31AppSkeleton.Controllers
 {
+    [AuthorizedRole(roles: new string[] { "Administrators" })]
     public class AuditsController : BaseController
     {
         private readonly IRepository<Audit> _auditRepository;

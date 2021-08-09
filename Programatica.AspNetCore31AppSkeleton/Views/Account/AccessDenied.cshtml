@@ -45,16 +45,18 @@
             </div>
 
             <div class="row mt-1">
-                <p class="lead text-justify font-italic">
+                <p class="lead text-justify">
                     The HTTP 403 is a HTTP status code meaning access to the requested resource is forbidden for some reason. The server understood the request, but will not fulfill it due to client-related issues. IIS defines non standard "sub-status" error codes that provide a more specific reason for responding with the 403 status code.
                 </p>
             </div>
 
             <div class="row mt-1">
-                <a asp-controller="Home" asp-action="Index" class="btn btn-default"><i class="fas fa-home"></i> BACK TO HOME</a>
+                <div class="btn-group">
+                    <a asp-controller="Home" asp-action="Index" class="btn btn-link"><i class="fas fa-home"></i> Back to home page</a>
+                    <a asp-controller="Account" asp-action="Login" class="btn btn-link"><i class="fas fa-door-open"></i> Go to login page</a>
+                </div>
             </div>
-
-        </div>
+            </div>
 
     </div>
 

@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
-    <Version>1.0.30</Version>
+    <Version>1.0.31</Version>
     <UserSecretsId>75c08277-9ea1-4537-a184-f8742c21289e</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>

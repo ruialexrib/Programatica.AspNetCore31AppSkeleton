@@ -3,11 +3,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Programatica.AspNetCore31AppSkeleton.Filters;
 using Programatica.AspNetCore31AppSkeleton.ViewModels;
 using Programatica.Framework.Data.Models;
 using Programatica.Framework.Data.Repository;
 using Programatica.Framework.Mvc.Controllers;
+using Programatica.Framework.Mvc.Filters;
 
 namespace Programatica.AspNetCore31AppSkeleton.Controllers
 {

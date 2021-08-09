@@ -77,7 +77,7 @@ namespace Programatica.AspNetCore31AppSkeleton.Data.Migrations.Context
                 }
             );
 
-            // seed permissions
+            // seed role permissions
             modelBuilder.Entity<UserRole>().HasData(
                 new UserRole
                 {

@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Programatica.AspNetCore31AppSkeleton.Data.Models;
-using Programatica.AspNetCore31AppSkeleton.Filters;
 using Programatica.AspNetCore31AppSkeleton.ViewModels;
 using Programatica.AspNetCore31AppSkeleton.ViewModels.Base;
 using Programatica.Framework.Mvc.Controllers;

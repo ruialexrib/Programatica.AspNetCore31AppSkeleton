@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Programatica.AspNetCore31AppSkeleton.Data.Models;
@@ -13,7 +12,6 @@ using System;
 using System.Collections.Generic;
 using Programatica.AspNetCore31AppSkeleton.ViewModels.Base;
 using System.ComponentModel;
-using Programatica.AspNetCore31AppSkeleton.Filters;
 
 namespace Programatica.AspNetCore31AppSkeleton.Controllers
 {

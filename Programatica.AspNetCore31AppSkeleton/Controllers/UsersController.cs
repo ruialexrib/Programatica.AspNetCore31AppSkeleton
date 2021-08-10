@@ -9,12 +9,10 @@ using Programatica.Framework.Mvc.Filters;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using System;
-using System.Collections.Generic;
 using Programatica.AspNetCore31AppSkeleton.ViewModels.Base;
 using System.ComponentModel;
 using Microsoft.Extensions.Caching.Memory;
 using System.Linq;
-using Programatica.Framework.Core.Extensions;
 
 namespace Programatica.AspNetCore31AppSkeleton.Controllers
 {
@@ -52,8 +50,6 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
         protected override IQueryable<User> LoadData()
         {
             var data = _userService.Get();
-            var sql = data.ToSql();
-            var data2 = data.ToList();
             return data;
         }
 

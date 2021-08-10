@@ -41,12 +41,12 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
             _logger = logger;
         }
 
-        protected override async Task<IEnumerable<UserRoleViewModel>> LoadDataAsync()
+        protected override IQueryable<UserRoleViewModel> LoadData()
         {
-            var userroles = await _userRoleService.GetAsync(x => x.Include(z => z.User)
-                                                                  .Include(z => z.Role));
+            var userroles = _userRoleService.Get(x => x.Include(z => z.User)
+                                                       .Include(z => z.Role));
 
-            IEnumerable<UserRoleViewModel> data = userroles
+            IQueryable<UserRoleViewModel> data = userroles
                                                   .Select(s => new UserRoleViewModel
                                                   {
                                                       Id = s.Id,

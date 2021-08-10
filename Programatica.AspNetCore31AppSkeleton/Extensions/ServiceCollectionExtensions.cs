@@ -30,7 +30,10 @@ namespace Programatica.AspNetCore31AppSkeleton.Extensions
 {
     public static class ServiceCollectionExtensions
     {
-
+        /// <summary>
+        /// ConfigureInfrastructureServices
+        /// </summary>
+        /// <param name="services"></param>
         public static void ConfigureInfrastructureServices(this IServiceCollection services)
         {
             ConfigureLogging(services);
@@ -40,6 +43,7 @@ namespace Programatica.AspNetCore31AppSkeleton.Extensions
             ConfigureDatabase(services);
             ConfigureMvc(services);
             ConfigureHttpContext(services);
+            ConfigureCache(services);
 
             ConfigureRepositories(services);
             ConfigureAdapters(services);
@@ -49,6 +53,10 @@ namespace Programatica.AspNetCore31AppSkeleton.Extensions
 
         }
 
+        /// <summary>
+        /// ConfigureDatabase
+        /// </summary>
+        /// <param name="services"></param>
         private static void ConfigureDatabase(IServiceCollection services)
         {
             // sqlserver context
@@ -65,6 +73,10 @@ namespace Programatica.AspNetCore31AppSkeleton.Extensions
 
         }
 
+        /// <summary>
+        /// ConfigureAuthentication
+        /// </summary>
+        /// <param name="services"></param>
         private static void ConfigureAuthentication(IServiceCollection services)
         {
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -83,11 +95,19 @@ namespace Programatica.AspNetCore31AppSkeleton.Extensions
                                                              );
         }
 
+        /// <summary>
+        /// ConfigureAutoMapper
+        /// </summary>
+        /// <param name="services"></param>
         private static void ConfigureAutoMapper(IServiceCollection services)
         {
             services.AddAutoMapper(typeof(Startup));
         }
 
+        /// <summary>
+        /// ConfigureSession
+        /// </summary>
+        /// <param name="services"></param>
         private static void ConfigureSession(IServiceCollection services)
         {
             services.AddSession(options => options
@@ -95,6 +115,10 @@ namespace Programatica.AspNetCore31AppSkeleton.Extensions
                                 );
         }
 
+        /// <summary>
+        /// ConfigureMvc
+        /// </summary>
+        /// <param name="services"></param>
         private static void ConfigureMvc(IServiceCollection services)
         {
             services
@@ -105,11 +129,19 @@ namespace Programatica.AspNetCore31AppSkeleton.Extensions
                                    );
         }
 
+        /// <summary>
+        /// ConfigureRepositories
+        /// </summary>
+        /// <param name="services"></param>
         private static void ConfigureRepositories(IServiceCollection services)
         {
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
         }
 
+        /// <summary>
+        /// ConfigureAdapters
+        /// </summary>
+        /// <param name="services"></param>
         private static void ConfigureAdapters(IServiceCollection services)
         {
             services.AddScoped<IDateTimeAdapter, DateTimeAdapter>();
@@ -119,6 +151,10 @@ namespace Programatica.AspNetCore31AppSkeleton.Extensions
             services.AddSingleton<IAppObjectsAdapter, AppObjectsAdapter>();
         }
 
+        /// <summary>
+        /// ConfigureEventHandlers
+        /// </summary>
+        /// <param name="services"></param>
         private static void ConfigureEventHandlers(IServiceCollection services)
         {
             services.AddScoped<IEventHandler<Dummy>, ServiceEventHandler<Dummy>>();
@@ -141,6 +177,10 @@ namespace Programatica.AspNetCore31AppSkeleton.Extensions
             services.AddScoped<IList<IEventHandler<TrackChange>>>(p => p.GetServices<IEventHandler<TrackChange>>().ToList());
         }
 
+        /// <summary>
+        /// ConfigureBusiness
+        /// </summary>
+        /// <param name="services"></param>
         private static void ConfigureBusiness(IServiceCollection services)
         {
             // injector
@@ -152,11 +192,28 @@ namespace Programatica.AspNetCore31AppSkeleton.Extensions
             services.AddScoped<IAuthenticationUtility, AuthenticationUtility>();
         }
 
+        /// <summary>
+        /// ConfigureHttpContext
+        /// </summary>
+        /// <param name="services"></param>
         private static void ConfigureHttpContext(IServiceCollection services)
         {
             services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
         }
 
+        /// <summary>
+        /// ConfigureCache
+        /// </summary>
+        /// <param name="services"></param>
+        private static void ConfigureCache(IServiceCollection services)
+        {
+            services.AddMemoryCache();
+        }
+
+        /// <summary>
+        /// ConfigureLogging
+        /// </summary>
+        /// <param name="services"></param>
         private static void ConfigureLogging(IServiceCollection services)
         {
             services.AddLogging(builder => builder.AddConsole()
@@ -165,6 +222,10 @@ namespace Programatica.AspNetCore31AppSkeleton.Extensions
                                );
         }
 
+        /// <summary>
+        /// ConfigureServices
+        /// </summary>
+        /// <param name="services"></param>
         private static void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<IMvcControllerDiscoveryService, MvcControllerDiscoveryService>();

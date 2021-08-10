@@ -12,6 +12,9 @@ using System;
 using System.Collections.Generic;
 using Programatica.AspNetCore31AppSkeleton.ViewModels.Base;
 using System.ComponentModel;
+using Microsoft.Extensions.Caching.Memory;
+using System.Linq;
+using Programatica.Framework.Core.Extensions;
 
 namespace Programatica.AspNetCore31AppSkeleton.Controllers
 {
@@ -21,6 +24,7 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
         private readonly IService<User> _userService;
         protected readonly ILogger<UsersController> _logger;
         protected readonly IMapper _mapper;
+        private readonly IMemoryCache _memoryCache;
 
         /// <summary>
         /// UsersController
@@ -28,23 +32,28 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
         /// <param name="userService"></param>
         /// <param name="mapper"></param>
         /// <param name="logger"></param>
+        /// <param name="memoryCache"></param>
         public UsersController(
             IService<User> userService,
             IMapper mapper,
-            ILogger<UsersController> logger)
+            ILogger<UsersController> logger,
+            IMemoryCache memoryCache)
         {
             _userService = userService;
             _mapper = mapper;
             _logger = logger;
+            _memoryCache = memoryCache;
         }
 
         /// <summary>
         /// LoadDataAsync
         /// </summary>
         /// <returns></returns>
-        protected override async Task<IEnumerable<User>> LoadDataAsync()
+        protected override IQueryable<User> LoadData()
         {
-            var data = await _userService.GetAsync();
+            var data = _userService.Get();
+            var sql = data.ToSql();
+            var data2 = data.ToList();
             return data;
         }
 

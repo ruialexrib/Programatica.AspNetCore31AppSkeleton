@@ -11,6 +11,7 @@ using Programatica.Framework.Mvc.Filters;
 using Programatica.Framework.Services;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Programatica.AspNetCore31AppSkeleton.Controllers
@@ -37,9 +38,9 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
             PageAlerts.Add("Alert from GridController Constructor");
         }
 
-        protected override async Task<IEnumerable<Dummy>> LoadDataAsync()
+        protected override IQueryable<Dummy> LoadData()
         {
-            var data = await _dummyService.GetAsync();
+            var data = _dummyService.Get();
             return data;
         }
 

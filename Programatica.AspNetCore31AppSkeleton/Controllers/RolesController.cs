@@ -39,9 +39,9 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
             _userRoleRepository = userRoleRepository;
         }
 
-        protected override async Task<IEnumerable<Role>> LoadDataAsync()
+        protected override IQueryable<Role> LoadData()
         {
-            var data = await _roleService.GetAsync();
+            var data = _roleService.Get();
             return data;
         }
 

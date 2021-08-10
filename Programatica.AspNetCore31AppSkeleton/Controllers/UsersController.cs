@@ -49,7 +49,8 @@ namespace Programatica.AspNetCore31AppSkeleton.Controllers
         /// <returns></returns>
         protected override IQueryable<User> LoadData()
         {
-            var data = _userService.Get();
+            var data = _userService.Get("select * from Users");
+            //var data = _userService.Get();
             return data;
         }
 

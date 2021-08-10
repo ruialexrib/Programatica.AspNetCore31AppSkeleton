@@ -1,5 +1,4 @@
-﻿@inject IAppPageAdapter _page
-<!-- jquery -->
+﻿<!-- jquery -->
 <script src="~/lib/jquery/dist/jquery.js"></script>
 <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
 <script src="~/lib/jquery-validation/dist/additional-methods.js"></script>
@@ -20,47 +19,6 @@
 <!-- site -->
 <script src="~/js/appskeleton.js"></script>
 <script src="~/js/site.js"></script>
-
-<!-- global IPageAdapter razor scripts -->
-<script type="text/javascript">
-
-        $(document).ready(function () {
-            // add messages
-            @foreach(var m in _page.PageMessages.OrEmptyIfNull())
-            {
-                @:global.toastinfo("@m");
-            }
-            @foreach(var w in _page.PageWarnings.OrEmptyIfNull())
-            {
-                @:global.toastwarning("@w");
-            }
-            @foreach(var a in _page.PageAlerts.OrEmptyIfNull())
-            {
-                @:global.toasterror("@a");
-            }
-        });
-
-</script>
-
-<!-- layout generic view scripts -->
-<script type="text/javascript">
-
-    var layout = layout || {};
-
-    layout.modal = (controller, action, params, modalsize) => {
-        var url = "@Url.Content("~/")" + controller + "/" + action;
-        if (params) {
-            url = url + "?" + params;
-        }
-        modal.show(url, modalsize)
-            .then((h) => {
-            })
-            .catch((e) => {
-                global.toasterror(e);
-            });
-    };
-
-</script>
 
 
 

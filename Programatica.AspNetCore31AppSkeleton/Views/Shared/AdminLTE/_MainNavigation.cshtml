@@ -6,7 +6,12 @@
         @*<img src="~/img/brand.png" alt="AppSkeleton Logo" class="brand-image img-circle elevation-0"
             style="opacity: .8">*@
         <i class="fas fa-skull fa-2x"></i>
-        <span class="brand-text"><b>App</b>Skeleton</span><br />
+        <span class="brand-text"
+              aria-label="AppSkeleton"
+              data-microtip-position="bottom"
+              role="tooltip">
+            <b>App</b>Skeleton
+        </span><br />
     </a>
 
     <!-- Sidebar -->
@@ -45,7 +50,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a asp-controller="Users" asp-action="Index" class="nav-link">
+                            <a asp-controller="Users" asp-action="Index" class="nav-link" onclick="layout.show_loading(true);">
                                 <i class="fa fa-fw fa-user nav-icon"></i>
                                 <p>Users</p>
                             </a>

@@ -2,12 +2,12 @@
 @inject IAppPageAdapter _page
 
 @{
-    string on_save_click = Razor.Rnd();
-    string refresh_users = Razor.Rnd();
-    string form = Razor.Rnd();
+    string ev_on_save_click = Razor.GenerateElementId("ev_on_save_click");
+    string func_refresh_users = Razor.GenerateElementId("func_refresh_users");
+    string form = Razor.GenerateElementId("form");
 }
 
-<div class="modal-header bg-light">
+<div class="modal-header bg-dark">
     <h5 class="modal-title">
         <i class="far fa-edit"></i> Edit User<br />
         <span class="text-sm">Manage user record details. Press 'save' to persist current changes.</span>
@@ -137,12 +137,12 @@
 
 <div class="modal-footer">
     <a href="#" class="btn btn-secondary" onclick="modal.close(event)">Close</a>
-    <a href="#" class="btn btn-primary" onclick="@(on_save_click)(event)" data-loading-text="Saving...">Save</a>
+    <a href="#" class="btn btn-primary" onclick="@(ev_on_save_click)(event)" data-loading-text="Saving...">Save</a>
 </div>
 
 <script type="text/javascript">
 
-    @on_save_click = (e) => {
+    @ev_on_save_click = (e) => {
         e.preventDefault();
         var url = "@Url.Action("Edit", "Users")";
         var data = {
@@ -163,7 +163,7 @@
                 var id = status.id;
                 modal.close(e);
                 global.toastsuccess("Record [" + id + "] updated with success!");
-                @(refresh_users)();
+                @(func_refresh_users)();
             })
             .catch((status) => {
                 var s = JSON.parse(status);
@@ -171,7 +171,7 @@
             });
     };
 
-    @refresh_users = () => {
+    @func_refresh_users = () => {
         var gridname = '@_page.AppObjectsAdapter.Grid_Users';
         var grid = $("#" + gridname)[0].ej2_instances[0];
         if (grid) {

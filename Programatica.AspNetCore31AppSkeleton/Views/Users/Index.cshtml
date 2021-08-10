@@ -274,9 +274,7 @@
 
         // f_refresh
         @func_refresh = () => {
-            if (@(var_record_id)) {
-                @(func_resize)().refresh();
-            }
+            @(func_get_grid)().refresh();
         };
 
         // f_get_grid

@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
-    <Version>1.0.37</Version>
+    <Version>1.0.38</Version>
     <UserSecretsId>75c08277-9ea1-4537-a184-f8742c21289e</UserSecretsId>
     <Authors>ruialexrib</Authors>
     <Company>Programatica Software</Company>
